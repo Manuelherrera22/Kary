@@ -1,0 +1,11 @@
+{
+  "errorDefault": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+  "errorInvalidCredentials": "L'e-mail ou le mot de passe n'est pas correct. Veuillez vérifier qu'ils sont bien orthographiés.",
+  "errorEmailNotConfirmed": "Votre e-mail n'a pas encore été confirmé. Vérifiez votre boîte de réception (et le dossier spam) pour l'e-mail de confirmation de Kary.",
+  "errorUserNotFound": "Nous n'avons pas trouvé de compte avec cet e-mail. Souhaitez-vous créer un compte ?",
+  "errorEmailPasswordRequired": "Veuillez entrer votre e-mail et votre mot de passe pour continuer.",
+  "errorGoogleLogin": "Impossible de se connecter avec Google pour le moment. Veuillez réessayer ou utiliser votre e-mail et votre mot de passe.",
+  "errorFullNameRoleRequired": "Veuillez entrer votre nom complet et sélectionner un rôle.",
+  "errorUserAlreadyRegistered": "Cet e-mail est déjà enregistré. Veuillez vous connecter ou utiliser un autre e-mail.",
+  "errorRolePermission": "Vous n'avez pas la permission d'accéder avec le rôle sélectionné."
+}

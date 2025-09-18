@@ -1,0 +1,86 @@
+{
+  "pageTitle": "Panel de Acudiente",
+  "pageSubtitle": "Bienvenido/a, {userName}. Gestiona el progreso y bienestar de tu hijo/a.",
+  "childInteractions": {
+    "title": "Interacciones de mi Hijo/a",
+    "description": "Revisa las últimas interacciones y registros emocionales de tu hijo/a."
+  },
+  "accessReports": {
+    "title": "Acceder a Reportes",
+    "description": "Consulta los informes de progreso y planes de apoyo compartidos."
+  },
+  "directCommunication": {
+    "title": "Comunicación Directa",
+    "description": "Contacta con docentes y psicopedagogos para consultas rápidas."
+  },
+  "studentProgress": {
+    "title": "Progreso del Estudiante",
+    "description": "Visualiza el avance académico y emocional de tu hijo/a."
+  },
+  "accountSettings": {
+    "title": "Configuración de Cuenta",
+    "description": "Actualiza tu información personal y preferencias de la plataforma."
+  },
+  "scheduleAppointment": {
+    "title": "Agendar Cita",
+    "description": "Programa reuniones con el personal del colegio de forma sencilla."
+  },
+  "appointmentHistory": {
+    "title": "Historial de Citas",
+    "description": "Revisa tus citas pasadas y futuras."
+  },
+  "assignedStudentsTitle": "Hijos Vinculados",
+  "studentName": "Nombre",
+  "academicLevel": "Nivel académico",
+  "status": "Estado",
+  "assignedAt": "Asignado el",
+  "viewDetails": "Ver detalles",
+  "viewSupportPlan": "Ver Plan de Apoyo",
+  "noStudents": "Aún no tienes hijos/estudiantes vinculados a tu cuenta.",
+  "loading": "Cargando información de tus hijos...",
+  "statusActive": "Activo",
+  "statusInactive": "Inactivo",
+  "statusGraduated": "Graduado",
+  "statusSuspended": "Suspendido",
+  "statusUnknown": "Desconocido",
+  "noSupportPlan": "Este estudiante aún no tiene un plan de apoyo asignado.",
+  "errorFetchingPlanDetails": "Error al cargar los detalles del plan. Intenta más tarde.",
+  "description": "Aquí puedes ver un resumen de los estudiantes vinculados a tu cuenta.",
+  "noChildrenAssigned": "Una vez que un estudiante sea asignado, aparecerá aquí.",
+  "unifiedProgress": {
+    "pageTitle": "Panel de Seguimiento Unificado",
+    "pageSubtitle": "Visión general del progreso de tu hijo/a."
+  },
+  "childProfile": {
+    "description": "Ver y editar el perfil de tu hijo/a."
+  },
+  "requiresChildLink": "Necesitas vincular un estudiante para usar esta función.",
+  "noChildLinked": "Aún no has vinculado a tu hijo/a. Por favor, contacta a la institución para realizar la vinculación.",
+  "noChildLinkedTitle": "Vincular Estudiante",
+  "errorFetchingChildData": "Error al cargar los datos de tu hijo/a.",
+  "errorFetchingActivities": "Error al cargar las actividades.",
+  "sections": {
+    "supportPlan": {
+      "title": "Plan de Apoyo Familiar",
+      "description": "Accede al plan emocional y académico que el psicopedagogo ha creado para tu hijo. Aquí también podrás ver las actividades asignadas por el docente."
+    },
+    "activities": {
+      "title": "Actividades Asignadas",
+      "description": "Revisa las actividades que el docente ha asignado a tu hijo para realizar en casa.",
+      "noActivities": "Tu hijo/a no tiene actividades asignadas por el momento.",
+      "activitiesFrom": "Actividades compartidas por el docente {teacherName}"
+    },
+    "communication": {
+      "title": "Comunicación con el Colegio",
+      "description": "Mantente en contacto con los profesionales del colegio.",
+      "sendMessage": "Enviar Mensaje al Docente"
+    }
+  },
+  "viewPlan": "Ver Plan",
+  "viewActivities": "Ver Actividades",
+  "downloadPdf": "Descargar PDF",
+  "noPlan": "Aún no hay plan asignado a tu hijo.",
+  "activitiesByTeacher": "Actividades compartidas por el docente {teacherName}",
+  "planCompleted": "Plan de Apoyo",
+  "newActivities": "Nuevas Actividades"
+}

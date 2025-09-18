@@ -1,0 +1,17 @@
+{
+  "tabAll": "All",
+  "tabVideos": "Videos",
+  "tabGuides": "Guides",
+  "tabGuidesNoAccent": "Guides",
+  "tabActivities": "Activities",
+  "tabDocuments": "Documents",
+  "tabExercises": "Exercises",
+  "noDescription": "No description available.",
+  "viewResourceButton": "View Resource",
+  "noResources": "You don't have any assigned resources yet.",
+  "noResourcesFoundTitle": "No Resources Found",
+  "noResourcesFoundDesc": "No assigned resources match the type '{type}' or selected filters.",
+  "fetchError": "Error fetching assigned resources.",
+  "filterByTags": "Filter by tags:",
+  "clearTagsFilter": "Clear tags filter"
+}

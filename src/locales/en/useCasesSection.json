@@ -1,0 +1,14 @@
+{
+  "title": "Kary Use Cases",
+  "subtitle": "Kary adapts to diverse educational environments, providing support where it's needed most.",
+  "caseHospital": "Hospital Classrooms",
+  "caseHospitalDesc": "Support during illness processes.",
+  "caseHome": "Homeschooling",
+  "caseHomeDesc": "Educational continuity at home.",
+  "caseRural": "Rural or Multigrade Schools",
+  "caseRuralDesc": "Support in contexts with limited resources.",
+  "caseUrban": "Urban Institutions",
+  "caseUrbanDesc": "Assistance in high-demand classrooms.",
+  "caseEmotional": "Pediatric Clinics",
+  "caseEmotionalDesc": "Educational support in health settings."
+}

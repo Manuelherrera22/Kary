@@ -1,0 +1,11 @@
+{
+  "errorDefault": "An unexpected error occurred. Please try again.",
+  "errorInvalidCredentials": "The email or password is not correct. Please verify that they are spelled correctly.",
+  "errorEmailNotConfirmed": "Your email has not been confirmed yet. Check your inbox (and spam folder) for Kary's confirmation email.",
+  "errorUserNotFound": "We couldn't find an account with that email. Would you like to create an account?",
+  "errorEmailPasswordRequired": "Please enter your email and password to continue.",
+  "errorGoogleLogin": "Could not sign in with Google at this time. Please try again or use your email and password.",
+  "errorFullNameRoleRequired": "Please enter your full name and select a role.",
+  "errorUserAlreadyRegistered": "This email is already registered. Please log in or use another email.",
+  "errorRolePermission": "You do not have permission to access with the selected role."
+}

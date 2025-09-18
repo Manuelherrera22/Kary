@@ -1,0 +1,23 @@
+{
+  "dateLabel": "Appointment Date",
+  "timeSlotLabel": "Time Slot",
+  "selectTimeSlot": "Select a time slot",
+  "reasonLabel": "Reason for Appointment",
+  "reasonPlaceholder": "Briefly describe the reason...",
+  "confirmButton": "Confirm Appointment",
+  "successTitle": "Appointment Scheduled!",
+  "successDescription": "Your appointment for {date} at {time} has been requested. You will receive a confirmation soon.",
+  "errorScheduling": "Error scheduling appointment. Please try again.",
+  "errorAllFieldsRequired": "All fields marked with * are required.",
+  "errorFetchingHistory": "Error fetching appointment history.",
+  "noHistoryFound": "No appointments found in your history.",
+  "noReasonProvided": "No reason specified",
+  "notesLabel": "Additional Notes",
+  "withProfessional": "With Professional",
+  "status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled",
+    "completed": "Completed"
+  }
+}

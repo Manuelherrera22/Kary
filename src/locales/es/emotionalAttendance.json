@@ -1,0 +1,24 @@
+{
+  "pageTitle": "Asistencia Emocional Semanal",
+  "pageSubtitle": "Tómate un momento para registrar cómo te has sentido esta semana. ¡Tu bienestar es nuestra prioridad!",
+  "formTitle": "¿Cómo te sientes esta semana?",
+  "emotionQuestion": "Elige la emoción que mejor te represente:",
+  "emotions": {
+    "happy": "Feliz",
+    "neutral": "Neutral",
+    "sad": "Triste"
+  },
+  "commentsLabel": "Si quieres, puedes contarnos un poco más (opcional):",
+  "commentsPlaceholder": "Escribe aquí tus pensamientos...",
+  "submitButton": "Registrar Mi Semana",
+  "successMessage": "¡Gracias por compartir! Tu registro semanal ha sido guardado.",
+  "errors": {
+    "selectEmotion": "Por favor, selecciona una emoción para continuar.",
+    "submitError": "No se pudo guardar tu registro. Por favor, inténtalo de nuevo."
+  },
+  "counseling": {
+    "title": "Estamos aquí para ti",
+    "message": "Hemos notado que las últimas semanas han sido un poco difíciles. Recuerda que hablar de tus sentimientos es un paso valiente. Kary está disponible para escucharte sin juicios.",
+    "actionButton": "Hablar con Kary"
+  }
+}

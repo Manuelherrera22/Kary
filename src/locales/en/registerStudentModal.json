@@ -1,0 +1,15 @@
+{
+  "title": "Register New Student",
+  "fullNameLabel": "Full Name",
+  "fullNamePlaceholder": "E.g.: John Doe Smith",
+  "emailLabel": "Email Address",
+  "emailPlaceholder": "E.g.: john.doe@example.com",
+  "gradeLabel": "Grade/Class",
+  "gradePlaceholder": "E.g.: 5th A, Secondary 1",
+  "submitButton": "Register Student",
+  "submittingButton": "Registering...",
+  "registerButtonText": "Register Student",
+  "errorAllFieldsRequired": "Please fill in all fields.",
+  "errorCreatingStudent": "Error registering student",
+  "studentCreatedSuccess": "Student registered successfully!"
+}

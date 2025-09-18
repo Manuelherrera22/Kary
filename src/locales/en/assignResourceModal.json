@@ -1,0 +1,57 @@
+{
+  "assignResourceModal": {
+    "title": "Assign Learning Resource",
+    "triggerButton": "Assign Resource",
+    "studentLabel": "Student",
+    "studentPlaceholder": "Select Student",
+    "resourceLabel": "Resource",
+    "resourcePlaceholder": "Select Resource",
+    "assignButton": "Assign Resource",
+    "assigningButton": "Assigning...",
+    "validationError": "You must select a student and a resource.",
+    "authError": "Authentication error. Please try again.",
+    "assignError": "Error assigning resource. Please try again.",
+    "assignSuccess": "Resource assigned successfully.",
+    "fetchError": "Error fetching data for assignment.",
+    "resourceTypeLabel": "Resource Type",
+    "resourceTypePlaceholder": "Filter by type...",
+    "types": {
+        "todos": "All",
+        "video": "Videos",
+        "guia": "Guides",
+        "ejercicio": "Exercises",
+        "articulo": "Articles",
+        "material": "Materials",
+        "otro": "Others"
+    },
+    "noResourcesOfType": "No resources of this type.",
+    "assignToStudentTitle": "Assign Resource to {studentName}"
+  },
+  "assignResourceToStudentModal": {
+    "title": "Assign Resource to {studentName}",
+    "triggerButton": "Assign Resource",
+    "resourceTypeLabel": "Resource Type",
+    "resourceTypePlaceholder": "Filter by type...",
+    "resourceLabel": "Resource",
+    "resourcePlaceholder": "Select Resource...",
+    "assignButton": "Assign Resource",
+    "assigningButton": "Assigning...",
+    "validationError": "Please select a resource.",
+    "validationErrorResource": "Please select a resource.",
+    "authError": "Authentication error. Please try again.",
+    "assignError": "Error assigning resource. Try again.",
+    "assignSuccess": "Resource assigned successfully to {studentName}.",
+    "fetchResourcesError": "Error loading resources.",
+    "fetchError": "Error fetching data for assignment.",
+    "noResourcesOfType": "No resources of this type.",
+     "types": {
+        "todos": "All",
+        "video": "Videos",
+        "guia": "Guides",
+        "ejercicio": "Exercises",
+        "articulo": "Articles",
+        "material": "Materials",
+        "otro": "Others"
+    }
+  }
+}

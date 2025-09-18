@@ -1,0 +1,33 @@
+{
+  "title": "Asignar Recurso a {studentName}",
+  "triggerButton": "Asignar Recurso",
+  "resourceTypeLabel": "Filtrar por Tipo de Recurso",
+  "resourceTypePlaceholder": "Selecciona un tipo...",
+  "types": {
+    "todos": "Todos los Tipos",
+    "guia": "Guía",
+    "video": "Video",
+    "actividad": "Actividad",
+    "documento": "Documento",
+    "ejercicio": "Ejercicio"
+  },
+  "resourceLabel": "Seleccionar Recurso",
+  "resourcePlaceholder": "Elige un recurso...",
+  "noResourcesOfType": "No hay recursos de tipo '{type}' disponibles.",
+  "assignButton": "Asignar Recurso",
+  "assigningButton": "Asignando...",
+  "validationErrorResource": "Por favor, selecciona un recurso para asignar.",
+  "validationErrorMissingStudentId": "ID de estudiante faltante o inválido.",
+  "validationErrorMissingResourceId": "ID de recurso faltante o inválido.",
+  "validationErrorMissingAssignerId": "ID de asignador faltante o inválido.",
+  "validationErrorStudentNotFoundDetailed": "Estudiante con ID '{studentId}' no encontrado o no válido.",
+  "validationErrorStudentNotStudent": "El usuario seleccionado no es un estudiante.",
+  "validationErrorResourceNotFoundInLearningResources": "Recurso con ID '{resourceId}' no encontrado en la lista de recursos de aprendizaje.",
+  "validationErrorAssignerNotFoundDetailed": "Usuario asignador con ID '{assignerId}' no encontrado o no válido.",
+  "authErrorUserNotLoaded": "Error de autenticación: No se pudo cargar la información del usuario. Intenta de nuevo.",
+  "authErrorUserNotLoadedForFetch": "Error de autenticación: No se pudo cargar la información del usuario para obtener los recursos. Intenta de nuevo.",
+  "assignSuccess": "¡Recurso asignado a {studentName} exitosamente!",
+  "assignError": "Error al asignar el recurso.",
+  "fetchError": "Error al cargar los recursos disponibles.",
+  "foreignKeyViolation": "Error de asignación: Uno de los IDs (estudiante, recurso o asignador) no es válido."
+}

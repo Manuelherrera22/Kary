@@ -1,0 +1,11 @@
+{
+  "parent": "Estamos atentos al bienestar de tu hijo/a. Se ha activado un acompañamiento especial.",
+  "teacher": "El estudiante {studentId} ha presentado señales que requieren tu atención. Recomendamos estrategias de apoyo en clase. Nivel de alerta: {alertLevel}.",
+  "psychopedagogue": "Se ha identificado un riesgo ({alertLevel}) para el estudiante {studentId} en el área de {eventType}. Se sugiere iniciar una intervención estructurada. Detalles: {details}",
+  "psychopedagogueHighEmotionalRisk": "ALERTA: Riesgo emocional ALTO para {studentId}. Iniciar protocolo de intervención urgente. Detalles: {details}",
+  "directive": "Resumen ejecutivo de alertas recientes: Evento '{eventType}' con nivel '{alertLevel}' para el estudiante {studentId}.",
+  "program_coordinator": "Riesgo multidimensional ({alertLevel}) detectado para el estudiante {studentId} relacionado con {eventType}. Es crucial coordinar acciones con los actores clave.",
+  "admin": "Evento de sistema: {eventType} - Nivel: {alertLevel} para estudiante {studentId}.",
+  "student": "Se ha registrado un evento importante relacionado con tu seguimiento. Si tienes dudas, por favor contacta a tu orientador/a.",
+  "default": "Se ha registrado un nuevo evento en el sistema."
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Хабарландырулар",
+  "noNotifications": "Сізде жаңа хабарландырулар жоқ.",
+  "markAllAsRead": "Барлығын оқылған деп белгілеу",
+  "markAsRead": "Оқылған деп белгілеу",
+  "settings": "Хабарландыру Параметрлері",
+  "viewAll": "Барлық Хабарландыруларды Көру",
+  "errorFetching": "Хабарландыруларды жүктеу кезінде қате.",
+  "newReportTitle": "Жаңа Есеп Қолжетімді",
+  "newReportMessage": "'{reportName}' есебі сіздің қарауыңызға дайын.",
+  "appointmentReminderTitle": "Кездесу Ескертуі",
+  "appointmentReminderMessage": "{date} күні {time}-да жоспарланған кездесуіңіз бар.",
+  "planApprovalPendingTitle": "Қолдау Жоспары",
+  "planApprovalPendingMessage": "'{planName}' жоспары сіздің бекітуіңізді қажет етеді."
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Партнеры и контакты",
+  "subtitle": "Вы преподаватель, директор или представляете образовательное учреждение? Запланируйте частную презентацию или примите участие в нашем пилотном проекте.",
+  "formTitle": "Запланировать презентацию",
+  "formNameLabel": "Полное имя",
+  "formNamePlaceholder": "Ваше имя",
+  "formEmailLabel": "Адрес электронной почты",
+  "formEmailPlaceholder": "you@email.com",
+  "formInstitutionLabel": "Учреждение (необязательно)",
+  "formInstitutionPlaceholder": "Название вашего учреждения",
+  "formSubmitButton": "Запросить презентацию",
+  "contactInfoTitle": "Контактная информация",
+  "contactEmail": "contacto@karyeduca.com",
+  "contactPhone": "+57 322 234 5650",
+  "contactWebsite": "www.karyeduca.com",
+  "closingMessage": "Мы рады сотрудничать с вами для трансформации образования."
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Sugerencias de Recursos para Ti",
+  "buttonText": "🔍 Sugerir Recursos",
+  "loadingButton": "Buscando sugerencias...",
+  "errorEstudianteId": "ID de estudiante no proporcionado. No se pueden obtener sugerencias.",
+  "errorFetching": "Error al obtener las sugerencias de recursos",
+  "noSuggestionsFound": "No se encontraron sugerencias de recursos en este momento.",
+  "noSuggestionsFoundAfterSearch": "No hay sugerencias de recursos disponibles para ti en este momento. ¡Explora los recursos generales!",
+  "suggestedResourcesTitle": "Recursos Sugeridos:",
+  "viewResourceButton": "Ver Recurso",
+  "noDescription": "Sin descripción disponible.",
+  "typeLabel": "Tipo",
+  "tagsLabel": "Etiquetas",
+  "unknownType": "Desconocido"
+}

@@ -1,0 +1,21 @@
+{
+  "admin": "Administrador",
+  "directive": "Directivo",
+  "psychopedagogue": "Psicopedagogo/a",
+  "parent": "Acudiente",
+  "student": "Estudiante",
+  "teacher": "Docente",
+  "program_coordinator": "Coordinador de Programa",
+  "guest": "Invitado",
+  "selectRole": "Selecciona tu Rol",
+  "roleNotSetDescription": "Para continuar, por favor selecciona el rol que mejor describe tu función en la comunidad educativa. Esto nos ayudará a personalizar tu experiencia en Kary AI.",
+  "roleSelectionTitle": "Elige tu Perfil en Kary AI",
+  "roleSelectionSubtitle": "Selecciona el rol que mejor te representa para acceder a las herramientas y funcionalidades diseñadas para ti.",
+  "confirmRoleButton": "Confirmar Rol",
+  "noRoleAssigned": "Rol no asignado",
+  "roleNotSetTitle": "¡Bienvenido/a!",
+  "roleSetSuccessTitle": "¡Rol Configurado!",
+  "roleSetSuccessDescription": "Tu rol ha sido establecido como {role}. ¡Bienvenido!",
+  "roleSetErrorTitle": "Error al Configurar Rol",
+  "roleSetErrorDescription": "No pudimos guardar tu selección de rol. Por favor, inténtalo de nuevo."
+}

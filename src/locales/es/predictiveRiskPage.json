@@ -1,0 +1,47 @@
+{
+  "pageTitle": "Análisis de Riesgo Predictivo",
+  "pageSubtitle": "Identifica y analiza los factores de riesgo de los estudiantes. Utiliza los filtros para refinar tu vista.",
+  "overallRiskTitle": "Riesgo General del Estudiante",
+  "academicRiskTitle": "Riesgo Académico",
+  "emotionalRiskTitle": "Riesgo Emocional",
+  "riskLevels": {
+    "low": "Bajo",
+    "medium": "Medio",
+    "high": "Alto",
+    "critical": "Crítico",
+    "unknown": "Desconocido"
+  },
+  "trendChartTitle": "Tendencia del Nivel de Riesgo",
+  "trendChartDesc": "Evolución del riesgo general del estudiante en el tiempo.",
+  "riskFactorsTitle": "Factores de Riesgo Identificados",
+  "riskFactorsDesc": "Principales factores que contribuyen al nivel de riesgo actual.",
+  "noData": "No hay datos de riesgo predictivo disponibles para el estudiante o filtros seleccionados.",
+  "filterByStudent": "Filtrar por Estudiante",
+  "selectStudentPlaceholder": "Selecciona un estudiante...",
+  "allStudents": "Todos los Estudiantes",
+  "filterByRiskLevel": "Filtrar por Nivel de Riesgo",
+  "selectRiskLevelPlaceholder": "Selecciona nivel de riesgo...",
+  "filterByDateRange": "Filtrar por Rango de Fechas",
+  "startDate": "Fecha de Inicio",
+  "endDate": "Fecha de Fin",
+  "applyFiltersButton": "Aplicar Filtros",
+  "clearFiltersButton": "Limpiar Filtros",
+  "studentTable": {
+    "studentName": "Nombre del Estudiante",
+    "overallRisk": "Riesgo General",
+    "academicRisk": "Académico",
+    "emotionalRisk": "Emocional",
+    "lastEvaluation": "Últ. Eval.",
+    "actions": "Acciones",
+    "viewDetails": "Ver Detalles"
+  },
+  "detailsModal": {
+    "title": "Detalles de Riesgo Predictivo: {studentName}",
+    "closeButton": "Cerrar",
+    "factors": "Factores de Riesgo",
+    "suggestions": "Sugerencias IA",
+    "history": "Historial de Riesgo"
+  },
+  "loadingData": "Cargando datos de riesgo predictivo...",
+  "errorLoadingData": "Error al cargar los datos de riesgo predictivo. Por favor, inténtalo de nuevo."
+}

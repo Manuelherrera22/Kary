@@ -1,0 +1,15 @@
+{
+  "parent": "Parent or Guardian",
+  "directive": "Institutional Directive",
+  "psychopedagogue": "Psychopedagogue",
+  "admin": "Administrator",
+  "student": "Student",
+  "selectRoleTitle": "Select Your Role",
+  "selectRoleSubtitle": "To personalize your experience, please tell us your role in the educational community.",
+  "selectRoleSubtitleForUser": "Hi {userName}! To personalize your experience, please tell us your role.",
+  "roleSetSuccessTitle": "Role Set",
+  "roleSetSuccessDescription": "Your role as {role} has been saved. You will be redirected to your dashboard.",
+  "roleSetErrorTitle": "Error Setting Role",
+  "roleNotSetTitle": "Role Not Specified",
+  "roleNotSetDescription": "Your role has not been set up yet. Some features might be limited. Please contact an administrator or complete your profile."
+}

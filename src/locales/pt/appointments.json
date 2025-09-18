@@ -1,0 +1,23 @@
+{
+  "dateLabel": "Data da Consulta",
+  "timeSlotLabel": "Horário",
+  "selectTimeSlot": "Selecione um horário",
+  "reasonLabel": "Motivo da Consulta",
+  "reasonPlaceholder": "Descreva brevemente o motivo...",
+  "confirmButton": "Confirmar Consulta",
+  "successTitle": "Consulta Agendada!",
+  "successDescription": "Sua consulta para {date} às {time} foi solicitada. Você receberá uma confirmação em breve.",
+  "errorScheduling": "Erro ao agendar a consulta. Por favor, tente novamente.",
+  "errorAllFieldsRequired": "Todos os campos marcados com * são obrigatórios.",
+  "errorFetchingHistory": "Erro ao carregar o histórico de consultas.",
+  "noHistoryFound": "Nenhuma consulta encontrada no seu histórico.",
+  "noReasonProvided": "Nenhum motivo especificado",
+  "notesLabel": "Notas Adicionais",
+  "withProfessional": "Com Profissional",
+  "status": {
+    "pending": "Pendente",
+    "confirmed": "Confirmada",
+    "cancelled": "Cancelada",
+    "completed": "Concluída"
+  }
+}

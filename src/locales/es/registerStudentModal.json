@@ -1,0 +1,15 @@
+{
+  "title": "Registrar Nuevo Estudiante",
+  "fullNameLabel": "Nombre Completo",
+  "fullNamePlaceholder": "Ej: Ana Pérez García",
+  "emailLabel": "Correo Electrónico",
+  "emailPlaceholder": "Ej: ana.perez@ejemplo.com",
+  "gradeLabel": "Grado/Curso",
+  "gradePlaceholder": "Ej: 5to A, Secundaria 1",
+  "submitButton": "Registrar Estudiante",
+  "submittingButton": "Registrando...",
+  "registerButtonText": "Registrar Estudiante",
+  "errorAllFieldsRequired": "Por favor, completa todos los campos.",
+  "errorCreatingStudent": "Error al registrar el estudiante",
+  "studentCreatedSuccess": "¡Estudiante registrado exitosamente!"
+}

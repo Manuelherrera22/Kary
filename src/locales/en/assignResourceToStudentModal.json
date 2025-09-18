@@ -1,0 +1,33 @@
+{
+  "title": "Assign Resource to {studentName}",
+  "triggerButton": "Assign Resource",
+  "resourceTypeLabel": "Filter by Resource Type",
+  "resourceTypePlaceholder": "Select a type...",
+  "types": {
+    "todos": "All Types",
+    "guia": "Guide",
+    "video": "Video",
+    "actividad": "Activity",
+    "documento": "Document",
+    "ejercicio": "Exercise"
+  },
+  "resourceLabel": "Select Resource",
+  "resourcePlaceholder": "Choose a resource...",
+  "noResourcesOfType": "No resources of type '{type}' available.",
+  "assignButton": "Assign Resource",
+  "assigningButton": "Assigning...",
+  "validationErrorResource": "Please select a resource to assign.",
+  "validationErrorMissingStudentId": "Missing or invalid student ID.",
+  "validationErrorMissingResourceId": "Missing or invalid resource ID.",
+  "validationErrorMissingAssignerId": "Missing or invalid assigner ID.",
+  "validationErrorStudentNotFoundDetailed": "Student with ID '{studentId}' not found or invalid.",
+  "validationErrorStudentNotStudent": "The selected user is not a student.",
+  "validationErrorResourceNotFoundInLearningResources": "Resource with ID '{resourceId}' not found in the learning resources list.",
+  "validationErrorAssignerNotFoundDetailed": "Assigning user with ID '{assignerId}' not found or invalid.",
+  "authErrorUserNotLoaded": "Authentication error: User information could not be loaded. Please try again.",
+  "authErrorUserNotLoadedForFetch": "Authentication error: User information could not be loaded to fetch resources. Please try again.",
+  "assignSuccess": "Resource assigned to {studentName} successfully!",
+  "assignError": "Error assigning the resource.",
+  "fetchError": "Error fetching available resources.",
+  "foreignKeyViolation": "Assignment Error: One of the IDs (student, resource, or assigner) is invalid."
+}

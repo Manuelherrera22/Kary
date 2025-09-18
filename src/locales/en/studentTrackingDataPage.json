@@ -1,0 +1,15 @@
+{
+  "title": "My Tracking Data",
+  "emotionalTab": "Emotional Tracking",
+  "academicTab": "Academic Performance",
+  "emotionalChartTitle": "Emotional State & Energy Chart",
+  "academicChartTitle": "Academic Performance Chart",
+  "energyLevel": "Energy Level",
+  "moodScore": "Mood Score",
+  "academicScore": "Academic Score",
+  "noEmotionalData": "No emotional tracking data recorded yet.",
+  "noAcademicData": "No academic performance data recorded yet.",
+  "errorFetchingEmotional": "Error fetching emotional tracking data.",
+  "errorFetchingAcademic": "Error fetching academic performance data.",
+  "toastErrorTitle": "Loading Error"
+}

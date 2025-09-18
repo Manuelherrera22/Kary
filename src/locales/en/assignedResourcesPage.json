@@ -1,0 +1,18 @@
+{
+  "assignedResourcesPage": {
+    "pageTitle": "My Assigned Resources",
+    "pageSubtitle": "Explore all the learning materials your educators have specially selected for you.",
+    "tabTodos": "All",
+    "tabVideos": "Videos",
+    "tabGuides": "Guides",
+    "tabExercises": "Exercises",
+    "tabArticles": "Articles",
+    "tabOthers": "Others",
+    "viewResource": "View Resource",
+    "noDescription": "No description available.",
+    "loading": "Loading resources...",
+    "noResourcesFoundTitle": "Nothing here yet!",
+    "noResourcesFoundDesc": "No assigned resources of type '{type}' found. New materials might appear soon!",
+    "fetchError": "Could not load assigned resources."
+  }
+}

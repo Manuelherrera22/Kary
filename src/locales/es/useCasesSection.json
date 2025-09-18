@@ -1,0 +1,16 @@
+{
+  "title": "Casos de Uso de Kary",
+  "subtitle": "Kary se adapta a diversos entornos educativos, brindando apoyo donde más se necesita.",
+  "caseHospital": "Aulas hospitalarias",
+  "caseHospitalDesc": "Acompañamiento en procesos de enfermedad.",
+  "caseHome": "Educación domiciliaria",
+  "caseHomeDesc": "Continuidad educativa en casa.",
+  "caseRural": "Escuelas rurales o multigrado",
+  "caseRuralDesc": "Apoyo en contextos con recursos limitados.",
+  "caseUrban": "Instituciones urbanas",
+  "caseUrbanDesc": "Asistencia en aulas con alta demanda.",
+  "caseEmotional": "Clínicas pediátricas (anterior)",
+  "caseEmotionalDesc": "Soporte educativo en entornos de salud (anterior).",
+  "caseClinics": "Clínicas pediátricas",
+  "caseClinicsDesc": "Soporte educativo en entornos de salud."
+}

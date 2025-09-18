@@ -1,0 +1,15 @@
+{
+  "title": "Notificações",
+  "noNotifications": "Você não tem notificações novas.",
+  "markAllAsRead": "Marcar todas como lidas",
+  "markAsRead": "Marcar como lida",
+  "settings": "Configurações de Notificação",
+  "viewAll": "Ver Todas as Notificações",
+  "errorFetching": "Erro ao carregar notificações.",
+  "newReportTitle": "Novo Relatório Disponível",
+  "newReportMessage": "O relatório '{reportName}' está pronto para sua revisão.",
+  "appointmentReminderTitle": "Lembrete de Consulta",
+  "appointmentReminderMessage": "Você tem uma consulta agendada para {date} às {time}.",
+  "planApprovalPendingTitle": "Plano de Acompanhamento",
+  "planApprovalPendingMessage": "O plano '{planName}' requer sua aprovação."
+}

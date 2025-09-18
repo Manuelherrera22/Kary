@@ -1,0 +1,12 @@
+{
+  "commonActionButtons": "src/locales/es/buttons/commonActionButtons.json",
+  "navigationButtons": "src/locales/es/buttons/navigationButtons.json",
+  "dialogButtons": "src/locales/es/buttons/dialogButtons.json",
+  "formButtons": "src/locales/es/buttons/formButtons.json",
+  "authButtons": "src/locales/es/buttons/authButtons.json",
+  "dataManagementButtons": "src/locales/es/buttons/dataManagementButtons.json",
+  "mediaPlayerButtons": "src/locales/es/buttons/mediaPlayerButtons.json",
+  "socialMediaButtons": "src/locales/es/buttons/socialMediaButtons.json",
+  "utilityButtons": "src/locales/es/buttons/utilityButtons.json",
+  "dashboardButtons": "src/locales/es/buttons/dashboardButtons.json"
+}

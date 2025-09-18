@@ -1,0 +1,15 @@
+{
+  "parent": "Parent ou Tuteur",
+  "directive": "Direction Institutionnelle",
+  "psychopedagogue": "Psychopédagogue",
+  "admin": "Administrateur",
+  "student": "Étudiant",
+  "selectRoleTitle": "Sélectionnez Votre Rôle",
+  "selectRoleSubtitle": "Pour personnaliser votre expérience, veuillez nous indiquer votre rôle dans la communauté éducative.",
+  "selectRoleSubtitleForUser": "Bonjour {userName} ! Pour personnaliser votre expérience, veuillez nous indiquer votre rôle.",
+  "roleSetSuccessTitle": "Rôle Défini",
+  "roleSetSuccessDescription": "Votre rôle en tant que {role} a été enregistré. Vous allez être redirigé vers votre tableau de bord.",
+  "roleSetErrorTitle": "Erreur lors de la Définition du Rôle",
+  "roleNotSetTitle": "Rôle Non Spécifié",
+  "roleNotSetDescription": "Votre rôle n'a pas encore été configuré. Certaines fonctionnalités pourraient être limitées. Veuillez contacter un administrateur ou compléter votre profil."
+}

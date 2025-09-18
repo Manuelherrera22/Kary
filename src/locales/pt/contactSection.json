@@ -1,0 +1,17 @@
+{
+  "title": "Parceiros e Contato",
+  "subtitle": "Você é docente, diretor ou instituição de ensino? Agende uma apresentação privada ou participe do nosso piloto.",
+  "formTitle": "Agende uma apresentação",
+  "formNameLabel": "Nome completo",
+  "formNamePlaceholder": "Seu nome",
+  "formEmailLabel": "Endereço de email",
+  "formEmailPlaceholder": "voce@email.com",
+  "formInstitutionLabel": "Instituição (Opcional)",
+  "formInstitutionPlaceholder": "Nome da sua instituição",
+  "formSubmitButton": "Solicitar Apresentação",
+  "contactInfoTitle": "Informações de Contato",
+  "contactEmail": "contacto@karyeduca.com",
+  "contactPhone": "+57 322 234 5650",
+  "contactWebsite": "www.karyeduca.com",
+  "closingMessage": "Estamos entusiasmados para colaborar com você na transformação da educação."
+}

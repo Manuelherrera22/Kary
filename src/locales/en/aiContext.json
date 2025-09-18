@@ -1,0 +1,10 @@
+{
+  "title": "Generate Context with AI",
+  "button": "Generate Suggested Context",
+  "noEmotionalData": "No recent emotional logs for this student.",
+  "noAcademicData": "No recent academic data for this student.",
+  "success": "Context generated successfully by AI.",
+  "error": "Error generating context with AI.",
+  "fetchError": "Could not connect to the server to generate context.",
+  "error.noDataToGenerate": "Not enough data (emotional, academic, or other factors) to generate context. Please ensure information is available or add other factors."
+}

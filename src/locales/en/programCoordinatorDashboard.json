@@ -1,0 +1,24 @@
+{
+  "pageTitle": "Program Coordinator Dashboard",
+  "welcomeMessage": "Welcome, {userName}! Oversee and manage educational programs effectively.",
+  "programDataPanel": "Program Data Panel",
+  "programDataPanelDesc": "Global view of program metrics and student performance.",
+  "smartAssignment": "Smart Assignment",
+  "smartAssignmentDesc": "AI-powered tools for resource and task allocation.",
+  "escalatedAlerts": "Escalated Alerts",
+  "escalatedAlertsDesc": "Manage critical alerts escalated from other roles.",
+  "piarProgress": "PIAR Progress",
+  "piarProgressDesc": "Track the development and execution of PIARs.",
+  "blockComparison": "Block/Group Comparison",
+  "blockComparisonDesc": "Analyze and compare performance across different student groups or blocks.",
+  "settings": "Settings",
+  "settingsDesc": "Configure program parameters and coordinator preferences.",
+  "accessNow": "Access Now",
+  "fetchSuccess": "Summary loaded successfully for the Program Coordinator.",
+  "fetchError": "Could not load summary for the Program Coordinator.",
+  "summaryCategories": {
+    "planes_de_apoyo": "Support Plans",
+    "sugerencias_kary": "Kary's Suggestions",
+    "casos_escalados": "Escalated Cases"
+  }
+}

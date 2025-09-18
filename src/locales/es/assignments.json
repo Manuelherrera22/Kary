@@ -1,0 +1,18 @@
+{
+  "title": "Asignaciones",
+  "assignTeacherTitle": "Asignar Docente a Estudiante",
+  "assignGuardianTitle": "Asignar Acudiente a Estudiante",
+  "teacher": "Docente",
+  "guardian": "Acudiente",
+  "student": "Estudiante",
+  "selectTeacher": "Seleccionar Docente",
+  "selectGuardian": "Seleccionar Acudiente",
+  "selectStudent": "Seleccionar Estudiante",
+  "assignButton": "Asignar",
+  "assignSuccess": "Asignación realizada con éxito.",
+  "assignError": "Error al realizar la asignación.",
+  "noUsersFound": "No se encontraron usuarios con el rol '{role}'.",
+  "noStudentsFound": "No se encontraron estudiantes.",
+  "loading": "Cargando...",
+  "errorFetching": "Error al cargar los datos."
+}

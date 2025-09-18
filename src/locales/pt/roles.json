@@ -1,0 +1,15 @@
+{
+  "parent": "Pai ou Responsável",
+  "directive": "Diretor Institucional",
+  "psychopedagogue": "Psicopedagogo",
+  "admin": "Administrador",
+  "student": "Estudante",
+  "selectRoleTitle": "Selecione seu Papel",
+  "selectRoleSubtitle": "Para personalizar sua experiência, por favor, diga-nos qual é o seu papel na comunidade educacional.",
+  "selectRoleSubtitleForUser": "Olá {userName}! Para personalizar sua experiência, por favor, diga-nos qual é o seu papel.",
+  "roleSetSuccessTitle": "Papel Definido",
+  "roleSetSuccessDescription": "Seu papel como {role} foi salvo. Você será redirecionado para o seu painel.",
+  "roleSetErrorTitle": "Erro ao Definir Papel",
+  "roleNotSetTitle": "Papel Não Especificado",
+  "roleNotSetDescription": "Seu papel ainda não foi configurado. Alguns recursos podem ser limitados. Entre em contato com um administrador ou complete seu perfil."
+}

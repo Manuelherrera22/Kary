@@ -1,0 +1,63 @@
+{
+  "pageTitle": "Psychopedagogue Dashboard",
+  "dataLoadedSuccess": "Psychopedagogue dashboard data loaded.",
+  "dataLoadedError": "Error loading psychopedagogue dashboard data.",
+  "cards": {
+    "activeCases": "Active Cases",
+    "activeCasesDesc": "Students with active follow-up.",
+    "emotionalAlerts": "Emotional Alerts",
+    "emotionalAlertsDesc": "Recent emotional risk alerts.",
+    "supportPlans": "Support Plans",
+    "supportPlansDesc": "Active intervention plans.",
+    "pendingTasks": "Pending Tasks",
+    "pendingTasksDesc": "Tasks and follow-ups to complete."
+  },
+  "quickAccessTitle": "Quick Access & Tools",
+  "quickAccessDesc": "Key functions for your daily management.",
+  "quickAccess": {
+    "karyCore": "KARY CORE Panel",
+    "karyCoreDesc": "Artificial intelligence for support.",
+    "predictiveRisk": "Predictive Risk",
+    "predictiveRiskDesc": "Risk analysis and predictions.",
+    "communication": "Communication",
+    "communicationDesc": "Messaging and appointments.",
+    "settings": "Settings",
+    "settingsDesc": "Account and preference settings."
+  },
+  "managementToolsTitle": "Management Tools",
+  "managementToolsDesc": "Create, assign, and manage resources and students.",
+  "registerStudentButton": "Register Student",
+  "createResourceButton": "Create Resource",
+  "assignMultipleButton": "Multiple Assignment",
+  "evaluations": {
+    "pageTitle": "Psychopedagogical Evaluations",
+    "pageSubtitle": "Manage evaluations, tests, and comments for detailed tracking.",
+    "newEvaluation": "New Evaluation",
+    "editEvaluation": "Edit Evaluation",
+    "modalDescription": "Fill in the evaluation details, add tests, and record your comments.",
+    "student": "Student",
+    "selectStudent": "Select a student",
+    "title": "Evaluation Title",
+    "date": "Date",
+    "status": "Status",
+    "tests": "Applied Tests",
+    "comments": "Comments",
+    "addTest": "Add Test",
+    "testName": "Test Name",
+    "resultsJson": "Results (JSON)",
+    "addComment": "Add Comment",
+    "newCommentPlaceholder": "Write a new comment...",
+    "noEvaluationsFound": "No evaluations found.",
+    "noEvaluationsDescription": "Create a new evaluation to start tracking.",
+    "fetchError": "Error fetching evaluations.",
+    "fetchStudentsError": "Error fetching student list.",
+    "saveSuccess": "Evaluation saved successfully.",
+    "saveError": "Error saving evaluation.",
+    "commentAddedSuccess": "Comment added successfully.",
+    "commentAddedError": "Error adding comment.",
+    "statuses": {
+      "in_progress": "In Progress",
+      "completed": "Completed"
+    }
+  }
+}

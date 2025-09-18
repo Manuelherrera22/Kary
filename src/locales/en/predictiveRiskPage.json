@@ -1,0 +1,47 @@
+{
+  "pageTitle": "Predictive Risk Analysis",
+  "pageSubtitle": "Identify and analyze student risk factors. Use filters to refine your view.",
+  "overallRiskTitle": "Overall Student Risk",
+  "academicRiskTitle": "Academic Risk",
+  "emotionalRiskTitle": "Emotional Risk",
+  "riskLevels": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical",
+    "unknown": "Unknown"
+  },
+  "trendChartTitle": "Risk Level Trend",
+  "trendChartDesc": "Evolution of the student's overall risk over time.",
+  "riskFactorsTitle": "Identified Risk Factors",
+  "riskFactorsDesc": "Main factors contributing to the current risk level.",
+  "noData": "No predictive risk data available for the selected student or filters.",
+  "filterByStudent": "Filter by Student",
+  "selectStudentPlaceholder": "Select a student...",
+  "allStudents": "All Students",
+  "filterByRiskLevel": "Filter by Risk Level",
+  "selectRiskLevelPlaceholder": "Select risk level...",
+  "filterByDateRange": "Filter by Date Range",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "applyFiltersButton": "Apply Filters",
+  "clearFiltersButton": "Clear Filters",
+  "studentTable": {
+    "studentName": "Student Name",
+    "overallRisk": "Overall Risk",
+    "academicRisk": "Academic",
+    "emotionalRisk": "Emotional",
+    "lastEvaluation": "Last Eval.",
+    "actions": "Actions",
+    "viewDetails": "View Details"
+  },
+  "detailsModal": {
+    "title": "Predictive Risk Details: {studentName}",
+    "closeButton": "Close",
+    "factors": "Risk Factors",
+    "suggestions": "AI Suggestions",
+    "history": "Risk History"
+  },
+  "loadingData": "Loading predictive risk data...",
+  "errorLoadingData": "Error loading predictive risk data. Please try again."
+}

@@ -1,0 +1,15 @@
+{
+  "panelTitle": "Notificaciones",
+  "noNotifications": "No tienes notificaciones nuevas.",
+  "markAllAsRead": "Marcar todas como leídas",
+  "archiveNotification": "Archivar notificación",
+  "viewAll": "Ver todas",
+  "unreadBadge": "{count} no leídas",
+  "errorFetching": "Error al cargar notificaciones.",
+  "errorUpdating": "Error al actualizar notificación.",
+  "typeAppointmentReminder": "Recordatorio de Cita",
+  "typeNewReport": "Nuevo Reporte Disponible",
+  "typeSystemUpdate": "Actualización del Sistema",
+  "typeNewMessage": "Nuevo Mensaje",
+  "typeProgressUpdate": "Actualización de Progreso"
+}

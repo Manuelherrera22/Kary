@@ -1,0 +1,17 @@
+{
+  "tabAll": "Todos",
+  "tabVideos": "Videos",
+  "tabGuides": "Guías",
+  "tabGuidesNoAccent": "Guías",
+  "tabActivities": "Actividades",
+  "tabDocuments": "Documentos",
+  "tabExercises": "Ejercicios",
+  "noDescription": "No hay descripción disponible.",
+  "viewResourceButton": "Ver Recurso",
+  "noResources": "Aún no tienes recursos asignados.",
+  "noResourcesFoundTitle": "No se encontraron recursos",
+  "noResourcesFoundDesc": "No hay recursos asignados que coincidan con el tipo '{type}' o los filtros seleccionados.",
+  "fetchError": "Error al cargar los recursos asignados.",
+  "filterByTags": "Filtrar por etiquetas:",
+  "clearTagsFilter": "Limpiar filtro de etiquetas"
+}

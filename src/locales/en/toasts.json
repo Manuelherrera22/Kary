@@ -1,0 +1,21 @@
+{
+  "demoRequestSentTitle": "Request Received!",
+  "demoRequestSentDescription": "Thank you for your interest in Kary. We will contact you very soon.",
+  "loginSuccessTitle": "Welcome Back!",
+  "loginSuccessDescription": "You've logged in as {userIdentifier}. Redirecting to your dashboard...",
+  "loginErrorTitle": "Login Error",
+  "errorTitle": "Oops! Something Went Wrong",
+  "demoRequestErrorDescription": "We couldn't send your demo request. Please check your details and try again.",
+  "loginErrorDefault": "We couldn't log you in. Check your details or try again later.",
+  "loginErrorInvalidCredentials": "The email or password is incorrect. Are you sure they are spelled correctly?",
+  "loginErrorEmailNotConfirmed": "It seems your email hasn't been confirmed. Check your inbox (and spam) for a message from Kary.",
+  "loginErrorUnknown": "An unexpected error occurred. Please try again or contact support if the problem persists.",
+  "infoTitle": "Information",
+  "warningTitle": "Warning",
+  "errorLoadingInfoTitle": "Error Loading Information",
+  "errorLoadingInfoDescription": "Could not load support plans or dashboard summary due to a database conflict. We are working to resolve it. Please try again in a few minutes.",
+  "selectStudentErrorTitle": "Select a student to view plans",
+  "selectStudentErrorDescription": "Please select a student from the panel above to load their existing support plans.",
+  "relationsFixedInfoTitle": "Relationships corrected and plan loading stabilized",
+  "relationsFixedInfoMessage": "A foreign key duplication conflict between 'support_plans' and the 'students' and 'user_profiles' tables, which prevented correct plan visualization, has been resolved. Now:\n\n• Ambiguity in relationships has been eliminated, and JOINs have been explicitly adjusted.\n• It has been validated that plans are generated correctly after selecting a student.\n• The system now only attempts to load plans **once the student has been chosen**.\n\n🧩 Recommendation: ensure a student is always selected before invoking loading or summary functions. Implement preventive validations in the UI flow to avoid premature loading attempts."
+}

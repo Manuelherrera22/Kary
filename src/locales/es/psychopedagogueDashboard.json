@@ -1,0 +1,95 @@
+{
+  "welcome": "¡Bienvenido de nuevo, {name}!",
+  "subtitle": "Aquí puedes gestionar casos, recursos y tendencias emocionales de tus estudiantes.",
+  "activeCases": "Casos Activos",
+  "studentsTracked": "Estudiantes en Seguimiento",
+  "resourcesAvailable": "Recursos Disponibles",
+  "quickActions": {
+    "title": "Acciones Rápidas",
+    "newSupportPlan": "Nuevo Plan de Apoyo",
+    "createResource": "Crear Recurso Educativo",
+    "assignResource": "Asignar Recurso Individual",
+    "assignMultipleResources": "Asignar Múltiples Recursos",
+    "registerStudent": "Registrar Estudiante",
+    "viewRecentCases": "Ver Casos Recientes",
+    "viewEmotionalTrends": "Analizar Tendencias Emocionales"
+  },
+  "tabs": {
+    "students": "Lista de Estudiantes",
+    "recentCases": "Casos Recientes"
+  },
+  "goal": "Objetivo",
+  "responsible": "Responsable",
+  "startDate": "Fecha de Inicio",
+  "viewDetails": "Ver Detalles",
+  "recentCasesTitle": "Casos de Soporte Recientes",
+  "recentCasesDescription": "Un resumen de los últimos planes de apoyo activos o recientemente actualizados.",
+  "noRecentCases": "No hay casos recientes para mostrar.",
+  "errorFetchingData": "Error al cargar los datos del panel.",
+  "errorFetchingRecentCases": "Error al cargar los casos recientes.",
+  "assignmentSuccessToast": "¡Recurso asignado con éxito!",
+  "resourceCreatedToast": "¡Recurso creado con éxito!",
+  "studentRegisteredToast": "¡Estudiante registrado con éxito!",
+  "supportPlanCreatedToast": "¡Plan de apoyo creado con éxito!",
+  "supportPlanUpdatedToast": "¡Plan de apoyo actualizado con éxito!",
+  "emotionalTrendsTitle": "Tendencias Emocionales",
+  "emotionalTrendsPageSubtitle": "Visualiza y analiza las tendencias emocionales de los estudiantes.",
+  "emotionalTrend": "Tendencia Emocional",
+  "emotionalTrendTimeline": "Línea de Tiempo de Tendencias Emocionales",
+  "emotionalDistribution": "Distribución de Tendencias Emocionales",
+  "noEmotionalData": "No hay datos de tendencias emocionales disponibles.",
+  "activeCasesTitle": "Casos Activos",
+  "activeCasesDescription": "Estudiantes con seguimiento activo",
+  "emotionalAlertsTitle": "Alertas Emocionales",
+  "emotionalAlertsDescription": "Alertas de riesgo emocional recientes",
+  "supportPlansActiveTitle": "Planes de Apoyo Activos",
+  "supportPlansActiveDescription": "Planes de intervención en curso",
+  "pendingTasksTitle": "Tareas Pendientes",
+  "pendingTasksDescription": "Tareas y seguimientos por completar",
+  "accessNow": "Acceder ahora",
+  "aiSuggestion": {
+    "title": "Sugerencias de Kary IA"
+  },
+  "priority": "Prioridad",
+  "academicRiskGroup": "Grupo de Riesgo Académico",
+  "emotionalRiskHigh": "Riesgo emocional alto detectado. Plan de apoyo sin seguimiento hace 4 días.",
+  "reviewSupportPlan": "Revisar Plan de Apoyo",
+  "identifiedStudents": "Identificados 3 estudiantes con bajo rendimiento en matemáticas. Se sugiere crear un grupo de estudio.",
+  "createSmartGroup": "Crear Grupo Inteligente",
+  "riskAlerts": {
+    "title": "Alertas de Riesgo",
+    "levels": {
+      "alto": "Alto"
+    },
+    "viewStudentButton": "Ver Estudiante"
+  },
+  "managementTools": {
+    "title": "Herramientas de Gestión"
+  },
+  "buttons": {
+    "registerStudent": "Registrar Estudiante",
+    "createResource": "Crear Recurso",
+    "assignResource": "Asignar Recurso",
+    "smartAssignment": "Asignación Inteligente",
+    "supportPlans": "Planes de Apoyo"
+  },
+  "quickAccess": {
+    "title": "Acceso Rápido y Herramientas"
+  },
+  "karyCorePanel": {
+    "title": "Panel KARY CORE",
+    "description": "Inteligencia artificial para el apoyo."
+  },
+  "predictiveRisk": {
+    "title": "Riesgo Predictivo",
+    "description": "Análisis y predicciones de riesgo."
+  },
+  "communication": {
+    "title": "Comunicación",
+    "description": "Mensajería y citas."
+  },
+  "settings": {
+    "title": "Configuración",
+    "description": "Ajustes de cuenta y preferencias."
+  }
+}

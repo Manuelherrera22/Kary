@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 258 90% 66%; /* Purple */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 336 88% 60%; /* Pink */
+    --secondary-foreground: 0 0% 100%;
+    
+    --tertiary: 30 95% 59%; /* Orange */
+    --tertiary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%; /* Light Sky Blue / Light Purple */
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 258 90% 66%; /* Purple for focus rings */
+
+    --radius: 0.75rem; /* Slightly larger radius for a softer look */
+  }
+
+  .dark {
+    --background: 224 71% 4%; /* Dark blue-gray */
+    --foreground: 210 40% 98%; /* Light gray */
+
+    --card: 223 47% 11%; /* Slightly lighter dark blue-gray for cards */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 258 80% 70%; /* Brighter purple for dark mode */
+    --primary-foreground: 222.2 47.4% 11.2%; /* Darker text for contrast */
+
+    --secondary: 336 80% 70%; /* Brighter pink */
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --tertiary: 30 85% 65%; /* Brighter orange */
+    --tertiary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%; /* Lighter muted text */
+
+    --accent: 223 47% 11%; /* Same as card for subtle accents */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 72% 51%; /* Slightly adjusted red for dark mode */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 17%; /* Darker border */
+    --input: 215 28% 17%; /* Darker input background */
+    --ring: 258 80% 70%; /* Brighter purple for focus rings */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', sans-serif;
+    @apply antialiased; /* Smoother font rendering */
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  section {
+    @apply overflow-hidden; 
+  }
+  ::selection {
+    @apply bg-primary/70 text-primary-foreground;
+  }
+  .dark ::selection {
+    @apply bg-primary/50 text-primary-foreground;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+.dark ::-webkit-scrollbar-track {
+  @apply bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, theme('colors.purple.500'), theme('colors.pink.500')); 
+  @apply rounded-full;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, theme('colors.purple.400'), theme('colors.pink.400'));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, theme('colors.purple.600'), theme('colors.pink.600'));
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, theme('colors.purple.500'), theme('colors.pink.500'));
+}
+
+
+.gradient-text-kary {
+  @apply bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent;
+}
+.dark .gradient-text-kary {
+  @apply from-purple-400 via-pink-400 to-orange-300;
+}
+
+.gradient-text-kary-dashboard {
+  @apply bg-gradient-to-r from-purple-300 via-pink-300 to-orange-300 bg-clip-text text-transparent;
+}
+.dark .gradient-text-kary-dashboard {
+   @apply from-purple-400 via-pink-400 to-orange-300;
+}
+
+
+.glass-card {
+  @apply bg-white/30 dark:bg-slate-800/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-2xl rounded-2xl p-6;
+}
+
+.hover-lift {
+  @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-primary/20;
+}
+
+.button-hover-effect {
+  @apply transition-all duration-200 ease-in-out transform hover:scale-105 hover:shadow-md;
+}
+
+@keyframes float-gentle {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+
+@keyframes ping-once {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.7;
+  }
+}
+
+.animate-ping-once {
+  animation: ping-once 0.5s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, transparent 0%, theme('colors.slate.200/50') 50%, transparent 100%);
+  background-size: 1000px 100%;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(to right, transparent 0%, theme('colors.slate.700/50') 50%, transparent 100%);
+  background-size: 1000px 100%;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+
+.font-inter { font-family: 'Inter', sans-serif; }
+.font-poppins { font-family: 'Poppins', sans-serif; }
+.font-nunito-sans { font-family: 'Nunito Sans', sans-serif; }
+
+.aura-gold {
+  box-shadow: 0 0 80px 30px theme('colors.yellow.400');
+}
+.aura-lavender {
+  box-shadow: 0 0 80px 30px theme('colors.purple.400');
+}
+.aura-blue {
+  box-shadow: 0 0 80px 30px theme('colors.sky.400');
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle infinite;
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+}
+
+.magic-portal-card {
+  background: rgba(22, 28, 52, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.magic-portal-card:before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+  transition: all 0.5s ease-in-out;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.magic-portal-card:hover:before {
+  transform: scale(1);
+  opacity: 1;
+}

@@ -1,0 +1,85 @@
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Sparkles, Edit } from 'lucide-react';
+
+const AIContentSuggestionStep = ({ assignmentData, updateAssignmentData }) => {
+  const { t } = useLanguage();
+  const [editingSuggestion, setEditingSuggestion] = React.useState(false);
+
+  // Placeholder for IA suggestion based on selected students
+  const getAISuggestion = () => {
+    if (assignmentData.selectedStudents.length > 0) {
+      const studentNames = assignmentData.selectedStudents.map(s => s.full_name).join(', ');
+      const firstStudentDiag = assignmentData.selectedStudents[0]?.diagnostic_summary;
+      let suggestion = t('smartAssignment.aiSuggestionBase', { studentNames: studentNames });
+      if (firstStudentDiag) {
+        suggestion += ` ${t('smartAssignment.aiSuggestionWithDiagnosis', { diagnosis: firstStudentDiag })}`;
+      } else {
+        suggestion += ` ${t('smartAssignment.aiSuggestionGenericFocus')}`;
+      }
+      return suggestion;
+    }
+    return t('smartAssignment.aiSuggestionPlaceholder');
+  };
+
+  const aiGeneratedSuggestion = getAISuggestion();
+  const currentContent = assignmentData.aiEditedContent || aiGeneratedSuggestion;
+
+  const handleUseSuggestion = () => {
+    updateAssignmentData({ aiSuggestionUsed: true, aiEditedContent: aiGeneratedSuggestion });
+    setEditingSuggestion(false); 
+  };
+
+  const handleEditSuggestion = () => {
+    setEditingSuggestion(true);
+    // Initialize aiEditedContent if it's not already set
+    if (!assignmentData.aiEditedContent) {
+      updateAssignmentData({ aiEditedContent: aiGeneratedSuggestion });
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="p-6 bg-slate-800/70 border border-purple-700/50 rounded-xl shadow-lg">
+        <Label className="text-xl font-semibold text-purple-300 mb-3 block flex items-center">
+          <Sparkles size={24} className="mr-2 text-yellow-400 animate-pulse" />
+          {t('smartAssignment.aiSuggestionTitle')}
+        </Label>
+        
+        {!editingSuggestion ? (
+          <p className="text-slate-300 whitespace-pre-wrap min-h-[100px]">
+            {currentContent}
+          </p>
+        ) : (
+          <Textarea
+            value={assignmentData.aiEditedContent}
+            onChange={(e) => updateAssignmentData({ aiEditedContent: e.target.value })}
+            rows={5}
+            className="bg-slate-700 border-slate-600 text-slate-100 focus:ring-purple-500 min-h-[120px]"
+            placeholder={t('smartAssignment.aiEditPlaceholder')}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Button onClick={handleUseSuggestion} variant="outline" className="flex-1 text-purple-300 border-purple-500 hover:bg-purple-500/20 hover:text-purple-200 py-3 text-base">
+          <Sparkles size={18} className="mr-2" /> {t('smartAssignment.aiUseSuggestionButton')}
+        </Button>
+        <Button onClick={handleEditSuggestion} variant="outline" className="flex-1 text-sky-300 border-sky-500 hover:bg-sky-500/20 hover:text-sky-200 py-3 text-base">
+          <Edit size={18} className="mr-2" /> {t('smartAssignment.aiEditSuggestionButton')}
+        </Button>
+      </div>
+      {assignmentData.aiSuggestionUsed && !editingSuggestion && (
+         <p className="text-sm text-green-400 flex items-center"><Sparkles size={14} className="mr-1" />{t('smartAssignment.aiSuggestionAccepted')}</p>
+      )}
+       {editingSuggestion && (
+         <p className="text-sm text-sky-400 flex items-center"><Edit size={14} className="mr-1" />{t('smartAssignment.aiEditingSuggestion')}</p>
+      )}
+    </div>
+  );
+};
+
+export default AIContentSuggestionStep;

@@ -1,0 +1,15 @@
+{
+  "title": "Mis Datos de Seguimiento",
+  "emotionalTab": "Seguimiento Emocional",
+  "academicTab": "Rendimiento Académico",
+  "emotionalChartTitle": "Gráfico de Estado Emocional y Energía",
+  "academicChartTitle": "Gráfico de Rendimiento Académico",
+  "energyLevel": "Nivel de Energía",
+  "moodScore": "Estado de Ánimo",
+  "academicScore": "Puntaje Académico",
+  "noEmotionalData": "Aún no hay datos de seguimiento emocional registrados.",
+  "noAcademicData": "Aún no hay datos de rendimiento académico registrados.",
+  "errorFetchingEmotional": "Error al cargar los datos de seguimiento emocional.",
+  "errorFetchingAcademic": "Error al cargar los datos de rendimiento académico.",
+  "toastErrorTitle": "Error de Carga"
+}

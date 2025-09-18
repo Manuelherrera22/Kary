@@ -1,0 +1,18 @@
+{
+  "loginButton": "Iniciar Sesión",
+  "logoutButton": "Cerrar Sesión",
+  "signInButton": "Acceder",
+  "signOutButton": "Salir",
+  "signUpButton": "Registrarse",
+  "registerButton": "Registrarse",
+  "forgotPasswordButton": "Olvidé mi Contraseña",
+  "resetPasswordButton": "Restablecer Contraseña",
+  "changePasswordButton": "Cambiar Contraseña",
+  "createAccountButton": "Crear Cuenta",
+  "linkAccountButton": "Vincular Cuenta",
+  "unlinkAccountButton": "Desvincular Cuenta",
+  "continueWithGoogleButton": "Continuar con Google",
+  "continueWithFacebookButton": "Continuar con Facebook",
+  "continueWithAppleButton": "Continuar con Apple",
+  "continueWithEmailButton": "Continuar con Correo Electrónico"
+}

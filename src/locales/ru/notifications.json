@@ -1,0 +1,15 @@
+{
+  "title": "Уведомления",
+  "noNotifications": "У вас нет новых уведомлений.",
+  "markAllAsRead": "Отметить все как прочитанные",
+  "markAsRead": "Отметить как прочитанное",
+  "settings": "Настройки Уведомлений",
+  "viewAll": "Посмотреть Все Уведомления",
+  "errorFetching": "Ошибка загрузки уведомлений.",
+  "newReportTitle": "Доступен Новый Отчет",
+  "newReportMessage": "Отчет '{reportName}' готов к вашему рассмотрению.",
+  "appointmentReminderTitle": "Напоминание о Встрече",
+  "appointmentReminderMessage": "У вас запланирована встреча на {date} в {time}.",
+  "planApprovalPendingTitle": "План Поддержки",
+  "planApprovalPendingMessage": "План '{planName}' требует вашего утверждения."
+}

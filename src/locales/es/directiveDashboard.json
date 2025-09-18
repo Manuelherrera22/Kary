@@ -1,0 +1,148 @@
+{
+  "pageTitle": "Panel de Control Directivo",
+  "welcomeMessage": "Bienvenido/a, {userName}",
+  "dataLoadedSuccess": "Datos del panel de directivo cargados exitosamente.",
+  "dataLoadedError": "Error al cargar los datos del panel de directivo.",
+  "stats": {
+    "schoolData": "Datos del Colegio",
+    "schoolDataDesc": "Visualiza métricas clave y tendencias institucionales.",
+    "userManagement": "Gestión de Usuarios",
+    "userManagementDesc": "Administra cuentas y roles de usuarios.",
+    "reports": "Informes Agregados",
+    "reportsDesc": "Accede a reportes consolidados.",
+    "alerts": "Alertas Institucionales",
+    "alertsDesc": "Monitoriza alertas críticas a nivel institucional."
+  },
+  "quickAccessTitle": "Acceso Rápido y Estrategia",
+  "quickAccessDesc": "Navega a las secciones clave de gestión y estrategia.",
+  "sections": {
+    "strategy": {
+      "title": "Estrategia y KARY CORE",
+      "strategicSummary": "Resumen Estratégico",
+      "strategicSummaryDesc": "Indicadores clave y visión mensual.",
+      "karyCorePanel": "Panel KARY CORE",
+      "karyCorePanelDesc": "Centro de Inteligencia Artificial."
+    },
+    "management": {
+      "title": "Gestión y Administración",
+      "userManagement": "Gestión de Usuarios",
+      "userManagementDesc": "Perfiles, roles y accesos.",
+      "accessManagement": "Gestión de Accesos",
+      "accessManagementDesc": "Asignación de estudiantes a profesionales.",
+      "familyLinkValidation": "Validación de Vínculos Familiares",
+      "familyLinkValidationDesc": "Aprueba conexiones padres-estudiantes."
+    },
+    "monitoring": {
+      "title": "Monitoreo y Alertas",
+      "roleActivity": "Actividad por Roles",
+      "roleActivityDesc": "Seguimiento de acciones en la plataforma.",
+      "institutionalAlerts": "Alertas Institucionales",
+      "institutionalAlertsDesc": "Riesgos académicos y emocionales.",
+      "notificationAudit": "Auditoría de Notificaciones",
+      "notificationAuditDesc": "Revisa el historial de notificaciones."
+    },
+    "data": {
+      "title": "Datos e Informes",
+      "schoolDataPanel": "Panel de Datos Institucionales",
+      "schoolDataPanelDesc": "Análisis detallado de datos.",
+      "reports": "Informes Agregados",
+      "reportsDesc": "Genera y visualiza informes."
+    },
+    "settings": {
+      "title": "Configuración de Cuenta",
+      "accountSettings": "Ajustes de Cuenta",
+      "accountSettingsDesc": "Gestiona tu perfil y preferencias."
+    }
+  },
+  "userManagementPage": {
+    "title": "Gestión de Usuarios",
+    "subtitle": "Administra los perfiles, roles y accesos de todos los usuarios de la plataforma."
+  },
+  "accessManagementPage": {
+    "title": "Gestión de Accesos y Permisos",
+    "subtitle": "Asigna estudiantes a profesionales y controla sus permisos de acceso.",
+    "pageTitle": "Gestión de Asignaciones",
+    "pageDescription": "Asigna estudiantes a docentes y acudientes, gestionando sus vínculos y accesos."
+  },
+  "familyLinkValidationPage": {
+    "title": "Validación de Vínculos Familiares",
+    "subtitle": "Aprueba solicitudes y gestiona las conexiones entre padres y estudiantes."
+  },
+  "institutionalAlertsPage": {
+    "title": "Alertas Institucionales Agrupadas",
+    "subtitle": "Monitoriza en tiempo real los riesgos institucionales y toma acciones."
+  },
+  "roleActivityPage": {
+    "title": "Panel de Actividad por Roles",
+    "subtitle": "Observa las acciones clave realizadas por los diferentes actores en la plataforma."
+  },
+  "strategicSummaryPage": {
+    "title": "Resumen Estratégico Institucional",
+    "subtitle": "Accede a una vista mensual consolidada con el cumplimiento de indicadores clave."
+  },
+  "schoolDataPanelPage": {
+    "title": "Panel de Datos Institucionales",
+    "subtitle": "Análisis detallado de los datos de la institución educativa."
+  },
+  "aggregatedReportsPage": {
+    "title": "Informes Consolidados",
+    "subtitle": "Genera y visualiza informes agregados de la institución."
+  },
+  "accountSettingsPage": {
+    "title": "Configuración de Cuenta",
+    "subtitle": "Gestiona tu información personal y preferencias de la plataforma."
+  },
+  "strategicSummary": {
+    "title": "Resumen Estratégico",
+    "subtitle": "Visión general del impacto institucional y académico",
+    "categories": {
+      "alertas_emocionales": "Alertas emocionales",
+      "retroalimentaciones": "Retroalimentaciones recibidas",
+      "planes_apoyo_activos": "Planes de apoyo activos",
+      "recursos_asignados": "Recursos asignados",
+      "default_category": "Categoría Desconocida"
+    },
+    "noData": "Aún no hay datos suficientes para mostrar un resumen estratégico.",
+    "loading": "Cargando resumen estratégico...",
+    "error": "Error al cargar el resumen estratégico."
+  },
+  "accessManagement": {
+    "assignTeacherTitle": "Asignar estudiantes a docentes",
+    "assignTeacherDescription": "Selecciona un docente y asigna estudiantes bajo su responsabilidad.",
+    "selectTeacherPlaceholder": "Buscar o seleccionar un docente...",
+    "assignGuardianTitle": "Asignar estudiantes a acudientes",
+    "assignGuardianDescription": "Selecciona un acudiente y asigna estudiantes bajo su cuidado.",
+    "selectGuardianPlaceholder": "Buscar o seleccionar un acudiente...",
+    "selectRoleTitle": "Seleccionar Rol Profesional",
+    "selectRolePlaceholder": "Elige un rol para ver la lista de profesionales",
+    "userListTitle": "Lista de Profesionales",
+    "userListDescSelected": "Profesionales con rol: {roleName}",
+    "userListDescDefault": "Por favor, selecciona un rol para ver la lista de profesionales.",
+    "searchUserPlaceholder": "Buscar profesional por nombre o email...",
+    "assignStudentsButton": "Asignar Estudiantes",
+    "noUsersFound": "No se encontraron profesionales para el rol seleccionado o el término de búsqueda.",
+    "assignStudentsModalTitle": "Asignar Estudiantes a",
+    "assignStudentsModalDesc": "Selecciona los estudiantes que deseas asignar a este profesional.",
+    "searchStudentPlaceholder": "Buscar estudiante por nombre...",
+    "filterByGroup": "Filtrar por grupo/grado",
+    "filterByStatus": "Filtrar por estado",
+    "filterByDiagnosis": "Filtrar por diagnóstico principal",
+    "noStudentsMatchFilters": "No se encontraron estudiantes que coincidan con los filtros aplicados.",
+    "assignmentsSavedSuccess": "Asignaciones guardadas con éxito.",
+    "saveAssignmentsError": "Error al guardar las asignaciones.",
+    "fetchProfessionalsError": "Error al cargar la lista de profesionales.",
+    "fetchStudentsError": "Error al cargar la lista de estudiantes.",
+    "fetchAssignedStudentsError": "Error al cargar las asignaciones previas del profesional.",
+    "selectStudentsToAssign": "Selecciona los estudiantes para asignar",
+    "currentlyAssigned": "Asignado",
+    "notAssigned": "No asignado",
+    "assignButton": "Asignar seleccionados",
+    "assignAllVisibleButton": "Asignar todos los visibles",
+    "unassignSelectedButton": "Desasignar seleccionados",
+    "assigningStudents": "Asignando estudiantes...",
+    "student": "Estudiante",
+    "status": "Estado",
+    "grade": "Grado",
+    "diagnosis": "Diagnóstico Principal"
+  }
+}

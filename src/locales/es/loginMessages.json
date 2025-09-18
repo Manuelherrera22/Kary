@@ -1,0 +1,11 @@
+{
+  "errorDefault": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+  "errorInvalidCredentials": "El correo electrónico o la contraseña no son correctos. Por favor, verifica que estén bien escritos.",
+  "errorEmailNotConfirmed": "Tu correo electrónico aún no ha sido confirmado. Revisa tu bandeja de entrada (y la carpeta de spam) para el correo de confirmación de Kary.",
+  "errorUserNotFound": "No encontramos una cuenta con ese correo electrónico. ¿Deseas crear una cuenta?",
+  "errorEmailPasswordRequired": "Por favor, ingresa tu correo electrónico y contraseña para continuar.",
+  "errorGoogleLogin": "No se pudo iniciar sesión con Google en este momento. Por favor, inténtalo de nuevo o usa tu correo y contraseña.",
+  "errorUserAlreadyRegistered": "Ya existe un usuario con este correo electrónico. Por favor, inicia sesión.",
+  "errorPasswordLength": "La contraseña debe tener al menos 6 caracteres.",
+  "errorInvalidEmail": "La dirección de correo electrónico no es válida."
+}

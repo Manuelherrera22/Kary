@@ -1,0 +1,15 @@
+{
+  "title": "Notifications",
+  "noNotifications": "You have no new notifications.",
+  "markAllAsRead": "Mark all as read",
+  "markAsRead": "Mark as read",
+  "settings": "Notification Settings",
+  "viewAll": "View All Notifications",
+  "errorFetching": "Error loading notifications.",
+  "newReportTitle": "New Report Available",
+  "newReportMessage": "The report '{reportName}' is ready for your review.",
+  "appointmentReminderTitle": "Appointment Reminder",
+  "appointmentReminderMessage": "You have an appointment scheduled for {date} at {time}.",
+  "planApprovalPendingTitle": "Support Plan",
+  "planApprovalPendingMessage": "The plan '{planName}' requires your approval."
+}

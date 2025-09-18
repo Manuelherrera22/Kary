@@ -1,0 +1,31 @@
+{
+  "pageTitle": "Evaluaciones Psicopedagógicas",
+  "pageSubtitle": "Gestiona evaluaciones, pruebas y comentarios para un seguimiento detallado.",
+  "newEvaluation": "Nueva Evaluación",
+  "editEvaluation": "Editar Evaluación",
+  "modalDescription": "Completa los detalles de la evaluación, añade pruebas y registra tus comentarios.",
+  "student": "Estudiante",
+  "selectStudent": "Selecciona un estudiante",
+  "title": "Título de la Evaluación",
+  "date": "Fecha",
+  "status": "Estado",
+  "tests": "Pruebas Aplicadas",
+  "comments": "Comentarios",
+  "addTest": "Añadir Prueba",
+  "testName": "Nombre de la Prueba",
+  "resultsJson": "Resultados (JSON)",
+  "addComment": "Añadir Comentario",
+  "newCommentPlaceholder": "Escribe un nuevo comentario...",
+  "noEvaluationsFound": "No se encontraron evaluaciones.",
+  "noEvaluationsDescription": "Crea una nueva evaluación para comenzar el seguimiento.",
+  "fetchError": "Error al cargar las evaluaciones.",
+  "fetchStudentsError": "Error al cargar la lista de estudiantes.",
+  "saveSuccess": "Evaluación guardada con éxito.",
+  "saveError": "Error al guardar la evaluación.",
+  "commentAddedSuccess": "Comentario añadido con éxito.",
+  "commentAddedError": "Error al añadir el comentario.",
+  "statuses": {
+    "in_progress": "En Progreso",
+    "completed": "Completada"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "pageTitle": "Panel Coordinador de Programas",
+  "pageSubtitle": "Gestiona proyectos de vida, PIAR y la alianza familia-escuela.",
+  "accessNowButton": "Acceder",
+  "studentProfilesTitle": "Perfiles de Estudiantes",
+  "studentProfilesDesc": "Acceso rápido a información detallada de estudiantes.",
+  "piarManagementTitle": "Gestión PIAR",
+  "piarManagementDesc": "Supervisa y actualiza los Planes Individuales de Ajustes Razonables.",
+  "lifeProjectsTitle": "Proyectos de Vida",
+  "lifeProjectsDesc": "Acompaña y registra la evolución de los proyectos de vida estudiantiles.",
+  "familySchoolAllianceTitle": "Alianza Familia-Escuela",
+  "familySchoolAllianceDesc": "Fortalece la comunicación y colaboración con las familias.",
+  "notificationsCardTitle": "Notificaciones y Alertas",
+  "notificationsCardDesc": "Revisa las últimas notificaciones y alertas relevantes para tus programas.",
+  "reportsCardTitle": "Informes del Programa",
+  "reportsCardDesc": "Genera y consulta informes consolidados sobre el progreso y actividad.",
+  "programProgressSummary": {
+    "title": "Resumen de Progreso del Programa",
+    "descPlaceholder": "Indicadores clave y estado general de tus programas."
+  },
+  "strategicSuggestions": {
+    "title": "Sugerencias IA de Foco Estratégico",
+    "item1": "Top 3 acciones recomendadas para tu programa.",
+    "item2": "Estudiantes con necesidades comunes no atendidas.",
+    "item3": "Planes de apoyo más efectivos aplicados en tu cohorte."
+  },
+  "programDataPanel": {
+    "title": "Panel de Datos del Programa",
+    "desc": "Diagnósticos frecuentes, cumplimiento de recursos y alertas críticas."
+  },
+  "programSmartAssignment": {
+    "title": "Asignación Inteligente por Programa",
+    "desc": "Aplica sugerencias IA a grupos, con recursos y planes personalizables."
+  },
+  "escalatedAlerts": {
+    "title": "Alertas Escaladas del Programa",
+    "desc": "Gestiona alertas de docentes y psicopedagogos de tu programa."
+  },
+  "piarLifeProjectsProgress": {
+    "title": "Avance PIAR y Proyectos de Vida",
+    "desc": "Control de cumplimiento y detección de estudiantes sin seguimiento."
+  },
+  "blockComparison": {
+    "title": "Comparativo por Bloques/Cursos",
+    "desc": "Visualiza rendimiento, participación y riesgo por subgrupos."
+  },
+  "additionalToolsTitle": "Herramientas Adicionales y Configuración",
+  "auditAccess": {
+    "title": "Acceso a Auditoría",
+    "desc": "Revisa el historial de notificaciones y acciones del sistema."
+  },
+  "fetchSuccess": "Resumen cargado correctamente para el Coordinador de Programa.",
+  "fetchError": "No fue posible cargar el resumen para el Coordinador de Programa.",
+  "summaryCategories": {
+    "planes_de_apoyo": "Planes de Apoyo",
+    "sugerencias_kary": "Sugerencias de Kary",
+    "casos_escalados": "Casos Escalados"
+  }
+}

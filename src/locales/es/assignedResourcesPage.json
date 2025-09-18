@@ -1,0 +1,18 @@
+{
+  "assignedResourcesPage": {
+    "pageTitle": "Mis Recursos Asignados",
+    "pageSubtitle": "Explora todos los materiales de aprendizaje que tus educadores han seleccionado especialmente para ti.",
+    "tabTodos": "Todos",
+    "tabVideos": "Videos",
+    "tabGuides": "Guías",
+    "tabExercises": "Ejercicios",
+    "tabArticles": "Artículos",
+    "tabOthers": "Otros",
+    "viewResource": "Ver Recurso",
+    "noDescription": "No hay descripción disponible.",
+    "loading": "Cargando recursos...",
+    "noResourcesFoundTitle": "¡Aún no hay nada por aquí!",
+    "noResourcesFoundDesc": "No se encontraron recursos asignados del tipo '{type}'. ¡Pronto podrían aparecer nuevos materiales!",
+    "fetchError": "No se pudieron cargar los recursos asignados."
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "title": "Panel de Datos Adaptativo",
+  "subtitle": "Información relevante y acciones rápidas según tu rol.",
+  "error": {
+    "noRole": "No se pudo determinar tu rol. Contacta al administrador.",
+    "fetchFailed": "Error al cargar los datos: {details}",
+    "noStudentData": "No se encontraron datos para el estudiante seleccionado."
+  },
+  "selector": {
+    "selectStudentTeacher": "Selecciona un estudiante para ver detalles",
+    "selectStudentPsycho": "Elige un caso o estudiante",
+    "selectStudentOrGroup": "Selecciona estudiante o grupo",
+    "noChildLinked": "No hay hijos vinculados",
+    "yourData": "Tu Información Personal",
+    "selectItem": "Selecciona un ítem",
+    "groupsLabel": "Grupos/Cursos",
+    "studentsLabel": "Estudiantes Individuales",
+    "noData": "No hay datos para seleccionar",
+    "courseLabel": "Curso"
+  },
+  "priorityRadar": {
+    "title": "Radar de Prioridad",
+    "description": "Estudiantes o grupos con mayor urgencia de atención.",
+    "noPriorityData": "No hay datos de prioridad actualmente.",
+    "riskCritical": "Riesgo Crítico",
+    "riskHigh": "Intervención Pronta",
+    "riskNormal": "Seguimiento Normal",
+    "tooltipStudentName": "Estudiante: {name}",
+    "tooltipAcademicRisk": "Riesgo Académico: {risk}%",
+    "tooltipEmotionalRisk": "Riesgo Emocional: {risk}%",
+    "tooltipDiagnosis": "Diagnóstico: {diagnosis}",
+    "tooltipAIRecommends": "IA recomienda intervención emocional."
+  },
+  "filters": {
+    "title": "Filtros Avanzados",
+    "labels": {
+      "diagnostic": "Diagnóstico",
+      "performance": "Nivel de Rendimiento",
+      "emotional_status": "Estado Emocional",
+      "last_contact": "Último Contacto",
+      "attendance": "Asistencia",
+      "last_resource_date": "Fecha Último Recurso",
+      "view_by": "Ver Por"
+    },
+    "placeholders": {
+      "diagnostic": "Todos los diagnósticos",
+      "performance": "Todos los rendimientos",
+      "emotional_status": "Todos los estados",
+      "last_contact": "Cualquier fecha",
+      "attendance": "Cualquier asistencia",
+      "last_resource_date": "Cualquier fecha",
+      "view_by": "Estudiantes Individuales"
+    },
+    "allDiagnostics": "Todos los Diagnósticos",
+    "diagnostics": {
+      "tdah": "TDAH",
+      "dislexia": "Dislexia",
+      "anxiety": "Ansiedad"
+    },
+    "allPerformances": "Todos los Rendimientos",
+    "performance": {
+      "high": "Alto",
+      "medium": "Medio",
+      "low": "Bajo"
+    },
+    "viewBy": {
+      "individual": "Estudiantes Individuales",
+      "groups": "Agrupaciones Inteligentes (IA)",
+      "courses": "Cursos"
+    },
+    "applyButton": "Aplicar Filtros",
+    "resetButton": "Restablecer Filtros"
+  },
+  "modules": {
+    "noItemSelected": "Selecciona un estudiante o grupo del panel izquierdo para ver su información detallada.",
+    "studentTitle": "Información de: {name}",
+    "groupTitle": "Información del Grupo: {name}",
+    "gradeLabel": "Grado",
+    "partialView": "(Vista parcial por permisos)",
+    "recentObservations": {
+      "title": "Observaciones Recientes"
+    },
+    "assignedSupportPlans": {
+      "title": "Planes de Apoyo Asignados"
+    },
+    "academicProgress": {
+      "title": "Progreso Académico"
+    },
+    "academicEmotionalRisk": {
+      "title": "Riesgo Académico/Emocional",
+      "academic": "Académico",
+      "emotional": "Emocional"
+    },
+    "aiRecommendations": {
+      "title": "Recomendaciones IA"
+    },
+    "resourceTracking": {
+      "title": "Seguimiento de Recursos"
+    },
+    "groupEmotionalThermometer": {
+      "title": "Termómetro Emocional del Grupo"
+    },
+    "mySupportPlans": {
+      "title": "Mis Planes de Apoyo"
+    },
+    "myResources": {
+      "title": "Mis Recursos Asignados"
+    },
+    "myProgress": {
+      "title": "Mi Progreso"
+    }
+  },
+  "actions": {
+    "viewPlan": "Ver Plan",
+    "assignResource": "Asignar Recurso",
+    "requestAIRedaction": "Redacción IA",
+    "contactParent": "Contactar Padre",
+    "requestReviewCommittee": "Solicitar Comité"
+  }
+}

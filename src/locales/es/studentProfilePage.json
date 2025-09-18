@@ -1,0 +1,123 @@
+{
+  "pageTitle": "Perfil de {{studentName}}",
+  "pageSubtitle": "Información detallada y seguimiento del estudiante.",
+  "errorNoStudentId": "No se proporcionó ID de estudiante.",
+  "errorStudentNotFound": "Estudiante no encontrado.",
+  "errorLoadingTitle": "Error al Cargar Perfil",
+  "noStudentDataTitle": "Datos del Estudiante No Disponibles",
+  "noStudentDataDescription": "No se pudieron cargar los datos para este estudiante o el estudiante no existe.",
+  "adminEditProfileButton": "Editar Perfil (Admin)",
+  "tabs": {
+    "general": "General",
+    "observations": "Observaciones",
+    "multidisciplinary": "Seguimiento Multidisciplinario",
+    "piar": "PIAR",
+    "lifeProject": "Proyecto de Vida",
+    "specialData": "Datos Especiales",
+    "futureAI": "Futuro con IA",
+    "notifications": "Notificaciones",
+    "emotionalSupport": "Plan de Apoyo Emocional"
+  },
+  "generalInfo": {
+    "title": "Información General",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "role": "Rol",
+    "status": "Estado",
+    "grade": "Grado/Curso",
+    "admissionDate": "Fecha de Admisión",
+    "language": "Idioma Preferido",
+    "timezone": "Zona Horaria",
+    "notificationsEnabled": "Notificaciones Habilitadas",
+    "yes": "Sí",
+    "no": "No",
+    "notSpecified": "No especificado",
+    "institutionName": "Nombre de la Institución",
+    "piarStatus": "Estado PIAR",
+    "academicRisk": "Riesgo Académico",
+    "emotionalRisk": "Riesgo Emocional",
+    "diagnosticSummary": "Resumen Diagnóstico",
+    "condition": "Condición",
+    "supportAreas": "Áreas de Apoyo",
+    "lastUpdated": "Última Actualización"
+  },
+  "teacherObservations": {
+    "title": "Observaciones del Docente",
+    "addObservationButton": "Añadir Observación",
+    "noObservations": "No hay observaciones registradas para este estudiante.",
+    "situationLabel": "Situación Observada",
+    "situationPlaceholder": "Describe la situación observada...",
+    "situationRequired": "La descripción de la situación es obligatoria.",
+    "saveObservationButton": "Guardar Observación",
+    "savingObservation": "Guardando observación...",
+    "errorSavingObservation": "Error al guardar la observación.",
+    "successSavingObservation": "Observación guardada con éxito.",
+    "confirmDeleteTitle": "¿Eliminar Observación?",
+    "confirmDeleteDescription": "Esta acción no se puede deshacer. ¿Estás seguro de que quieres eliminar esta observación?",
+    "deleteButton": "Eliminar",
+    "errorDeletingObservation": "Error al eliminar la observación.",
+    "successDeletingObservation": "Observación eliminada con éxito."
+  },
+  "multidisciplinaryTracking": {
+    "title": "Seguimiento Multidisciplinario",
+    "description": "Visualiza el progreso y las intervenciones desde diferentes áreas.",
+    "noData": "No hay datos de seguimiento multidisciplinario disponibles."
+  },
+  "piarSection": {
+    "title": "Plan Individual de Ajustes Razonables (PIAR)",
+    "description": "Gestión y seguimiento del PIAR del estudiante.",
+    "statusLabel": "Estado del PIAR",
+    "editButton": "Editar PIAR",
+    "viewButton": "Ver PIAR",
+    "noPiarData": "No hay datos del PIAR disponibles para este estudiante."
+  },
+  "lifeProjectSection": {
+    "title": "Proyecto de Vida",
+    "description": "Metas y aspiraciones del estudiante a corto, mediano y largo plazo.",
+    "editButton": "Editar Proyecto de Vida",
+    "viewButton": "Ver Proyecto de Vida",
+    "noLifeProjectData": "No hay datos del proyecto de vida disponibles."
+  },
+  "specialDataSection": {
+    "title": "Datos Especiales y Necesidades",
+    "description": "Información sobre necesidades educativas especiales, diagnósticos y adaptaciones.",
+    "editButton": "Editar Datos Especiales",
+    "viewButton": "Ver Datos Especiales",
+    "noSpecialData": "No hay datos especiales registrados."
+  },
+  "futureAISection": {
+    "title": "Futuro con IA Karys",
+    "description": "Proyecciones y recomendaciones generadas por IA para el desarrollo del estudiante.",
+    "generateReportButton": "Generar Análisis IA",
+    "noAIData": "Aún no hay análisis de IA disponibles."
+  },
+  "notificationTimeline": {
+    "title": "Línea de Tiempo de Notificaciones",
+    "description": "Historial de notificaciones relevantes para el estudiante.",
+    "noNotifications": "No hay notificaciones para mostrar.",
+    "type": "Tipo",
+    "message": "Mensaje",
+    "date": "Fecha"
+  },
+  "generatePlanModal": {
+    "studentIdMissing": "Falta el ID del estudiante para generar el plan.",
+    "situationRequired": "El contexto o situación es obligatorio para generar el plan."
+  },
+  "emotionalSupportPlan": {
+    "title": "Plan de Apoyo Emocional Personalizado",
+    "description": "Genera un plan de apoyo basado en los últimos registros emocionales de {{studentName}}.",
+    "generateButton": "Generar Plan de Apoyo Emocional",
+    "studentIdMissing": "ID de estudiante no encontrado. No se puede generar el plan.",
+    "errorGeneratingPlan": "Ocurrió un problema al generar el plan. Intenta nuevamente en unos minutos o contacta al administrador.",
+    "errorNoData": "No se recibieron datos del plan.",
+    "planGeneratedSuccess": "¡Plan de apoyo emocional generado con éxito!",
+    "riskLevelTitle": "Nivel de Riesgo Detectado",
+    "suggestionTitle": "Sugerencia de Apoyo",
+    "statusMessages": {
+      "sin_alerta": "No se detectaron patrones de alerta en los registros emocionales recientes de {{studentName}}.",
+      "sin_registros": "{{studentName}} aún no tiene suficientes registros emocionales para generar un plan.",
+      "default": "Estado del análisis: {{status}}"
+    },
+    "unknownStatus": "Respuesta desconocida del análisis del plan."
+  }
+}

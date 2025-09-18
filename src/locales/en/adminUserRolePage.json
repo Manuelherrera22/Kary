@@ -1,0 +1,13 @@
+{
+  "pageTitle": "User Role Management",
+  "pageSubtitle": "Modify a user's role by specifying their email address and the new assigned role.",
+  "emailLabel": "User Email Address",
+  "emailPlaceholder": "Enter user's email",
+  "roleLabel": "New Role",
+  "rolePlaceholder": "Select new role",
+  "updateButtonText": "Update Role",
+  "updatingButtonText": "Updating...",
+  "errorAllFieldsRequired": "Please fill in all fields: email address and role.",
+  "errorUpdatingRole": "Error updating user role.",
+  "successRoleUpdated": "User {email}'s role successfully updated to {role}."
+}

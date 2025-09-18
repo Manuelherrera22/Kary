@@ -1,0 +1,15 @@
+{
+  "title": "Resource Suggestions For You",
+  "buttonText": "🔍 Suggest Resources",
+  "loadingButton": "Fetching suggestions...",
+  "errorEstudianteId": "Student ID not provided. Cannot fetch suggestions.",
+  "errorFetching": "Error fetching suggested resources",
+  "noSuggestionsFound": "No resource suggestions found at this time.",
+  "noSuggestionsFoundAfterSearch": "No resource suggestions available for you right now. Explore the general resources!",
+  "suggestedResourcesTitle": "Suggested Resources:",
+  "viewResourceButton": "View Resource",
+  "noDescription": "No description available.",
+  "typeLabel": "Type",
+  "tagsLabel": "Tags",
+  "unknownType": "Unknown"
+}

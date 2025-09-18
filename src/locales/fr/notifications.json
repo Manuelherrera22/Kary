@@ -1,0 +1,15 @@
+{
+  "title": "Notifications",
+  "noNotifications": "Vous n'avez aucune nouvelle notification.",
+  "markAllAsRead": "Marquer tout comme lu",
+  "markAsRead": "Marquer comme lu",
+  "settings": "Paramètres des Notifications",
+  "viewAll": "Voir Toutes les Notifications",
+  "errorFetching": "Erreur lors du chargement des notifications.",
+  "newReportTitle": "Nouveau Rapport Disponible",
+  "newReportMessage": "Le rapport '{reportName}' est prêt pour votre examen.",
+  "appointmentReminderTitle": "Rappel de Rendez-vous",
+  "appointmentReminderMessage": "Vous avez un rendez-vous prévu pour le {date} à {time}.",
+  "planApprovalPendingTitle": "Plan d'Accompagnement",
+  "planApprovalPendingMessage": "Le plan '{planName}' nécessite votre approbation."
+}

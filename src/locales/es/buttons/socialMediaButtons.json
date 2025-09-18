@@ -1,0 +1,15 @@
+{
+  "shareButton": "Compartir",
+  "likeButton": "Me Gusta",
+  "commentButton": "Comentar",
+  "followButton": "Seguir",
+  "messageButton": "Mensaje",
+  "retweetButton": "Retwittear",
+  "repostButton": "Republicar",
+  "savePostButton": "Guardar Publicación",
+  "reactButton": "Reaccionar",
+  "tagFriendsButton": "Etiquetar Amigos",
+  "checkInButton": "Registrar Visita",
+  "createStoryButton": "Crear Historia",
+  "goLiveButton": "Transmitir en Vivo"
+}

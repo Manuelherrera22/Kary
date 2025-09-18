@@ -1,0 +1,18 @@
+{
+  "okButton": "OK",
+  "cancelButton": "Cancelar",
+  "yesButton": "Sí",
+  "noButton": "No",
+  "agreeButton": "De Acuerdo",
+  "disagreeButton": "En Desacuerdo",
+  "confirmButton": "Confirmar",
+  "closeButton": "Cerrar",
+  "doneButton": "Hecho",
+  "applyButton": "Aplicar",
+  "retryButton": "Reintentar",
+  "ignoreButton": "Ignorar",
+  "abortButton": "Abortar",
+  "laterButton": "Más Tarde",
+  "remindMeLaterButton": "Recordarme Más Tarde",
+  "doNotShowAgainButton": "No Mostrar de Nuevo"
+}

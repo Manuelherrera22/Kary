@@ -1,0 +1,107 @@
+{
+  "pageTitle": "Directive Dashboard",
+  "welcomeMessage": "Welcome, {userName}",
+  "dataLoadedSuccess": "Directive dashboard data loaded successfully.",
+  "dataLoadedError": "Error loading directive dashboard data.",
+  "stats": {
+    "schoolData": "School Data",
+    "schoolDataDesc": "View key metrics and institutional trends.",
+    "userManagement": "User Management",
+    "userManagementDesc": "Manage user accounts and roles.",
+    "reports": "Aggregated Reports",
+    "reportsDesc": "Access consolidated reports.",
+    "alerts": "Institutional Alerts",
+    "alertsDesc": "Monitor critical institutional-level alerts."
+  },
+  "quickAccessTitle": "Quick Access & Strategy",
+  "quickAccessDesc": "Navigate to key management and strategy sections.",
+  "sections": {
+    "strategy": {
+      "title": "Strategy and KARY CORE",
+      "strategicSummary": "Strategic Summary",
+      "strategicSummaryDesc": "Key indicators and monthly vision.",
+      "karyCorePanel": "KARY CORE Panel",
+      "karyCorePanelDesc": "Artificial Intelligence Center."
+    },
+    "management": {
+      "title": "Management & Administration",
+      "userManagement": "User Management",
+      "userManagementDesc": "Profiles, roles, and access.",
+      "accessManagement": "Access Management",
+      "accessManagementDesc": "Assign students to professionals.",
+      "familyLinkValidation": "Family Link Validation",
+      "familyLinkValidationDesc": "Approve parent-student connections."
+    },
+    "monitoring": {
+      "title": "Monitoring & Alerts",
+      "roleActivity": "Activity by Roles",
+      "roleActivityDesc": "Track actions on the platform.",
+      "institutionalAlerts": "Institutional Alerts",
+      "institutionalAlertsDesc": "Academic and emotional risks.",
+      "notificationAudit": "Notification Audit",
+      "notificationAuditDesc": "Review notification history."
+    },
+    "data": {
+      "title": "Data & Reports",
+      "schoolDataPanel": "Institutional Data Panel",
+      "schoolDataPanelDesc": "Detailed data analysis.",
+      "reports": "Aggregated Reports",
+      "reportsDesc": "Generate and view reports."
+    },
+    "settings": {
+      "title": "Account Configuration",
+      "accountSettings": "Account Settings",
+      "accountSettingsDesc": "Manage your profile and preferences."
+    }
+  },
+  "userManagementPage": {
+    "title": "User Management",
+    "subtitle": "Manage profiles, roles, and access for all platform users."
+  },
+  "accessManagementPage": {
+    "title": "Access and Permission Management",
+    "subtitle": "Assign students to professionals and control their access permissions."
+  },
+  "familyLinkValidationPage": {
+    "title": "Family Link Validation",
+    "subtitle": "Approve requests and manage connections between parents and students."
+  },
+  "institutionalAlertsPage": {
+    "title": "Grouped Institutional Alerts",
+    "subtitle": "Monitor institutional risks in real-time and take action."
+  },
+  "roleActivityPage": {
+    "title": "Role Activity Panel",
+    "subtitle": "Observe key actions performed by different actors on the platform."
+  },
+  "strategicSummaryPage": {
+    "title": "Institutional Strategic Summary",
+    "subtitle": "Access a consolidated monthly view with key indicator compliance."
+  },
+  "schoolDataPanelPage": {
+    "title": "Institutional Data Panel",
+    "subtitle": "Detailed analysis of the educational institution's data."
+  },
+  "aggregatedReportsPage": {
+    "title": "Consolidated Reports",
+    "subtitle": "Generate and view aggregated institutional reports."
+  },
+  "accountSettingsPage": {
+    "title": "Account Settings",
+    "subtitle": "Manage your personal information and platform preferences."
+  },
+  "strategicSummary": {
+    "title": "Strategic Summary",
+    "subtitle": "Overview of institutional and academic impact",
+    "categories": {
+      "alertas_emocionales": "Emotional Alerts",
+      "retroalimentaciones": "Feedbacks Received",
+      "planes_apoyo_activos": "Active Support Plans",
+      "recursos_asignados": "Assigned Resources",
+      "default_category": "Unknown Category"
+    },
+    "noData": "Not enough data yet to display a strategic summary.",
+    "loading": "Loading strategic summary...",
+    "error": "Error loading strategic summary."
+  }
+}

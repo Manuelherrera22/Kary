@@ -1,0 +1,17 @@
+{
+  "title": "Серіктестер және Байланыс",
+  "subtitle": "Сіз мұғалімсіз бе, директорсыз ба немесе білім беру мекемесінің өкілісіз бе? Жеке таныстырылымды жоспарлаңыз немесе біздің пилоттық жобамызға қатысыңыз.",
+  "formTitle": "Таныстырылымды жоспарлау",
+  "formNameLabel": "Толық аты-жөні",
+  "formNamePlaceholder": "Сіздің атыңыз",
+  "formEmailLabel": "Электрондық пошта мекенжайы",
+  "formEmailPlaceholder": "siz@email.com",
+  "formInstitutionLabel": "Мекеме (Міндетті емес)",
+  "formInstitutionPlaceholder": "Мекемеңіздің атауы",
+  "formSubmitButton": "Таныстырылымды Сұрау",
+  "contactInfoTitle": "Байланыс Ақпараты",
+  "contactEmail": "contacto@karyeduca.com",
+  "contactPhone": "+57 322 234 5650",
+  "contactWebsite": "www.karyeduca.com",
+  "closingMessage": "Білім беруді трансформациялау үшін сізбен ынтымақтасуға қуаныштымыз."
+}

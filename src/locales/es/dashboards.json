@@ -1,0 +1,94 @@
+{
+  "mainDashboard": {
+    "welcomeMessage": "Bienvenido de nuevo, {userName}",
+    "lastConnection": "Última conexión: {lastConnectionDate}",
+    "selectRolePrompt": "Por favor, selecciona tu rol para continuar:",
+    "currentRole": "Rol actual: {role}",
+    "changeRoleButton": "Cambiar Rol",
+    "accessDenied": "Acceso Denegado",
+    "accessDeniedMessage": "No tienes permiso para acceder a esta sección con tu rol actual. Por favor, contacta al administrador si crees que esto es un error.",
+    "roleNotSetTitle": "Rol no asignado",
+    "roleNotSetMessage": "Tu cuenta no tiene un rol asignado. Por favor, contacta al administrador para configurar tu acceso.",
+    "backToRoleSelection": "Volver a selección de rol",
+    "availableRoles": "Roles Disponibles",
+    "selectRole": "Seleccionar Rol",
+    "confirmRole": "Confirmar Rol",
+    "noDashboardForRole": "No hay un panel específico disponible para el rol '{role}'.",
+    "contactAdmin": "Por favor, contacta al administrador.",
+    "goBackToSelection": "Volver a selección de rol"
+  },
+  "genericDashboard": {
+    "title": "Panel de {role}",
+    "settings": "Configuración",
+    "viewProfile": "Ver Perfil",
+    "notifications": "Notificaciones ({count})",
+    "language": "Idioma",
+    "theme": "Tema",
+    "logout": "Cerrar Sesión",
+    "userManagementTitle": "Gestión de Usuarios",
+    "userManagementDesc": "Administrar perfiles y accesos de usuarios.",
+    "systemSettingsTitle": "Configuración del Sistema",
+    "systemSettingsDesc": "Ajustes generales y mantenimiento de la plataforma.",
+    "notificationAuditTitle": "Auditoría de Notificaciones",
+    "notificationAuditDesc": "Revisar y gestionar el historial de notificaciones.",
+    "accountSettingsTitle": "Configuración de Cuenta",
+    "accountSettingsDesc": "Gestiona tu información personal y preferencias."
+  },
+  "adminDashboard": {
+    "pageTitle": "Panel de Administrador",
+    "welcomeMessage": "Bienvenido/a, {userName}",
+    "dataLoadedSuccess": "Datos del panel de administrador cargados exitosamente.",
+    "dataLoadedError": "Error al cargar los datos del panel de administrador.",
+    "quickActions": {
+      "manageUserRoles": "Gestión de Usuarios y Roles",
+      "systemSettings": "Configuración del Sistema",
+      "viewLogs": "Auditoría de Notificaciones"
+    },
+    "studentProfilesDesc": "Acceso rápido a información detallada de estudiantes."
+  },
+  "directiveDashboard": {
+    "pageTitle": "Panel del Directivo"
+  },
+  "studentDashboard": {
+    "welcome": "¡Hola, {studentName}!",
+    "defaultMotivationalQuote": "Cada día es una nueva oportunidad para aprender y crecer. ¡Tú puedes!",
+    "dataLoadedSuccess": "¡Tus datos se han cargado! Listo para empezar.",
+    "dataLoadedError": "No pudimos cargar los datos de tu panel. Intenta de nuevo.",
+    "cards": {
+      "karyChat": "Chatea con Kary AI",
+      "karyChatDesc": "Tu asistente IA para apoyo emocional y académico.",
+      "myTasks": "Mis Tareas",
+      "myTasksDesc": "Organiza y completa tus actividades pendientes.",
+      "assignedResources": "Recursos Asignados",
+      "assignedResourcesDesc": "Visualiza los recursos que te han asignado.",
+      "learningResources": "Recursos de Aprendizaje",
+      "learningResourcesDesc": "Accede a materiales y herramientas útiles."
+    },
+    "quickAccessTitle": "Explora tus Herramientas",
+    "quickAccessDesc": "Todo lo que necesitas para tu seguimiento y desarrollo.",
+    "quickAccess": {
+      "personalTracking": "Seguimiento Personal",
+      "personalTrackingDesc": "Registra tu estado de ánimo y progreso.",
+      "studentReports": "Mis Informes",
+      "studentReportsDesc": "Consulta tus informes de progreso y desempeño.",
+      "supportPlans": "Planes de Apoyo",
+      "supportPlansDesc": "Revisa tus planes de apoyo personalizados.",
+      "settings": "Configuración de Cuenta",
+      "settingsDesc": "Administra tu perfil y preferencias."
+    }
+  },
+  "teacherDashboard": {
+    "title": "Panel del Docente",
+    "description": "Gestiona tus estudiantes, observaciones y recursos educativos.",
+    "studentListTitle": "Lista de Estudiantes",
+    "trackingsTitle": "Seguimientos y Observaciones",
+    "learningResources": "Recursos de Aprendizaje",
+    "assignedResources": "Recursos Asignados",
+    "tasks": "Tareas y Actividades"
+  },
+  "psychopedagogue": {
+    "latestCasesTitle": "Casos Recientes y Seguimiento",
+    "latestCasesPageSubtitle": "Visualiza y gestiona los casos más recientes de tus estudiantes.",
+    "emotionalTrendsPageSubtitle": "Analiza la evolución emocional de tus estudiantes."
+  }
+}

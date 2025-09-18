@@ -1,0 +1,30 @@
+{
+  "title": "Generar Contexto con IA",
+  "button": "Generar Contexto Sugerido",
+  "noEmotionalData": "No hay registros emocionales recientes para este estudiante.",
+  "noAcademicData": "No hay datos académicos recientes para este estudiante.",
+  "success": "Contexto generado correctamente por la IA.",
+  "error": "Error al generar el contexto con la IA.",
+  "fetchError": "No se pudo conectar con el servidor para generar el contexto.",
+  "error.noDataToGenerate": "No hay suficientes datos (emocionales, académicos u otros factores) para generar un contexto. Por favor, asegúrate de que haya información disponible o añade factores adicionales.",
+  "preExistingContextTitle": "Contexto Preexistente de IA",
+  "preExistingContextFoundTitle": "Contexto de IA Encontrado",
+  "preExistingContextFoundDesc": "Se encontró un contexto previamente generado por IA para este estudiante. Puedes usarlo o generar uno nuevo.",
+  "viewPreExistingButton": "Usar Contexto Existente",
+  "forceGenerateButton": "Generar Nuevo Contexto",
+  "riskLevelLabel": "Nivel de Riesgo Sugerido por IA",
+  "detectedEmotionsLabel": "Emociones Clave Detectadas por IA",
+  "suggestedPlanStepsLabel": "Pasos Sugeridos por IA para el Plan",
+  "suggestedActionsLabel": "Acciones Sugeridas por IA",
+  "riskLevels": {
+    "alto": "Alto",
+    "medio": "Medio",
+    "moderado": "Moderado",
+    "bajo": "Bajo",
+    "unknown": "Desconocido"
+  },
+  "baseContextSectionTitle": "Base Sugerida por IA",
+  "baseContextDescription": "Este es el contexto inicial generado por Kary AI basado en los datos disponibles del estudiante. Puedes usarlo como punto de partida.",
+  "professionalObservationsSectionTitle": "Observaciones Adicionales del Profesional",
+  "professionalObservationsDescription": "Añade aquí tus propias observaciones, detalles específicos o cualquier información relevante que Kary AI podría no haber considerado."
+}

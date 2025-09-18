@@ -1,0 +1,196 @@
+{
+  "pageTitle": "Student Dashboard",
+  "welcomeMessage": "Welcome back, {userName}!",
+  "karyChatTitle": "Chat with Kary AI",
+  "karyChatDesc": "Your AI assistant for emotional and academic support.",
+  "personalTrackingTitle": "Personal Tracking",
+  "personalTrackingDesc": "Log your mood and progress.",
+  "learningResourcesTitle": "Learning Resources",
+  "learningResourcesDesc": "Access useful materials and tools.",
+  "assignedResourcesTitle": "Assigned Resources",
+  "assignedResourcesDesc": "View the resources assigned to you.",
+  "myTasksTitle": "My Tasks",
+  "myTasksDesc": "Organize and complete your pending activities.",
+  "reportsTitle": "My Reports",
+  "reportsDesc": "Check your progress and performance reports.",
+  "supportPlansTitle": "Support Plans",
+  "supportPlansDesc": "Review your personalized support plans.",
+  "accountSettingsTitle": "Account Settings",
+  "accountSettingsDesc": "Manage your profile and preferences.",
+  "karyChat": {
+    "pageTitle": "Kary AI - Your Personal Assistant",
+    "errorFetchingHistory": "Error loading chat history.",
+    "karyResponsePrefix": "Kary AI says:",
+    "karyResponseSuffix": "Remember I am a language model and can make mistakes.",
+    "errorSendingMessage": "Could not send your message. Try again.",
+    "noMessages": "No messages yet.",
+    "startConversation": "Type something to start the conversation.",
+    "you": "You",
+    "typeMessagePlaceholder": "Type your message here...",
+    "sendButton": "Send"
+  },
+  "myTasks": {
+    "pageTitle": "My Pending Tasks",
+    "pageSubtitle": "Here you can see and manage all your assigned tasks.",
+    "errorFetching": "Error loading your tasks.",
+    "markedAsIncomplete": "Task marked as incomplete.",
+    "markedAsComplete": "Task completed!",
+    "errorUpdatingStatus": "Error updating task status.",
+    "newTaskDefaultTitle": "New Task",
+    "newTaskDefaultDesc": "Description pending.",
+    "taskAddedSuccess": "New task added successfully.",
+    "addTaskError": "Error adding new task.",
+    "addTaskButton": "Add Task",
+    "noTasksTitle": "No pending tasks!",
+    "noTasksSubtitle": "Looks like you're all caught up. Good job!",
+    "dueDate": "Due Date",
+    "statusCompleted": "Completed",
+    "statusPending": "Pending"
+  },
+  "studentReports": {
+    "pageTitle": "My Reports",
+    "pageSubtitle": "Check your progress and performance reports.",
+    "errorFetching": "Error loading your reports.",
+    "generatedOn": "Generated on",
+    "noReportsTitle": "No reports available",
+    "noReportsSubtitle": "No reports have been generated for you yet."
+  },
+  "supportPlans": {
+    "pageTitle": "My Support Plans",
+    "pageSubtitle": "Review the support plans designed for you.",
+    "errorFetching": "Error loading your support plans.",
+    "planForStudent": "Support Plan",
+    "status": "Status",
+    "goal": "Main Goal",
+    "strategy": "Strategy",
+    "responsible": "Responsible",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "noPlansTitle": "No Support Plans",
+    "noPlansSubtitle": "You currently have no support plans assigned.",
+    "statusTypes": {
+      "active": "Active",
+      "completed": "Completed",
+      "pending": "Pending",
+      "paused": "Paused",
+      "cancelled": "Cancelled",
+      "notavailable": "Not Available"
+    }
+  },
+  "personalTrackingPage": {
+    "title": "My Personal Tracking",
+    "subtitle": "Log how you feel and your reflections.",
+    "formTitle": "New Emotional Log",
+    "descriptionLabel": "How are you feeling today? Describe your day.",
+    "descriptionPlaceholder": "Write your thoughts, emotions, or important events here...",
+    "selectTagsLabel": "Select tags that describe your state:",
+    "errorLoadingClassifications": "Error loading emotional classifications.",
+    "errorLoadingTags": "Error loading emotional tags.",
+    "noTagsOrClassifications": "No tags or classifications available at this moment.",
+    "submitButton": "Save Log",
+    "successMessage": "Your emotional log has been saved successfully!",
+    "errorMessage": "Error saving your log. Please try again.",
+    "errorUserNotLoaded": "User not loaded. Cannot save log.",
+    "errorDescriptionRequired": "Description is required to save the log.",
+    "analysisInProgressTitle": "Analyzing your entry...",
+    "analysisInProgressMessage": "We are processing your information to offer you the best support.",
+    "analysisResultTitle": "Analysis Result",
+    "riskLevelLabel": "Detected Risk Level",
+    "riskLevels": {
+      "alto": "High",
+      "moderado": "Moderate",
+      "bajo": "Low",
+      "sin_datos": "No Data",
+      "unknown": "Unknown"
+    },
+    "suggestionLabel": "K.A.R.Y.'s Suggestion",
+    "noSuggestion": "No specific suggestions at this time.",
+    "analyzing": "Analyzing..."
+  },
+  "learningResourcesPage": {
+    "pageTitle": "Learning Resources",
+    "subtitle": "Explore a variety of materials to boost your development.",
+    "errorFetching": "Error loading learning resources.",
+    "noDescription": "No description available.",
+    "accessResource": "Access Resource",
+    "noUrlProvided": "This resource does not have an associated URL.",
+    "uploadResourceButton": "Upload New Resource",
+    "searchPlaceholder": "Search resources by title, description, or tag...",
+    "tabTodos": "All",
+    "tabGuia": "Guides",
+    "tabActividad": "Activities",
+    "tabVideo": "Videos",
+    "tabDocumento": "Documents",
+    "typeGuia": "Guide",
+    "typeVideo": "Video",
+    "typeActividad": "Activity",
+    "typeDocumento": "Document",
+    "typeUnknown": "Unknown",
+    "noResourcesFound": "No resources found",
+    "noSearchResults": "No resources found for \"{searchTerm}\". Try another search.",
+    "tryDifferentFilters": "Try changing filters or check back later."
+  },
+  "assignedResourcesPage": {
+    "pageTitle": "My Assigned Resources",
+    "subtitle": "Here you will find the materials your educators have selected for you."
+  },
+  "settingsPageTitle": "Account Settings",
+  "settingsPageSubtitle": "Manage your profile, preferences, and security.",
+  "studentTrackingDataPage": {
+    "title": "My Tracking Data",
+    "toastErrorTitle": "Data Error",
+    "errorFetchingEmotional": "Could not load emotional data.",
+    "errorFetchingAcademic": "Could not load academic data.",
+    "emotionalTab": "Emotional Wellbeing",
+    "academicTab": "Academic Progress",
+    "emotionalChartTitle": "Energy and Mood Evolution",
+    "energyLevel": "Energy Level",
+    "moodScore": "Mood Score",
+    "noEmotionalData": "No emotional tracking data recorded yet.",
+    "academicChartTitle": "Academic Performance Evolution",
+    "academicScore": "Academic Average",
+    "noAcademicData": "No academic performance data recorded yet."
+  },
+  "chat": {
+    "title": "Chat with Kary AI",
+    "description": "Your AI assistant for emotional and academic support."
+  },
+  "profile": {
+    "title": "Student Profile",
+    "description": "Detailed information and comprehensive student tracking."
+  },
+  "tracking": {
+    "title": "Personal Tracking",
+    "description": "Log your mood and progress."
+  },
+  "resources": {
+    "title": "Learning Resources",
+    "description": "Access useful materials and tools."
+  },
+  "assignedResources": {
+    "title": "Assigned Resources",
+    "description": "View the resources assigned to you."
+  },
+  "tasks": {
+    "title": "My Tasks",
+    "description": "Organize and complete your pending activities."
+  },
+  "reports": {
+    "title": "My Reports",
+    "description": "Check your progress and performance reports."
+  },
+  "supportPlans": {
+    "title": "Support Plans",
+    "description": "Review your personalized support plans."
+  },
+  "account": {
+    "title": "Account Settings",
+    "description": "Manage your profile and preferences."
+  },
+  "roleSelection": {
+    "title": "Change My Role",
+    "description": "Select the new role you wish to assume. You may need to refresh the page or log in again for all changes to take effect.",
+    "currentRole": "My Current Role",
+    "newRole": "New Role"
+  }
+}

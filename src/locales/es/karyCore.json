@@ -1,0 +1,63 @@
+{
+  "panelTitle": "KARY CORE: Centro de IA",
+  "panelSubtitle": "El cerebro estratégico que conecta, analiza y mejora.",
+  "floatingButton": {
+    "ariaLabel": "Acceder a KARY CORE",
+    "tooltip": "Panel de IA KARY CORE"
+  },
+  "tabs": {
+    "summary": "Resumen Inteligente",
+    "evaluation": "Evaluación IA",
+    "assistant": "Asistente Estratégico",
+    "alerts": "Alertas Predictivas",
+    "history": "Historial de Decisiones"
+  },
+  "summary": {
+    "title": "Resumen Inteligente Diario/Semanal",
+    "dailyDigestPlaceholder": "Aquí se mostrará un resumen de las actividades y alertas más relevantes generadas por KARY CORE.",
+    "recentAlerts": "Alertas Recientes",
+    "new": "nuevas",
+    "alertsDetailsPlaceholder": "Detalles sobre las últimas alertas identificadas.",
+    "automatedSuggestions": "Sugerencias Automatizadas",
+    "pendingReview": "pendientes de revisión",
+    "suggestionsDetailsPlaceholder": "Propuestas de acción o mejora generadas por la IA."
+  },
+  "evaluation": {
+    "title": "Vista de Evaluación en Tiempo Real",
+    "monitoringPlaceholder": "Monitorización de emociones, rendimiento y actividad general de la institución.",
+    "inconsistencyExample": "Ej: KARY CORE detectó que 3 estudiantes del grado 6A no tienen retroalimentación en sus planes de apoyo desde hace 15 días."
+  },
+  "assistant": {
+    "title": "Asistente Estratégico KARY CORE",
+    "exampleSuggestion1": "Detecté que varios estudiantes del grupo 'Alfa-3' muestran un bajo rendimiento en matemáticas. ¿Quieres generar un plan de recursos de refuerzo personalizado?",
+    "actionButtonSuggestResource": "Sugerir Recursos",
+    "exampleSuggestion2": "El nivel de interacción docente en el curso '7B' ha disminuido un 20% esta semana. ¿Deseas enviar un recordatorio amistoso a los docentes?",
+    "actionButtonSendReport": "Enviar Recordatorio",
+    "psychopedagogueSpecific": "Sugerencias de intervención y análisis de evolución conductual adaptadas para psicopedagogos.",
+    "teacherSpecific": "Sugerencias pedagógicas puntuales y alertas relevantes para tus grupos."
+  },
+  "alerts": {
+    "title": "Alertas Predictivas por IA",
+    "riskLevels": {
+      "high": "Alto Riesgo",
+      "medium": "Riesgo Medio",
+      "emerging": "Riesgo Emergente",
+      "low": "Bajo Riesgo"
+    },
+    "alertTypes": {
+      "academic_risk": "Riesgo Académico",
+      "emotional_risk": "Riesgo Emocional",
+      "interaction_gap": "Brecha de Interacción"
+    },
+    "sampleAlert1Details": "Acumulación de inasistencias y retroalimentación negativa en matemáticas.",
+    "sampleAlert2Details": "Cambios emocionales abruptos y aislamiento reportado.",
+    "sampleAlert3Details": "Falta de interacción docente-estudiante en las últimas 2 semanas.",
+    "psychopedagogueFocus": "Alertas emocionales y conductuales priorizadas."
+  },
+  "history": {
+    "title": "Módulo de Decisiones Históricas",
+    "logPlaceholder": "Registro de sugerencias de IA aceptadas, rechazadas y su impacto (funcionalidad en desarrollo)."
+  },
+  "noAccessTitle": "Acceso Limitado a KARY CORE",
+  "noAccessMessage": "Las funcionalidades de KARY CORE disponibles para tu rol se mostrarán aquí. Si crees que deberías tener más acceso, por favor contacta al administrador."
+}
