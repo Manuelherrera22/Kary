@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckSquare, ListTodo, Calendar, Loader2, AlertTriangle, PlusCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
-import { supabase } from '@/lib/supabaseClient';
+import { useMockAuth } from '@/contexts/MockAuthContext';
+import mockTaskService from '@/services/mockTaskService';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox'; 
@@ -14,7 +14,7 @@ import MagicBackground from '@/pages/Dashboard/StudentDashboard/components/Magic
 
 const MyTasksPage = () => {
   const { t, language } = useLanguage();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,13 +29,7 @@ const MyTasksPage = () => {
       }
       setIsLoading(true);
       try {
-        const { data, error } = await supabase
-          .from('student_tasks')
-          .select('*')
-          .order('due_date', { ascending: true, nullsFirst: false })
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
+        const data = await mockTaskService.getStudentTasks(user.id);
         setTasks(data || []);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -54,14 +48,7 @@ const MyTasksPage = () => {
   const toggleTaskCompletion = async (taskId, currentStatus) => {
     if (!user) return;
     try {
-      const { data, error } = await supabase
-        .from('student_tasks')
-        .update({ completed: !currentStatus, updated_at: new Date().toISOString() })
-        .eq('id', taskId)
-        .select()
-        .single();
-
-      if (error) throw error;
+      const data = await mockTaskService.updateTaskStatus(taskId, !currentStatus);
       
       setTasks(prevTasks => 
         prevTasks.map(task => task.id === taskId ? data : task)
@@ -106,13 +93,7 @@ const MyTasksPage = () => {
     };
 
     try {
-      const { data, error } = await supabase
-        .from('student_tasks')
-        .insert(newTask)
-        .select()
-        .single();
-      
-      if (error) throw error;
+      const data = await mockTaskService.createTask(newTask);
 
       setTasks(prevTasks => [data, ...prevTasks]);
       toast({
@@ -150,92 +131,150 @@ const MyTasksPage = () => {
         transition={{ duration: 0.5 }}
         className="p-4 sm:p-6"
       >
-        <div className="container mx-auto max-w-3xl">
-          <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-slate-200 mb-6 transition-colors group">
-            <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
-            {t('common.backToDashboard')}
-          </Link>
+        <div className="container mx-auto max-w-6xl">
+          {/* Header Section */}
+          <div className="mb-8">
+            <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-slate-200 mb-6 transition-all duration-200 group">
+              <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+              {t('common.backToDashboard')}
+            </Link>
 
-          <header className="page-header">
-            <h1 className="page-title bg-gradient-to-r from-violet-400 to-purple-300">
-              <ListTodo size={36} className="mr-3" />
-              {t('studentDashboard.myTasks.pageTitle')}
-            </h1>
-            <p className="page-subtitle">{t('studentDashboard.myTasks.pageSubtitle')}</p>
-          </header>
-          
-          <div className="text-right mb-6">
-              <Button 
-                  variant="outline" 
-                  className="text-violet-300 border-violet-500 hover:bg-violet-500/20 hover:text-violet-200"
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 p-8 shadow-2xl">
+              <div className="absolute inset-0 bg-black/10"></div>
+              <div className="relative flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm">
+                    <ListTodo size={32} className="text-white" />
+                  </div>
+                  <div>
+                    <h1 className="text-3xl font-bold text-white mb-2">
+                      {t('studentDashboard.myTasks.pageTitle')}
+                    </h1>
+                    <p className="text-white/90 text-lg">
+                      {t('studentDashboard.myTasks.pageSubtitle')}
+                    </p>
+                  </div>
+                </div>
+                <Button 
                   onClick={handleAddTask}
-              >
-                  <PlusCircle size={18} className="mr-2" /> {t('studentDashboard.myTasks.addTaskButton')}
-              </Button>
+                  className="bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/50 font-semibold px-6 py-3 rounded-xl backdrop-blur-sm transition-all duration-200 hover:scale-105"
+                >
+                  <PlusCircle size={20} className="mr-2" />
+                  {t('studentDashboard.myTasks.addTaskButton')}
+                </Button>
+              </div>
+            </div>
           </div>
 
 
+          {/* Tasks Section */}
           {isLoading ? (
             <div className="flex items-center justify-center h-64">
-              <Loader2 className="h-8 w-8 animate-spin text-violet-400" />
-              <p className="ml-2">{t('common.loadingData')}</p>
+              <div className="text-center">
+                <Loader2 className="h-12 w-12 animate-spin text-violet-400 mx-auto mb-4" />
+                <p className="text-slate-300 text-lg">{t('common.loadingData')}</p>
+              </div>
             </div>
           ) : tasks.length === 0 ? (
-            <div className="bg-slate-800/50 backdrop-blur-md p-8 rounded-xl shadow-2xl border border-slate-700/50 text-center">
-              <AlertTriangle size={48} className="text-violet-400 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-slate-200 mb-2">{t('studentDashboard.myTasks.noTasksTitle')}</h2>
-              <p className="text-slate-400">{t('studentDashboard.myTasks.noTasksSubtitle')}</p>
+            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-slate-700/50 text-center">
+              <div className="p-6 bg-violet-500/20 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                <AlertTriangle size={48} className="text-violet-400" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-200 mb-4">{t('studentDashboard.myTasks.noTasksTitle')}</h2>
+              <p className="text-slate-400 text-lg mb-6">{t('studentDashboard.myTasks.noTasksSubtitle')}</p>
+              <Button 
+                onClick={handleAddTask}
+                className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+              >
+                <PlusCircle size={20} className="mr-2" />
+                {t('studentDashboard.myTasks.addTaskButton')}
+              </Button>
             </div>
           ) : (
-            <div className="space-y-4">
-              {tasks.map(task => (
+            <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+              {tasks.map((task, index) => (
                 <motion.div
                   key={task.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`p-4 rounded-xl shadow-lg border flex items-start gap-4 transition-all duration-300
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className={`group relative overflow-hidden rounded-3xl shadow-2xl border transition-all duration-300 hover:shadow-3xl hover:scale-[1.02]
                     ${task.completed 
-                      ? 'bg-green-600/20 border-green-500/30 hover:border-green-500/50' 
-                      : 'bg-slate-800/50 backdrop-blur-md border-slate-700/50 hover:border-slate-600/70'
+                      ? 'bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/30 hover:border-emerald-400/50' 
+                      : 'bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-slate-800/90 border-slate-700/50 hover:border-violet-500/50 hover:shadow-violet-500/20'
                     }`}
                 >
-                  <Checkbox
-                    id={`task-${task.id}`}
-                    checked={task.completed}
-                    onCheckedChange={() => toggleTaskCompletion(task.id, task.completed)}
-                    className={`mt-1 h-5 w-5 rounded border-2 transition-colors
-                      ${task.completed 
-                        ? 'border-green-400 data-[state=checked]:bg-green-500 text-white' 
-                        : 'border-slate-500 data-[state=checked]:bg-violet-500 text-white'
-                      }`}
-                  />
-                  <div className="flex-grow">
-                    <label 
-                      htmlFor={`task-${task.id}`} 
-                      className={`font-semibold cursor-pointer ${task.completed ? 'line-through text-slate-400' : 'text-slate-100'}`}
-                    >
-                      {task.title}
-                    </label>
-                    {task.description && (
-                      <p className={`text-sm mt-1 ${task.completed ? 'text-slate-500' : 'text-slate-400'}`}>
-                        {task.description}
-                      </p>
-                    )}
-                    {task.due_date && (
-                      <p className={`text-xs mt-2 flex items-center ${task.completed ? 'text-slate-500' : 'text-violet-300'}`}>
-                        <Calendar size={14} className="mr-1" /> 
-                        {t('studentDashboard.myTasks.dueDate')}: {formatDateSafe(task.due_date)}
-                      </p>
-                    )}
-                  </div>
-                  <div className={`text-xs px-2 py-1 rounded-full font-medium
-                    ${task.completed 
-                      ? 'bg-green-500/30 text-green-300' 
-                      : 'bg-slate-700 text-slate-300'
-                    }`}
-                  >
-                    {task.completed ? t('studentDashboard.myTasks.statusCompleted') : t('studentDashboard.myTasks.statusPending')}
+                  {/* Background Pattern */}
+                  <div className={`absolute inset-0 opacity-5 ${task.completed ? 'bg-emerald-500' : 'bg-violet-500'}`} 
+                       style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+                  
+                  <div className="relative p-8">
+                    <div className="flex items-start gap-6">
+                      {/* Checkbox */}
+                      <div className="flex-shrink-0 pt-2">
+                        <Checkbox
+                          id={`task-${task.id}`}
+                          checked={task.completed}
+                          onCheckedChange={() => toggleTaskCompletion(task.id, task.completed)}
+                          className={`h-7 w-7 rounded-xl border-2 transition-all duration-200 hover:scale-110 shadow-lg
+                            ${task.completed 
+                              ? 'border-emerald-400 data-[state=checked]:bg-emerald-500 text-white shadow-emerald-500/30' 
+                              : 'border-slate-500 data-[state=checked]:bg-violet-500 text-white hover:border-violet-400 shadow-slate-500/20'
+                            }`}
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-grow min-w-0">
+                        <label 
+                          htmlFor={`task-${task.id}`} 
+                          className={`block font-bold text-xl cursor-pointer transition-all duration-200 hover:scale-[1.02] leading-tight ${
+                            task.completed 
+                              ? 'line-through text-slate-400' 
+                              : 'text-slate-100 group-hover:text-violet-200'
+                          }`}
+                        >
+                          {task.title}
+                        </label>
+                        
+                        {task.description && (
+                          <p className={`text-base mt-3 leading-relaxed ${
+                            task.completed ? 'text-slate-500' : 'text-slate-300'
+                          }`}>
+                            {task.description}
+                          </p>
+                        )}
+
+                        {task.due_date && (
+                          <div className={`mt-4 flex items-center gap-3 ${
+                            task.completed ? 'text-slate-500' : 'text-violet-300'
+                          }`}>
+                            <div className="p-2 bg-slate-700/50 rounded-lg">
+                              <Calendar size={18} className="flex-shrink-0" />
+                            </div>
+                            <div>
+                              <div className="text-sm text-slate-500 font-medium">
+                                {t('studentDashboard.myTasks.dueDate')}
+                              </div>
+                              <div className="text-sm font-semibold">
+                                {formatDateSafe(task.due_date)}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Status Badge */}
+                      <div className="flex-shrink-0">
+                        <div className={`px-5 py-3 rounded-2xl text-sm font-bold shadow-lg transition-all duration-200 ${
+                          task.completed 
+                            ? 'bg-gradient-to-r from-emerald-500/20 to-green-500/20 text-emerald-300 border border-emerald-500/30' 
+                            : 'bg-gradient-to-r from-slate-700/50 to-slate-800/50 text-slate-300 border border-slate-600/50 group-hover:from-violet-500/20 group-hover:to-purple-500/20 group-hover:text-violet-300 group-hover:border-violet-500/30'
+                        }`}>
+                          {task.completed ? t('studentDashboard.myTasks.statusCompleted') : t('studentDashboard.myTasks.statusPending')}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               ))}

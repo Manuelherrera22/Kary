@@ -15,7 +15,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import DashboardPage from "@/pages/DashboardPage"; 
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAuth } from "@/pages/Dashboard/hooks/useAuth.jsx";
+import { useMockAuth } from "@/contexts/MockAuthContext.jsx";
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
 
 import SchoolDataPanelPage from "@/pages/Dashboard/DirectiveSections/SchoolDataPanelPage";
@@ -114,7 +114,7 @@ const MainPageLayout = () => {
 };
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading, userProfile } = useAuth();
+  const { user, loading, userProfile } = useMockAuth();
   const location = useLocation();
 
   if (loading) {

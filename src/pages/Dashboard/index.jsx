@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import NoAccessScreen from '@/pages/Dashboard/components/NoAccessScreen';
 import RoleSelectionScreen from '@/pages/Dashboard/components/RoleSelectionScreen';
 import DashboardLayout from '@/pages/Dashboard/components/DashboardLayout';
 
 const DashboardComponent = () => {
-  const { user, userProfile, loading, handleLogout, updateUserRoleInProfile } = useAuth();
+  const { user, userProfile, loading, handleLogout, updateUserRoleInProfile } = useMockAuth();
 
   if (loading) {
     return <LoadingScreen />;

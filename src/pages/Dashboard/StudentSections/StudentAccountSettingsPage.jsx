@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Settings } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import AccountSettingsLayout from '@/pages/Dashboard/components/AccountSettingsLayout';
 import ProfileInfoSection from '@/pages/Dashboard/components/AccountSettingsSections/ProfileInfoSection';
@@ -14,7 +14,7 @@ import LogoutSection from '@/pages/Dashboard/components/AccountSettingsSections/
 
 const StudentAccountSettingsPage = () => {
   const { t } = useLanguage();
-  const { user, userProfile, loading: authLoading, handleLogout } = useAuth();
+  const { user, userProfile, loading: authLoading, handleLogout } = useMockAuth();
 
   if (authLoading || !userProfile) {
     return <LoadingScreen />;

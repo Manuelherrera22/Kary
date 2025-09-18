@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, History, CalendarDays, Clock, UserCircle, Info, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 
 const AppointmentHistoryPage = () => {
   const { t } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useMockAuth();
   const { toast } = useToast();
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

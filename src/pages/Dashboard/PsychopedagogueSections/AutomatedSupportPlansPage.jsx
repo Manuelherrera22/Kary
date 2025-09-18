@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from '@/components/ui/input';
@@ -17,7 +17,7 @@ import { Badge } from '@/components/ui/badge';
 
 const AutomatedSupportPlansPage = () => {
   const { t, language } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const { toast } = useToast();
 
   const [studentPlans, setStudentPlans] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from '@/lib/supabaseClient';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -40,7 +40,7 @@ const containerVariants = {
 
 const SupportPlanPage = () => {
   const { t } = useLanguage(); 
-  const { user: authUser, userProfile } = useAuth();
+  const { user: authUser, userProfile } = useMockAuth();
   const { toast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();

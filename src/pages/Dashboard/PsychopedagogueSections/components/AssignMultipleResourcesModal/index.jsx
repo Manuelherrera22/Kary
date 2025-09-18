@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, Palette, User, Search, CheckSquare, Filter, X, Layers, Video, FileText as FileTextIcon, Activity as ActivityIcon, BookOpen } from 'lucide-react';
 import ResourceItem from './ResourceItem';
 import useResourceAssignmentData from './useResourceAssignmentData';
@@ -35,7 +35,7 @@ const validResourceTypesForFilter = [
 export default function AssignMultipleResourcesModal({ onAssignmentSuccess, children, isOpen: externalOpen, onOpenChange: externalOnOpenChange }) {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   
   const [internalOpen, setInternalOpen] = useState(false);
   const open = externalOpen !== undefined ? externalOpen : internalOpen;

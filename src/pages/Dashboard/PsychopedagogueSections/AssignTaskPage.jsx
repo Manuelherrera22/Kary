@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ClipboardEdit, Users, CalendarDays, Send, Loader2, Layers, Info } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,7 +17,7 @@ import RegisterStudentButton from '@/pages/Dashboard/PsychopedagogueSections/com
 
 const AssignTaskPage = () => {
   const { t } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useMockAuth();
   const { toast } = useToast();
 
   const [allStudents, setAllStudents] = useState([]);

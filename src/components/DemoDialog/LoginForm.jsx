@@ -12,7 +12,7 @@ import AuthFormHeader from "./LoginForm/components/AuthFormHeader";
 import GoogleAuthButton from "./LoginForm/components/GoogleAuthButton";
 import FormSeparator from "./LoginForm/components/FormSeparator";
 import FormErrorDisplay from "./LoginForm/components/FormErrorDisplay";
-import { useAuth } from "@/pages/Dashboard/hooks/useAuth"; // Import useAuth to use parseSupabaseError
+import { CustomAuth } from "@/lib/customAuth";
 
 const UserRoleSelector = ({ t, userRoles }) => (
   <div>
@@ -73,7 +73,18 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
   const { toast } = useToast();
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { parseSupabaseError } = useAuth(); 
+  // Función para parsear errores personalizada
+  const parseError = (error) => {
+    if (!error) return t('loginMessages.errorDefault');
+    if (error.message.includes("Usuario no encontrado")) return t('loginMessages.errorUserNotFound');
+    if (error.message.includes("Contraseña incorrecta")) return t('loginMessages.errorInvalidCredentials');
+    if (error.message.includes("already exists") || error.message.includes("duplicate")) return t('loginMessages.errorUserAlreadyRegistered');
+    if (error.message.includes("Invalid login credentials")) return t('loginMessages.errorInvalidCredentials');
+    if (error.message.includes("Email not confirmed")) return t('loginMessages.errorEmailNotConfirmed');
+    if (error.message.includes("User already registered")) return t('loginMessages.errorUserAlreadyRegistered');
+    if (error.message.includes("User not found")) return t('loginMessages.errorUserNotFound');
+    return error.message || t('loginMessages.errorDefault');
+  }; 
   const [loadingEmail, setLoadingEmail] = useState(false);
   const [loadingGoogle, setLoadingGoogle] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -99,49 +110,45 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
 
     try {
       if (isSignUpFlow) {
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        // Usar sistema de autenticación personalizado para registro
+        const result = await CustomAuth.signUp({
           email,
           password,
-          options: {
-            data: { 
-              full_name: fullName,
-            }
-          }
+          full_name: fullName,
+          role: role || 'student',
+          status: 'active'
         });
-        if (signUpError) throw signUpError;
-        if (signUpData.user) {
-          const { error: profileError } = await supabase
-            .from('user_profiles')
-            .insert({ id: signUpData.user.id, full_name: fullName, role: role, updated_at: new Date().toISOString() });
-          if (profileError) throw profileError;
-          
-          toast({
-            title: t("toasts.signupSuccessTitle"),
-            description: t("toasts.signupSuccessDescription"),
-            className: "bg-green-500 text-white dark:bg-green-600"
-          });
-          if(onSignUpSuccess) onSignUpSuccess();
-        } else {
-           throw new Error(t("toasts.signupErrorUnknown"));
+        
+        if (!result.success) {
+          throw new Error(result.error);
         }
+        
+        toast({
+          title: t("toasts.signupSuccessTitle"),
+          description: t("toasts.signupSuccessDescription"),
+          className: "bg-green-500 text-white dark:bg-green-600"
+        });
+        if(onSignUpSuccess) onSignUpSuccess();
       } else {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        if (data.user) {
-          toast({
-            title: t("toasts.loginSuccessTitle"),
-            description: t("toasts.loginSuccessDescription", { userIdentifier: data.user.user_metadata?.full_name || data.user.email }),
-            className: "bg-green-500 text-white dark:bg-green-600"
-          });
-          onOpenChange(false);
-          navigate('/dashboard');
-        } else {
-          throw new Error(t("toasts.loginErrorUnknown"));
+        // Usar sistema de autenticación personalizado para login
+        const result = await CustomAuth.signIn(email, password);
+        
+        if (!result.success) {
+          throw new Error(result.error);
         }
+        
+        toast({
+          title: t("toasts.loginSuccessTitle"),
+          description: t("toasts.loginSuccessDescription", { userIdentifier: result.data.user.full_name || result.data.user.email }),
+          className: "bg-green-500 text-white dark:bg-green-600"
+        });
+        
+        if (onOpenChange) onOpenChange(false);
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error(`Error during email ${isSignUpFlow ? 'sign up' : 'login'}:`, error);
-      const errorMessage = parseSupabaseError(error);
+      const errorMessage = parseError(error);
       setLoginErrorExt(errorMessage);
       toast({ title: t(isSignUpFlow ? "toasts.signupErrorTitle" : "toasts.loginErrorTitle"), description: errorMessage, variant: "destructive" });
     } finally {

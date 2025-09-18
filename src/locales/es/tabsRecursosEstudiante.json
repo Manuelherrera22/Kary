@@ -13,5 +13,9 @@
   "noResourcesFoundDesc": "No hay recursos asignados que coincidan con el tipo '{type}' o los filtros seleccionados.",
   "fetchError": "Error al cargar los recursos asignados.",
   "filterByTags": "Filtrar por etiquetas:",
-  "clearTagsFilter": "Limpiar filtro de etiquetas"
+  "clearTagsFilter": "Limpiar filtro de etiquetas",
+  "pageTitle": "Recursos Asignados",
+  "pageSubtitle": "Material de apoyo seleccionado especialmente para ti",
+  "filters": "Filtros",
+  "favoritesOnly": "Solo Favoritos"
 }

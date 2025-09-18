@@ -17,5 +17,8 @@
   "selectStudentErrorTitle": "Select a student to view plans",
   "selectStudentErrorDescription": "Please select a student from the panel above to load their existing support plans.",
   "relationsFixedInfoTitle": "Relationships corrected and plan loading stabilized",
-  "relationsFixedInfoMessage": "A foreign key duplication conflict between 'support_plans' and the 'students' and 'user_profiles' tables, which prevented correct plan visualization, has been resolved. Now:\n\n• Ambiguity in relationships has been eliminated, and JOINs have been explicitly adjusted.\n• It has been validated that plans are generated correctly after selecting a student.\n• The system now only attempts to load plans **once the student has been chosen**.\n\n🧩 Recommendation: ensure a student is always selected before invoking loading or summary functions. Implement preventive validations in the UI flow to avoid premature loading attempts."
+  "relationsFixedInfoMessage": "A foreign key duplication conflict between 'support_plans' and the 'students' and 'user_profiles' tables, which prevented correct plan visualization, has been resolved. Now:\n\n• Ambiguity in relationships has been eliminated, and JOINs have been explicitly adjusted.\n• It has been validated that plans are generated correctly after selecting a student.\n• The system now only attempts to load plans **once the student has been chosen**.\n\n🧩 Recommendation: ensure a student is always selected before invoking loading or summary functions. Implement preventive validations in the UI flow to avoid premature loading attempts.",
+  "error": "Error",
+  "successTitle": "Success!",
+  "errorTitle": "Error!"
 }

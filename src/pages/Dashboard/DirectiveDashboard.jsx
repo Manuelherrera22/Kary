@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Link } from 'react-router-dom';
 import { BarChart2, Users, FileText, Settings, ShieldAlert, Activity, Link2, Users2, Edit3, Eye, Briefcase, Maximize2, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -57,7 +57,7 @@ const SectionItem = ({ label, description, icon: Icon, linkTo, bgColor, iconColo
 
 const DirectiveDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile, user } = useAuth(); 
+  const { userProfile, user } = useMockAuth(); 
   const [loadingDashboard, setLoadingDashboard] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);

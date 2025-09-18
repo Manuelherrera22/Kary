@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import { Helmet } from 'react-helmet';
 import StatCards from './PsychopedagogueSections/components/PsychopedagogueDashboard/StatCards';
@@ -13,7 +13,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 const PsychopedagogueDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile, loading: authLoading } = useAuth();
+  const { userProfile, loading: authLoading } = useMockAuth();
   const [dashboardData, setDashboardData] = useState(null);
   const [riskAlerts, setRiskAlerts] = useState([]);
   const [loadingData, setLoadingData] = useState(true);

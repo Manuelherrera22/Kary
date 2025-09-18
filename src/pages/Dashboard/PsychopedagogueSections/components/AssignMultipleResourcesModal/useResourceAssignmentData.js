@@ -2,12 +2,12 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 
 const useResourceAssignmentData = (open) => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   
   const [estudiantes, setEstudiantes] = useState([]);
   const [allResources, setAllResources] = useState([]);

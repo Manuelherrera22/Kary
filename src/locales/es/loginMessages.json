@@ -7,5 +7,6 @@
   "errorGoogleLogin": "No se pudo iniciar sesión con Google en este momento. Por favor, inténtalo de nuevo o usa tu correo y contraseña.",
   "errorUserAlreadyRegistered": "Ya existe un usuario con este correo electrónico. Por favor, inicia sesión.",
   "errorPasswordLength": "La contraseña debe tener al menos 6 caracteres.",
-  "errorInvalidEmail": "La dirección de correo electrónico no es válida."
+  "errorInvalidEmail": "La dirección de correo electrónico no es válida.",
+  "errorFullNameRoleRequired": "Por favor, ingresa tu nombre completo y selecciona tu rol."
 }

@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, BookOpen, Layers, Video, FileText as FileTextIcon, Activity as ActivityIcon } from 'lucide-react';
 
 const validResourceTypesForFilter = [
@@ -28,7 +28,7 @@ const validResourceTypesForFilter = [
 export default function AssignResourceToStudentModal({ studentId, studentName, onAssignmentSuccess }) {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const [open, setOpen] = useState(false);
   const [allResources, setAllResources] = useState([]);
   const [selectedType, setSelectedType] = useState('todos');

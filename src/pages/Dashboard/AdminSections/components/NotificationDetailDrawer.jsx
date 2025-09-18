@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from "@/components/ui/drawer"; 
 import { Button } from '@/components/ui/button';
 import { X, Info, UserCircle, Calendar, Shield, Eye, Server, Smartphone, Globe, History } from 'lucide-react';
@@ -23,7 +23,7 @@ const DetailItem = ({ icon: Icon, label, value, sensitive = false, canViewSensit
 
 const NotificationDetailDrawer = ({ isOpen, onClose, notification, currentUserRole, canViewSensitiveData }) => {
   const { t, language } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
 
   if (!notification) return null;
 

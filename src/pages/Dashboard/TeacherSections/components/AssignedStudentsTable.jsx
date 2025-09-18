@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Eye, User, BookOpen, CalendarDays, Info, Loader2, UserX, Zap } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import edgeFunctionService from '@/services/edgeFunctionService';
 import { toast } from '@/components/ui/use-toast';
 import DetailedPlanModal from '@/pages/Dashboard/PsychopedagogueSections/SupportPlanPageComponents/DetailedPlanModal';
@@ -18,7 +18,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 const AssignedStudentsTable = () => {
   const { t, language } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

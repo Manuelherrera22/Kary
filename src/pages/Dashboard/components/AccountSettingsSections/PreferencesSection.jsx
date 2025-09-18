@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Languages as LanguagesIcon, Palette, Clock, Bell, CheckCircle, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -20,7 +20,7 @@ const timezones = [
 
 const PreferencesSection = () => {
   const { t, language: currentLanguageContext, changeLanguage, availableLanguages } = useLanguage();
-  const { user, userProfile, updateUserProfile, loading: authLoading } = useAuth();
+  const { user, userProfile, updateUserProfile, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({

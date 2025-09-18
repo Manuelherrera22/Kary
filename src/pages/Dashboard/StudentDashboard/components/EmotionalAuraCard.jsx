@@ -12,13 +12,16 @@ const EmotionalAuraCard = ({ emotionalState }) => {
 
   const stateConfig = useMemo(() => ({
     happy: { icon: Star, color: 'text-yellow-300', auraColor: 'shadow-yellow-300/50', bgColor: 'bg-yellow-900/20' },
+    positive: { icon: Star, color: 'text-yellow-300', auraColor: 'shadow-yellow-300/50', bgColor: 'bg-yellow-900/20' },
     neutral: { icon: Cloud, color: 'text-purple-300', auraColor: 'shadow-purple-300/40', bgColor: 'bg-purple-900/20' },
     sad: { icon: Droplet, color: 'text-sky-300', auraColor: 'shadow-sky-300/50', bgColor: 'bg-sky-900/20' },
+    negative: { icon: Droplet, color: 'text-sky-300', auraColor: 'shadow-sky-300/50', bgColor: 'bg-sky-900/20' },
     loading: { icon: Sparkles, color: 'text-slate-400', auraColor: 'shadow-slate-400/30', bgColor: 'bg-slate-800/20' },
   }), []);
 
   const currentStatus = emotionalState?.status || 'loading';
-  const { icon: Icon, color, auraColor, bgColor } = stateConfig[currentStatus];
+  const config = stateConfig[currentStatus] || stateConfig.loading;
+  const { icon: Icon, color, auraColor, bgColor } = config;
   
   const messageKey = `studentDashboard.emotionalState.${currentStatus}.message`;
   const message = emotionalState?.message || t(messageKey);

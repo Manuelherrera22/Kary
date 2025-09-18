@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -28,7 +28,7 @@ const iconVariants = {
 };
 
 const DashboardLayout = ({ children }) => {
-  const { userProfile, handleLogout } = useAuth();
+  const { userProfile, handleLogout } = useMockAuth();
   const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -163,7 +163,7 @@ const DashboardLayout = ({ children }) => {
       <div className={`flex items-center p-4 border-b border-slate-700 ${isExpanded ? 'justify-between' : 'justify-center'}`}>
         {isExpanded && (
           <Link to="/dashboard" className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Kary AI Logo" className="h-8 w-auto" />
+            <img src="/vite.svg" alt="Kary AI Logo" className="h-8 w-auto" />
             <span className="font-bold text-xl">Kary AI</span>
           </Link>
         )}

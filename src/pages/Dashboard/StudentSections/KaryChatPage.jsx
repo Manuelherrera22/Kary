@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Send, User, Sparkles, Loader2, MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
-import { supabase } from '@/lib/supabaseClient';
+import { useMockAuth } from '@/contexts/MockAuthContext';
+import mockKaryChatService from '@/services/mockKaryChatService';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
@@ -13,7 +13,7 @@ import { es } from 'date-fns/locale';
 
 const KaryChatPage = () => {
   const { t, language } = useLanguage(); 
-  const { user, userProfile, loading: authLoading } = useAuth();
+  const { user, userProfile, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -37,11 +37,7 @@ const KaryChatPage = () => {
       }
       setIsLoadingHistory(true);
       try {
-        const { data, error } = await supabase
-          .from('ai_conversations')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('timestamp', { ascending: true });
+        const { data, error } = await mockKaryChatService.getChatHistory(user.id);
 
         if (error) throw error;
         setMessages(data || []);
@@ -72,34 +68,16 @@ const KaryChatPage = () => {
     };
 
     try {
-      const { data: insertedUserMessage, error: userMessageError } = await supabase
-        .from('ai_conversations')
-        .insert(userMessagePayload)
-        .select()
-        .single();
+      const { data: conversation, error: sendError } = await mockKaryChatService.sendMessageToKary(
+        user.id,
+        newMessage
+      );
 
-      if (userMessageError) throw userMessageError;
+      if (sendError) throw sendError;
       
-      setMessages(prev => [...prev, insertedUserMessage]);
+      // Agregar tanto el mensaje del usuario como la respuesta de Kary
+      setMessages(prev => [...prev, conversation]);
       setNewMessage('');
-
-      const karyResponsePayload = {
-        user_id: user.id,
-        message: `${t('studentDashboard.karyChat.karyResponsePrefix')} "${insertedUserMessage.message}". ${t('studentDashboard.karyChat.karyResponseSuffix')}`,
-        sender: 'kary',
-        timestamp: new Date().toISOString(),
-      };
-      
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const { data: insertedKaryMessage, error: karyMessageError } = await supabase
-        .from('ai_conversations')
-        .insert(karyResponsePayload)
-        .select()
-        .single();
-      
-      if (karyMessageError) throw karyMessageError;
-      setMessages(prev => [...prev, insertedKaryMessage]);
 
     } catch (error) {
       console.error('Error sending message:', error);

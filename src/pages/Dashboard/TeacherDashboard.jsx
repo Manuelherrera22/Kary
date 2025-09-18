@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext.jsx';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { toast } from '@/components/ui/use-toast';
 import { AlertTriangle, Loader2, FileText, ListChecks, Edit, Users } from 'lucide-react';
 import TeacherWelcomeHeader from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/TeacherWelcomeHeader.jsx';
@@ -11,7 +11,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 const TeacherDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile, loading: authLoading } = useAuth();
+  const { userProfile, loading: authLoading } = useMockAuth();
   
   const [stats, setStats] = useState({
     activePlans: 0,

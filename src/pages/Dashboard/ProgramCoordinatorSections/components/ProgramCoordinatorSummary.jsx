@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,7 +16,7 @@ const iconMapping = {
 
 const ProgramCoordinatorSummary = () => {
   const { t, language } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useMockAuth();
   const { toast } = useToast();
   const [summaryData, setSummaryData] = useState([]);
   const [loading, setLoading] = useState(true);

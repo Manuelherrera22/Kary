@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
@@ -35,7 +35,7 @@ const SettingCard = ({ title, description, icon: Icon, children, actionButton })
 
 const AdminAccountSettingsPage = () => {
   const { t } = useLanguage();
-  const { user, userProfile, loading: authLoading, setLoading: setAuthLoading, parseSupabaseError, refreshUserProfile } = useAuth();
+  const { user, userProfile, loading: authLoading, setLoading: setAuthLoading, parseSupabaseError, refreshUserProfile } = useMockAuth();
   const { toast } = useToast();
 
   const [fullName, setFullName] = useState('');

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -109,7 +109,7 @@ const TeacherObservationItem = ({ observation, onEdit, onDelete, canEdit }) => {
 
 const TeacherObservationForm = ({ studentId, existingObservation, onSave, onCancel }) => {
   const { t } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     situation: '',
@@ -240,7 +240,7 @@ const TeacherObservationForm = ({ studentId, existingObservation, onSave, onCanc
 
 const TeacherObservationsSection = ({ studentId, canAddObservations }) => {
   const { t } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const { toast } = useToast();
   const [observations, setObservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

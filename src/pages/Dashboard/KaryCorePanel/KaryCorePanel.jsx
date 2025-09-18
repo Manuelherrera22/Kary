@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Brain, BarChart3, AlertTriangle, MessageSquare, History, Settings2, Zap, Loader2, Eye, RefreshCw } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -227,7 +227,7 @@ const HistoricalDecisionsLog = () => {
 
 const KaryCorePanel = () => {
   const { t } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   
   const allTabs = [
     { value: "summary", labelKey: "karyCore.tabs.summary", icon: BarChart3, component: <IntelligentSummary />, roles: ['directive', 'program_coordinator', 'admin'] },

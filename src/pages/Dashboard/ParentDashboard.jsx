@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { BarChartBig, CalendarClock, MessageSquare as MessageSquareText, FileText, Settings, ChevronRight, Smile, History as HistoryIcon, Users2, UserCircle } from 'lucide-react';
 import DashboardCard from './components/DashboardCard';
 import LoadingScreen from './components/LoadingScreen';
 
 const ParentDashboard = () => {
   const { t } = useLanguage();
-  const { user, userProfile, loading: authLoading, primaryChildId, associatedStudentIds } = useAuth();
+  const { user, userProfile, loading: authLoading, primaryChildId, associatedStudentIds } = useMockAuth();
 
   const parentDashboardCards = [
     {

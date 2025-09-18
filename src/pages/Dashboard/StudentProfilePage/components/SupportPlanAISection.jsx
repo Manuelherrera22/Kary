@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import edgeFunctionService from '@/services/edgeFunctionService';
 import { Button } from '@/components/ui/button';
@@ -16,7 +16,7 @@ import EditableBlock from '@/pages/Dashboard/PsychopedagogueSections/components/
 
 const SupportPlanAISection = ({ studentId, studentName }) => {
   const { t } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const { toast } = useToast();
 
   const [step, setStep] = useState(1);

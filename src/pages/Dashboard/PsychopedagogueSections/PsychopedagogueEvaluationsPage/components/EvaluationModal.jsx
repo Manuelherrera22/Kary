@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { Loader2, PlusCircle, Trash2, Save } from 'lucide-react';
 import { format } from 'date-fns';
@@ -16,7 +16,7 @@ import { es } from 'date-fns/locale';
 const EvaluationModal = ({ isOpen, onOpenChange, evaluation, onSave }) => {
   const { t, language } = useLanguage();
   const { toast } = useToast();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
 
   const [formData, setFormData] = useState({
     student_id: '',

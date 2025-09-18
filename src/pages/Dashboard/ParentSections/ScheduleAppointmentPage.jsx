@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 
 const timeSlots = [
   "09:00 - 10:00",
@@ -21,7 +21,7 @@ const timeSlots = [
 
 const ScheduleAppointmentPage = () => {
   const { t } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useMockAuth();
   const { toast } = useToast();
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTimeSlot, setAppointmentTimeSlot] = useState('');

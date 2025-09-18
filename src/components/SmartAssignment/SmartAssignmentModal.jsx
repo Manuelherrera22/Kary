@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight, ArrowLeft, CheckCircle, Sparkles, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 
 import AssignmentTypeStep from '@/components/SmartAssignment/steps/AssignmentTypeStep';
 import StudentSelectionStep from '@/components/SmartAssignment/steps/StudentSelectionStep';
@@ -24,7 +24,7 @@ const steps = [
 
 const SmartAssignmentModal = ({ isOpen, onOpenChange, triggerButton }) => {
   const { t } = useLanguage();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const { toast } = useToast();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [assignmentData, setAssignmentData] = useState({

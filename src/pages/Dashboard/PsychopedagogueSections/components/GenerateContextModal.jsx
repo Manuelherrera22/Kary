@@ -7,7 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
 import edgeFunctionService from '@/services/edgeFunctionService';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, Lightbulb, ClipboardCopy, AlertTriangle, Brain, RefreshCw, Eye, ShieldAlert, ShieldCheck, ShieldQuestion, CheckCircle, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -15,7 +15,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 const GenerateContextModal = ({ isOpen, onOpenChange, studentId, studentName, onContextGenerated, isLoading: propIsLoading, setIsLoading: propSetIsLoading }) => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
 
   const [internalIsLoading, setInternalIsLoading] = useState(false);
   const setIsLoading = propSetIsLoading || setInternalIsLoading;

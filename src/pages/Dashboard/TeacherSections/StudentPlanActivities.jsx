@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { toast } from '@/components/ui/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,7 +17,7 @@ import { Badge } from '@/components/ui/badge';
 
 const StudentPlanActivities = () => {
   const { t, language } = useLanguage();
-  const { user, userProfile } = useAuth();
+  const { user, userProfile } = useMockAuth();
   const [groupedActivities, setGroupedActivities] = useState({});
   const [students, setStudents] = useState({});
   const [isLoading, setIsLoading] = useState(true);

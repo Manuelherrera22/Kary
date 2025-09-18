@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth'; 
+import { useMockAuth } from '@/contexts/MockAuthContext'; 
 
 const WelcomeUser = () => {
   const { t } = useLanguage();
-  const { user, userProfile, loading: authLoading } = useAuth();
+  const { user, userProfile, loading: authLoading } = useMockAuth();
 
   if (authLoading && (!userProfile && !user)) {
     return (

@@ -2,16 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global dark theme */
+html, body, #root {
+  background-color: #0f172a !important; /* slate-900 */
+  color: #f1f5f9 !important; /* slate-100 */
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+  min-height: 100vh;
+}
+
+#root {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+  min-height: 100vh;
+}
+
+/* Force dark theme on all elements */
+* {
+  background-color: transparent !important;
+}
+
+body, html, #root {
+  background-color: #0f172a !important;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+}
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 224 71% 4%; /* Dark blue-gray */
+    --foreground: 210 40% 98%; /* Light gray */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 223 47% 11%; /* Slightly lighter dark blue-gray for cards */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
 
     --primary: 258 90% 66%; /* Purple */
     --primary-foreground: 0 0% 100%;
@@ -22,17 +48,17 @@
     --tertiary: 30 95% 59%; /* Orange */
     --tertiary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 25% 27%;
+    --muted-foreground: 217.9 10.6% 64.9%;
 
-    --accent: 210 40% 96.1%; /* Light Sky Blue / Light Purple */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 215 27.9% 16.9%; /* Dark Sky Blue / Dark Purple */
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
     --ring: 258 90% 66%; /* Purple for focus rings */
 
     --radius: 0.75rem; /* Slightly larger radius for a softer look */

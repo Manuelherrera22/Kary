@@ -13,7 +13,7 @@ import { Bell, CheckCheck, Settings2, AlertCircle as CircleAlert, FileText, Cale
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import { es, enUS, pt, fr, ru } from 'date-fns/locale';
@@ -93,7 +93,7 @@ const NotificationItem = ({ notification, onMarkAsRead }) => {
 
 const NotificationsPanel = () => {
   const { t } = useLanguage();
-  const { user, userProfile } = useAuth();
+  const { user, userProfile } = useMockAuth();
   const [notifications, setNotifications] = useState([]);
   const [predictiveAlerts, setPredictiveAlerts] = useState([]);
   const [loading, setLoading] = useState(true);

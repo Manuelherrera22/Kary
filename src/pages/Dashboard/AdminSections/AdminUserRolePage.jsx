@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,7 +14,7 @@ import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 
 const AdminUserRolePage = () => {
   const { t } = useLanguage();
-  const { loading: authLoading, refreshUserProfile } = useAuth(); 
+  const { loading: authLoading, refreshUserProfile } = useMockAuth(); 
   const { toast } = useToast();
 
   const [users, setUsers] = useState([]);

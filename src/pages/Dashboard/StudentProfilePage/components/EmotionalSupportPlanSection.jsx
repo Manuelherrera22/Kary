@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import edgeFunctionService from '@/services/edgeFunctionService';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -10,7 +10,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 const EmotionalSupportPlanSection = ({ studentId, studentName }) => {
   const { t } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useMockAuth();
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);

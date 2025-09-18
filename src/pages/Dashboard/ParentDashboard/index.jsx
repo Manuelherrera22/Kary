@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext.jsx';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
@@ -76,7 +76,7 @@ const ParentStudentActivities = ({ studentId, studentName, teacherName }) => {
 
 const ParentDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile, primaryChildId } = useAuth();
+  const { userProfile, primaryChildId } = useMockAuth();
   const [childData, setChildData] = useState(null);
   const [supportPlan, setSupportPlan] = useState(null);
   const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);

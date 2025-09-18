@@ -40,5 +40,8 @@
   "step": "Step",
   "invalidDate": "Invalid date",
   "tryAdjustingFilters": "Try adjusting your filters or check back later.",
-  "common.myChild": "my child"
+  "common.myChild": "my child",
+  "loadingText": "Loading...",
+  "loadingData": "Loading data...",
+  "mustBeLoggedIn": "You must be logged in to perform this action"
 }

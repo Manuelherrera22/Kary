@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck, Loader2, AlertTriangle, FileText, BrainCircuit, Activity, CalendarDays, Clock, UserCheck } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
-import { supabase } from '@/lib/supabaseClient';
+import { useMockAuth } from '@/contexts/MockAuthContext';
+import mockStudentDataService from '@/services/mockStudentDataService';
 import { useToast } from '@/components/ui/use-toast';
 import { format, parseISO } from 'date-fns';
 import { es, enUS } from 'date-fns/locale'; 
@@ -23,7 +23,7 @@ const blockIcons = {
 
 const StudentSupportPlansPage = () => {
   const { t, language } = useLanguage(); 
-  const { user, userProfile, loading: authLoading } = useAuth();
+  const { user, userProfile, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
   const [supportPlans, setSupportPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,25 +41,7 @@ const StudentSupportPlansPage = () => {
     }
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('support_plans')
-        .select(`
-          id,
-          created_at,
-          plan_json,
-          support_goal,
-          support_strategy,
-          start_date,
-          end_date,
-          status,
-          type,
-          assigned,
-          assigned_at,
-          responsible_person_profile:user_profiles!responsible_person(id, full_name)
-        `)
-        .eq('student_id', user.id)
-        .eq('assigned', true) 
-        .order('assigned_at', { ascending: false });
+      const { data, error } = await mockStudentDataService.getStudentSupportPlans(user.id);
 
       if (error) throw error;
       setSupportPlans(data || []);
@@ -154,71 +136,134 @@ const StudentSupportPlansPage = () => {
               <p className="text-slate-400">{t('studentDashboard.supportPlans.noPlansSubtitle')}</p>
             </div>
           ) : (
-            <div className="space-y-6">
-              {supportPlans.map(plan => (
+            <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+              {supportPlans.map((plan, index) => (
                 <motion.div
                   key={plan.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-slate-800/60 backdrop-blur-md p-6 rounded-xl shadow-xl border border-slate-700/60 hover:border-slate-600/80 transition-all"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-slate-700/50 hover:border-teal-500/50 transition-all duration-300 hover:shadow-teal-500/10 hover:shadow-2xl"
                 >
-                  <div className="flex justify-between items-start mb-3">
-                      <div>
-                          <h3 className="text-xl font-semibold text-teal-300">{plan.support_goal || t('studentDashboard.supportPlans.unnamedPlan')}</h3>
-                          <p className="text-xs text-slate-400">
-                              {t('supportPlans.statusLabel')}: <Badge variant={getStatusBadgeVariant(plan.status)} className="ml-1 text-xs">{getStatusDisplay(plan.status)}</Badge>
-                          </p>
-                      </div>
-                      <ShieldCheck size={24} className="text-teal-400 flex-shrink-0" />
-                  </div>
-                  
-                  <div className="space-y-2 text-sm text-slate-300 mb-4">
-                      <p><strong className="font-medium text-slate-200">{t('supportPlans.strategyLabel')}:</strong> {plan.support_strategy || t('common.notSpecified')}</p>
-                      <p><strong className="font-medium text-slate-200">{t('supportPlans.responsiblePersonLabel')}:</strong> {plan.responsible_person_profile?.full_name || t('common.notSpecified')}</p>
+                  {/* Status Badge */}
+                  <div className="absolute top-4 right-4">
+                    <Badge 
+                      variant={getStatusBadgeVariant(plan.status)} 
+                      className={`text-xs font-medium px-3 py-1 ${
+                        plan.status === 'active' 
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
+                          : plan.status === 'completed'
+                          ? 'bg-blue-500/20 text-blue-300 border-blue-500/30'
+                          : 'bg-slate-500/20 text-slate-300 border-slate-500/30'
+                      }`}
+                    >
+                      {getStatusDisplay(plan.status)}
+                    </Badge>
                   </div>
 
-                  {plan.plan_json?.steps && Array.isArray(plan.plan_json.steps) && plan.plan_json.steps.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-slate-700/50">
-                      <h4 className="text-md font-semibold text-sky-300 mb-3">{t('supportPlans.detailModal.detailedPlanTitle')}</h4>
+                  {/* Header */}
+                  <div className="mb-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-xl border border-teal-500/30">
+                        <ShieldCheck size={24} className="text-teal-400" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-100 mb-2 leading-tight">
+                          {plan.support_goal || t('studentDashboard.supportPlans.unnamedPlan')}
+                        </h3>
+                        <p className="text-sm text-slate-400">
+                          {t('studentDashboard.supportPlans.details.responsiblePerson')}: {plan.responsible_person_profile?.full_name || t('common.notSpecified')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Strategy */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-slate-200 mb-2 flex items-center">
+                      <BrainCircuit size={16} className="mr-2 text-teal-400" />
+                      {t('studentDashboard.supportPlans.details.interventionStrategy')}
+                    </h4>
+                    <p className="text-slate-300 text-sm leading-relaxed">
+                      {plan.support_strategy || t('common.notSpecified')}
+                    </p>
+                  </div>
+
+                  {/* Plan Details */}
+                  {plan.plan_json && (
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-slate-200 mb-3 flex items-center">
+                        <FileText size={16} className="mr-2 text-sky-400" />
+                        {t('studentDashboard.supportPlans.details.objectives')}
+                      </h4>
                       <div className="space-y-3">
-                        {plan.plan_json.steps.map((step, index) => {
-                          const IconComponent = blockIcons[step.key] || blockIcons.default;
-                          return (
-                            <div key={step.id || index} className="p-3 bg-slate-700/50 rounded-lg border border-slate-600/70">
-                              <h5 className="text-sm font-semibold text-sky-200 mb-1 flex items-center">
-                                <IconComponent size={16} className="mr-2 text-sky-300" />
-                                {step.title || t('supportPlans.pdf.unnamedStep')}
-                              </h5>
-                              <p className="text-slate-300 whitespace-pre-wrap text-xs">{typeof step.content === 'string' ? step.content : JSON.stringify(step.content, null, 2)}</p>
+                        {plan.plan_json.objectives && Array.isArray(plan.plan_json.objectives) && (
+                          <div className="space-y-2">
+                            {plan.plan_json.objectives.map((objective, idx) => (
+                              <div key={idx} className="flex items-start gap-2">
+                                <div className="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0"></div>
+                                <span className="text-slate-300 text-sm">{objective}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {plan.plan_json.activities && Array.isArray(plan.plan_json.activities) && (
+                          <div className="mt-4">
+                            <h5 className="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide">
+                              {t('studentDashboard.supportPlans.details.activities')}
+                            </h5>
+                            <div className="space-y-2">
+                              {plan.plan_json.activities.map((activity, idx) => (
+                                <div key={idx} className="flex items-start gap-2">
+                                  <div className="w-2 h-2 bg-sky-400 rounded-full mt-2 flex-shrink-0"></div>
+                                  <span className="text-slate-300 text-sm">{activity}</span>
+                                </div>
+                              ))}
                             </div>
-                          );
-                        })}
+                          </div>
+                        )}
+
+                        {plan.plan_json.timeline && (
+                          <div className="mt-4 p-3 bg-slate-700/30 rounded-lg border border-slate-600/50">
+                            <div className="flex items-center gap-2">
+                              <Clock size={14} className="text-amber-400" />
+                              <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
+                                {t('studentDashboard.supportPlans.details.timeline')}:
+                              </span>
+                              <span className="text-amber-300 text-sm font-medium">
+                                {plan.plan_json.timeline}
+                              </span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
-                   {(plan.plan_json && typeof plan.plan_json === 'object' && !plan.plan_json.steps && Object.keys(plan.plan_json).length > 0) && (
-                      <div className="mt-4 pt-4 border-t border-slate-700/50">
-                          <h4 className="text-md font-semibold text-sky-300 mb-3">{t('supportPlans.detailModal.detailedPlanTitle')}</h4>
-                          <div className="p-3 bg-slate-700/50 rounded-lg border border-slate-600/70">
-                              <pre className="text-slate-300 whitespace-pre-wrap text-xs">{JSON.stringify(plan.plan_json, null, 2)}</pre>
-                          </div>
+
+                  {/* Footer with Dates */}
+                  <div className="pt-4 border-t border-slate-700/50">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                      <div className="flex items-center gap-2 text-slate-400">
+                        <CalendarDays size={14} className="text-sky-400" />
+                        <div>
+                          <div className="text-slate-500">{t('studentDashboard.supportPlans.details.startDate')}</div>
+                          <div className="text-slate-300 font-medium">{formatDateSafe(plan.start_date)}</div>
+                        </div>
                       </div>
-                   )}
-
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-400 border-t border-slate-700/50 pt-3 mt-4">
-                    <div className="flex items-center">
-                      <CalendarDays size={14} className="mr-1.5 text-sky-400"/>
-                      <span>{t('supportPlans.startDateLabel')}: {formatDateSafe(plan.start_date)}</span>
+                      <div className="flex items-center gap-2 text-slate-400">
+                        <CalendarDays size={14} className="text-sky-400" />
+                        <div>
+                          <div className="text-slate-500">{t('studentDashboard.supportPlans.details.endDate')}</div>
+                          <div className="text-slate-300 font-medium">{formatDateSafe(plan.end_date)}</div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center">
-                      <CalendarDays size={14} className="mr-1.5 text-sky-400"/>
-                      <span>{t('supportPlans.endDateLabel')}: {formatDateSafe(plan.end_date)}</span>
-                    </div>
-                     <div className="flex items-center col-span-1 sm:col-span-2">
-                      <Clock size={14} className="mr-1.5 text-amber-400"/>
-                      <span>{t('supportPlans.assignedAtLabel', 'Asignado el')}: {formatDateSafe(plan.assigned_at)}</span>
+                    <div className="mt-3 pt-3 border-t border-slate-700/30">
+                      <div className="flex items-center gap-2 text-xs text-slate-500">
+                        <Clock size={12} className="text-amber-400" />
+                        <span>{t('studentDashboard.supportPlans.details.assignedOn')}: {formatDateSafe(plan.assigned_at)}</span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/components/ui/use-toast';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import edgeFunctionService from '@/services/edgeFunctionService'; // Changed to default import
 import { Lightbulb, Loader2 } from 'lucide-react';
 import EmotionalTagSelector from '@/components/shared/EmotionalTagSelector';
@@ -22,7 +22,7 @@ import GeneratedPlanViewer from './GeneratedPlanViewer';
 const GeneratePlanModal = ({ isOpen, onOpenChange, studentId, studentName }) => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
 
   const [context, setContext] = useState('');
   const [emotionalTagId, setEmotionalTagId] = useState('');

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, FolderKanban, Filter, Search, User, AlertTriangle, Loader2, ChevronDown, ChevronRight, Eye } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from "@/components/ui/use-toast";
 import edgeFunctionService from '@/services/edgeFunctionService';
 import { Button } from '@/components/ui/button';
@@ -16,7 +16,7 @@ import { es, enUS } from 'date-fns/locale';
 
 const RecentCasesPage = () => {
   const { t, language: currentLanguage } = useLanguage();
-  const { user: authUser, userProfile } = useAuth();
+  const { user: authUser, userProfile } = useMockAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const dateLocale = currentLanguage === 'es' ? es : enUS;

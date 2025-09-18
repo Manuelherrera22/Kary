@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import NoAccessScreen from '@/pages/Dashboard/components/NoAccessScreen';
 import RoleSelectionScreen from '@/pages/Dashboard/components/RoleSelectionScreen';
@@ -15,7 +15,7 @@ import ProgramCoordinatorDashboard from '@/pages/Dashboard/ProgramCoordinatorDas
 import TeacherDashboard from '@/pages/Dashboard/TeacherDashboard'; 
 
 const DashboardPage = () => {
-  const { user, userProfile, loading, updateUserRoleInProfile } = useAuth();
+  const { user, userProfile, loading, updateUserRoleInProfile } = useMockAuth();
 
   if (loading) {
     return <LoadingScreen />;

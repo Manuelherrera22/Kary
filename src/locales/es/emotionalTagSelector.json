@@ -1,0 +1,5 @@
+{
+  "fetchError": "Error al cargar las etiquetas emocionales",
+  "noTagsAvailable": "No hay etiquetas emocionales disponibles",
+  "selectTag": "Selecciona una etiqueta emocional"
+}

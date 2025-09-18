@@ -10,7 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { supabase } from '@/lib/supabaseClient.js';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, X, UploadCloud } from 'lucide-react';
 
 const validResourceTypesForUpload = [
@@ -23,7 +23,7 @@ const validResourceTypesForUpload = [
 const UploadRecursoModal = ({ isOpen, onClose, onUploadSuccess }) => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user } = useAuth();
+  const { user } = useMockAuth();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const { register, handleSubmit, control, reset, formState: { errors } } = useForm({

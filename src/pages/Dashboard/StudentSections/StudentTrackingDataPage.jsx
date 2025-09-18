@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.jsx";
 import {
@@ -11,13 +12,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { supabase } from "@/lib/supabaseClient.js";
-import { useAuth } from "@/pages/Dashboard/hooks/useAuth";
+import mockStudentDataService from '@/services/mockStudentDataService';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import DashboardLayout from "@/pages/Dashboard/components/DashboardLayout";
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
-import { AlertCircle, TrendingUp, Smile, BookOpen } from "lucide-react";
+import { AlertCircle, TrendingUp, Smile, BookOpen, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ChartPlaceholder = () => {
@@ -41,7 +42,7 @@ const NoDataPlaceholder = ({ messageKey }) => {
 };
 
 export default function StudentTrackingDataPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useMockAuth();
   const { t, language } = useLanguage();
   const { toast } = useToast();
 
@@ -59,11 +60,7 @@ export default function StudentTrackingDataPage() {
     const dateLocale = language || 'default';
 
     try {
-      const { data: emociones, error: emotionalError } = await supabase
-        .from("tracking_data")
-        .select("created_at, energy_level, mood_score")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: true });
+      const { data: emociones, error: emotionalError } = await mockStudentDataService.getEmotionalTracking(user.id);
 
       if (emotionalError) throw emotionalError;
 
@@ -86,16 +83,17 @@ export default function StudentTrackingDataPage() {
     }
 
     try {
-      const { data: rendimiento, error: academicError } = await supabase
-        .from("rendimiento_academico")
-        .select("fecha_registro, promedio")
-        .eq("user_id", user.id)
-        .order("fecha_registro", { ascending: true });
-      
-      if (academicError) throw academicError;
+      // Datos mock para rendimiento académico
+      const mockAcademicData = [
+        { fecha_registro: '2024-01-15', promedio: 8.5 },
+        { fecha_registro: '2024-01-14', promedio: 7.8 },
+        { fecha_registro: '2024-01-13', promedio: 9.2 },
+        { fecha_registro: '2024-01-12', promedio: 8.0 },
+        { fecha_registro: '2024-01-11', promedio: 8.7 }
+      ];
 
       setAcademicData(
-        (rendimiento || []).map((r) => ({
+        mockAcademicData.map((r) => ({
           date: new Date(r.fecha_registro).toLocaleDateString(dateLocale, { year: 'numeric', month: 'short', day: 'numeric' }),
           score: r.promedio,
         }))
@@ -137,6 +135,13 @@ export default function StudentTrackingDataPage() {
         transition={{ duration: 0.5 }}
         className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8"
       >
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-slate-200 transition-colors group">
+            <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+            {t('common.backToDashboard')}
+          </Link>
+        </div>
         <Tabs defaultValue="emotional" className="w-full">
           <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-200 dark:bg-slate-700 p-1 rounded-lg shadow-inner">
             <TabsTrigger value="emotional" className="flex items-center justify-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white rounded-md px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 data-[state=active]:dark:text-white transition-all duration-150 ease-in-out hover:bg-slate-300 dark:hover:bg-slate-600 data-[state=active]:hover:bg-purple-600">

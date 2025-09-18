@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
+import mockEmotionalAttendanceService from '@/services/mockEmotionalAttendanceService';
 
 export const useEmotionalAttendance = (studentId) => {
   const { t } = useLanguage();
@@ -15,9 +15,7 @@ export const useEmotionalAttendance = (studentId) => {
   const checkCounselingSuggestion = useCallback(async () => {
     if (!studentId) return;
     try {
-      const { data, error } = await supabase.rpc('obtener_asesoramiento_sugerido', {
-        p_student_id: studentId,
-      });
+      const { data, error } = await mockEmotionalAttendanceService.checkCounselingSuggestion(studentId);
 
       if (error) throw error;
 
@@ -43,11 +41,11 @@ export const useEmotionalAttendance = (studentId) => {
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.rpc('registrar_asistencia', {
-        p_student_id: studentId,
-        p_emotion_state: selectedEmotion,
-        p_comments: comments,
-      });
+      const { data, error } = await mockEmotionalAttendanceService.registerEmotionalAttendance(
+        studentId,
+        selectedEmotion,
+        comments
+      );
 
       if (error) throw error;
 

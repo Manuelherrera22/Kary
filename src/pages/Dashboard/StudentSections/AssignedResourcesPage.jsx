@@ -1,15 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BookCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BookCheck, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
 import TabsRecursosEstudiante from '@/pages/Dashboard/StudentSections/components/TabsRecursosEstudiante';
 import MagicBackground from '@/pages/Dashboard/StudentDashboard/components/MagicBackground';
 
 export default function AssignedResourcesPage() {
   const { t } = useLanguage();
-  const { userProfile, loading: authLoading } = useAuth();
+  const { userProfile, loading: authLoading } = useMockAuth();
 
   if (authLoading || !userProfile) {
     return <LoadingScreen />;
@@ -25,6 +26,14 @@ export default function AssignedResourcesPage() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="max-w-full mx-auto py-8 px-4 sm:px-6 lg:px-8"
       >
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-slate-200 transition-colors group">
+            <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+            {t('common.backToDashboard')}
+          </Link>
+        </div>
+
         <header className="page-header">
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}

@@ -15,12 +15,12 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Loader2, PlusCircle, BookOpen, User } from 'lucide-react';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 
 export default function AsignarRecursoModal({ onAssignmentSuccess, children }) {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const [open, setOpen] = useState(false);
   const [selectedEstudiante, setSelectedEstudiante] = useState('');
   const [selectedRecurso, setSelectedRecurso] = useState('');

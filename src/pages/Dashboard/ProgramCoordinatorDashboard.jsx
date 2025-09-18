@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import WelcomeUser from '@/pages/Dashboard/WelcomeUser';
 import DashboardCard from '@/pages/Dashboard/components/DashboardCard';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import ProgramCoordinatorSummary from './ProgramCoordinatorSections/components/P
 
 const ProgramCoordinatorDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
 
   const cards = [
     {

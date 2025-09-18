@@ -20,7 +20,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, PlusCircle, BookPlus, Tag, Link as LinkIcon, Type, FileText as FileTextIcon, Users, Filter, Search, ChevronDown, ChevronUp, Video as VideoIcon, Activity } from 'lucide-react';
 
 const validResourceTypes = [
@@ -167,7 +167,7 @@ const AssignmentSection = ({
 export default function CreateResourceModal({ onResourceCreatedAndAssigned, children }) {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const [open, setOpen] = useState(false);
   
   const [title, setTitle] = useState('');

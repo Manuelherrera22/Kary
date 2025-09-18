@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { toast } from '@/components/ui/use-toast';
-import { Helmet } from 'react-helmet';
-import edgeFunctionService from '@/services/edgeFunctionService';
+import { Helmet } from 'react-helmet-async';
+import mockEdgeFunctionService from '@/services/mockEdgeFunctionService';
 import LoadingScreen from './components/LoadingScreen';
 import { Button } from '@/components/ui/button';
 import { MessageSquare, BookOpen, ShieldCheck, Gem, Compass, Tally5, HeartHandshake } from 'lucide-react';
@@ -12,10 +12,13 @@ import WelcomeHeader from './StudentDashboard/components/WelcomeHeader';
 import EmotionalAuraCard from './StudentDashboard/components/EmotionalAuraCard';
 import MagicPortalCard from './StudentDashboard/components/MagicPortalCard';
 import KarySuggestionCard from './StudentDashboard/components/KarySuggestionCard';
+import WeeklyProgressWidget from './StudentDashboard/components/WeeklyProgressWidget';
+import QuickActionsWidget from './StudentDashboard/components/QuickActionsWidget';
+import SmartNotificationsWidget from './StudentDashboard/components/SmartNotificationsWidget';
 
 const StudentDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile, user } = useAuth();
+  const { userProfile, user } = useMockAuth();
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
@@ -26,7 +29,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const payload = { role: 'student', user_id: user.id };
-      const { data, error: fetchError } = await edgeFunctionService.getDashboardSummary(payload);
+      const { data, error: fetchError } = await mockEdgeFunctionService.getDashboardSummary(payload);
       
       if (fetchError) throw new Error(fetchError.message || t('studentDashboard.dataLoadedError'));
       setDashboardData(data);
@@ -83,6 +86,17 @@ const StudentDashboard = () => {
           <>
             <WelcomeHeader userName={userProfile?.full_name} />
             <EmotionalAuraCard emotionalState={emotionalState} />
+            
+            {/* New Widgets Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <WeeklyProgressWidget t={t} />
+              <SmartNotificationsWidget t={t} />
+            </div>
+            
+            {/* Quick Actions */}
+            <QuickActionsWidget t={t} />
+            
+            {/* Original Magic Portals */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {magicPortals.map((card, index) => (
                 <MagicPortalCard

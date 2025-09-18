@@ -192,5 +192,26 @@
     "description": "Select the new role you wish to assume. You may need to refresh the page or log in again for all changes to take effect.",
     "currentRole": "My Current Role",
     "newRole": "New Role"
+  },
+  "emotionalState": {
+    "happy": {
+      "message": "It's great to see you so radiant! Keep shining."
+    },
+    "positive": {
+      "message": "It's great to see you so radiant! Keep shining."
+    },
+    "neutral": {
+      "message": "A quiet day is an opportunity to recharge. What are you thinking about today?"
+    },
+    "sad": {
+      "message": "Sometimes we feel this way. Remember you're not alone, I'm here to listen."
+    },
+    "negative": {
+      "message": "Sometimes we feel this way. Remember you're not alone, I'm here to listen."
+    },
+    "loading": {
+      "message": "Tuning into your energy..."
+    },
+    "talkToKary": "Talk to Kary"
   }
 }

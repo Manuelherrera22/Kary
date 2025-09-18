@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, FileText, Loader2, AlertTriangle, DownloadCloud } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
@@ -13,7 +13,7 @@ import MagicBackground from '@/pages/Dashboard/StudentDashboard/components/Magic
 
 const StudentReportsPage = () => {
   const { t, language } = useLanguage();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
   const [reports, setReports] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

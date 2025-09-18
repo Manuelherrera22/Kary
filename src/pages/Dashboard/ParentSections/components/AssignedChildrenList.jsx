@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { User, FileText, Info, Loader2, UserX, CalendarDays, BookOpen, Activity, ShieldCheck, ArrowRightCircle, Eye } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import edgeFunctionService from '@/services/edgeFunctionService';
 import { toast } from '@/components/ui/use-toast';
 import DetailedPlanModal from '@/pages/Dashboard/PsychopedagogueSections/SupportPlanPageComponents/DetailedPlanModal';
@@ -49,7 +49,7 @@ const StudentStatusIndicator = ({ statusKey, t }) => {
 
 const AssignedChildrenList = () => {
   const { t, language } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const navigate = useNavigate();
   const [children, setChildren] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -22,5 +22,10 @@
   "relationsFixedInfoMessage": "Se solucionó un conflicto de duplicación de claves foráneas entre 'support_plans' y las tablas 'students' y 'user_profiles', lo cual impedía la visualización correcta de los planes. Ahora:\n\n• Se eliminó la ambigüedad en las relaciones y se ajustaron los JOIN explícitamente.\n• Se validó que los planes se generen correctamente tras seleccionar un estudiante.\n• El sistema ahora solo intenta cargar los planes **una vez se ha elegido el estudiante**.\n\n🧩 Recomendación: asegúrate de que siempre haya un estudiante seleccionado antes de invocar funciones de carga o resumen. Implementa validaciones preventivas en el flujo de UI para evitar intentos de carga prematuros.",
   "assignTeacherSuccess": "Estudiante(s) asignado(s) correctamente al docente.",
   "assignGuardianSuccess": "Estudiante(s) asignado(s) correctamente al acudiente.",
-  "assignError": "No se pudo completar la asignación. Intenta de nuevo."
+  "assignError": "No se pudo completar la asignación. Intenta de nuevo.",
+  "error": "Error",
+  "successTitle": "¡Éxito!",
+  "errorTitle": "¡Error!",
+  "contactFormSuccessTitle": "¡Mensaje Enviado!",
+  "contactFormSuccessDescription": "Gracias por contactarnos. Te responderemos pronto."
 }

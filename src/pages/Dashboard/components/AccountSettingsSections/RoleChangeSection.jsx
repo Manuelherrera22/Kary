@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Save } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 const RoleChangeSection = () => {
   const { t } = useLanguage();
-  const { user, userProfile, loading: authLoading, setLoading: setAuthLoading, refreshUserProfile } = useAuth();
+  const { user, userProfile, loading: authLoading, setLoading: setAuthLoading, refreshUserProfile } = useMockAuth();
   const { toast } = useToast();
 
   const [isChangeRoleModalOpen, setIsChangeRoleModalOpen] = useState(false);

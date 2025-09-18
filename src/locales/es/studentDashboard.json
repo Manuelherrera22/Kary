@@ -10,10 +10,16 @@
     "happy": {
       "message": "¡Qué bueno verte tan radiante! Sigue brillando."
     },
+    "positive": {
+      "message": "¡Qué bueno verte tan radiante! Sigue brillando."
+    },
     "neutral": {
       "message": "Un día tranquilo es una oportunidad para recargar. ¿En qué piensas hoy?"
     },
     "sad": {
+      "message": "A veces nos sentimos así. Recuerda que no estás solo, estoy aquí para escucharte."
+    },
+    "negative": {
       "message": "A veces nos sentimos así. Recuerda que no estás solo, estoy aquí para escucharte."
     },
     "loading": {
@@ -37,45 +43,96 @@
     "emotionalAttendance": "Asistencia Emocional",
     "emotionalAttendanceDesc": "Registra cómo te sientes esta semana."
   },
+  "myTasks": {
+    "pageTitle": "Mis Tareas Pendientes",
+    "pageSubtitle": "Aquí puedes ver y gestionar todas tus tareas asignadas.",
+    "errorFetching": "Error al cargar tus tareas.",
+    "markedAsIncomplete": "Tarea marcada como incompleta.",
+    "markedAsComplete": "Tarea marcada como completada.",
+    "errorUpdatingStatus": "Error al actualizar el estado de la tarea.",
+    "noTasksTitle": "No tienes tareas pendientes",
+    "noTasksSubtitle": "¡Excelente! Has completado todas tus tareas. ¡Sigue así!",
+    "dueDate": "Fecha de Vencimiento",
+    "statusPending": "Pendiente",
+    "statusCompleted": "Completado",
+    "addTaskButton": "Agregar Tarea",
+    "newTaskDefaultTitle": "Nueva Tarea",
+    "newTaskDefaultDesc": "Descripción de la nueva tarea",
+    "taskAddedSuccess": "Tarea agregada exitosamente",
+    "addTaskError": "Error al agregar la tarea"
+  },
+  "assignedResourcesPage": {
+    "pageTitle": "Recursos Asignados",
+    "subtitle": "Material de apoyo seleccionado especialmente para ti"
+  },
   "personalTrackingPage": {
-    "title": "Mi Rincón Personal",
-    "subtitle": "Un espacio seguro para que compartas cómo te sientes y qué piensas. Tus reflexiones son importantes.",
-    "formTitle": "Registro de Hoy",
-    "descriptionLabel": "¿Hay algo que quieras contarme?",
-    "descriptionPlaceholder": "Escribe aquí tus pensamientos, ideas o cómo te fue el día...",
-    "selectTagsLabel": "Elige las etiquetas que mejor describan tu sentir:",
-    "submitButton": "Guardar Mi Reflexión",
-    "errorAuthLoading": "Esperando autenticación, por favor intenta de nuevo en un momento.",
-    "errorUserNotLoaded": "No se pudo cargar tu perfil. Intenta recargar la página.",
-    "errorNoTextOrTags": "Por favor, escribe algo o selecciona al menos una etiqueta.",
-    "errorSavingLogGeneric": "Ocurrió un error al guardar tu registro.",
-    "emotion": {
-      "logged": {
-        "success": "¡Gracias por compartir! Tu registro se ha guardado.",
-        "error": "No se pudo guardar tu registro emocional"
-      }
-    },
-    "analysisInProgressTitle": "Kary está analizando...",
-    "analysisInProgressMessage": "Un momento, estoy revisando tus reflexiones para darte el mejor apoyo.",
-    "analysisResultTitle": "Análisis de Kary",
-    "riskLevelLabel": "Nivel de Riesgo Sugerido",
-    "suggestionLabel": "Sugerencia de Kary",
-    "noSuggestion": "Sigue compartiendo tus pensamientos para recibir sugerencias más personalizadas.",
-    "riskLevels": {
-      "alto": "Alto",
-      "moderado": "Moderado",
-      "bajo": "Bajo",
-      "sin_datos": "Sin Datos",
-      "unknown": "Indeterminado"
-    },
+    "pageTitle": "Mi Rincón Personal",
+    "pageSubtitle": "Un espacio seguro para que compartas cómo te sientes y qué piensas. Tus reflexiones son importantes.",
+    "todayRecord": "Registro de Hoy",
+    "question": "¿Hay algo que quieras contarme?",
+    "placeholder": "Escribe aquí tus pensamientos, ideas o cómo te fue el día...",
+    "chooseTags": "Elige las etiquetas que mejor describan tu sentir:",
+    "noTagsAvailable": "No hay etiquetas emocionales disponibles en este momento.",
+    "saveReflection": "Guardar Mi Reflexión",
+    "errorLoadingClassifications": "Error al cargar las clasificaciones emocionales.",
+    "errorLoadingTags": "Error al cargar las etiquetas emocionales.",
+    "noTagsOrClassifications": "No hay etiquetas emocionales disponibles en este momento.",
+    "analyzing": "Analizando...",
     "analysisErrorTitle": "Error en el Análisis",
     "analysisErrorMessage": "No se pudo completar el análisis en este momento.",
     "analysisCriticalErrorTitle": "Error Crítico de Análisis",
     "analysisCompleteTitle": "Análisis Completado",
-    "analysisResultsBelow": "Los resultados del análisis se muestran a continuación.",
-    "errorLoadingClassifications": "Error al cargar las clasificaciones emocionales.",
-    "errorLoadingTags": "Error al cargar las etiquetas emocionales.",
-    "noTagsOrClassifications": "No hay etiquetas emocionales disponibles en este momento.",
-    "analyzing": "Analizando..."
-  }
+    "analysisResultsBelow": "Los resultados del análisis se muestran a continuación."
+  },
+  "supportPlans": {
+    "pageTitle": "Planes de Apoyo",
+    "pageSubtitle": "Aquí puedes ver todos tus planes de desarrollo personal asignados.",
+    "errorFetching": "Error al cargar los planes de apoyo.",
+    "noPlans": "No tienes planes de apoyo asignados en este momento.",
+    "status": {
+      "active": "Activo",
+      "completed": "Completado",
+      "pending": "Pendiente"
+    },
+    "details": {
+      "interventionStrategy": "Estrategia de Intervención",
+      "responsiblePerson": "Persona Responsable",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha Estimada de Finalización",
+      "assignedOn": "Asignado el",
+      "objectives": "Objetivos",
+      "activities": "Actividades",
+      "timeline": "Duración"
+    }
+  },
+  "weeklyProgress": {
+    "title": "Progreso Semanal",
+    "overallProgress": "Progreso General",
+    "tasksCompleted": "Tareas Completadas",
+    "resourcesUsed": "Recursos Utilizados",
+    "emotionalChecks": "Chequeos Emocionales",
+    "streakDays": "Días Consecutivos"
+  },
+  "quickActions": {
+    "title": "Acciones Rápidas",
+    "myTasks": "Mis Tareas",
+    "learningResources": "Recursos de Aprendizaje",
+    "emotionalAttendance": "Asistencia Emocional",
+    "karyChat": "Chat con Kary",
+    "myReports": "Mis Reportes",
+    "settings": "Configuración"
+  },
+  "notifications": {
+    "title": "Notificaciones Inteligentes",
+    "new": "nuevas",
+    "noNewNotifications": "No hay notificaciones nuevas",
+    "taskDue": "Tienes una tarea pendiente por entregar",
+    "newResource": "Nuevo recurso disponible para ti",
+    "achievementUnlocked": "¡Has desbloqueado un nuevo logro!",
+    "emotionalCheck": "Es hora de hacer tu chequeo emocional semanal"
+  },
+  "filters": "Filtros",
+  "favoritesOnly": "Solo Favoritos",
+  "pageTitle": "Recursos Asignados",
+  "pageSubtitle": "Material de apoyo seleccionado especialmente para ti"
 }

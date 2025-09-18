@@ -4,15 +4,18 @@ import { BrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import '@/index.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
-import { AuthProvider } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { MockAuthProvider } from '@/contexts/MockAuthContext.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <LanguageProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <MockAuthProvider>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </MockAuthProvider>
       </LanguageProvider>
     </BrowserRouter>
   </React.StrictMode>

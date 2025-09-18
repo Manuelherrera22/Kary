@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
@@ -13,7 +13,7 @@ import { FileSearch, AlertTriangle } from 'lucide-react';
 
 const NotificationAuditPage = () => {
   const { t } = useLanguage();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const { toast } = useToast();
 
   const [notifications, setNotifications] = useState([]);

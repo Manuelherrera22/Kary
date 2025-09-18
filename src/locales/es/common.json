@@ -20,5 +20,11 @@
   "actions": "Acciones",
   "yes": "Sí",
   "no": "No",
-  "kary": "Kary"
+  "kary": "Kary",
+  "loadingText": "Cargando...",
+  "loadingData": "Cargando datos...",
+  "mustBeLoggedIn": "Debes estar autenticado para realizar esta acción",
+  "areYouSure": "¿Estás seguro?",
+  "cancelButton": "Cancelar",
+  "days": "días"
 }

@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, Settings, UserCircle, LogOut, Menu, X, Sun, Moon, Search, ChevronDown, Brain } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import NotificationsPanel from '@/components/NotificationsPanel';
 
 const DashboardHeader = ({ pageTitle, onToggleSidebar, isSidebarOpen }) => {
   const { t, language, changeLanguage, availableLanguages } = useLanguage();
-  const { user, userProfile, handleLogout } = useAuth();
+  const { user, userProfile, handleLogout } = useMockAuth();
   const navigate = useNavigate();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);

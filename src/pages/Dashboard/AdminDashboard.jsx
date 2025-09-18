@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Shield, Users, Settings, BarChart, LogOut, FileText, SlidersHorizontal, Activity, UserCog, UserCheck as UserSearch, Brain } from 'lucide-react';
 import DashboardCard from './components/DashboardCard';
 import LoadingScreen from './components/LoadingScreen';
@@ -11,7 +11,7 @@ import edgeFunctionService from '@/services/edgeFunctionService';
 
 const AdminDashboard = () => {
   const { t } = useLanguage();
-  const { user, userProfile, loading: authLoading, signOut } = useAuth();
+  const { user, userProfile, loading: authLoading, signOut } = useMockAuth();
   const [loadingDashboard, setLoadingDashboard] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);

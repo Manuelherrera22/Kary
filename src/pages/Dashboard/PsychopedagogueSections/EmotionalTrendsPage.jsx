@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, LineChart as LineChartIcon, BarChart2, Users, AlertTriangle, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -17,7 +17,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarEleme
 
 const EmotionalTrendsPage = () => {
   const { t, language: currentLanguage } = useLanguage();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const { toast } = useToast();
 
   const [students, setStudents] = useState([]);

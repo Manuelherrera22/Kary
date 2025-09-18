@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowLeft, User, Edit3, Activity, BookOpen, Shield, MessageSquare, Brain, Info, Users, TrendingUp, FileText, Target, Eye, Mic, StickyNote, AlertTriangle, HelpCircle, Settings, Bell, Lightbulb, HeartHandshake } from 'lucide-react';
 
@@ -25,7 +25,7 @@ import EmotionalSupportPlanSection from './components/EmotionalSupportPlanSectio
 
 const StudentProfilePage = () => {
   const { studentId } = useParams();
-  const { user, userProfile, loading: authLoading } = useAuth();
+  const { user, userProfile, loading: authLoading } = useMockAuth();
   const { t, language } = useLanguage();
   const navigate = useNavigate();
 

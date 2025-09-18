@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -37,7 +37,7 @@ const SettingCard = ({ title, description, icon: Icon, children, actionButton })
 
 const AccountSettingsPage = () => {
   const { t, language, changeLanguage, availableLanguages } = useLanguage();
-  const { user, userProfile, loading: authLoading, updateUserProfile, signOut, refreshUserProfile, setLoading: setAuthLoading } = useAuth();
+  const { user, userProfile, loading: authLoading, updateUserProfile, signOut, refreshUserProfile, setLoading: setAuthLoading } = useMockAuth();
   const { toast } = useToast();
 
   const [fullName, setFullName] = useState('');

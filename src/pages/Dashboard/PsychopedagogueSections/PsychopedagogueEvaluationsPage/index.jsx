@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import { PlusCircle, Loader2, AlertTriangle } from 'lucide-react';
 import EvaluationList from './components/EvaluationList';
@@ -12,7 +12,7 @@ import EvaluationModal from './components/EvaluationModal';
 const PsychopedagogueEvaluationsPage = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
 
   const [evaluations, setEvaluations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, BarChartBig, BookOpen, Smile, Calendar } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 
 const StudentProgressPage = () => {
   const { t } = useLanguage();
-  const { userProfile, primaryChildId, loading: authLoading } = useAuth();
+  const { userProfile, primaryChildId, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
   const [progressEntries, setProgressEntries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

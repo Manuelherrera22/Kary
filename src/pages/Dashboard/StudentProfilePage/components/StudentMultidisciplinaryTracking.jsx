@@ -9,13 +9,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 
 
 const TrackingTabContent = ({ title, children, canEdit, onEdit, canComment, studentId, trackingType }) => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { userProfile } = useAuth();
+  const { userProfile } = useMockAuth();
   const [comment, setComment] = useState('');
   const [isSubmittingComment, setIsSubmittingComment] = useState(false);
 

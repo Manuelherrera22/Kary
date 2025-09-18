@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
-import edgeFunctionService from "@/services/edgeFunctionService.js";
+import { useMockAuth } from '@/contexts/MockAuthContext';
+import mockEmotionalDataService from '@/services/mockEmotionalDataService';
+import mockEdgeFunctionService from '@/services/mockEdgeFunctionService';
 
 export const useEmotionalTracking = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useMockAuth();
 
   const [tags, setTags] = useState([]);
   const [classifications, setClassifications] = useState([]);
@@ -26,7 +26,7 @@ export const useEmotionalTracking = () => {
   const loadClassifications = useCallback(async () => {
     setIsLoadingClassifications(true);
     try {
-      const { data, error } = await supabase.from('emotional_classifications').select('*').order('name', { ascending: true });
+      const { data, error } = await mockEmotionalDataService.getEmotionalClassifications();
       if (error) throw error;
       setClassifications(data || []);
     } catch (error) {
@@ -45,7 +45,7 @@ export const useEmotionalTracking = () => {
   const loadTags = useCallback(async () => {
     setIsLoadingTags(true);
     try {
-      const { data, error } = await supabase.from('emotional_tags').select('id, label, classification_id').order('label', { ascending: true });
+      const { data, error } = await mockEmotionalDataService.getEmotionalTags();
       if (error) throw error;
       setTags(data || []);
     } catch (error) {
@@ -166,7 +166,7 @@ export const useEmotionalTracking = () => {
         logEmotionPayload.emotion_tags = selectedTagObjects.map(tag => tag.label.toLowerCase());
       }
       
-      const { data: logData, error: logError } = await edgeFunctionService.logEmotionFromTracking(logEmotionPayload);
+      const { data: logData, error: logError } = await mockEmotionalDataService.saveEmotionalTracking(logEmotionPayload);
 
       if (logError) {
         let friendlyMessage = t('studentDashboard.personalTrackingPage.emotion.logged.error');
@@ -191,7 +191,7 @@ export const useEmotionalTracking = () => {
       setIsAnalyzing(true);
       try {
         const alertAnalyzerPayload = { student_id: studentIdToUse };
-        const { data: analysisData, error: analysisError } = await edgeFunctionService.emotionalAlertAnalyzer(alertAnalyzerPayload);
+        const { data: analysisData, error: analysisError } = await mockEdgeFunctionService.getEmotionalTrendSummaryDashboard(alertAnalyzerPayload);
         
         if (analysisError) {
            toast({ title: t('studentDashboard.personalTrackingPage.analysisErrorTitle'), description: analysisError.message || t('studentDashboard.personalTrackingPage.analysisErrorMessage'), variant: 'destructive' });

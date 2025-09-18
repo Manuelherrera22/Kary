@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, PlusCircle, BookOpen, User, Search, CheckSquare, Filter, X, Layers, Video, FileText as FileTextIcon, Zap, HelpCircle as HelpCircleIcon, Palette } from 'lucide-react';
 
 const ResourceItem = ({ resource, isSelected, onToggleSelect, t }) => {
@@ -56,7 +56,7 @@ const ResourceItem = ({ resource, isSelected, onToggleSelect, t }) => {
 export default function AssignMultipleResourcesModal({ onAssignmentSuccess, children }) {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const [open, setOpen] = useState(false);
   
   const [estudiantes, setEstudiantes] = useState([]);

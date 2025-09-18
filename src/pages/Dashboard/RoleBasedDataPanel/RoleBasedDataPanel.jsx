@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import edgeFunctionService from '@/services/edgeFunctionService';
 import { AlertTriangle, Filter, Users, BarChart2, Brain, FileText, Settings, BookOpen, Activity, HeartPulse, ChevronRight, MessageSquare, Loader2 } from 'lucide-react';
@@ -18,7 +18,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const RoleBasedDataPanel = () => {
   const { t } = useLanguage();
-  const { userProfile, user: authUser } = useAuth(); // Renamed user to authUser to avoid conflict
+  const { userProfile, user: authUser } = useMockAuth(); // Renamed user to authUser to avoid conflict
   const { toast } = useToast();
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null); 

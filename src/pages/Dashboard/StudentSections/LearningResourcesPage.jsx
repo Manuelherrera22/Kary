@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Filter, Loader2, ExternalLink, AlertTriangle, Video, FileText, PlusCircle, Search, Library, Layers, Activity as ActivityIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BookOpen, Filter, Loader2, ExternalLink, AlertTriangle, Video, FileText, PlusCircle, Search, Library, Layers, Activity as ActivityIcon, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient.js';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
@@ -92,7 +93,7 @@ const ResourceCard = ({ resource, onAccessResource }) => {
 
 export default function LearningResourcesPage() {
   const { t } = useLanguage();
-  const { userProfile, loading: authLoading } = useAuth();
+  const { userProfile, loading: authLoading } = useMockAuth();
   const { toast } = useToast();
 
   const [allResources, setAllResources] = useState([]);
@@ -195,6 +196,14 @@ export default function LearningResourcesPage() {
         transition={{ duration: 0.8, ease: "easeInOut" }}
         className="max-w-full mx-auto py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-neutral-900 min-h-[calc(100vh-var(--header-height,4rem))]"
       >
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-slate-200 transition-colors group">
+            <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+            {t('common.backToDashboard')}
+          </Link>
+        </div>
+
         <header className="mb-12 text-center relative overflow-hidden py-8">
           <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/10 via-transparent to-sky-600/10 opacity-50 -z-10 blur-3xl"></div>
           <motion.div

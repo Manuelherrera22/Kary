@@ -6,7 +6,7 @@ import { Loader2, Brain, Save, AlertTriangle, Send, Edit, ChevronLeft, ChevronRi
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import PlanGeneratorForm from './PlanGeneratorForm';
 import PlanEditor from './PlanEditor';
 import edgeFunctionService from '@/services/edgeFunctionService';
@@ -16,7 +16,7 @@ import { useSupportPlans } from '@/pages/Dashboard/PsychopedagogueSections/hooks
 const CreateSupportPlanCanvas = ({ isOpen, onOpenChange, preselectedStudentId, initialObservations, onPlanCreated }) => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   const { addSupportPlan, updateSupportPlan } = useSupportPlans();
 
   const [currentStep, setCurrentStep] = useState(1);

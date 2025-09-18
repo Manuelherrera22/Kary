@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth.jsx';
+import { useMockAuth } from '@/contexts/MockAuthContext';
 import { Loader2, PlusCircle, BookPlus } from 'lucide-react';
 import ResourceForm from './ResourceForm';
 import AssignmentSection from './AssignmentSection';
@@ -32,7 +32,7 @@ const initialResourceFormData = {
 export default function CreateResourceModal({ open: externalOpen, onOpenChange: externalOnOpenChange, onResourceCreatedAndAssigned, children }) {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMockAuth();
   
   const [internalOpen, setInternalOpen] = useState(false);
   const open = externalOpen !== undefined ? externalOpen : internalOpen;
