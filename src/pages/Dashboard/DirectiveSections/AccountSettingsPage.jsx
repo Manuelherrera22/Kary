@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabaseClient';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
@@ -10,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { User, Lock, Mail, Bell, Languages, LogOut, ShieldAlert, Trash2, Palette, Server, UserCog, Save, ShieldCheck, Loader2 } from 'lucide-react';
+import { User, Lock, Mail, Bell, Languages, LogOut, ShieldAlert, Trash2, Palette, Server, UserCog, Save, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 
 const SettingCard = ({ title, description, icon: Icon, children, actionButton }) => (
@@ -39,6 +40,7 @@ const AccountSettingsPage = () => {
   const { t, language, changeLanguage, availableLanguages } = useLanguage();
   const { user, userProfile, loading: authLoading, updateUserProfile, signOut, refreshUserProfile, setLoading: setAuthLoading } = useMockAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -65,12 +67,25 @@ const AccountSettingsPage = () => {
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const { data, error } = await supabase.from('roles').select('name, display_name_key');
-        if (error) throw error;
-        setAllRoles(data.map(r => ({ value: r.name, labelKey: r.display_name_key })));
+        // Simular carga de roles para San Luis Gonzaga
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        const mockRoles = [
+          { value: 'directive', labelKey: 'roles.directive' },
+          { value: 'teacher', labelKey: 'roles.teacher' },
+          { value: 'student', labelKey: 'roles.student' },
+          { value: 'parent', labelKey: 'roles.parent' },
+          { value: 'psychopedagogue', labelKey: 'roles.psychopedagogue' },
+          { value: 'admin', labelKey: 'roles.admin' },
+          { value: 'program_coordinator', labelKey: 'roles.program_coordinator' }
+        ];
+        
+        setAllRoles(mockRoles);
+        console.log("✅ Roles de San Luis Gonzaga cargados:", mockRoles.length);
+        
       } catch (error) {
         console.error('Error fetching roles:', error);
-        toast({ title: t('toast.errorTitle'), description: t('roles.errorFetchingRoles'), variant: 'destructive' });
+        toast({ title: t('common.errorTitle'), description: t('roles.errorFetchingRoles'), variant: 'destructive' });
       }
     };
     fetchRoles();
@@ -187,12 +202,27 @@ const AccountSettingsPage = () => {
       animate={{ opacity: 1 }}
       className="p-4 sm:p-6 space-y-8"
     >
+      {/* Botón de regreso */}
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
+        className="mb-4"
+      >
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="flex items-center text-slate-300 hover:text-white transition-colors duration-200 group"
+        >
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          <span className="text-sm font-medium">{t('common.backToDashboard')}</span>
+        </button>
+      </motion.div>
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-indigo-300 to-purple-300">
-          {t('directive.settings.pageTitle')}
+          {t('dashboards.directive.settings.pageTitle')}
         </h1>
         <p className="text-slate-300 mt-2 text-lg">
-          {t('directive.settings.pageSubtitle')}
+          {t('dashboards.directive.settings.pageSubtitle')}
         </p>
       </div>
 

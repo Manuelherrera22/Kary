@@ -46,16 +46,49 @@ const StudentProfilePage = () => {
 
       setLoading(true);
       try {
-        const { data, error: studentError } = await supabase
-          .from('user_profiles')
-          .select('*')
-          .eq('id', studentId)
-          .single();
+        // Usar datos mock para María García
+        if (studentId === '550e8400-e29b-41d4-a716-446655440002') {
+          const mockStudentData = {
+            id: '550e8400-e29b-41d4-a716-446655440002',
+            full_name: 'María García',
+            email: 'maria.garcia@colegio.com',
+            role: 'student',
+            grade: '5to Grado',
+            school: 'Colegio San José',
+            age: 10,
+            status: 'Activo',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            // Datos adicionales para el perfil
+            student_id: 'STU-001',
+            parent_email: 'ana.rodriguez@email.com',
+            emergency_contact: 'Ana Rodríguez - 300-123-4567',
+            medical_info: 'Sin alergias conocidas',
+            academic_level: 'Primaria',
+            emotional_state: 'Estable',
+            learning_style: 'Visual',
+            special_needs: 'Ninguna',
+            interests: ['Matemáticas', 'Ciencias', 'Arte'],
+            goals: ['Mejorar en lectura', 'Desarrollar habilidades sociales'],
+            achievements: [
+              { title: 'Completó 5 actividades esta semana', date: new Date().toISOString() },
+              { title: 'Mejoró en matemáticas', date: new Date(Date.now() - 86400000).toISOString() }
+            ]
+          };
+          setStudentData(mockStudentData);
+        } else {
+          // Consultar Supabase para otros estudiantes
+          const { data, error: studentError } = await supabase
+            .from('user_profiles')
+            .select('*')
+            .eq('id', studentId)
+            .single();
 
-        if (studentError) throw studentError;
-        if (!data) throw new Error(t('studentProfilePage.errorStudentNotFound'));
-        
-        setStudentData(data);
+          if (studentError) throw studentError;
+          if (!data) throw new Error(t('studentProfilePage.errorStudentNotFound'));
+          
+          setStudentData(data);
+        }
       } catch (err) {
         console.error("Error fetching student data:", err);
         setError(err.message);

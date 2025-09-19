@@ -133,7 +133,7 @@ const QuickActionsWidget = ({ t }) => {
                     >
                       <div className="flex flex-col items-center text-center space-y-3">
                         <div className={`p-3 rounded-xl bg-gradient-to-br ${action.bgColor} border ${action.borderColor} group-hover:scale-110 transition-transform duration-200`}>
-                          <Icon size={24} className={action.iconColor} />
+                          {React.createElement(action.icon, { size: 24, className: action.iconColor })}
                         </div>
                         <div>
                           <h3 className="font-semibold text-slate-200 group-hover:text-white transition-colors">

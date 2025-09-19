@@ -1,6 +1,7 @@
 {
   "pageTitle": "Portal del Estudiante - Kary",
   "welcomeMessage": "¡Hola de nuevo, {{userName}}! Kary está aquí para ayudarte.",
+  "welcomeSubtitle": "Tu espacio personal de aprendizaje y crecimiento",
   "dataLoadedError": "No se pudieron cargar los datos del panel.",
   "karySuggestion": {
     "title": "Sugerencia de Kary",
@@ -107,14 +108,36 @@
   },
   "weeklyProgress": {
     "title": "Progreso Semanal",
+    "subtitle": "Tu rendimiento esta semana",
     "overallProgress": "Progreso General",
     "tasksCompleted": "Tareas Completadas",
     "resourcesUsed": "Recursos Utilizados",
     "emotionalChecks": "Chequeos Emocionales",
-    "streakDays": "Días Consecutivos"
+    "streakDays": "Días Consecutivos",
+    "studyHours": "Horas de Estudio",
+    "goalProgress": "Progreso de Meta",
+    "achievements": "Logros Esta Semana",
+    "weeklyGoal": "Meta Semanal",
+    "goalRemaining": "tareas restantes"
   },
   "quickActions": {
     "title": "Acciones Rápidas",
+    "subtitle": "Accede rápidamente a las funciones más importantes",
+    "resources": "Recursos",
+    "resourcesDesc": "Ver recursos asignados",
+    "tasks": "Mis Tareas",
+    "tasksDesc": "Gestionar tareas pendientes",
+    "emotional": "Estado Emocional",
+    "emotionalDesc": "Registrar cómo te sientes",
+    "chat": "Chat con Kary",
+    "chatDesc": "Hablar con tu asistente IA",
+    "tracking": "Mi Seguimiento",
+    "trackingDesc": "Ver tu progreso personal",
+    "support": "Planes de Apoyo",
+    "supportDesc": "Consultar planes de desarrollo",
+    "schedule": "Agendar",
+    "favorites": "Favoritos",
+    "goals": "Metas",
     "myTasks": "Mis Tareas",
     "learningResources": "Recursos de Aprendizaje",
     "emotionalAttendance": "Asistencia Emocional",
@@ -124,15 +147,101 @@
   },
   "notifications": {
     "title": "Notificaciones Inteligentes",
+    "subtitle": "Mantente al día con tus actividades",
     "new": "nuevas",
     "noNewNotifications": "No hay notificaciones nuevas",
+    "markAllRead": "Marcar todas como leídas",
     "taskDue": "Tienes una tarea pendiente por entregar",
+    "taskDueMessage": "Tienes una tarea de matemáticas que vence mañana",
     "newResource": "Nuevo recurso disponible para ti",
+    "newResourceMessage": "Se ha asignado un nuevo video de ciencias",
     "achievementUnlocked": "¡Has desbloqueado un nuevo logro!",
-    "emotionalCheck": "Es hora de hacer tu chequeo emocional semanal"
+    "achievementMessage": "Has completado 5 recursos esta semana",
+    "emotionalCheck": "Es hora de hacer tu chequeo emocional semanal",
+    "emotionalCheckMessage": "Recuerda registrar cómo te sientes hoy",
+    "karyMessage": "Mensaje de Kary",
+    "karyMessageText": "Kary tiene una sugerencia para ti"
   },
   "filters": "Filtros",
   "favoritesOnly": "Solo Favoritos",
   "pageTitle": "Recursos Asignados",
-  "pageSubtitle": "Material de apoyo seleccionado especialmente para ti"
+  "pageSubtitle": "Material de apoyo seleccionado especialmente para ti",
+  "myStrengths": {
+    "title": "Lo que haces muy bien",
+    "subtitle": "Kary ha notado estas cosas increíbles sobre ti",
+    "recentAchievements": "Logros Recientes",
+    "recentAchievementsDesc": "Cosas increíbles que has hecho últimamente",
+    "motivationalTitle": "¡Eres único y especial!",
+    "motivationalMessage": "Cada día aprendes algo nuevo y creces como persona. Kary está aquí para apoyarte en tu camino de aprendizaje."
+  },
+  "adaptiveActivities": {
+    "title": "Mis Actividades Personalizadas",
+    "subtitle": "Actividades divertidas y personalizadas para ti",
+    "chooseSubject": "Elige una materia"
+  },
+  "comfortZone": {
+    "title": "Mi Zona de Confort",
+    "subtitle": "Un espacio seguro donde puedes aprender a tu ritmo",
+    "howAreYou": "¿Cómo te sientes hoy?",
+    "energyLevel": "¿Cuánta energía tienes?",
+    "recommendedActivities": "Actividades recomendadas para ti",
+    "recommendedDesc": "Basado en cómo te sientes hoy",
+    "breakReminder": "Recuerda tomar descansos",
+    "breakMessage": "Es importante descansar cuando te sientas cansado. Kary te recordará cuando sea momento de tomar una pausa.",
+    "takeBreak": "Tomar un descanso ahora"
+  },
+  "realTimeNotifications": {
+    "title": "Notificaciones en Tiempo Real",
+    "subtitle": "Mantente al día con tus actividades",
+    "noNotifications": "No hay notificaciones nuevas",
+    "allCaughtUp": "¡Estás al día con todo!",
+    "markAllRead": "Marcar todas como leídas"
+  },
+  "gamifiedProgress": {
+    "title": "Progreso Gamificado",
+    "subtitle": "¡Conviértete en un maestro del aprendizaje!",
+    "streak": "Racha",
+    "achievements": "Logros",
+    "recentAchievements": "Logros Recientes",
+    "nextAchievement": "Próximo Logro"
+  },
+  "karyChat": {
+    "title": "Chat con Kary",
+    "subtitle": "Tu asistente de aprendizaje emocional",
+    "online": "En línea",
+    "placeholder": "Escribe tu mensaje..."
+  },
+  "emotionalAnalytics": {
+    "title": "Análisis Emocional",
+    "subtitle": "Tu bienestar emocional en tiempo real",
+    "currentMood": "Estado Actual",
+    "trending": "Tendencia",
+    "weeklyAverage": "Promedio semanal",
+    "stability": "Estabilidad",
+    "stress": "Estrés",
+    "energy": "Energía",
+    "weeklyPattern": "Patrón Semanal",
+    "recommendations": "Recomendaciones de Kary"
+  },
+  "accessibility": {
+    "title": "Accesibilidad",
+    "visual": "Configuración Visual",
+    "motion": "Configuración de Movimiento",
+    "audio": "Configuración de Audio",
+    "colorBlind": "Modo de Daltonismo",
+    "highContrast": "Alto Contraste",
+    "highContrastDesc": "Mejora el contraste de colores",
+    "largeText": "Texto Grande",
+    "largeTextDesc": "Aumenta el tamaño del texto",
+    "fontSize": "Tamaño de Fuente",
+    "reducedMotion": "Movimiento Reducido",
+    "reducedMotionDesc": "Reduce las animaciones",
+    "focusIndicators": "Indicadores de Foco",
+    "focusIndicatorsDesc": "Resalta elementos enfocados",
+    "screenReader": "Lector de Pantalla",
+    "screenReaderDesc": "Optimiza para lectores de pantalla",
+    "audioDescriptions": "Descripciones de Audio",
+    "audioDescriptionsDesc": "Añade descripciones de audio",
+    "activeSettings": "Configuraciones Activas"
+  }
 }

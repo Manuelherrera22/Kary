@@ -43,10 +43,10 @@ const DemoDialog = ({ open, onOpenChange, initialFlow = "login" }) => {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[800px] md:max-w-[900px] lg:max-w-[1000px] xl:max-w-[1100px] bg-white dark:bg-gray-900 p-0 rounded-xl shadow-2xl overflow-hidden">
+      <DialogContent className="sm:max-w-[800px] md:max-w-[900px] lg:max-w-[1000px] xl:max-w-[1100px] bg-white p-0 rounded-xl shadow-2xl overflow-hidden">
         <div className="flex flex-col md:flex-row min-h-[600px] md:min-h-[650px] lg:min-h-[700px]">
           <LoginVisualPanel />
-          <div className="w-full md:w-3/5 p-8 md:p-10 lg:p-12 overflow-y-auto max-h-[calc(100vh-100px)] md:max-h-full flex flex-col bg-gray-50 dark:bg-gray-800 rounded-r-xl md:rounded-r-xl md:rounded-l-none">
+          <div className="w-full md:w-3/5 p-8 md:p-10 lg:p-12 overflow-y-auto max-h-[calc(100vh-100px)] md:max-h-full flex flex-col bg-white rounded-r-xl md:rounded-r-xl md:rounded-l-none">
             <DialogTabs activeTab={activeTab} setActiveTab={setActiveTab} setLoginError={setAuthError} availableTabs={availableDialogTabs} />
             <div className="flex-grow mt-8">
               {activeTab === "acceder" && (

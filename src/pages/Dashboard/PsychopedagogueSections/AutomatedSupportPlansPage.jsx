@@ -23,7 +23,7 @@ const AutomatedSupportPlansPage = () => {
   const [studentPlans, setStudentPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [riskFilter, setRiskFilter] = useState('');
+  const [riskFilter, setRiskFilter] = useState('all');
   const [dateFilter, setDateFilter] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +38,6 @@ const AutomatedSupportPlansPage = () => {
         .select(`
           id,
           student_id,
-          students:user_profiles!student_id(full_name, emotional_risk),
           plan_json,
           created_at,
           updated_at
@@ -77,25 +76,26 @@ const AutomatedSupportPlansPage = () => {
 
   const filteredPlans = useMemo(() => {
     return studentPlans.filter(plan => {
-      const studentName = plan.students?.full_name?.toLowerCase() || '';
-      const planRisk = plan.students?.emotional_risk?.toLowerCase() || 'unknown';
       const planDate = plan.updated_at ? new Date(plan.updated_at) : null;
-
-      const nameMatch = searchTerm === '' || studentName.includes(searchTerm.toLowerCase());
-      const riskMatch = riskFilter === '' || planRisk === riskFilter;
       const dateMatch = !dateFilter || (planDate && format(planDate, 'yyyy-MM-dd') === format(dateFilter, 'yyyy-MM-dd'));
       
-      return nameMatch && riskMatch && dateMatch;
+      // For now, we'll only filter by date since we don't have student info
+      // TODO: Add student information to support_plans or create a proper join
+      return dateMatch;
     });
-  }, [studentPlans, searchTerm, riskFilter, dateFilter]);
+  }, [studentPlans, dateFilter]);
 
   const handleViewPlan = (plan) => {
     setSelectedPlan(plan);
     setIsModalOpen(true);
   };
   
-  const getRiskLevelInfo = (riskLevel) => {
+  const getRiskLevelInfo = (plan) => {
+    // Try to get risk level from plan_json if available
+    const planData = plan.plan_json || {};
+    const riskLevel = planData.riskLevel || planData.risk_level || 'unknown';
     const riskKey = riskLevel?.toLowerCase() || 'unknown';
+    
     switch (riskKey) {
       case 'alto':
       case 'high':
@@ -148,7 +148,7 @@ const AutomatedSupportPlansPage = () => {
                 <SelectValue placeholder={t('psychopedagoguePlans.filterByRisk')} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-white">
-                <SelectItem value="" className="hover:bg-slate-700">{t('psychopedagoguePlans.allRiskLevels')}</SelectItem>
+                <SelectItem value="all" className="hover:bg-slate-700">{t('psychopedagoguePlans.allRiskLevels')}</SelectItem>
                 {riskOptions.map(option => (
                   <SelectItem key={option.value} value={option.value} className="hover:bg-slate-700">{option.label}</SelectItem>
                 ))}
@@ -191,7 +191,7 @@ const AutomatedSupportPlansPage = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPlans.map((plan) => {
-              const riskInfo = getRiskLevelInfo(plan.students?.emotional_risk);
+              const riskInfo = getRiskLevelInfo(plan);
               const planGenerated = !!plan.plan_json;
               const lastAnalysisDate = plan.updated_at && isValid(parseISO(plan.updated_at)) 
                 ? format(parseISO(plan.updated_at), 'PPpp', { locale: dateLocale }) 
@@ -206,7 +206,7 @@ const AutomatedSupportPlansPage = () => {
                   className="bg-slate-800/70 backdrop-blur-sm border border-slate-700 rounded-xl shadow-xl p-5 flex flex-col justify-between hover:shadow-purple-500/30 transition-shadow"
                 >
                   <div>
-                    <h2 className="text-xl font-semibold text-purple-300 truncate mb-1">{plan.students?.full_name || t('common.unknownStudent')}</h2>
+                    <h2 className="text-xl font-semibold text-purple-300 truncate mb-1">Estudiante ID: {plan.student_id}</h2>
                     <div className="flex items-center mb-2">
                       <Badge variant="outline" className={`text-xs px-2 py-0.5 border-none text-white ${riskInfo.color}`}>
                         {riskInfo.icon}
@@ -240,7 +240,7 @@ const AutomatedSupportPlansPage = () => {
           isOpen={isModalOpen}
           onOpenChange={setIsModalOpen}
           plan={selectedPlan}
-          studentName={selectedPlan.students?.full_name || t('common.unknownStudent')}
+          studentName={`Estudiante ID: ${selectedPlan.student_id}`}
           onPlanUpdate={fetchStudentPlans}
         />
       )}

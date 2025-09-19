@@ -17,6 +17,7 @@ import DashboardPage from "@/pages/DashboardPage";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMockAuth } from "@/contexts/MockAuthContext.jsx";
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
+import RealTimeSync from "@/components/RealTimeSync";
 
 import SchoolDataPanelPage from "@/pages/Dashboard/DirectiveSections/SchoolDataPanelPage";
 import AggregatedReportsPage from "@/pages/Dashboard/DirectiveSections/AggregatedReportsPage";
@@ -134,13 +135,14 @@ const AppContent = () => {
   const isDashboardRoute = location.pathname.startsWith("/dashboard");
 
   return (
-    <div className={`min-h-screen text-gray-800 ${isDashboardRoute ? "bg-gray-100 dark:bg-slate-900" : "bg-gradient-to-b from-sky-100 via-purple-50 to-pink-50"}`}>
-      <Routes>
-        <Route path="/" element={<MainPageLayout />} />
-        
-        <Route path="/dashboard/*" element={
-          <ProtectedRoute>
-            <Routes>
+    <RealTimeSync>
+      <div className={`min-h-screen text-gray-800 ${isDashboardRoute ? "dashboard-route bg-gray-100 dark:bg-slate-900" : "bg-gradient-to-b from-sky-100 via-purple-50 to-pink-50"}`}>
+        <Routes>
+          <Route path="/" element={<MainPageLayout />} />
+          
+          <Route path="/dashboard/*" element={
+            <ProtectedRoute>
+              <Routes>
                 <Route index element={<DashboardPage />} />
                 <Route path="data-panel" element={<RoleBasedDataPanel />} />
                 <Route path="kary-core" element={<KaryCorePanel />} />
@@ -195,9 +197,10 @@ const AppContent = () => {
             </Routes>
           </ProtectedRoute>
         }/>
-      </Routes>
-      <Toaster />
-    </div>
+        </Routes>
+        <Toaster />
+      </div>
+    </RealTimeSync>
   );
 };
 

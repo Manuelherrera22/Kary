@@ -13,16 +13,17 @@ import GoogleAuthButton from "./LoginForm/components/GoogleAuthButton";
 import FormSeparator from "./LoginForm/components/FormSeparator";
 import FormErrorDisplay from "./LoginForm/components/FormErrorDisplay";
 import { CustomAuth } from "@/lib/customAuth";
+import { useMockAuth } from "@/contexts/MockAuthContext";
 
 const UserRoleSelector = ({ t, userRoles }) => (
   <div>
-    <Label htmlFor="role-signup" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-      <Shield size={14} className="mr-1.5 text-purple-500 dark:text-purple-400"/>{t("demoDialog.formRole")}
+    <Label htmlFor="role-signup" className="text-sm font-medium text-gray-700 flex items-center">
+      <Shield size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formRole")}
     </Label>
     <select 
       name="role" 
       id="role-signup" 
-      className="mt-1 block w-full py-2.5 px-3 border border-gray-300 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+      className="mt-1 block w-full py-2.5 px-3 border border-gray-300 bg-white text-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
       required
     >
       <option value="">{t("demoDialog.formRolePlaceholder")}</option>
@@ -40,27 +41,27 @@ const EmailAuthFormFields = ({ t, isSignUpFlow, showPassword, setShowPassword, u
     {isSignUpFlow && (
       <>
         <div>
-          <Label htmlFor="fullName-signup" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-            <Users size={14} className="mr-1.5 text-purple-500 dark:text-purple-400"/>{t("demoDialog.formFullName")}
+          <Label htmlFor="fullName-signup" className="text-sm font-medium text-gray-700 flex items-center">
+            <Users size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formFullName")}
           </Label>
-          <Input name="fullName" id="fullName-signup" type="text" placeholder={t("demoDialog.formFullNamePlaceholder")} className="mt-1 py-2.5 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600" required />
+          <Input name="fullName" id="fullName-signup" type="text" placeholder={t("demoDialog.formFullNamePlaceholder")} className="mt-1 py-2.5 bg-white text-gray-900 border-gray-300" required />
         </div>
         <UserRoleSelector t={t} userRoles={userRoles} />
       </>
     )}
     <div>
-      <Label htmlFor="email-auth" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-        <Mail size={14} className="mr-1.5 text-purple-500 dark:text-purple-400"/>{t("demoDialog.formEmail")}
+      <Label htmlFor="email-auth" className="text-sm font-medium text-gray-700 flex items-center">
+        <Mail size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formEmail")}
       </Label>
-      <Input name="email" id="email-auth" type="email" placeholder={t("demoDialog.formEmailPlaceholder")} className="mt-1 py-2.5 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600" required />
+      <Input name="email" id="email-auth" type="email" placeholder={t("demoDialog.formEmailPlaceholder")} className="mt-1 py-2.5 bg-white text-gray-900 border-gray-300" required />
     </div>
     <div>
-      <Label htmlFor="password-auth" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-        <KeyRound size={14} className="mr-1.5 text-purple-500 dark:text-purple-400"/>{t("demoDialog.formPassword")}
+      <Label htmlFor="password-auth" className="text-sm font-medium text-gray-700 flex items-center">
+        <KeyRound size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formPassword")}
       </Label>
       <div className="relative">
-        <Input name="password" id="password-auth" type={showPassword ? "text" : "password"} placeholder={t("demoDialog.formPasswordPlaceholder")} className="mt-1 py-2.5 pr-10 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600" required />
-        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400">
+        <Input name="password" id="password-auth" type={showPassword ? "text" : "password"} placeholder={t("demoDialog.formPasswordPlaceholder")} className="mt-1 py-2.5 pr-10 bg-white text-gray-900 border-gray-300" required />
+        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-500 hover:text-purple-600">
           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>
       </div>
@@ -73,6 +74,7 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
   const { toast } = useToast();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const { refreshUserProfile } = useMockAuth();
   // Función para parsear errores personalizada
   const parseError = (error) => {
     if (!error) return t('loginMessages.errorDefault');
@@ -142,6 +144,11 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
           description: t("toasts.loginSuccessDescription", { userIdentifier: result.data.user.full_name || result.data.user.email }),
           className: "bg-green-500 text-white dark:bg-green-600"
         });
+        
+        // Actualizar el contexto de autenticación
+        if (refreshUserProfile) {
+          await refreshUserProfile();
+        }
         
         if (onOpenChange) onOpenChange(false);
         navigate('/dashboard');

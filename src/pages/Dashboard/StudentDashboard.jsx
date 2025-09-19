@@ -4,6 +4,7 @@ import { useMockAuth } from '@/contexts/MockAuthContext';
 import { toast } from '@/components/ui/use-toast';
 import { Helmet } from 'react-helmet-async';
 import mockEdgeFunctionService from '@/services/mockEdgeFunctionService';
+import unifiedDataService from '@/services/unifiedDataService';
 import LoadingScreen from './components/LoadingScreen';
 import { Button } from '@/components/ui/button';
 import { MessageSquare, BookOpen, ShieldCheck, Gem, Compass, Tally5, HeartHandshake } from 'lucide-react';
@@ -15,6 +16,17 @@ import KarySuggestionCard from './StudentDashboard/components/KarySuggestionCard
 import WeeklyProgressWidget from './StudentDashboard/components/WeeklyProgressWidget';
 import QuickActionsWidget from './StudentDashboard/components/QuickActionsWidget';
 import SmartNotificationsWidget from './StudentDashboard/components/SmartNotificationsWidget';
+import MyStrengthsWidget from './StudentDashboard/components/MyStrengthsWidget';
+import AdaptiveActivitiesWidget from './StudentDashboard/components/AdaptiveActivitiesWidget';
+import ComfortZoneWidget from './StudentDashboard/components/ComfortZoneWidget';
+import RealTimeNotifications from './StudentDashboard/components/RealTimeNotifications';
+import GamifiedProgress from './StudentDashboard/components/GamifiedProgress';
+import SmartKaryChat from './StudentDashboard/components/SmartKaryChat';
+import EmotionalAnalytics from './StudentDashboard/components/EmotionalAnalytics';
+import MicroInteractions from './StudentDashboard/components/MicroInteractions';
+import AccessibilityFeatures from './StudentDashboard/components/AccessibilityFeatures';
+import StudentActivities from './StudentDashboard/components/StudentActivities';
+import RealTimeNotificationsPanel from './StudentDashboard/components/RealTimeNotificationsPanel';
 
 const StudentDashboard = () => {
   const { t } = useLanguage();
@@ -87,14 +99,38 @@ const StudentDashboard = () => {
             <WelcomeHeader userName={userProfile?.full_name} />
             <EmotionalAuraCard emotionalState={emotionalState} />
             
-            {/* New Widgets Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <WeeklyProgressWidget t={t} />
-              <SmartNotificationsWidget t={t} />
-            </div>
-            
-            {/* Quick Actions */}
-            <QuickActionsWidget t={t} />
+              {/* New Widgets Section */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <WeeklyProgressWidget t={t} />
+                <GamifiedProgress t={t} />
+              </div>
+              
+              {/* Real-time Notifications */}
+              <RealTimeNotifications t={t} />
+              
+              {/* Emotional Analytics */}
+              <EmotionalAnalytics t={t} />
+              
+              {/* Student Strengths */}
+              <MyStrengthsWidget t={t} />
+              
+              {/* Adaptive Activities */}
+              <AdaptiveActivitiesWidget t={t} />
+              
+              {/* Comfort Zone for Special Needs */}
+              <ComfortZoneWidget t={t} />
+              
+              {/* Smart Kary Chat */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <SmartKaryChat t={t} />
+                <QuickActionsWidget t={t} />
+              </div>
+              
+              {/* Actividades del Estudiante */}
+              <StudentActivities />
+              
+              {/* Panel de Notificaciones en Tiempo Real */}
+              <RealTimeNotificationsPanel />
             
             {/* Original Magic Portals */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -111,6 +147,12 @@ const StudentDashboard = () => {
               ))}
             </div>
             <KarySuggestionCard suggestion={karySuggestion} />
+            
+            {/* Micro-interacciones */}
+            <MicroInteractions />
+            
+            {/* Características de accesibilidad */}
+            <AccessibilityFeatures />
           </>
         )}
       </div>

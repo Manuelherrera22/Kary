@@ -47,20 +47,53 @@ const RoleBasedDataPanel = () => {
     console.log("Fetching dashboard summary with payload:", payload);
     setSummaryLoading(true);
     try {
-      const { data, error: summaryError } = await edgeFunctionService.getDashboardSummary(payload);
+      // Usar datos mock para el resumen del dashboard
+      const mockSummaryData = {
+        totalStudents: userProfile.role === 'student' ? 1 : 15,
+        activeSupportPlans: 8,
+        completedActivities: 45,
+        pendingTasks: 3,
+        academicProgress: {
+          excellent: 25,
+          good: 50,
+          needsImprovement: 20,
+          atRisk: 5
+        },
+        emotionalWellbeing: {
+          stable: 60,
+          improving: 25,
+          declining: 10,
+          critical: 5
+        },
+        recentActivity: [
+          {
+            id: 1,
+            type: 'activity_completed',
+            description: 'Actividad de matemáticas completada',
+            timestamp: new Date().toISOString(),
+            student: 'María García'
+          },
+          {
+            id: 2,
+            type: 'support_plan_updated',
+            description: 'Plan de apoyo actualizado',
+            timestamp: new Date(Date.now() - 1800000).toISOString(),
+            student: 'Carlos López'
+          }
+        ],
+        alerts: [
+          {
+            id: 1,
+            type: 'academic_concern',
+            message: 'Estudiante requiere atención académica',
+            priority: 'medium',
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
 
-      if (summaryError) {
-        console.error("Error fetching dashboard summary:", summaryError);
-        toast({
-          variant: "destructive",
-          title: t('toasts.errorTitle'),
-          description: summaryError.message || t('roleBasedDataPanel.error.summaryFetchFailed'),
-        });
-        setDashboardSummary(null);
-      } else {
-        console.log("Dashboard summary data:", data);
-        setDashboardSummary(data);
-      }
+      console.log("Dashboard summary data:", mockSummaryData);
+      setDashboardSummary(mockSummaryData);
     } catch (err) {
       console.error("Catch block error fetching dashboard summary:", err);
       toast({

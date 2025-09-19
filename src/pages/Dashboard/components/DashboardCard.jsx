@@ -17,7 +17,14 @@ const DashboardCard = ({
   children,
   bgColor = 'bg-slate-800/50', // Default background color
   hoverBgColor = 'hover:bg-slate-700/70', // Default hover background color
-  buttonTextKey 
+  buttonTextKey,
+  // Nuevas propiedades para métricas
+  progress = null,
+  status = 'active',
+  metrics = null,
+  specialValue = null,
+  specialColor = 'text-slate-400',
+  disabled = false
 }) => {
   const { t } = useLanguage();
   const defaultCardVariants = {
@@ -25,7 +32,7 @@ const DashboardCard = ({
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
-  const cardBaseClasses = `p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor}`;
+  const cardBaseClasses = `p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
   
   const content = (
     <>
@@ -41,16 +48,59 @@ const DashboardCard = ({
         {description && (
           <p className="text-sm text-slate-400 mb-3 leading-relaxed">{description}</p>
         )}
-      </div>
-      {children}
-      {link && !children && (
-         <div className="mt-auto pt-3 border-t border-slate-700/50">
-            <span className={`inline-flex items-center text-sm font-medium ${iconColor.replace('text-','text-')} group-hover:underline`}>
-              {t(buttonTextKey || 'common.accessNowButton')}
-              <ArrowRight size={16} className="ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
-            </span>
+        
+        {/* Mostrar métricas si están disponibles */}
+        {metrics && status === 'active' && (
+          <div className="mt-4 space-y-2">
+            {progress !== null && (
+              <div className="space-y-1">
+                <div className="flex justify-between text-xs text-slate-400">
+                  <span>Progreso</span>
+                  <span>{progress}%</span>
+                </div>
+                <div className="w-full bg-slate-700 rounded-full h-2">
+                  <div 
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+              </div>
+            )}
+            
+            {/* Mostrar métricas específicas */}
+            {Object.entries(metrics).map(([key, value]) => (
+              <div key={key} className="flex justify-between text-xs">
+                <span className="text-slate-400 capitalize">{key}:</span>
+                <span className="text-slate-300 font-medium">{value}</span>
+              </div>
+            ))}
           </div>
-      )}
+        )}
+      </div>
+      
+      {children}
+      
+      {/* Footer con información adicional */}
+      <div className="mt-auto pt-3 border-t border-slate-700/50">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col">
+            {link && !children && (
+              <span className={`inline-flex items-center text-sm font-medium ${iconColor.replace('text-','text-')} group-hover:underline`}>
+                {t(buttonTextKey || 'common.accessNowButton')}
+                <ArrowRight size={16} className="ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
+              </span>
+            )}
+            {specialValue && (
+              <span className={`text-xs font-medium ${specialColor} mt-1`}>
+                {specialValue}
+              </span>
+            )}
+          </div>
+          {status === 'active' && !disabled && (
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          )}
+        </div>
+      </div>
     </>
   );
 

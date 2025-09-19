@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
-import { UserCheck, ShieldCheck, Link as LinkIcon, AlertTriangle, Search, Users, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { UserCheck, ShieldCheck, Link as LinkIcon, AlertTriangle, Search, Users, CheckCircle, XCircle, Clock, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -14,10 +14,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
 
 const FamilyLinkValidationPage = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [requests, setRequests] = useState([]);
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +45,7 @@ const FamilyLinkValidationPage = () => {
       setHistory(data.filter(req => req.status !== 'pending'));
     } catch (error) {
       console.error('Error fetching link requests:', error);
-      toast({ title: t('common.errorTitle'), description: t('directive.familyValidation.fetchError'), variant: 'destructive' });
+      toast({ title: t('common.errorTitle'), description: t('dashboards.directive.familyValidation.fetchError'), variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -84,15 +86,15 @@ const FamilyLinkValidationPage = () => {
           
         if (linkError) {
           console.warn("Error upserting to parent_student_links, but request status updated:", linkError);
-           toast({ title: t('common.warningTitle'), description: t('directive.familyValidation.linkUpsertWarning', {details: linkError.message}), variant: 'default' });
+           toast({ title: t('common.warningTitle'), description: t('dashboards.directive.familyValidation.linkUpsertWarning', {details: linkError.message}), variant: 'default' });
         }
       }
       
-      toast({ title: t('common.successTitle'), description: t(`directive.familyValidation.${actionType}Success`) });
+      toast({ title: t('common.successTitle'), description: t(`dashboards.directive.familyValidation.${actionType}Success`) });
       fetchLinkRequests(); 
     } catch (error) {
       console.error(`Error ${actionType}ing request:`, error);
-      toast({ title: t('common.errorTitle'), description: t('directive.familyValidation.actionError'), variant: 'destructive' });
+      toast({ title: t('common.errorTitle'), description: t('dashboards.directive.familyValidation.actionError'), variant: 'destructive' });
     } finally {
       setIsLoading(false);
       setIsModalOpen(false);
@@ -120,9 +122,9 @@ const FamilyLinkValidationPage = () => {
 
   const getStatusBadge = (status) => {
     switch (status) {
-      case 'pending': return <Badge variant="outline" className="border-yellow-500 text-yellow-400 bg-yellow-900/30">{t('directive.familyValidation.statusPending')}</Badge>;
-      case 'approved': return <Badge variant="outline" className="border-green-500 text-green-400 bg-green-900/30">{t('directive.familyValidation.statusApproved')}</Badge>;
-      case 'rejected': return <Badge variant="outline" className="border-red-500 text-red-400 bg-red-900/30">{t('directive.familyValidation.statusRejected')}</Badge>;
+      case 'pending': return <Badge variant="outline" className="border-yellow-500 text-yellow-400 bg-yellow-900/30">{t('dashboards.directive.familyValidation.statusPending')}</Badge>;
+      case 'approved': return <Badge variant="outline" className="border-green-500 text-green-400 bg-green-900/30">{t('dashboards.directive.familyValidation.statusApproved')}</Badge>;
+      case 'rejected': return <Badge variant="outline" className="border-red-500 text-red-400 bg-red-900/30">{t('dashboards.directive.familyValidation.statusRejected')}</Badge>;
       default: return <Badge variant="secondary">{status}</Badge>;
     }
   };
@@ -136,28 +138,43 @@ const FamilyLinkValidationPage = () => {
       transition={{ duration: 0.5 }}
       className="p-4 sm:p-6 bg-gradient-to-br from-slate-900 via-purple-900 to-pink-800 min-h-screen text-white"
     >
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
+        className="mb-4"
+      >
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="flex items-center text-emerald-300 hover:text-emerald-100 transition-colors duration-200 group"
+        >
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          <span className="text-sm font-medium">{t('common.backToDashboard')}</span>
+        </button>
+      </motion.div>
+
       <header className="mb-8 text-center">
         <LinkIcon size={48} className="mx-auto mb-4 text-emerald-400" />
         <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-sky-400 to-purple-400">
-          {t('directive.familyValidation.pageTitle')}
+          {t('dashboards.directive.familyValidation.pageTitle')}
         </h1>
         <p className="text-slate-400 mt-2 max-w-2xl mx-auto">
-          {t('directive.familyValidation.pageDescription')}
+          {t('dashboards.directive.familyValidation.pageDescription')}
         </p>
       </header>
 
       <Card className="bg-slate-800/70 border-slate-700 shadow-xl mb-8">
         <CardHeader>
           <CardTitle className="text-xl text-pink-400 flex items-center">
-            <Clock className="mr-2" /> {t('directive.familyValidation.pendingRequestsTitle')}
+            <Clock className="mr-2" /> {t('dashboards.directive.familyValidation.pendingRequestsTitle')}
           </CardTitle>
-          <CardDescription className="text-slate-400">{t('directive.familyValidation.pendingRequestsDesc')}</CardDescription>
+          <CardDescription className="text-slate-400">{t('dashboards.directive.familyValidation.pendingRequestsDesc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="mb-4 relative">
             <Input
               type="text"
-              placeholder={t('directive.familyValidation.searchPlaceholder')}
+              placeholder={t('dashboards.directive.familyValidation.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full sm:w-1/2 bg-slate-700 border-slate-600 text-white placeholder-slate-400 focus:ring-pink-500 pl-10"
@@ -165,17 +182,17 @@ const FamilyLinkValidationPage = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
           </div>
           {isLoading && filteredRequests.length === 0 ? <p className="text-center text-slate-400 py-4">{t('common.loadingText')}</p> : 
-            filteredRequests.length === 0 ? <p className="text-center text-slate-400 py-4">{t('directive.familyValidation.noPendingRequests')}</p> : (
+            filteredRequests.length === 0 ? <p className="text-center text-slate-400 py-4">{t('dashboards.directive.familyValidation.noPendingRequests')}</p> : (
             <ScrollArea className="h-[300px]">
               <Table>
                 <TableHeader>
                   <TableRow className="border-slate-700 hover:bg-slate-700/30">
-                    <TableHead className="text-pink-300">{t('directive.familyValidation.table.parent')}</TableHead>
-                    <TableHead className="text-pink-300">{t('directive.familyValidation.table.student')}</TableHead>
-                    <TableHead className="text-pink-300">{t('directive.familyValidation.table.grade')}</TableHead>
-                    <TableHead className="text-pink-300">{t('directive.familyValidation.table.requestCode')}</TableHead>
-                    <TableHead className="text-pink-300">{t('directive.familyValidation.table.date')}</TableHead>
-                    <TableHead className="text-right text-pink-300">{t('directive.familyValidation.table.actions')}</TableHead>
+                    <TableHead className="text-pink-300">{t('dashboards.directive.familyValidation.table.parent')}</TableHead>
+                    <TableHead className="text-pink-300">{t('dashboards.directive.familyValidation.table.student')}</TableHead>
+                    <TableHead className="text-pink-300">{t('dashboards.directive.familyValidation.table.grade')}</TableHead>
+                    <TableHead className="text-pink-300">{t('dashboards.directive.familyValidation.table.requestCode')}</TableHead>
+                    <TableHead className="text-pink-300">{t('dashboards.directive.familyValidation.table.date')}</TableHead>
+                    <TableHead className="text-right text-pink-300">{t('dashboards.directive.familyValidation.table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -206,21 +223,21 @@ const FamilyLinkValidationPage = () => {
       <Card className="bg-slate-800/70 border-slate-700 shadow-xl">
         <CardHeader>
           <CardTitle className="text-xl text-sky-400 flex items-center">
-             {t('directive.familyValidation.historyTitle')}
+             {t('dashboards.directive.familyValidation.historyTitle')}
           </CardTitle>
-           <CardDescription className="text-slate-400">{t('directive.familyValidation.historyDesc')}</CardDescription>
+           <CardDescription className="text-slate-400">{t('dashboards.directive.familyValidation.historyDesc')}</CardDescription>
         </CardHeader>
         <CardContent>
             {isLoading && filteredHistory.length === 0 ? <p className="text-center text-slate-400 py-4">{t('common.loadingText')}</p> :
-            filteredHistory.length === 0 ? <p className="text-center text-slate-400 py-4">{t('directive.familyValidation.noHistory')}</p> : (
+            filteredHistory.length === 0 ? <p className="text-center text-slate-400 py-4">{t('dashboards.directive.familyValidation.noHistory')}</p> : (
              <ScrollArea className="h-[300px]">
               <Table>
                 <TableHeader>
                   <TableRow className="border-slate-700 hover:bg-slate-700/30">
-                    <TableHead className="text-sky-300">{t('directive.familyValidation.table.parent')}</TableHead>
-                    <TableHead className="text-sky-300">{t('directive.familyValidation.table.student')}</TableHead>
-                    <TableHead className="text-sky-300">{t('directive.familyValidation.table.status')}</TableHead>
-                    <TableHead className="text-sky-300">{t('directive.familyValidation.table.validationDate')}</TableHead>
+                    <TableHead className="text-sky-300">{t('dashboards.directive.familyValidation.table.parent')}</TableHead>
+                    <TableHead className="text-sky-300">{t('dashboards.directive.familyValidation.table.student')}</TableHead>
+                    <TableHead className="text-sky-300">{t('dashboards.directive.familyValidation.table.status')}</TableHead>
+                    <TableHead className="text-sky-300">{t('dashboards.directive.familyValidation.table.validationDate')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -243,9 +260,9 @@ const FamilyLinkValidationPage = () => {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="bg-slate-800 border-slate-700 text-white">
           <DialogHeader>
-            <DialogTitle className="text-xl text-pink-400">{t('directive.familyValidation.confirmActionTitle')}</DialogTitle>
+            <DialogTitle className="text-xl text-pink-400">{t('dashboards.directive.familyValidation.confirmActionTitle')}</DialogTitle>
             <DialogDescription className="text-slate-400">
-              {t(actionType === 'approved' ? 'directive.familyValidation.confirmApproveDesc' : 'directive.familyValidation.confirmRejectDesc', { 
+              {t(actionType === 'approved' ? 'dashboards.directive.familyValidation.confirmApproveDesc' : 'dashboards.directive.familyValidation.confirmRejectDesc', { 
                 parentName: selectedRequest?.parent?.full_name, 
                 studentName: selectedRequest?.student?.full_name 
               })}
@@ -262,7 +279,7 @@ const FamilyLinkValidationPage = () => {
               disabled={isLoading}
               className={actionType === 'approved' ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"}
             >
-              {isLoading ? t('common.savingButton') : t(actionType === 'approved' ? 'directive.familyValidation.approveButton' : 'directive.familyValidation.rejectButton')}
+              {isLoading ? t('common.savingButton') : t(actionType === 'approved' ? 'dashboards.directive.familyValidation.approveButton' : 'dashboards.directive.familyValidation.rejectButton')}
             </Button>
           </DialogFooter>
         </DialogContent>

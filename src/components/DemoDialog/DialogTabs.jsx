@@ -26,7 +26,7 @@ const DialogTabs = ({ activeTab, setActiveTab, setLoginError, availableTabs = ["
   };
 
   return (
-    <div className="mb-8 border-b border-gray-200 dark:border-gray-700">
+    <div className="mb-8 border-b border-gray-200">
       <nav className="-mb-px flex space-x-6" aria-label="Tabs">
         {availableTabs.map(tabKey => {
           const config = tabConfig[tabKey];
@@ -37,8 +37,8 @@ const DialogTabs = ({ activeTab, setActiveTab, setLoginError, availableTabs = ["
               onClick={() => handleTabChange(tabKey)}
               className={`whitespace-nowrap pb-4 px-1 border-b-2 font-semibold text-base transition-colors duration-200 ease-in-out
                 ${activeTab === tabKey
-                  ? "border-purple-600 text-purple-700 dark:border-purple-400 dark:text-purple-300"
-                  : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-500"}`}
+                  ? "border-purple-600 text-purple-700"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"}`}
             >
               {config.icon} {t(config.labelKey, config.labelKey.split('.')[1])}
             </button>

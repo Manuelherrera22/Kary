@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import { supabase } from '@/lib/supabaseClient';
+import mockTeacherDataService from '@/services/mockTeacherDataService';
 import { toast } from '@/components/ui/use-toast';
 import { Zap, BookOpen, Users } from 'lucide-react';
 import TeacherSupportPlanBlock from './components/TeacherSupportPlanBlock';
@@ -39,22 +40,13 @@ const TeacherStudentPlansPage = () => {
     if (!userProfile?.id) return;
     setIsLoadingPlans(true);
     try {
-      const { data, error } = await supabase
-        .from('support_plans')
-        .select('*, student:user_profiles!student_id(full_name)')
-        .eq('responsible_teacher_id', userProfile.id)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
+      const result = await mockTeacherDataService.getSupportPlans(userProfile.id);
       
-      const formattedPlans = data.map(plan => ({
-          ...plan,
-          plan_preview: plan.plan_json?.preview,
-          emotional_support: plan.plan_json?.emotional_support,
-          academic_support: plan.plan_json?.academic_support,
-          recommendations: plan.plan_json?.recommendations
-      }));
-      setPlans(formattedPlans);
+      if (result.success) {
+        setPlans(result.data);
+      } else {
+        throw new Error('Error al obtener planes de apoyo');
+      }
 
     } catch (error) {
       console.error("Error fetching support plans:", error);

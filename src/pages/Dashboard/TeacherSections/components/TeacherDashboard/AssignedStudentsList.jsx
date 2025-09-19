@@ -7,6 +7,7 @@ import { User, BookOpen, Calendar, MessageSquare, Eye, Edit, FileText, Loader2, 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
+import mockTeacherDataService from '@/services/mockTeacherDataService';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 
@@ -30,38 +31,21 @@ const AssignedStudentsList = ({ teacherId }) => {
       if (!teacherId) return;
       setIsLoading(true);
       try {
-        const { data, error } = await supabase.rpc('list_students_by_teacher', { teacher_id_input: teacherId });
-        if (error) throw error;
+        const result = await mockTeacherDataService.getAssignedStudents(teacherId);
         
-        const studentDetailsPromises = (data || []).map(async (student) => {
-          const { data: activityData, error: activityError } = await supabase
-            .from('student_activities')
-            .select('completed_at')
-            .eq('student_id', student.student_id)
-            .order('completed_at', { ascending: false })
-            .limit(1)
-            .single();
-
-          const { data: observationData, error: observationError } = await supabase
-            .from('observations')
-            .select('created_at')
-            .eq('student_id', student.student_id)
-            .order('created_at', { ascending: false })
-            .limit(1)
-            .single();
-
-          return {
+        if (result.success) {
+          const studentsWithDetails = result.data.map(student => ({
             ...student,
-            id: student.student_id,
-            lastActivity: activityData?.completed_at ? `${t('teacherDashboard.assignedStudentsList.completedOn', { date: formatDate(activityData.completed_at) })}` : t('teacherDashboard.assignedStudentsList.noActivity'),
-            lastObservation: observationData?.created_at ? formatDate(observationData.created_at) : t('teacherDashboard.assignedStudentsList.noObservation'),
+            id: student.id,
+            lastActivity: student.last_activity ? `${t('teacherDashboard.assignedStudentsList.completedOn', { date: formatDate(student.last_activity) })}` : t('teacherDashboard.assignedStudentsList.noActivity'),
+            lastObservation: student.last_observation ? formatDate(student.last_observation) : t('teacherDashboard.assignedStudentsList.noObservation'),
             generalStatus: student.general_status || t('teacherDashboard.assignedStudentsList.needsFollowUp'),
             showEmotionalAlert: student.emotional_alert || false,
-          };
-        });
-
-        const studentsWithDetails = await Promise.all(studentDetailsPromises);
-        setStudents(studentsWithDetails);
+          }));
+          setStudents(studentsWithDetails);
+        } else {
+          throw new Error('Error al obtener estudiantes asignados');
+        }
 
       } catch (error) {
         console.error("Error fetching assigned students:", error);

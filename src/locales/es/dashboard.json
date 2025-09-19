@@ -40,7 +40,15 @@
     "quickAccess": "Acceso Rápido Unificado",
     "studentList": "Lista de Estudiantes",
     "observations": "Seguimientos y Observaciones",
-    "aiAlerts": "Alertas Cognitivas IA"
+    "aiAlerts": "Alertas Cognitivas IA",
+    "automatedSupportPlans": "Planes de Apoyo Automatizados",
+    "evaluations": "Evaluaciones",
+    "roleAssignment": "Asignación de Roles",
+    "familyLinkValidation": "Validación de Vínculos Familiares",
+    "institutionalAlerts": "Alertas Institucionales",
+    "roleActivity": "Actividad por Roles",
+    "accessManagement": "Gestión de Accesos",
+    "strategicSummary": "Resumen Estratégico"
   },
   "header": {
     "notifications": "Notificaciones",
@@ -66,5 +74,8 @@
     "accountSettingsDesc": "Gestiona tu información y preferencias"
   },
   "authErrorTitle": "Error de Autenticación",
-  "loadingTextSubtitle": "Estamos preparando todo para ti."
+  "loadingTextSubtitle": "Estamos preparando todo para ti.",
+  "noChildLinkedForUnifiedView": "No tienes un hijo/a vinculado para ver esta vista unificada.",
+  "contactInstitution": "Contacta con la institución para vincular tu cuenta.",
+  "errorFetchingUnifiedProgress": "Error al cargar los datos del progreso unificado"
 }

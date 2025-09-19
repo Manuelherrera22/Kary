@@ -35,5 +35,14 @@
   "confirmCancelTitle": "Confirmar Cancelación",
   "confirmCancelMessage": "¿Estás seguro de que deseas cancelar esta cita?",
   "appointmentCancelledToastTitle": "Cita Cancelada",
-  "appointmentCancelledToastDesc": "La cita ha sido cancelada exitosamente."
+  "appointmentCancelledToastDesc": "La cita ha sido cancelada exitosamente.",
+  "statusLabel": "Estado",
+  "status": {
+    "requested": "Solicitada",
+    "confirmed": "Confirmada",
+    "completed": "Completada",
+    "cancelled": "Cancelada",
+    "pending": "Pendiente",
+    "unknown": "Desconocido"
+  }
 }

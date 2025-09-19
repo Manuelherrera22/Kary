@@ -187,7 +187,7 @@ const SmartNotificationsWidget = ({ t }) => {
                   >
                     <div className="flex items-start gap-3">
                       <div className={`p-2 rounded-lg ${notification.bgColor} border ${notification.borderColor} flex-shrink-0`}>
-                        <Icon size={16} className={notification.color} />
+                        {React.createElement(notification.icon, { size: 16, className: notification.color })}
                       </div>
                       
                       <div className="flex-1 min-w-0">

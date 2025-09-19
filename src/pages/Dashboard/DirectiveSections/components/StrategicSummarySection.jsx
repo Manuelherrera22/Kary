@@ -35,25 +35,65 @@ const StrategicSummarySection = () => {
     setIsLoading(true);
     setError(null);
     try {
+      // Usar datos mock para el resumen estratégico
+      const mockStrategicData = [
+        {
+          categoria: 'alertas_emocionales',
+          cantidad: 12,
+          meta: 15,
+          porcentaje: 80,
+          tendencia: 'decreasing',
+          descripcion: 'Reducción del 15% en alertas emocionales este mes'
+        },
+        {
+          categoria: 'retroalimentaciones',
+          cantidad: 45,
+          meta: 50,
+          porcentaje: 90,
+          tendencia: 'increasing',
+          descripcion: 'Aumento del 20% en retroalimentaciones positivas'
+        },
+        {
+          categoria: 'planes_apoyo_activos',
+          cantidad: 28,
+          meta: 30,
+          porcentaje: 93,
+          tendencia: 'stable',
+          descripcion: 'Mantenimiento de planes de apoyo efectivos'
+        },
+        {
+          categoria: 'recursos_asignados',
+          cantidad: 85,
+          meta: 100,
+          porcentaje: 85,
+          tendencia: 'increasing',
+          descripcion: 'Optimización del 85% de recursos disponibles'
+        },
+        {
+          categoria: 'satisfaccion_docente',
+          cantidad: 92,
+          meta: 95,
+          porcentaje: 97,
+          tendencia: 'increasing',
+          descripcion: 'Alto nivel de satisfacción del personal docente'
+        },
+        {
+          categoria: 'progreso_academico',
+          cantidad: 78,
+          meta: 80,
+          porcentaje: 98,
+          tendencia: 'stable',
+          descripcion: 'Progreso académico estable y consistente'
+        }
+      ];
+
+      setSummaryData(mockStrategicData);
       
-      const { data, error: fetchError } = await edgeFunctionService.invokeEdgeFunction("strategic-summary", {
-        user_id: user.id
+      toast({
+        title: t('toasts.successTitle'),
+        description: t('directiveDashboard.strategicSummary.dataLoadedSuccess'),
+        variant: 'success',
       });
-      
-      if (fetchError) {
-        console.error("Error fetching strategic summary:", fetchError);
-        throw new Error(fetchError.message || t('directiveDashboard.strategicSummary.error'));
-      }
-
-      if (data && Array.isArray(data)) {
-        setSummaryData(data);
-      } else if (data && data.error) {
-         throw new Error(data.error);
-      }
-      else {
-        setSummaryData([]);
-      }
-
     } catch (err) {
       console.error("Component error fetching strategic summary:", err);
       setError(err.message);

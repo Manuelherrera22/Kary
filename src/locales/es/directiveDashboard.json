@@ -95,11 +95,14 @@
   "strategicSummary": {
     "title": "Resumen Estratégico",
     "subtitle": "Visión general del impacto institucional y académico",
+    "dataLoadedSuccess": "Resumen estratégico cargado exitosamente",
     "categories": {
       "alertas_emocionales": "Alertas emocionales",
       "retroalimentaciones": "Retroalimentaciones recibidas",
       "planes_apoyo_activos": "Planes de apoyo activos",
       "recursos_asignados": "Recursos asignados",
+      "satisfaccion_docente": "Satisfacción Docente",
+      "progreso_academico": "Progreso Académico",
       "default_category": "Categoría Desconocida"
     },
     "noData": "Aún no hay datos suficientes para mostrar un resumen estratégico.",

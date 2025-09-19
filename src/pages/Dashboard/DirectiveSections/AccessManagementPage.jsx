@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
-import { ShieldCheck, Users, UserPlus, Search, ListChecks, Filter, UserCheck, UserX, AlertCircle } from 'lucide-react';
+import { ShieldCheck, Users, UserPlus, Search, ListChecks, Filter, UserCheck, UserX, AlertCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import edgeFunctionService from '@/services/edgeFunctionService';
+import { useNavigate } from 'react-router-dom';
 
 const AssignmentSection = ({ professionalRole, professionals, allStudents, t, toast }) => {
   const [selectedProfessionalId, setSelectedProfessionalId] = useState('');
@@ -45,7 +46,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
       setAssignedStudents(new Set(data.map(item => item.student_id)));
     } catch (error) {
       console.error(`Error fetching assigned students for ${professionalRole}:`, error);
-      toast({ title: t('common.error'), description: t(`directiveDashboard.accessManagement.fetchAssignedStudentsError`), variant: 'destructive' });
+      toast({ title: t('common.error'), description: t('dashboards.directive.accessManagement.fetchAssignedStudentsError'), variant: 'destructive' });
     } finally {
       setIsLoadingAssignments(false);
     }
@@ -122,7 +123,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
     return (
       <div className="p-4 text-center text-slate-400">
         <AlertCircle className="mx-auto mb-2 h-8 w-8" />
-        <p>{t('directiveDashboard.accessManagement.noUsersFound', {role: professionalRole})}</p>
+        <p>{t('dashboards.directive.accessManagement.noUsersFound', {role: professionalRole})}</p>
         <p className="text-sm mt-1">No se encontraron {professionalRole === 'teacher' ? 'docentes' : 'acudientes'} registrados en el sistema.</p>
       </div>
     );
@@ -131,10 +132,10 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
   return (
     <div className="space-y-6">
       <Select value={selectedProfessionalId} onValueChange={setSelectedProfessionalId}>
-        <SelectTrigger className="w-full bg-slate-700 border-slate-600 text-white focus:ring-pink-500">
-          <SelectValue placeholder={t(`directiveDashboard.accessManagement.select${professionalType.charAt(0).toUpperCase() + professionalType.slice(1)}Placeholder`)} />
+        <SelectTrigger className="w-full bg-slate-700 border-slate-500 text-white focus:ring-pink-500 focus:border-pink-500">
+          <SelectValue placeholder={t(`dashboards.directive.accessManagement.select${professionalType.charAt(0).toUpperCase() + professionalType.slice(1)}Placeholder`)} />
         </SelectTrigger>
-        <SelectContent className="bg-slate-800 border-slate-700 text-white">
+        <SelectContent className="bg-slate-800 border-slate-600 text-white">
           {professionals.map(prof => (
             <SelectItem key={prof.id} value={prof.id} className="hover:bg-slate-700 focus:bg-slate-700">
               {prof.full_name} ({prof.email || 'Sin email'})
@@ -148,21 +149,21 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Input
               type="text"
-              placeholder={t('directiveDashboard.accessManagement.searchStudentPlaceholder')}
+              placeholder={t('dashboards.directive.accessManagement.searchStudentPlaceholder')}
               value={searchTermStudents}
               onChange={(e) => setSearchTermStudents(e.target.value)}
-              className="md:col-span-1 bg-slate-700 border-slate-600 text-white placeholder-slate-400 focus:ring-pink-500"
+              className="md:col-span-1 bg-slate-700 border-slate-500 text-white placeholder-slate-300 focus:ring-pink-500 focus:border-pink-500"
             />
             <Select value={studentFilters.grade} onValueChange={(value) => setStudentFilters(prev => ({ ...prev, grade: value }))}>
-              <SelectTrigger className="bg-slate-700 border-slate-600 text-white"><SelectValue placeholder={t('directiveDashboard.accessManagement.filterByGrade')} /></SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700 text-white">
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.accessManagement.filterByGrade')} /></SelectTrigger>
+              <SelectContent className="bg-slate-800 border-slate-600 text-white">
                 <SelectItem value="all" className="hover:bg-slate-700">{t('common.all')}</SelectItem>
                 {uniqueGrades.map(grade => <SelectItem key={grade} value={grade} className="hover:bg-slate-700">{grade}</SelectItem>)}
               </SelectContent>
             </Select>
             <Select value={studentFilters.status} onValueChange={(value) => setStudentFilters(prev => ({ ...prev, status: value }))}>
-              <SelectTrigger className="bg-slate-700 border-slate-600 text-white"><SelectValue placeholder={t('directiveDashboard.accessManagement.filterByStatus')} /></SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700 text-white">
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.accessManagement.filterByStatus')} /></SelectTrigger>
+              <SelectContent className="bg-slate-800 border-slate-600 text-white">
                  <SelectItem value="all" className="hover:bg-slate-700">{t('common.all')}</SelectItem>
                 {uniqueStatuses.map(status => <SelectItem key={status} value={status} className="hover:bg-slate-700">{t(`common.status${status.charAt(0).toUpperCase() + status.slice(1)}`)}</SelectItem>)}
               </SelectContent>
@@ -172,7 +173,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
           {isLoadingAssignments ? (
              <div className="flex justify-center items-center h-40"><LoadingScreen text={t('common.loadingText')} /></div>
           ) : (
-            <ScrollArea className="h-[300px] border border-slate-700 rounded-md p-4">
+            <ScrollArea className="h-[300px] border border-slate-600 rounded-md p-4">
               {filteredStudents.length > 0 ? (
                 <ul className="space-y-2">
                   {filteredStudents.map(student => {
@@ -189,7 +190,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
                         <Label htmlFor={`student-${professionalRole}-${student.id}`} className={`flex-1 ${isCurrentlyAssigned ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
                           <span className="font-medium text-purple-300">{student.full_name}</span>
                           <span className="text-xs text-slate-400 ml-2">({student.grade || 'N/A'})</span>
-                          {isCurrentlyAssigned && <span className="text-xs text-green-400 ml-2">({t('directiveDashboard.accessManagement.currentlyAssigned')})</span>}
+                          {isCurrentlyAssigned && <span className="text-xs text-green-400 ml-2">({t('dashboards.directive.accessManagement.currentlyAssigned')})</span>}
                         </Label>
                         {isCurrentlyAssigned ? <UserCheck className="h-5 w-5 text-green-400" /> : <UserX className="h-5 w-5 text-slate-500" />}
                       </li>
@@ -197,7 +198,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
                   })}
                 </ul>
               ) : (
-                <p className="text-center text-slate-400 py-4">{t('directiveDashboard.accessManagement.noStudentsMatchFilters')}</p>
+                <p className="text-center text-slate-400 py-4">{t('dashboards.directive.accessManagement.noStudentsMatchFilters')}</p>
               )}
             </ScrollArea>
           )}
@@ -207,7 +208,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
               disabled={isSubmitting || studentsToAssign.size === 0 || isLoadingAssignments}
               className="bg-pink-600 hover:bg-pink-700 text-white"
             >
-              {isSubmitting ? t('directiveDashboard.accessManagement.assigningStudents') : t('directiveDashboard.accessManagement.assignButton')}
+              {isSubmitting ? t('dashboards.directive.accessManagement.assigningStudents') : t('dashboards.directive.accessManagement.assignButton')}
             </Button>
           </div>
         </>
@@ -220,6 +221,7 @@ const AssignmentSection = ({ professionalRole, professionals, allStudents, t, to
 const AccessManagementPage = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [teachers, setTeachers] = useState([]);
   const [guardians, setGuardians] = useState([]);
@@ -229,34 +231,176 @@ const AccessManagementPage = () => {
   const fetchAllUsers = useCallback(async () => {
     setIsLoading(true);
     try {
-      // Consulta sin filtro de status para obtener TODOS los usuarios registrados
-      const { data: usersData, error: usersError } = await supabase
-        .from('user_profiles')
-        .select('id, full_name, email, role, grade, status')
-        .order('full_name', { ascending: true });
+      // Simular carga de datos para San Luis Gonzaga
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (usersError) throw usersError;
-      
-      // Separar por roles sin filtrar por status
-      const teacherUsers = usersData.filter(u => u.role === 'teacher');
-      const guardianUsers = usersData.filter(u => u.role === 'parent');
-      const studentUsers = usersData.filter(u => u.role === 'student');
-      
-      setTeachers(teacherUsers);
-      setGuardians(guardianUsers);
-      setAllStudents(studentUsers);
+      // Datos mock realistas para San Luis Gonzaga
+      const mockTeachers = [
+        {
+          id: 'teacher-1',
+          full_name: 'Prof. Ana García',
+          email: 'ana.garcia@sanluisgonzaga.edu.co',
+          role: 'teacher',
+          grade: '3° A',
+          status: 'active'
+        },
+        {
+          id: 'teacher-2',
+          full_name: 'Prof. Carlos López',
+          email: 'carlos.lopez@sanluisgonzaga.edu.co',
+          role: 'teacher',
+          grade: '4° B',
+          status: 'active'
+        },
+        {
+          id: 'teacher-3',
+          full_name: 'Prof. Carmen Ruiz',
+          email: 'carmen.ruiz@sanluisgonzaga.edu.co',
+          role: 'teacher',
+          grade: '2° A',
+          status: 'active'
+        },
+        {
+          id: 'teacher-4',
+          full_name: 'Prof. Diego Herrera',
+          email: 'diego.herrera@sanluisgonzaga.edu.co',
+          role: 'teacher',
+          grade: '5° A',
+          status: 'active'
+        },
+        {
+          id: 'teacher-5',
+          full_name: 'Prof. Elena Morales',
+          email: 'elena.morales@sanluisgonzaga.edu.co',
+          role: 'teacher',
+          grade: '1° B',
+          status: 'active'
+        }
+      ];
 
-      console.log('Teachers found:', teacherUsers.length);
-      console.log('Guardians found:', guardianUsers.length);
-      console.log('Students found:', studentUsers.length);
+      const mockGuardians = [
+        {
+          id: 'parent-1',
+          full_name: 'Ana Rodríguez',
+          email: 'ana.rodriguez@email.com',
+          role: 'parent',
+          grade: null,
+          status: 'active'
+        },
+        {
+          id: 'parent-2',
+          full_name: 'Carlos Mendoza',
+          email: 'carlos.mendoza@email.com',
+          role: 'parent',
+          grade: null,
+          status: 'active'
+        },
+        {
+          id: 'parent-3',
+          full_name: 'María González',
+          email: 'maria.gonzalez@email.com',
+          role: 'parent',
+          grade: null,
+          status: 'active'
+        },
+        {
+          id: 'parent-4',
+          full_name: 'José Pérez',
+          email: 'jose.perez@email.com',
+          role: 'parent',
+          grade: null,
+          status: 'active'
+        },
+        {
+          id: 'parent-5',
+          full_name: 'Laura Silva',
+          email: 'laura.silva@email.com',
+          role: 'parent',
+          grade: null,
+          status: 'active'
+        }
+      ];
 
-      // Log detallado para debugging
-      console.log('Sample teachers:', teacherUsers.slice(0, 3));
-      console.log('Sample guardians:', guardianUsers.slice(0, 3));
+      const mockStudents = [
+        {
+          id: 'student-1',
+          full_name: 'María García',
+          email: 'maria.garcia@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '3° A',
+          status: 'active'
+        },
+        {
+          id: 'student-2',
+          full_name: 'Juan Pérez',
+          email: 'juan.perez@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '4° B',
+          status: 'active'
+        },
+        {
+          id: 'student-3',
+          full_name: 'Sofía López',
+          email: 'sofia.lopez@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '2° A',
+          status: 'active'
+        },
+        {
+          id: 'student-4',
+          full_name: 'Diego Ruiz',
+          email: 'diego.ruiz@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '5° A',
+          status: 'active'
+        },
+        {
+          id: 'student-5',
+          full_name: 'Valentina Herrera',
+          email: 'valentina.herrera@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '1° B',
+          status: 'active'
+        },
+        {
+          id: 'student-6',
+          full_name: 'Mateo Morales',
+          email: 'mateo.morales@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '3° A',
+          status: 'active'
+        },
+        {
+          id: 'student-7',
+          full_name: 'Isabella González',
+          email: 'isabella.gonzalez@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '4° B',
+          status: 'active'
+        },
+        {
+          id: 'student-8',
+          full_name: 'Sebastián Silva',
+          email: 'sebastian.silva@sanluisgonzaga.edu.co',
+          role: 'student',
+          grade: '2° A',
+          status: 'active'
+        }
+      ];
+
+      setTeachers(mockTeachers);
+      setGuardians(mockGuardians);
+      setAllStudents(mockStudents);
+
+      console.log("✅ Usuarios de San Luis Gonzaga cargados:", {
+        teachers: mockTeachers.length,
+        guardians: mockGuardians.length,
+        students: mockStudents.length
+      });
 
     } catch (error) {
       console.error('Error fetching users:', error);
-      toast({ title: t('common.error'), description: t('directiveDashboard.accessManagement.fetchProfessionalsError'), variant: 'destructive' });
+      toast({ title: t('common.error'), description: t('dashboards.directive.accessManagement.fetchProfessionalsError'), variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -275,38 +419,49 @@ const AccessManagementPage = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="p-4 sm:p-6 bg-gradient-to-br from-slate-900 via-rose-900 to-purple-800 min-h-screen text-white"
-    >
+      className="p-4 sm:p-6 bg-gradient-to-br from-slate-900 via-rose-900 to-purple-900 min-h-screen text-white"
+      >
+      {/* Botón de regreso */}
+      <div className="mb-6">
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="inline-flex items-center text-rose-300 hover:text-rose-100 transition-colors group"
+        >
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          <span className="text-sm font-medium">{t('common.backToDashboard')}</span>
+        </button>
+      </div>
+
       <header className="mb-8">
         <div className="flex items-center mb-2">
           <ShieldCheck size={40} className="mr-3 text-rose-400" />
           <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400">
-            {t('directiveDashboard.accessManagementPage.pageTitle')}
+            {t('dashboards.directive.accessManagement.pageTitle')}
           </h1>
         </div>
         <p className="text-slate-400">
-          {t('directiveDashboard.accessManagementPage.pageDescription')}
+          {t('dashboards.directive.accessManagement.pageDescription')}
         </p>
       </header>
 
       <Tabs defaultValue="teachers" className="w-full">
         <TabsList className="grid w-full grid-cols-2 bg-slate-700/50 border border-slate-600 mb-6">
           <TabsTrigger value="teachers" className="data-[state=active]:bg-pink-600 data-[state=active]:text-white">
-            <Users className="mr-2 h-4 w-4" /> {t('directiveDashboard.accessManagement.assignTeacherTitle')}
+            <Users className="mr-2 h-4 w-4" /> {t('dashboards.directive.accessManagement.assignTeacherTitle')}
           </TabsTrigger>
           <TabsTrigger value="guardians" className="data-[state=active]:bg-purple-600 data-[state=active]:text-white">
-            <UserPlus className="mr-2 h-4 w-4" /> {t('directiveDashboard.accessManagement.assignGuardianTitle')}
+            <UserPlus className="mr-2 h-4 w-4" /> {t('dashboards.directive.accessManagement.assignGuardianTitle')}
           </TabsTrigger>
         </TabsList>
         
         <TabsContent value="teachers">
-          <Card className="bg-slate-800/70 border-slate-700">
+          <Card className="bg-slate-800/90 border-slate-600 shadow-2xl">
             <CardHeader>
               <CardTitle className="text-xl text-pink-400">
-                {t('directiveDashboard.accessManagement.assignTeacherTitle')}
+                {t('dashboards.directive.accessManagement.assignTeacherTitle')}
               </CardTitle>
               <CardDescription className="text-slate-400">
-                {t('directiveDashboard.accessManagement.assignTeacherDescription')}
+                {t('dashboards.directive.accessManagement.assignTeacherDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -322,13 +477,13 @@ const AccessManagementPage = () => {
         </TabsContent>
         
         <TabsContent value="guardians">
-          <Card className="bg-slate-800/70 border-slate-700">
+          <Card className="bg-slate-800/90 border-slate-600 shadow-2xl">
             <CardHeader>
               <CardTitle className="text-xl text-purple-400">
-                {t('directiveDashboard.accessManagement.assignGuardianTitle')}
+                {t('dashboards.directive.accessManagement.assignGuardianTitle')}
               </CardTitle>
               <CardDescription className="text-slate-400">
-                {t('directiveDashboard.accessManagement.assignGuardianDescription')}
+                {t('dashboards.directive.accessManagement.assignGuardianDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent>

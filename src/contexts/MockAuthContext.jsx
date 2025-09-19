@@ -27,10 +27,19 @@ export const MockAuthProvider = ({ children }) => {
         if (currentUser && currentSession) {
           setUser(currentUser);
           setUserProfile(currentUser);
+          
+          // Simular vinculación para Ana Rodríguez
+          if (currentUser.email === 'ana.rodriguez@email.com' || currentUser.full_name === 'Ana Rodríguez Madre') {
+            setPrimaryChildId('550e8400-e29b-41d4-a716-446655440002');
+            setAssociatedStudentIds(['550e8400-e29b-41d4-a716-446655440002']);
+          }
+          
           setLoading(false);
         } else {
           setUser(null);
           setUserProfile(null);
+          setPrimaryChildId(null);
+          setAssociatedStudentIds([]);
           setLoading(false);
         }
       } catch (error) {
@@ -53,11 +62,22 @@ export const MockAuthProvider = ({ children }) => {
       if (currentUser && currentSession) {
         setUser(currentUser);
         setUserProfile(currentUser);
+        
+        // Simular vinculación para Ana Rodríguez
+        if (currentUser.email === 'ana.rodriguez@email.com' || currentUser.full_name === 'Ana Rodríguez Madre') {
+          setPrimaryChildId('550e8400-e29b-41d4-a716-446655440002');
+          setAssociatedStudentIds(['550e8400-e29b-41d4-a716-446655440002']);
+        }
       } else {
         setUser(null);
         setUserProfile(null);
+        setPrimaryChildId(null);
+        setAssociatedStudentIds([]);
       }
     };
+
+    // Verificar inmediatamente al montar el componente
+    handleStorageChange();
 
     window.addEventListener('storage', handleStorageChange);
     

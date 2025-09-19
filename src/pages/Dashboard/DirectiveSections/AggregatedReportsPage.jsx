@@ -1,18 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, FileText, Search, Download, Share2, Tag, Edit3 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 const AggregatedReportsPage = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const reports = [
-    { id: 1, nameKey: "directive.reports.report1Name", date: "2025-05-20", categoryKey: "directive.reports.categoryPerformance" },
-    { id: 2, nameKey: "directive.reports.report2Name", date: "2025-05-15", categoryKey: "directive.reports.categoryAttendance" },
-    { id: 3, nameKey: "directive.reports.report3Name", date: "2025-05-10", categoryKey: "directive.reports.categoryParticipation" },
+    { id: 1, nameKey: "dashboards.directive.reports.report1Name", date: "2025-05-20", categoryKey: "dashboards.directive.reports.categoryPerformance" },
+    { id: 2, nameKey: "dashboards.directive.reports.report2Name", date: "2025-05-15", categoryKey: "dashboards.directive.reports.categoryAttendance" },
+    { id: 3, nameKey: "dashboards.directive.reports.report3Name", date: "2025-05-10", categoryKey: "dashboards.directive.reports.categoryParticipation" },
   ];
 
   return (
@@ -23,18 +24,21 @@ const AggregatedReportsPage = () => {
       className="p-4 sm:p-6 bg-gradient-to-br from-purple-700 via-pink-700 to-orange-600 min-h-screen text-white"
     >
       <div className="container mx-auto">
-        <Link to="/dashboard" className="inline-flex items-center text-purple-300 hover:text-purple-100 mb-6 transition-colors">
-          <ArrowLeft size={20} className="mr-2" />
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="inline-flex items-center text-purple-300 hover:text-purple-100 mb-6 transition-colors group"
+        >
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
           {t('common.backToDashboard')}
-        </Link>
+        </button>
 
         <div className="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-2xl">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
             <div className="flex items-center mb-4 sm:mb-0">
               <FileText size={36} className="mr-4 text-orange-300" />
               <div>
-                <h1 className="text-3xl font-bold">{t('directive.reports.pageTitle')}</h1>
-                <p className="text-purple-200">{t('directive.reports.pageSubtitle')}</p>
+                <h1 className="text-3xl font-bold">{t('dashboards.directive.reports.pageTitle')}</h1>
+                <p className="text-purple-200">{t('dashboards.directive.reports.pageSubtitle')}</p>
               </div>
             </div>
              <Button className="bg-orange-500 hover:bg-orange-600 text-white">
@@ -57,10 +61,10 @@ const AggregatedReportsPage = () => {
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-purple-500/50">
-                  <th className="p-3 font-semibold text-orange-300">{t('directive.reports.tableName')}</th>
-                  <th className="p-3 font-semibold text-orange-300">{t('directive.reports.tableDate')}</th>
-                  <th className="p-3 font-semibold text-orange-300">{t('directive.reports.tableCategory')}</th>
-                  <th className="p-3 font-semibold text-orange-300 text-right">{t('directive.reports.tableActions')}</th>
+                  <th className="p-3 font-semibold text-orange-300">{t('dashboards.directive.reports.tableName')}</th>
+                  <th className="p-3 font-semibold text-orange-300">{t('dashboards.directive.reports.tableDate')}</th>
+                  <th className="p-3 font-semibold text-orange-300">{t('dashboards.directive.reports.tableCategory')}</th>
+                  <th className="p-3 font-semibold text-orange-300 text-right">{t('dashboards.directive.reports.tableActions')}</th>
                 </tr>
               </thead>
               <tbody>

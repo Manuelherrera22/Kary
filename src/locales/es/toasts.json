@@ -23,9 +23,16 @@
   "assignTeacherSuccess": "Estudiante(s) asignado(s) correctamente al docente.",
   "assignGuardianSuccess": "Estudiante(s) asignado(s) correctamente al acudiente.",
   "assignError": "No se pudo completar la asignación. Intenta de nuevo.",
+  "assignParentSuccess": "Estudiante(s) asignado(s) correctamente al acudiente.",
   "error": "Error",
-  "successTitle": "¡Éxito!",
-  "errorTitle": "¡Error!",
   "contactFormSuccessTitle": "¡Mensaje Enviado!",
-  "contactFormSuccessDescription": "Gracias por contactarnos. Te responderemos pronto."
+  "contactFormSuccessDescription": "Gracias por contactarnos. Te responderemos pronto.",
+  "unauthorizedAccess": "No tienes autorización para acceder a esta sección.",
+  "logoutSuccessTitle": "Sesión Cerrada",
+  "logoutSuccessDescription": "Has cerrado sesión exitosamente.",
+  "warningTitle": "Advertencia",
+  "infoTitle": "Información",
+  "karyCoreAlertGenerated": "Alerta de KARY CORE generada",
+  "karyCoreSuggestionCreated": "Sugerencia de KARY CORE creada",
+  "karyCorePlanSuggested": "Plan de apoyo sugerido por KARY CORE"
 }

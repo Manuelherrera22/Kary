@@ -49,6 +49,212 @@
   "directiveDashboard": {
     "pageTitle": "Panel del Directivo"
   },
+  "directive": {
+    "schoolData": {
+      "pageTitle": "Panel de Datos Institucionales",
+      "pageSubtitle": "Análisis completo de métricas académicas y asistenciales",
+      "academicAverages": "Promedios Académicos",
+      "averagesDesc": "Visualiza los promedios académicos por grado y materia",
+      "attendanceLevels": "Niveles de Asistencia",
+      "attendanceDesc": "Monitorea la asistencia estudiantil por grado",
+      "monthlyComparison": "Comparación Mensual",
+      "comparisonDesc": "Compara métricas entre meses",
+      "averageScore": "Puntuación Promedio",
+      "attendancePercentageAxis": "Porcentaje de Asistencia",
+      "valueOverTime": "Valor en el Tiempo",
+      "group": "Grupo",
+      "valueAxisLabel": "Valor",
+      "gradeLabel": "Grado {grade}",
+      "attendancePercentage": "Porcentaje de Asistencia",
+      "overallAttendance": "Asistencia General"
+    },
+    "settings": {
+      "pageTitle": "Configuración de Cuenta",
+      "pageSubtitle": "Gestiona tu información personal y preferencias del sistema"
+    },
+    "userManagement": {
+      "pageTitle": "Gestión de Usuarios",
+      "pageSubtitle": "Administra usuarios, roles y permisos del sistema",
+      "createButton": "Crear Usuario",
+      "searchPlaceholder": "Buscar usuarios...",
+      "editTitle": "Editar Usuario",
+      "createTitle": "Crear Usuario",
+      "editDesc": "Modifica la información del usuario seleccionado",
+      "createDesc": "Agrega un nuevo usuario al sistema",
+      "suspendUser": "Suspender Usuario",
+      "activateUser": "Activar Usuario",
+      "fetchError": "Error al cargar usuarios",
+      "actionSuccess": "Acción completada exitosamente",
+      "actionError": "Error al realizar la acción",
+      "form": {
+        "fullName": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "passwordPlaceholder": "Ingresa una contraseña",
+        "passwordPlaceholderOptional": "Deja vacío para contraseña aleatoria",
+        "passwordHelp": "La contraseña debe tener al menos 6 caracteres",
+        "passwordHelpNoEmail": "Se generará una contraseña automática si no se proporciona email",
+        "grade": "Grado",
+        "status": "Estado",
+        "selectStatus": "Seleccionar estado",
+        "admissionDate": "Fecha de Admisión",
+        "assignParent": "Asignar Acudiente",
+        "selectParent": "Seleccionar acudiente",
+        "noParentAssigned": "Sin acudiente asignado",
+        "createButton": "Crear Estudiante"
+      },
+      "fetchParentsError": "Error al cargar los acudientes disponibles",
+      "studentCreatedSuccess": "Estudiante creado exitosamente",
+      "studentUpdatedSuccess": "Estudiante actualizado exitosamente",
+      "studentCreateError": "Error al crear el estudiante",
+      "studentUpdateError": "Error al actualizar el estudiante"
+    },
+    "reports": {
+      "pageTitle": "Reportes Institucionales",
+      "pageSubtitle": "Visualiza y gestiona todos los reportes de la institución",
+      "tableName": "Nombre del Reporte",
+      "tableDate": "Fecha",
+      "tableCategory": "Categoría",
+      "tableActions": "Acciones",
+      "report1Name": "Reporte de Rendimiento Académico Q1",
+      "report2Name": "Análisis de Asistencia Estudiantil",
+      "report3Name": "Evaluación de Participación en Actividades",
+      "categoryPerformance": "Rendimiento",
+      "categoryAttendance": "Asistencia",
+      "categoryParticipation": "Participación"
+    },
+    "roleActivity": {
+      "pageTitle": "Actividad por Roles",
+      "pageDescription": "Monitorea la actividad y acciones realizadas por cada rol en el sistema",
+      "fetchError": "Error al cargar la actividad de roles",
+      "logTitle": "Registro de Actividad",
+      "logDesc": "Historial completo de acciones realizadas por usuarios",
+      "filterRole": "Filtrar por rol",
+      "filterActionType": "Filtrar por tipo de acción",
+      "filterDateRange": "Rango de fechas",
+      "noActivityFound": "No se encontró actividad en el período seleccionado",
+      "table": {
+        "user": "Usuario",
+        "role": "Rol",
+        "action": "Acción",
+        "details": "Detalles",
+        "date": "Fecha"
+      }
+    },
+    "institutionalAlerts": {
+      "pageTitle": "Alertas Institucionales",
+      "pageDescription": "Monitorea y gestiona alertas críticas del sistema educativo",
+      "fetchError": "Error al cargar las alertas institucionales",
+      "summaryTitle": "Resumen de Alertas",
+      "alertsListTitle": "Lista de Alertas",
+      "filterCourse": "Filtrar por curso",
+      "filterSeverity": "Filtrar por severidad",
+      "filterStatus": "Filtrar por estado",
+      "severityHigh": "Alta",
+      "severityMedium": "Media",
+      "severityLow": "Baja",
+      "statusPending": "Pendiente",
+      "statusAddressed": "Atendida",
+      "noAlertsFound": "No se encontraron alertas",
+      "chart": {
+        "academic": "Académicas",
+        "emotional": "Emocionales",
+        "attendance": "Asistencia",
+        "alertCount": "Número de Alertas"
+      },
+      "table": {
+        "type": "Tipo",
+        "title": "Título",
+        "severity": "Severidad",
+        "date": "Fecha",
+        "status": "Estado",
+        "actions": "Acciones"
+      },
+      "alertTypes": {
+        "riesgo_academico_grupal": "Riesgo Académico Grupal",
+        "riesgo_emocional_multiple": "Riesgo Emocional Múltiple",
+        "inasistencias_bloque": "Inasistencias en Bloque"
+      }
+    },
+    "accessManagement": {
+      "pageTitle": "Gestión de Asignaciones",
+      "pageDescription": "Asigna estudiantes a docentes y acudientes, gestionando sus vínculos y accesos",
+      "assignTeacherTitle": "Asignar estudiantes a docentes",
+      "assignGuardianTitle": "Asignar estudiantes a acudientes",
+      "assignTeacherDescription": "Selecciona un docente y asigna estudiantes bajo su responsabilidad",
+      "assignGuardianDescription": "Selecciona un acudiente y asigna estudiantes bajo su responsabilidad",
+      "selectTeacherPlaceholder": "Seleccionar docente",
+      "selectGuardianPlaceholder": "Seleccionar acudiente",
+      "searchStudentPlaceholder": "Buscar estudiantes...",
+      "filterByGrade": "Filtrar por grado",
+      "filterByStatus": "Filtrar por estado",
+      "currentlyAssigned": "Ya asignado",
+      "noStudentsMatchFilters": "No se encontraron estudiantes que coincidan con los filtros",
+      "assignButton": "Asignar Estudiantes Seleccionados",
+      "assigningStudents": "Asignando estudiantes...",
+      "noUsersFound": "No se encontraron {role} para el rol seleccionado",
+      "fetchProfessionalsError": "Error al cargar profesionales",
+      "fetchAssignedStudentsError": "Error al cargar estudiantes asignados"
+    },
+    "strategicSummary": {
+      "pageTitle": "Resumen Estratégico",
+      "pageDescription": "Análisis integral de métricas y indicadores institucionales",
+      "title": "Resumen Estratégico",
+      "subtitle": "Métricas clave de rendimiento institucional",
+      "loading": "Cargando resumen estratégico...",
+      "error": "Error al cargar el resumen estratégico.",
+      "noData": "No hay datos disponibles para el resumen estratégico",
+      "fetchError": "Error al obtener el resumen estratégico",
+      "categories": {
+        "alertas_emocionales": "Alertas Emocionales",
+        "retroalimentaciones": "Retroalimentaciones",
+        "planes_apoyo_activos": "Planes de Apoyo Activos",
+        "recursos_asignados": "Recursos Asignados",
+        "satisfaccion_docente": "Satisfacción Docente",
+        "progreso_academico": "Progreso Académico"
+      },
+      "dataLoadedSuccess": "Resumen estratégico cargado exitosamente"
+    },
+    "familyValidation": {
+      "pageTitle": "Validación de Vínculos Familiares",
+      "pageDescription": "Gestiona las solicitudes de vinculación entre padres y estudiantes",
+      "pendingRequestsTitle": "Solicitudes Pendientes",
+      "historyTitle": "Historial de Validaciones",
+      "statusPending": "Pendiente",
+      "statusApproved": "Aprobado",
+      "statusRejected": "Rechazado",
+      "approveSuccess": "Solicitud aprobada exitosamente",
+      "rejectSuccess": "Solicitud rechazada exitosamente",
+      "actionError": "Error al procesar la solicitud",
+      "linkUpsertWarning": "Advertencia al vincular: {details}"
+    },
+    "userManagement": {
+      "pageTitle": "Gestión de Usuarios",
+      "pageSubtitle": "Administra usuarios, roles y permisos del sistema",
+      "createButton": "Crear Usuario",
+      "searchPlaceholder": "Buscar usuarios...",
+      "editTitle": "Editar Usuario",
+      "createTitle": "Crear Usuario",
+      "editDesc": "Modifica la información del usuario",
+      "createDesc": "Agrega un nuevo usuario al sistema",
+      "suspendUser": "Suspender Usuario",
+      "activateUser": "Activar Usuario",
+      "fetchError": "Error al cargar los usuarios",
+      "actionSuccess": "Acción realizada exitosamente",
+      "actionError": "Error al realizar la acción",
+      "noUsersFound": "No se encontraron usuarios",
+      "table": {
+        "name": "Nombre",
+        "email": "Correo",
+        "role": "Rol",
+        "status": "Estado",
+        "grade": "Grado",
+        "institution": "Institución",
+        "admissionDate": "Fecha de Ingreso",
+        "actions": "Acciones"
+      }
+    }
+  },
   "studentDashboard": {
     "welcome": "¡Hola, {studentName}!",
     "defaultMotivationalQuote": "Cada día es una nueva oportunidad para aprender y crecer. ¡Tú puedes!",
@@ -90,5 +296,16 @@
     "latestCasesTitle": "Casos Recientes y Seguimiento",
     "latestCasesPageSubtitle": "Visualiza y gestiona los casos más recientes de tus estudiantes.",
     "emotionalTrendsPageSubtitle": "Analiza la evolución emocional de tus estudiantes."
+  },
+  "parent": {
+    "unified": {
+      "pageTitle": "Panel de Seguimiento Unificado",
+      "pageSubtitle": "Visión completa del progreso y bienestar de tu hijo/a",
+      "progressSummaryCardTitle": "Resumen de Progreso",
+      "recentInteractionsCardTitle": "Interacciones Recientes",
+      "recentReportsCardTitle": "Reportes Recientes",
+      "upcomingAppointmentsCardTitle": "Próximas Citas"
+    },
+    "scheduleAppointmentTitle": "Agendar Cita"
   }
 }

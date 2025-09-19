@@ -2,12 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMockAuth } from '@/contexts/MockAuthContext';
-import { BarChart, PieChart, AlertTriangle, CheckSquare, BookOpen, Users, Loader2, TrendingUp } from 'lucide-react';
+import { BarChart, PieChart, AlertTriangle, CheckSquare, BookOpen, Users, Loader2, TrendingUp, ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ResponsiveContainer, PieChart as RechartsPieChart, Pie, Cell, Tooltip as RechartsTooltip, Legend, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { useToast } from '@/components/ui/use-toast';
 import edgeFunctionService from '@/services/edgeFunctionService';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
+import { useNavigate } from 'react-router-dom';
 
 const COLORS = ['#38bdf8', '#34d399', '#facc15', '#f87171', '#a78bfa', '#fb923c'];
 
@@ -16,6 +17,8 @@ const iconMap = {
   retroalimentaciones: CheckSquare,
   planes_apoyo_activos: BookOpen,
   recursos_asignados: Users,
+  satisfaccion_docente: Users,
+  progreso_academico: TrendingUp,
   default: BarChart,
 };
 
@@ -23,49 +26,89 @@ const StrategicSummaryPage = () => {
   const { t } = useLanguage();
   const { user } = useMockAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [summaryData, setSummaryData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchStrategicSummary = useCallback(async () => {
-    if (!user?.id) {
-      setIsLoading(false);
-      setError(t('common.authenticationError'));
-      return;
-    }
     setIsLoading(true);
     setError(null);
     try {
-      const { data, error: fetchError } = await edgeFunctionService.invokeEdgeFunction("strategic-summary", {
-        user_id: user.id
-      });
-      
-      if (fetchError) {
-        console.error("Error fetching strategic summary:", fetchError);
-        throw new Error(fetchError.message || t('directiveDashboard.strategicSummary.fetchError', { ns: 'directiveDashboard' }));
-      }
+      // Simular carga de datos para San Luis Gonzaga
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (data && Array.isArray(data)) {
-        setSummaryData(data);
-      } else if (data && data.error) {
-         throw new Error(data.error);
-      }
-      else {
-        setSummaryData([]);
-      }
+      // Datos mock realistas para San Luis Gonzaga
+      const mockStrategicData = [
+        {
+          categoria: 'alertas_emocionales',
+          cantidad: 12,
+          meta: 15,
+          porcentaje: 80,
+          tendencia: 'decreasing',
+          descripcion: 'Reducción del 15% en alertas emocionales este mes'
+        },
+        {
+          categoria: 'retroalimentaciones',
+          cantidad: 45,
+          meta: 50,
+          porcentaje: 90,
+          tendencia: 'increasing',
+          descripcion: 'Aumento del 20% en retroalimentaciones positivas'
+        },
+        {
+          categoria: 'planes_apoyo_activos',
+          cantidad: 28,
+          meta: 30,
+          porcentaje: 93,
+          tendencia: 'stable',
+          descripcion: 'Mantenimiento de planes de apoyo efectivos'
+        },
+        {
+          categoria: 'recursos_asignados',
+          cantidad: 85,
+          meta: 100,
+          porcentaje: 85,
+          tendencia: 'increasing',
+          descripcion: 'Optimización del 85% de recursos disponibles'
+        },
+        {
+          categoria: 'satisfaccion_docente',
+          cantidad: 92,
+          meta: 95,
+          porcentaje: 97,
+          tendencia: 'increasing',
+          descripcion: 'Alto nivel de satisfacción del personal docente'
+        },
+        {
+          categoria: 'progreso_academico',
+          cantidad: 78,
+          meta: 80,
+          porcentaje: 98,
+          tendencia: 'stable',
+          descripcion: 'Progreso académico estable y consistente'
+        }
+      ];
+
+      setSummaryData(mockStrategicData);
+      
+      console.log("✅ Resumen estratégico de San Luis Gonzaga cargado:", {
+        total: mockStrategicData.length,
+        categorias: mockStrategicData.map(item => item.categoria)
+      });
 
     } catch (err) {
       console.error("Component error fetching strategic summary:", err);
       setError(err.message);
       toast({
-        title: t('toast.errorTitle', { ns: 'toasts' }),
+        title: t('common.errorTitle'),
         description: err.message,
         variant: 'destructive',
       });
     } finally {
       setIsLoading(false);
     }
-  }, [user, t, toast]);
+  }, [t, toast]);
 
   useEffect(() => {
     fetchStrategicSummary();
@@ -73,7 +116,7 @@ const StrategicSummaryPage = () => {
 
   if (isLoading) {
     return (
-      <LoadingScreen text={t('directiveDashboard.strategicSummary.loading', { ns: 'directiveDashboard' })} />
+      <LoadingScreen text={t('dashboards.directive.strategicSummary.loading')} />
     );
   }
   
@@ -83,11 +126,11 @@ const StrategicSummaryPage = () => {
         <CardHeader>
           <CardTitle className="text-xl text-red-300 flex items-center">
             <AlertTriangle size={24} className="mr-2" />
-            {t('directiveDashboard.strategicSummary.title', { ns: 'directiveDashboard' })}
+            {t('dashboards.directive.strategicSummary.title')}
           </CardTitle>
         </CardHeader>
         <CardContent className="h-[200px] flex flex-col items-center justify-center">
-          <p className="text-red-400">{t('directiveDashboard.strategicSummary.error', { ns: 'directiveDashboard' })}</p>
+          <p className="text-red-400">{t('dashboards.directive.strategicSummary.error')}</p>
           <p className="text-sm text-red-500">{error}</p>
           <button onClick={fetchStrategicSummary} className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm">
             {t('common.retryButton')}
@@ -103,18 +146,18 @@ const StrategicSummaryPage = () => {
         <CardHeader>
           <CardTitle className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300 flex items-center">
             <TrendingUp size={24} className="mr-2" />
-            {t('directiveDashboard.strategicSummary.title', { ns: 'directiveDashboard' })}
+            {t('dashboards.directive.strategicSummary.title')}
           </CardTitle>
         </CardHeader>
         <CardContent className="h-[200px] flex items-center justify-center">
-          <p className="text-slate-500">{t('directiveDashboard.strategicSummary.noData', { ns: 'directiveDashboard' })}</p>
+          <p className="text-slate-500">{t('dashboards.directive.strategicSummary.noData')}</p>
         </CardContent>
       </Card>
     );
   }
   
   const chartData = summaryData.map(item => ({
-    name: t(`directiveDashboard.strategicSummary.categories.${item.categoria}`, item.categoria , { ns: 'directiveDashboard' }),
+    name: t(`dashboards.directive.strategicSummary.categories.${item.categoria}`, item.categoria),
     value: item.cantidad,
     icon: iconMap[item.categoria] || iconMap.default,
   }));
@@ -126,12 +169,27 @@ const StrategicSummaryPage = () => {
       transition={{ duration: 0.5 }}
       className="p-4 sm:p-6"
     >
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
+        className="mb-4"
+      >
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="flex items-center text-sky-300 hover:text-sky-100 transition-colors duration-200 group"
+        >
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          <span className="text-sm font-medium">{t('common.backToDashboard')}</span>
+        </button>
+      </motion.div>
+      
        <header className="mb-6">
         <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400">
-          {t('dashboards.directiveDashboard.pageTitle', { ns: 'dashboards'})}
+          {t('dashboards.directive.strategicSummary.pageTitle')}
         </h1>
         <p className="text-slate-400 mt-1">
-          {t('directiveDashboard.strategicSummary.pageDescription', { ns: 'directiveDashboard' })}
+          {t('dashboards.directive.strategicSummary.pageDescription')}
         </p>
       </header>
 
@@ -139,9 +197,9 @@ const StrategicSummaryPage = () => {
         <CardHeader>
           <CardTitle className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300 flex items-center">
             <TrendingUp size={24} className="mr-2" />
-            {t('directiveDashboard.strategicSummary.title', { ns: 'directiveDashboard' })}
+            {t('dashboards.directive.strategicSummary.title')}
           </CardTitle>
-          <CardDescription className="text-slate-400">{t('directiveDashboard.strategicSummary.subtitle', { ns: 'directiveDashboard' })}</CardDescription>
+          <CardDescription className="text-slate-400">{t('dashboards.directive.strategicSummary.subtitle')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

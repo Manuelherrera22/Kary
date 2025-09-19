@@ -52,7 +52,18 @@
     "sampleAlert1Details": "Acumulación de inasistencias y retroalimentación negativa en matemáticas.",
     "sampleAlert2Details": "Cambios emocionales abruptos y aislamiento reportado.",
     "sampleAlert3Details": "Falta de interacción docente-estudiante en las últimas 2 semanas.",
-    "psychopedagogueFocus": "Alertas emocionales y conductuales priorizadas."
+    "psychopedagogueFocus": "Alertas emocionales y conductuales priorizadas.",
+    "noActiveAlerts": "No hay alertas activas en este momento",
+    "errorFetching": "Error al cargar alertas predictivas: {details}",
+    "noStudentIdForPlan": "No se puede generar plan: ID de estudiante no disponible",
+    "generatingPlanSuggestionTitle": "Generando Sugerencia de Plan",
+    "generatingPlanSuggestionDesc": "KARY CORE está analizando el caso y generando una propuesta de plan de apoyo...",
+    "errorSuggestingPlan": "Error al generar sugerencia de plan",
+    "viewStudent": "Ver Estudiante",
+    "suggestPlanAI": "Sugerir Plan IA",
+    "alertContextPrefix": "Contexto de la alerta:",
+    "alertContextFocus": "Enfoque:",
+    "alertContextLevel": "Nivel:"
   },
   "history": {
     "title": "Módulo de Decisiones Históricas",

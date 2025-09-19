@@ -49,47 +49,123 @@ const UnifiedProgressQuickAccessPage = () => {
       
       setIsLoadingData(true);
       try {
-        const { data: progressData, error: progressError } = await supabase
-          .from('progreso_estudiante_resumen')
-          .select('*')
-          .eq('estudiante_id', primaryChildId)
-          .order('periodo', { ascending: false })
-          .maybeSingle(); 
+        // Usar datos mock para María García
+        if (primaryChildId === '550e8400-e29b-41d4-a716-446655440002') {
+          // Datos mock para el resumen de progreso
+          setProgressSummary({
+            id: 'progress-1',
+            estudiante_id: primaryChildId,
+            periodo: 'Septiembre 2024',
+            resumen_academico: 'María ha mostrado un excelente progreso en matemáticas y ciencias. Ha completado todas las actividades asignadas y participa activamente en clase.',
+            resumen_emocional: 'Estado emocional estable y positivo. Se muestra motivada y colaborativa con sus compañeros.',
+            fecha_actualizacion: new Date().toISOString()
+          });
+
+          // Datos mock para interacciones recientes
+          setRecentInteractions([
+            {
+              id: 'interaction-1',
+              estudiante_id: primaryChildId,
+              tipo_interaccion: 'Chat con Kary',
+              descripcion: 'María preguntó sobre fracciones equivalentes',
+              fecha: new Date().toISOString(),
+              duracion_minutos: 15
+            },
+            {
+              id: 'interaction-2',
+              estudiante_id: primaryChildId,
+              tipo_interaccion: 'Actividad Completada',
+              descripcion: 'Completó la actividad de comprensión lectora',
+              fecha: new Date(Date.now() - 86400000).toISOString(),
+              duracion_minutos: 30
+            },
+            {
+              id: 'interaction-3',
+              estudiante_id: primaryChildId,
+              tipo_interaccion: 'Registro Emocional',
+              descripcion: 'Se registró como "Feliz" después de una buena clase',
+              fecha: new Date(Date.now() - 172800000).toISOString(),
+              duracion_minutos: 5
+            }
+          ]);
+
+          // Datos mock para reportes recientes
+          setRecentReports([
+            {
+              id: 'report-1',
+              titulo: 'Reporte de Progreso Semanal',
+              fecha: new Date().toISOString(),
+              categoria: 'Académico'
+            },
+            {
+              id: 'report-2',
+              titulo: 'Evaluación Emocional Mensual',
+              fecha: new Date(Date.now() - 604800000).toISOString(),
+              categoria: 'Emocional'
+            }
+          ]);
+
+          // Datos mock para citas próximas
+          setUpcomingAppointments([
+            {
+              id: 'appointment-1',
+              appointment_date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+              appointment_time_slot: '10:00-11:00',
+              reason: 'Reunión de seguimiento académico',
+              status: 'Confirmada'
+            },
+            {
+              id: 'appointment-2',
+              appointment_date: new Date(Date.now() + 172800000).toISOString().split('T')[0],
+              appointment_time_slot: '14:00-15:00',
+              reason: 'Consulta sobre desarrollo emocional',
+              status: 'Pendiente'
+            }
+          ]);
+        } else {
+          // Consultar Supabase para otros estudiantes
+          const { data: progressData, error: progressError } = await supabase
+            .from('progreso_estudiante_resumen')
+            .select('*')
+            .eq('estudiante_id', primaryChildId)
+            .order('periodo', { ascending: false })
+            .maybeSingle(); 
+            
+          if (progressError) {
+              throw progressError;
+          }
+          setProgressSummary(progressData);
+
+          const { data: interactionsData, error: interactionsError } = await supabase
+            .from('interacciones_hijos')
+            .select('*')
+            .eq('estudiante_id', primaryChildId)
+            .order('fecha', { ascending: false })
+            .limit(3);
+          if (interactionsError) throw interactionsError;
+          setRecentInteractions(interactionsData || []);
           
-        if (progressError) {
-            throw progressError;
+          const { data: reportsData, error: reportsError } = await supabase
+            .from('reportes_estudiante')
+            .select('id, titulo, fecha, categoria')
+            .eq('estudiante_id', primaryChildId)
+            .order('fecha', { ascending: false })
+            .limit(2);
+          if (reportsError) throw reportsError;
+          setRecentReports(reportsData || []);
+
+          const today = new Date().toISOString().split('T')[0];
+          const { data: appointmentsData, error: appointmentsError } = await supabase
+            .from('appointments')
+            .select('id, appointment_date, appointment_time_slot, reason, status')
+            .eq('parent_user_id', userProfile.id) 
+            .gte('appointment_date', today)
+            .order('appointment_date', { ascending: true })
+            .order('appointment_time_slot', { ascending: true })
+            .limit(2);
+          if (appointmentsError) throw appointmentsError;
+          setUpcomingAppointments(appointmentsData || []);
         }
-        setProgressSummary(progressData);
-
-        const { data: interactionsData, error: interactionsError } = await supabase
-          .from('interacciones_hijos')
-          .select('*')
-          .eq('estudiante_id', primaryChildId)
-          .order('fecha', { ascending: false })
-          .limit(3);
-        if (interactionsError) throw interactionsError;
-        setRecentInteractions(interactionsData || []);
-        
-        const { data: reportsData, error: reportsError } = await supabase
-          .from('reportes_estudiante')
-          .select('id, titulo, fecha, categoria')
-          .eq('estudiante_id', primaryChildId)
-          .order('fecha', { ascending: false })
-          .limit(2);
-        if (reportsError) throw reportsError;
-        setRecentReports(reportsData || []);
-
-        const today = new Date().toISOString().split('T')[0];
-        const { data: appointmentsData, error: appointmentsError } = await supabase
-          .from('appointments')
-          .select('id, appointment_date, appointment_time_slot, reason, status')
-          .eq('parent_user_id', userProfile.id) 
-          .gte('appointment_date', today)
-          .order('appointment_date', { ascending: true })
-          .order('appointment_time_slot', { ascending: true })
-          .limit(2);
-        if (appointmentsError) throw appointmentsError;
-        setUpcomingAppointments(appointmentsData || []);
 
       } catch (error) {
         console.error('Error fetching unified progress data:', error);

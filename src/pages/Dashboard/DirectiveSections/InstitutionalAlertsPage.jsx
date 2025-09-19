@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { AlertTriangle as AlertTriangleIcon, Filter, Users, BarChart2, Thermometer, CalendarX, Eye, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { ArrowLeft, AlertTriangle as AlertTriangleIcon, Filter, Users, BarChart2, Thermometer, CalendarX, Eye, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -18,15 +19,16 @@ import { es } from 'date-fns/locale';
 
 
 const alertTypeIcons = {
-  academic: <BarChart2 className="h-5 w-5 text-blue-400 mr-2" />,
-  emotional: <Thermometer className="h-5 w-5 text-yellow-400 mr-2" />,
-  attendance: <CalendarX className="h-5 w-5 text-red-400 mr-2" />,
-  default: <AlertTriangleIcon className="h-5 w-5 text-orange-400 mr-2" />,
+  academic: <BarChart2 className="h-5 w-5 text-blue-300 bg-blue-600/20 rounded-full p-1 mr-2" />,
+  emotional: <Thermometer className="h-5 w-5 text-yellow-300 bg-yellow-600/20 rounded-full p-1 mr-2" />,
+  attendance: <CalendarX className="h-5 w-5 text-red-300 bg-red-600/20 rounded-full p-1 mr-2" />,
+  default: <AlertTriangleIcon className="h-5 w-5 text-orange-300 bg-orange-600/20 rounded-full p-1 mr-2" />,
 };
 
 const InstitutionalAlertsPage = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [alerts, setAlerts] = useState([]);
   const [filteredAlerts, setFilteredAlerts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,36 +44,85 @@ const InstitutionalAlertsPage = () => {
   const fetchAlerts = useCallback(async () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('notifications')
-        .select(`
-          id, created_at, type, title, message, nivel_alerta, tipo_evento, is_read,
-          student:estudiante_id (id, full_name, grade),
-          user:user_id (id, full_name, role)
-        `)
-        .in('tipo_evento', ['riesgo_academico_grupal', 'riesgo_emocional_multiple', 'inasistencias_bloque']) 
-        .order('created_at', { ascending: false });
+      // Simular delay de carga
+      await new Promise(resolve => setTimeout(resolve, 800));
 
-      if (error) throw error;
-      
-      const mappedAlerts = data.map(a => ({
-        id: a.id,
-        date: a.created_at,
-        type: a.tipo_evento, 
-        title: a.title,
-        description: a.message,
-        severity: a.nivel_alerta, 
-        studentName: a.student?.full_name, 
-        studentGrade: a.student?.grade,
-        status: a.is_read ? 'addressed' : 'pending', 
-        raw: a
-      }));
-      setAlerts(mappedAlerts);
-      setFilteredAlerts(mappedAlerts);
+      // Datos mock de alertas para San Luis Gonzaga
+      const mockAlerts = [
+        {
+          id: 'alert-1',
+          date: '2025-01-15T10:30:00Z',
+          type: 'riesgo_academico_grupal',
+          title: 'Bajo rendimiento en Matemáticas - Grado 3°',
+          description: 'Se detectó una disminución significativa en el rendimiento académico del grado 3° en la materia de Matemáticas. Promedio actual: 6.2/10',
+          severity: 'alto',
+          studentName: 'Grado 3° A',
+          studentGrade: '3°',
+          status: 'pending',
+          raw: { institution: 'san-luis-gonzaga' }
+        },
+        {
+          id: 'alert-2',
+          date: '2025-01-14T14:20:00Z',
+          type: 'riesgo_emocional_multiple',
+          title: 'Indicadores de ansiedad en estudiantes',
+          description: 'Se han identificado múltiples casos de ansiedad en estudiantes de primaria. Se requiere intervención del equipo psicopedagógico.',
+          severity: 'alto',
+          studentName: 'Múltiples estudiantes',
+          studentGrade: 'Primaria',
+          status: 'pending',
+          raw: { institution: 'san-luis-gonzaga' }
+        },
+        {
+          id: 'alert-3',
+          date: '2025-01-13T09:15:00Z',
+          type: 'inasistencias_bloque',
+          title: 'Inasistencias frecuentes - Grado 2°',
+          description: 'Se registran inasistencias recurrentes en el grado 2°, afectando el proceso de aprendizaje. Tasa de asistencia: 78%',
+          severity: 'medio',
+          studentName: 'Grado 2° A',
+          studentGrade: '2°',
+          status: 'addressed',
+          raw: { institution: 'san-luis-gonzaga' }
+        },
+        {
+          id: 'alert-4',
+          date: '2025-01-12T16:45:00Z',
+          type: 'riesgo_academico_grupal',
+          title: 'Mejora en Ciencias - Grado 4°',
+          description: 'Excelente progreso en la materia de Ciencias Naturales. El grado 4° ha mostrado una mejora significativa en sus calificaciones.',
+          severity: 'bajo',
+          studentName: 'Grado 4° A',
+          studentGrade: '4°',
+          status: 'addressed',
+          raw: { institution: 'san-luis-gonzaga' }
+        },
+        {
+          id: 'alert-5',
+          date: '2025-01-11T11:30:00Z',
+          type: 'riesgo_emocional_multiple',
+          title: 'Necesidad de apoyo emocional',
+          description: 'Estudiantes del grado 1° requieren apoyo adicional en habilidades socioemocionales. Se recomienda implementar actividades grupales.',
+          severity: 'medio',
+          studentName: 'Grado 1° A',
+          studentGrade: '1°',
+          status: 'pending',
+          raw: { institution: 'san-luis-gonzaga' }
+        }
+      ];
+
+      setAlerts(mockAlerts);
+      setFilteredAlerts(mockAlerts);
+
+      console.log('✅ Alertas institucionales de San Luis Gonzaga cargadas:', mockAlerts.length);
 
     } catch (error) {
       console.error('Error fetching institutional alerts:', error);
-      toast({ title: t('common.errorTitle'), description: t('directive.institutionalAlerts.fetchError'), variant: 'destructive' });
+      toast({ 
+        title: t('common.errorTitle'), 
+        description: t('dashboards.directive.institutionalAlerts.fetchError'), 
+        variant: 'destructive' 
+      });
     } finally {
       setIsLoading(false);
     }
@@ -109,22 +160,22 @@ const InstitutionalAlertsPage = () => {
 
   const getSeverityBadge = (severity) => {
     switch (severity?.toLowerCase()) {
-      case 'alto': return <Badge variant="destructive" className="bg-red-600 text-white">{t('directive.institutionalAlerts.severityHigh')}</Badge>;
-      case 'medio': return <Badge variant="outline" className="border-yellow-500 text-yellow-400 bg-yellow-900/30">{t('directive.institutionalAlerts.severityMedium')}</Badge>;
-      case 'bajo': return <Badge variant="outline" className="border-green-500 text-green-400 bg-green-900/30">{t('directive.institutionalAlerts.severityLow')}</Badge>;
-      default: return <Badge variant="secondary">{severity || t('common.notSpecified')}</Badge>;
+      case 'alto': return <Badge className="bg-red-600 text-white font-semibold border-red-500 shadow-lg">{t('dashboards.directive.institutionalAlerts.severityHigh')}</Badge>;
+      case 'medio': return <Badge className="bg-orange-500 text-white font-semibold border-orange-400 shadow-lg">{t('dashboards.directive.institutionalAlerts.severityMedium')}</Badge>;
+      case 'bajo': return <Badge className="bg-green-600 text-white font-semibold border-green-500 shadow-lg">{t('dashboards.directive.institutionalAlerts.severityLow')}</Badge>;
+      default: return <Badge className="bg-gray-500 text-white font-semibold border-gray-400 shadow-lg">{severity || t('common.notSpecified')}</Badge>;
     }
   };
   
   const getStatusIcon = (status) => {
-    if (status === 'addressed') return <CheckCircle className="h-5 w-5 text-green-400" title={t('directive.institutionalAlerts.statusAddressed')} />;
-    return <Clock className="h-5 w-5 text-yellow-400" title={t('directive.institutionalAlerts.statusPending')} />;
+    if (status === 'addressed') return <CheckCircle className="h-5 w-5 text-green-300 bg-green-600/20 rounded-full p-1" title={t('dashboards.directive.institutionalAlerts.statusAddressed')} />;
+    return <Clock className="h-5 w-5 text-orange-300 bg-orange-600/20 rounded-full p-1" title={t('dashboards.directive.institutionalAlerts.statusPending')} />;
   };
 
   const chartData = [
-    { name: t('directive.institutionalAlerts.chart.academic'), count: alerts.filter(a=>a.type === 'riesgo_academico_grupal').length },
-    { name: t('directive.institutionalAlerts.chart.emotional'), count: alerts.filter(a=>a.type === 'riesgo_emocional_multiple').length },
-    { name: t('directive.institutionalAlerts.chart.attendance'), count: alerts.filter(a=>a.type === 'inasistencias_bloque').length },
+    { name: t('dashboards.directive.institutionalAlerts.chart.academic'), count: alerts.filter(a=>a.type === 'riesgo_academico_grupal').length },
+    { name: t('dashboards.directive.institutionalAlerts.chart.emotional'), count: alerts.filter(a=>a.type === 'riesgo_emocional_multiple').length },
+    { name: t('dashboards.directive.institutionalAlerts.chart.attendance'), count: alerts.filter(a=>a.type === 'inasistencias_bloque').length },
   ];
 
   if (isLoading && alerts.length === 0) return <LoadingScreen text={t('common.loadingText')} />;
@@ -134,21 +185,32 @@ const InstitutionalAlertsPage = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="p-4 sm:p-6 bg-gradient-to-br from-slate-900 via-red-800 to-orange-700 min-h-screen text-white"
+      className="p-4 sm:p-6 bg-gradient-to-br from-slate-900 via-red-900 to-orange-800 min-h-screen text-white"
     >
+      {/* Botón de regreso */}
+      <div className="mb-6">
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="inline-flex items-center text-red-300 hover:text-red-100 transition-colors group"
+        >
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          <span className="text-sm font-medium">{t('common.backToDashboard')}</span>
+        </button>
+      </div>
+
       <header className="mb-8 text-center">
         <AlertTriangleIcon size={48} className="mx-auto mb-4 text-red-300" />
         <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-300 via-orange-300 to-yellow-300">
-          {t('directive.institutionalAlerts.pageTitle')}
+          {t('dashboards.directive.institutionalAlerts.pageTitle')}
         </h1>
         <p className="text-slate-300 mt-2 max-w-2xl mx-auto">
-          {t('directive.institutionalAlerts.pageDescription')}
+          {t('dashboards.directive.institutionalAlerts.pageDescription')}
         </p>
       </header>
 
-      <Card className="mb-8 bg-slate-800/60 border-slate-700">
+      <Card className="mb-8 bg-slate-800/80 border-slate-600 shadow-2xl">
         <CardHeader>
-          <CardTitle className="text-xl text-orange-300">{t('directive.institutionalAlerts.summaryTitle')}</CardTitle>
+          <CardTitle className="text-xl text-orange-300">{t('dashboards.directive.institutionalAlerts.summaryTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
@@ -158,40 +220,40 @@ const InstitutionalAlertsPage = () => {
               <YAxis stroke="#94a3b8" />
               <RechartsTooltip contentStyle={{ backgroundColor: 'rgba(30, 41, 59, 0.9)', border: '1px solid #475569', borderRadius: '0.5rem' }} itemStyle={{ color: '#e2e8f0' }}/>
               <Legend />
-              <Bar dataKey="count" fill="#fb923c" name={t('directive.institutionalAlerts.chart.alertCount')} />
+              <Bar dataKey="count" fill="#f97316" name={t('dashboards.directive.institutionalAlerts.chart.alertCount')} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
 
-      <Card className="bg-slate-800/70 border-slate-700 shadow-xl">
+      <Card className="bg-slate-800/90 border-slate-600 shadow-2xl">
         <CardHeader>
           <CardTitle className="text-xl text-orange-300 flex items-center">
-            {t('directive.institutionalAlerts.alertsListTitle')}
+            {t('dashboards.directive.institutionalAlerts.alertsListTitle')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <Select onValueChange={(value) => handleFilterChange('course', value)} defaultValue="all">
-              <SelectTrigger className="bg-slate-700 border-slate-600"><SelectValue placeholder={t('directive.institutionalAlerts.filterCourse')} /></SelectTrigger>
-              <SelectContent className="bg-slate-700 border-slate-600 text-white"><SelectItem value="all">{t('common.allCourses')}</SelectItem></SelectContent>
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterCourse')} /></SelectTrigger>
+              <SelectContent className="bg-slate-700 border-slate-500 text-white"><SelectItem value="all">{t('common.allCourses')}</SelectItem></SelectContent>
             </Select>
             <Select onValueChange={(value) => handleFilterChange('severity', value)} defaultValue="all">
-              <SelectTrigger className="bg-slate-700 border-slate-600"><SelectValue placeholder={t('directive.institutionalAlerts.filterSeverity')} /></SelectTrigger>
-              <SelectContent className="bg-slate-700 border-slate-600 text-white">
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterSeverity')} /></SelectTrigger>
+              <SelectContent className="bg-slate-700 border-slate-500 text-white">
                 <SelectItem value="all">{t('common.allSeverities')}</SelectItem>
-                <SelectItem value="alto">{t('directive.institutionalAlerts.severityHigh')}</SelectItem>
-                <SelectItem value="medio">{t('directive.institutionalAlerts.severityMedium')}</SelectItem>
-                <SelectItem value="bajo">{t('directive.institutionalAlerts.severityLow')}</SelectItem>
+                <SelectItem value="alto">{t('dashboards.directive.institutionalAlerts.severityHigh')}</SelectItem>
+                <SelectItem value="medio">{t('dashboards.directive.institutionalAlerts.severityMedium')}</SelectItem>
+                <SelectItem value="bajo">{t('dashboards.directive.institutionalAlerts.severityLow')}</SelectItem>
               </SelectContent>
             </Select>
              <Select onValueChange={(value) => handleFilterChange('status', value)} defaultValue="all">
-              <SelectTrigger className="bg-slate-700 border-slate-600"><SelectValue placeholder={t('directive.institutionalAlerts.filterStatus')} /></SelectTrigger>
-              <SelectContent className="bg-slate-700 border-slate-600 text-white">
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterStatus')} /></SelectTrigger>
+              <SelectContent className="bg-slate-700 border-slate-500 text-white">
                 <SelectItem value="all">{t('common.allStatuses')}</SelectItem>
-                <SelectItem value="pending">{t('directive.institutionalAlerts.statusPending')}</SelectItem>
-                <SelectItem value="addressed">{t('directive.institutionalAlerts.statusAddressed')}</SelectItem>
+                <SelectItem value="pending">{t('dashboards.directive.institutionalAlerts.statusPending')}</SelectItem>
+                <SelectItem value="addressed">{t('dashboards.directive.institutionalAlerts.statusAddressed')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -201,34 +263,34 @@ const InstitutionalAlertsPage = () => {
               placeholder={t('common.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-slate-700 border-slate-600 text-white placeholder-slate-400 focus:ring-orange-500 pl-10"
+              className="w-full bg-slate-700 border-slate-500 text-white placeholder-slate-300 focus:ring-orange-500 focus:border-orange-500 pl-10"
             />
           </div>
 
           {isLoading && filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4">{t('common.loadingText')}</p> : 
-            filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4">{t('directive.institutionalAlerts.noAlertsFound')}</p> : (
+            filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4">{t('dashboards.directive.institutionalAlerts.noAlertsFound')}</p> : (
             <ScrollArea className="h-[400px]">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-slate-700 hover:bg-slate-700/30">
-                    <TableHead className="text-orange-300">{t('directive.institutionalAlerts.table.type')}</TableHead>
-                    <TableHead className="text-orange-300">{t('directive.institutionalAlerts.table.title')}</TableHead>
-                    <TableHead className="text-orange-300">{t('directive.institutionalAlerts.table.severity')}</TableHead>
-                    <TableHead className="text-orange-300">{t('directive.institutionalAlerts.table.date')}</TableHead>
-                    <TableHead className="text-orange-300">{t('directive.institutionalAlerts.table.status')}</TableHead>
-                    <TableHead className="text-right text-orange-300">{t('directive.institutionalAlerts.table.actions')}</TableHead>
+                  <TableRow className="border-slate-600 hover:bg-slate-700/40">
+                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.type')}</TableHead>
+                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.title')}</TableHead>
+                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.severity')}</TableHead>
+                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.date')}</TableHead>
+                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.status')}</TableHead>
+                    <TableHead className="text-right text-orange-300">{t('dashboards.directive.institutionalAlerts.table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredAlerts.map(alert => (
-                    <TableRow key={alert.id} className="border-slate-700 hover:bg-slate-700/30">
-                      <TableCell>{alertTypeIcons[alert.type] || alertTypeIcons.default} {t(`directive.institutionalAlerts.alertTypes.${alert.type}`, alert.type)}</TableCell>
+                    <TableRow key={alert.id} className="border-slate-600 hover:bg-slate-700/40">
+                      <TableCell>{alertTypeIcons[alert.type] || alertTypeIcons.default} {t(`dashboards.directive.institutionalAlerts.alertTypes.${alert.type}`, alert.type)}</TableCell>
                       <TableCell className="max-w-xs truncate" title={alert.title}>{alert.title}</TableCell>
                       <TableCell>{getSeverityBadge(alert.severity)}</TableCell>
                       <TableCell>{format(new Date(alert.date), 'PPP', { locale: es })}</TableCell>
                       <TableCell>{getStatusIcon(alert.status)}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" className="text-sky-400 hover:text-sky-300"><Eye size={16}/> {t('common.viewDetailsButton')}</Button>
+                        <Button variant="ghost" size="sm" className="text-orange-300 hover:text-white hover:bg-orange-600/20 border border-orange-600/30"><Eye size={16}/> {t('common.viewDetailsButton')}</Button>
                       </TableCell>
                     </TableRow>
                   ))}

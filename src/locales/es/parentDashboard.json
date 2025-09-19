@@ -15,7 +15,9 @@
   },
   "studentProgress": {
     "title": "Progreso del Estudiante",
-    "description": "Visualiza el avance académico y emocional de tu hijo/a."
+    "description": "Visualiza el avance académico y emocional de tu hijo/a.",
+    "pageSubtitle": "Seguimiento detallado del desarrollo académico y emocional de tu hijo/a",
+    "noProgressFound": "No se encontró información de progreso disponible para este período"
   },
   "accountSettings": {
     "title": "Configuración de Cuenta",
@@ -23,11 +25,14 @@
   },
   "scheduleAppointment": {
     "title": "Agendar Cita",
-    "description": "Programa reuniones con el personal del colegio de forma sencilla."
+    "description": "Programa reuniones con el personal del colegio de forma sencilla.",
+    "scheduleNowButton": "Agendar Nueva Cita"
   },
   "appointmentHistory": {
     "title": "Historial de Citas",
-    "description": "Revisa tus citas pasadas y futuras."
+    "description": "Revisa tus citas pasadas y futuras.",
+    "pageSubtitle": "Consulta el estado y detalles de todas tus citas programadas",
+    "noAppointmentsFound": "No se encontraron citas en tu historial."
   },
   "assignedStudentsTitle": "Hijos Vinculados",
   "studentName": "Nombre",
@@ -47,6 +52,7 @@
   "errorFetchingPlanDetails": "Error al cargar los detalles del plan. Intenta más tarde.",
   "description": "Aquí puedes ver un resumen de los estudiantes vinculados a tu cuenta.",
   "noChildrenAssigned": "Una vez que un estudiante sea asignado, aparecerá aquí.",
+  "requiresChildLink": "Requiere vinculación con estudiante",
   "unifiedProgress": {
     "pageTitle": "Panel de Seguimiento Unificado",
     "pageSubtitle": "Visión general del progreso de tu hijo/a."
@@ -80,7 +86,32 @@
   "viewActivities": "Ver Actividades",
   "downloadPdf": "Descargar PDF",
   "noPlan": "Aún no hay plan asignado a tu hijo.",
+  "noPlanAvailable": "No hay un plan de apoyo disponible para este estudiante.",
   "activitiesByTeacher": "Actividades compartidas por el docente {teacherName}",
   "planCompleted": "Plan de Apoyo",
-  "newActivities": "Nuevas Actividades"
+  "newActivities": "Nuevas Actividades",
+  "notifications": {
+    "title": "Notificaciones",
+    "description": "Mantente al día con las actualizaciones sobre el progreso de tu hijo/a."
+  },
+  "familyMetrics": {
+    "title": "Métricas Familiares",
+    "description": "Visualiza el progreso y compromiso familiar en el ecosistema educativo."
+  },
+  "intelligentAlerts": {
+    "title": "Alertas Inteligentes",
+    "description": "Recomendaciones personalizadas basadas en el comportamiento de tu hijo/a."
+  },
+  "familyCalendar": {
+    "title": "Calendario Familiar",
+    "description": "Organiza y gestiona las actividades familiares y escolares."
+  },
+  "parentResources": {
+    "title": "Recursos Educativos",
+    "description": "Herramientas y materiales para apoyar el aprendizaje en casa."
+  },
+  "familyGamification": {
+    "title": "Gamificación Familiar",
+    "description": "Convierte el aprendizaje en una aventura divertida para toda la familia."
+  }
 }

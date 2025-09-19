@@ -15,6 +15,12 @@ export const translations = {
 };
 
 export const t = (key, lang, replacements = {}, initialLangAttempt = null) => {
+  // Validar que key sea una cadena válida
+  if (!key || typeof key !== 'string') {
+    console.warn(`Invalid translation key: ${key}`);
+    return key || 'Translation key missing';
+  }
+  
   const keys = key.split('.');
   let MappedString = translations[lang];
 

@@ -59,7 +59,7 @@ const HeroSection = () => {
             <Button
               variant="custom"
               size="lg"
-              className="bg-gradient-to-r from-[#a16ae8] to-[#714cdd] text-white hover:shadow-xl shadow-lg transform hover:scale-105 transition-all duration-300 w-full sm:w-auto group px-8 py-3 rounded-[12px]"
+              className="w-full sm:w-auto group px-8 py-3 rounded-[12px]"
               onClick={() => handleOpenDialog("login")}
             >
               <LogIn size={22} className="mr-2.5 transition-transform duration-300 group-hover:rotate-[-10deg]" />
