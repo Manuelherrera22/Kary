@@ -456,9 +456,9 @@ class EducationalContext {
       recommendations: []
     };
 
-    evaluations.forEach(eval => {
-      if (eval.type) {
-        patterns.types[eval.type] = (patterns.types[eval.type] || 0) + 1;
+    evaluations.forEach(evaluation => {
+      if (evaluation.type) {
+        patterns.types[evaluation.type] = (patterns.types[evaluation.type] || 0) + 1;
       }
     });
 
@@ -467,9 +467,9 @@ class EducationalContext {
 
   extractRecommendations(evaluations) {
     const recommendations = [];
-    evaluations.forEach(eval => {
-      if (eval.recommendations) {
-        recommendations.push(...eval.recommendations);
+    evaluations.forEach(evaluation => {
+      if (evaluation.recommendations) {
+        recommendations.push(...evaluation.recommendations);
       }
     });
     return [...new Set(recommendations)]; // Eliminar duplicados
