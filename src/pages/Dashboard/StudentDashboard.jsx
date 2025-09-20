@@ -85,12 +85,12 @@ const StudentDashboard = () => {
         <meta name="description" content={t('studentDashboard.welcomeMessage', { userName: userProfile?.full_name || '' })} />
       </Helmet>
       
-      <div className="p-4 sm:p-6 lg:p-8 space-y-10">
+      <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-6 sm:space-y-8 lg:space-y-10">
         {error ? (
-          <div className="text-center p-8 bg-red-500/10 rounded-2xl border border-red-400/30">
-            <h2 className="text-2xl font-bold text-red-300">{t('common.errorTitle')}</h2>
-            <p className="text-slate-400 mt-2">{error}</p>
-            <Button onClick={fetchStudentData} className="mt-6 bg-purple-600 hover:bg-purple-700">
+          <div className="text-center p-4 sm:p-6 md:p-8 bg-red-500/10 rounded-2xl border border-red-400/30">
+            <h2 className="text-xl sm:text-2xl font-bold text-red-300">{t('common.errorTitle')}</h2>
+            <p className="text-slate-400 mt-2 text-sm sm:text-base">{error}</p>
+            <Button onClick={fetchStudentData} className="mt-4 sm:mt-6 bg-purple-600 hover:bg-purple-700 text-sm sm:text-base">
               {t('common.retryButton')}
             </Button>
           </div>
@@ -100,7 +100,7 @@ const StudentDashboard = () => {
             <EmotionalAuraCard emotionalState={emotionalState} />
             
               {/* New Widgets Section */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                 <WeeklyProgressWidget t={t} />
                 <GamifiedProgress t={t} />
               </div>
@@ -121,7 +121,7 @@ const StudentDashboard = () => {
               <ComfortZoneWidget t={t} />
               
               {/* Smart Kary Chat */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                 <SmartKaryChat t={t} />
                 <QuickActionsWidget t={t} />
               </div>
@@ -133,7 +133,7 @@ const StudentDashboard = () => {
               <RealTimeNotificationsPanel />
             
             {/* Original Magic Portals */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {magicPortals.map((card, index) => (
                 <MagicPortalCard
                   key={card.key}
