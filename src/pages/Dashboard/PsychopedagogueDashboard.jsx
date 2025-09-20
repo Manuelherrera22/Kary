@@ -243,30 +243,31 @@ const PsychopedagogueDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="space-y-8 p-6">
+      <div className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6">
         {/* Welcome Header - Enhanced */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-indigo-600/20 backdrop-blur-sm border border-purple-500/30 p-8"
+          className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-indigo-600/20 backdrop-blur-sm border border-purple-500/30 p-4 sm:p-6 md:p-8"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-600/10"></div>
           <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-purple-500/20 rounded-xl backdrop-blur-sm">
-                <Brain size={32} className="text-purple-300" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-4">
+              <div className="p-2 sm:p-3 bg-purple-500/20 rounded-xl backdrop-blur-sm">
+                <Brain size={24} className="sm:hidden text-purple-300" />
+                <Brain size={32} className="hidden sm:block text-purple-300" />
               </div>
-              <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+              <div className="flex-1">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent leading-tight">
                   ¡Bienvenido de nuevo, {userProfile?.name || 'Dr. Luis Martínez'}!
                 </h1>
-                <p className="text-slate-300 text-lg mt-2">
+                <p className="text-slate-300 text-base sm:text-lg mt-2">
                   Centro de Control Psicopedagógico Inteligente
                 </p>
               </div>
             </div>
-            <p className="text-slate-400 text-lg max-w-3xl">
+            <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed">
               Gestiona casos, monitorea tendencias emocionales y optimiza el desarrollo de tus estudiantes con herramientas de IA avanzadas.
             </p>
           </div>
@@ -277,26 +278,28 @@ const PsychopedagogueDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap gap-2 justify-center mb-8"
+          className="flex flex-wrap gap-2 justify-center mb-6 sm:mb-8"
         >
           {[
-            { id: 'overview', label: 'Resumen', icon: BarChart3, color: 'blue' },
-            { id: 'cases', label: 'Casos', icon: Briefcase, color: 'purple' },
-            { id: 'analytics', label: 'Analíticas', icon: Activity, color: 'green' },
-            { id: 'collaboration', label: 'Colaboración', icon: Users, color: 'cyan' },
-            { id: 'tools', label: 'Herramientas', icon: Settings, color: 'orange' }
+            { id: 'overview', label: 'Resumen', shortLabel: 'Resumen', icon: BarChart3, color: 'blue' },
+            { id: 'cases', label: 'Casos', shortLabel: 'Casos', icon: Briefcase, color: 'purple' },
+            { id: 'analytics', label: 'Analíticas', shortLabel: 'Analíticas', icon: Activity, color: 'green' },
+            { id: 'collaboration', label: 'Colaboración', shortLabel: 'Colab', icon: Users, color: 'cyan' },
+            { id: 'tools', label: 'Herramientas', shortLabel: 'Herramientas', icon: Settings, color: 'orange' }
           ].map((tab) => (
             <Button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+              className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-xs sm:text-sm ${
                 activeTab === tab.id
                   ? `bg-${tab.color}-500/20 text-${tab.color}-300 border-${tab.color}-500/50 shadow-lg`
                   : 'bg-slate-800/40 text-slate-400 border-slate-600/30 hover:bg-slate-700/40'
               }`}
             >
-              <tab.icon size={20} className="mr-2" />
-              {tab.label}
+              <tab.icon size={16} className="sm:hidden mr-1" />
+              <tab.icon size={20} className="hidden sm:block mr-2" />
+              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="sm:hidden">{tab.shortLabel}</span>
             </Button>
           ))}
         </motion.div>
@@ -305,7 +308,7 @@ const PsychopedagogueDashboard = () => {
         {activeTab === 'overview' && (
           <>
             {/* Stats Cards - Enhanced */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -432,7 +435,7 @@ const PsychopedagogueDashboard = () => {
         </div>
 
         {/* AI Suggestions and Risk Alerts - Enhanced */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -556,7 +559,7 @@ const PsychopedagogueDashboard = () => {
         </div>
 
         {/* Actividades Recientes y Notificaciones - Enhanced */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -696,7 +699,7 @@ const PsychopedagogueDashboard = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -713,7 +716,7 @@ const PsychopedagogueDashboard = () => {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -833,7 +836,7 @@ const PsychopedagogueDashboard = () => {
                 <p className="text-slate-400">Accede a todas las herramientas de administración</p>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
                   <motion.div
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
@@ -842,11 +845,12 @@ const PsychopedagogueDashboard = () => {
                   >
                     <Button 
                       onClick={handleStudentRegistration}
-                      className="w-full h-32 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-blue-600/20 to-blue-800/20 hover:from-blue-600/30 hover:to-blue-800/30 text-blue-300 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full h-24 sm:h-32 flex flex-col items-center justify-center gap-2 sm:gap-3 bg-gradient-to-br from-blue-600/20 to-blue-800/20 hover:from-blue-600/30 hover:to-blue-800/30 text-blue-300 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 backdrop-blur-sm"
                     >
-                      <UserPlus size={36} className="group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-sm font-semibold text-center">Registrar Estudiante</span>
-                      <span className="text-xs text-blue-200/80 text-center">Nuevo registro</span>
+                      <UserPlus size={24} className="sm:hidden group-hover:scale-110 transition-transform duration-300" />
+                      <UserPlus size={36} className="hidden sm:block group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-xs sm:text-sm font-semibold text-center">Registrar Estudiante</span>
+                      <span className="text-xs text-blue-200/80 text-center hidden sm:block">Nuevo registro</span>
                     </Button>
                   </motion.div>
 
@@ -858,11 +862,12 @@ const PsychopedagogueDashboard = () => {
                   >
                     <Button 
                       onClick={handleCaseCreation}
-                      className="w-full h-32 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-green-600/20 to-green-800/20 hover:from-green-600/30 hover:to-green-800/30 text-green-300 border border-green-500/30 hover:border-green-400/50 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full h-24 sm:h-32 flex flex-col items-center justify-center gap-2 sm:gap-3 bg-gradient-to-br from-green-600/20 to-green-800/20 hover:from-green-600/30 hover:to-green-800/30 text-green-300 border border-green-500/30 hover:border-green-400/50 transition-all duration-300 backdrop-blur-sm"
                     >
-                      <FileText size={36} className="group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-sm font-semibold text-center">Crear Caso</span>
-                      <span className="text-xs text-green-200/80 text-center">Nuevo caso</span>
+                      <FileText size={24} className="sm:hidden group-hover:scale-110 transition-transform duration-300" />
+                      <FileText size={36} className="hidden sm:block group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-xs sm:text-sm font-semibold text-center">Crear Caso</span>
+                      <span className="text-xs text-green-200/80 text-center hidden sm:block">Nuevo caso</span>
                     </Button>
                   </motion.div>
 
@@ -874,11 +879,12 @@ const PsychopedagogueDashboard = () => {
                   >
                     <Button 
                       onClick={handleCaseAssignment}
-                      className="w-full h-32 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-orange-600/20 to-orange-800/20 hover:from-orange-600/30 hover:to-orange-800/30 text-orange-300 border border-orange-500/30 hover:border-orange-400/50 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full h-24 sm:h-32 flex flex-col items-center justify-center gap-2 sm:gap-3 bg-gradient-to-br from-orange-600/20 to-orange-800/20 hover:from-orange-600/30 hover:to-orange-800/30 text-orange-300 border border-orange-500/30 hover:border-orange-400/50 transition-all duration-300 backdrop-blur-sm"
                     >
-                      <Users size={36} className="group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-sm font-semibold text-center">Asignar Caso</span>
-                      <span className="text-xs text-orange-200/80 text-center">Gestión de casos</span>
+                      <Users size={24} className="sm:hidden group-hover:scale-110 transition-transform duration-300" />
+                      <Users size={36} className="hidden sm:block group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-xs sm:text-sm font-semibold text-center">Asignar Caso</span>
+                      <span className="text-xs text-orange-200/80 text-center hidden sm:block">Gestión de casos</span>
                     </Button>
                   </motion.div>
 
@@ -890,11 +896,12 @@ const PsychopedagogueDashboard = () => {
                   >
                     <Button 
                       onClick={handleIntelligentAssignment}
-                      className="w-full h-32 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-purple-600/20 to-purple-800/20 hover:from-purple-600/30 hover:to-purple-800/30 text-purple-300 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full h-24 sm:h-32 flex flex-col items-center justify-center gap-2 sm:gap-3 bg-gradient-to-br from-purple-600/20 to-purple-800/20 hover:from-purple-600/30 hover:to-purple-800/30 text-purple-300 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 backdrop-blur-sm"
                     >
-                      <Star size={36} className="group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-sm font-semibold text-center">Asignación Inteligente</span>
-                      <span className="text-xs text-purple-200/80 text-center">IA avanzada</span>
+                      <Star size={24} className="sm:hidden group-hover:scale-110 transition-transform duration-300" />
+                      <Star size={36} className="hidden sm:block group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-xs sm:text-sm font-semibold text-center">Asignación Inteligente</span>
+                      <span className="text-xs text-purple-200/80 text-center hidden sm:block">IA avanzada</span>
                     </Button>
                   </motion.div>
 
@@ -906,11 +913,12 @@ const PsychopedagogueDashboard = () => {
                   >
                     <Button 
                       onClick={handleSupportPlans}
-                      className="w-full h-32 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-indigo-600/20 to-indigo-800/20 hover:from-indigo-600/30 hover:to-indigo-800/30 text-indigo-300 border border-indigo-500/30 hover:border-indigo-400/50 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full h-24 sm:h-32 flex flex-col items-center justify-center gap-2 sm:gap-3 bg-gradient-to-br from-indigo-600/20 to-indigo-800/20 hover:from-indigo-600/30 hover:to-indigo-800/30 text-indigo-300 border border-indigo-500/30 hover:border-indigo-400/50 transition-all duration-300 backdrop-blur-sm"
                     >
-                      <FileText size={36} className="group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-sm font-semibold text-center">Planes de Apoyo</span>
-                      <span className="text-xs text-indigo-200/80 text-center">Intervenciones</span>
+                      <FileText size={24} className="sm:hidden group-hover:scale-110 transition-transform duration-300" />
+                      <FileText size={36} className="hidden sm:block group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-xs sm:text-sm font-semibold text-center">Planes de Apoyo</span>
+                      <span className="text-xs text-indigo-200/80 text-center hidden sm:block">Intervenciones</span>
                     </Button>
                   </motion.div>
                 </div>
