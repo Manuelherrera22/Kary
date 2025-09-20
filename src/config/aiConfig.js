@@ -1,220 +1,131 @@
 /**
- * Configuración de IA para la plataforma Kary
+ * Configuración de IA para Kary Educational Platform
  */
 
 export const AI_CONFIG = {
-  // Configuración de proveedores
+  // Proveedores de IA disponibles
   providers: {
+    gemini: {
+      name: 'Google Gemini',
+      apiKey: import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBfQj3LxYUtLngyn3YPGJXiVs4xa0yb7QU',
+      models: {
+        geminiPro: 'gemini-pro',
+        geminiProVision: 'gemini-pro-vision'
+      },
+      priority: 1,
+      enabled: true
+    },
     openai: {
       name: 'OpenAI',
-      enabled: true,
-      priority: 1,
+      apiKey: import.meta.env.VITE_OPENAI_API_KEY,
       models: {
         gpt4: 'gpt-4',
-        gpt35: 'gpt-3.5-turbo',
-        embedding: 'text-embedding-ada-002'
+        gpt35: 'gpt-3.5-turbo'
       },
-      limits: {
-        maxTokens: 4000,
-        temperature: 0.7,
-        topP: 1
-      }
+      priority: 2,
+      enabled: !!import.meta.env.VITE_OPENAI_API_KEY
     },
     anthropic: {
       name: 'Anthropic Claude',
-      enabled: true,
-      priority: 2,
+      apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
       models: {
         claude: 'claude-3-sonnet-20240229',
         claudeHaiku: 'claude-3-haiku-20240307'
       },
-      limits: {
-        maxTokens: 4000,
-        temperature: 0.7,
-        topP: 1
-      }
+      priority: 3,
+      enabled: !!import.meta.env.VITE_ANTHROPIC_API_KEY
     },
     local: {
-      name: 'IA Local',
-      enabled: true,
-      priority: 3,
+      name: 'Local AI',
+      endpoint: import.meta.env.VITE_LOCAL_AI_ENDPOINT || 'http://localhost:11434/api',
       models: {
         llama: 'llama2',
-        mistral: 'mistral',
-        codellama: 'codellama'
+        mistral: 'mistral'
       },
-      limits: {
-        maxTokens: 2000,
-        temperature: 0.7,
-        topP: 1
-      }
+      priority: 4,
+      enabled: true
     }
   },
 
-  // Configuración de capacidades
-  capabilities: {
-    supportPlan: {
-      enabled: true,
-      maxObjectives: 5,
-      maxStrategies: 8,
-      timelineWeeks: 12
-    },
-    predictiveAlerts: {
-      enabled: true,
-      maxAlerts: 10,
-      alertTypes: ['academic', 'emotional', 'behavioral', 'attendance'],
-      priorityLevels: ['low', 'medium', 'high', 'critical']
-    },
-    personalizedTasks: {
-      enabled: true,
-      maxTasks: 5,
-      subjects: ['matemáticas', 'español', 'ciencias', 'historia', 'inglés'],
-      difficulties: ['easy', 'medium', 'hard'],
-      learningStyles: ['visual', 'auditory', 'kinesthetic', 'mixed']
-    },
-    learningAnalysis: {
-      enabled: true,
-      maxPatterns: 10,
-      analysisDepth: 'comprehensive'
-    },
-    roleAssistance: {
-      enabled: true,
-      maxRecommendations: 8,
-      maxActions: 5
-    },
-    adaptiveContent: {
-      enabled: true,
-      maxActivities: 6,
-      maxResources: 8,
-      contentTypes: ['text', 'video', 'interactive', 'assessment']
-    }
+  // Configuración por defecto
+  defaultProvider: import.meta.env.VITE_DEFAULT_AI_PROVIDER || 'gemini',
+  
+  // Configuración de respuestas
+  responseConfig: {
+    temperature: 0.7,
+    maxTokens: 2048,
+    topP: 0.95,
+    topK: 40
   },
 
-  // Configuración de contexto
-  context: {
-    maxHistoryItems: 50,
-    cacheTimeout: 300000, // 5 minutos
-    studentContextDepth: 'comprehensive',
-    institutionalContextDepth: 'overview'
+  // Configuración específica para educación
+  educationalConfig: {
+    contextPrompt: `
+      Eres un asistente de IA especializado en educación y psicopedagogía para la plataforma Kary.
+      Tu objetivo es ayudar a estudiantes, profesores, psicopedagogos, padres y directivos a mejorar
+      el proceso educativo mediante análisis inteligente y recomendaciones personalizadas.
+      
+      Principios fundamentales:
+      - Enfoque en el desarrollo integral del estudiante
+      - Consideración de aspectos académicos, emocionales y sociales
+      - Personalización basada en datos y contexto
+      - Promoción del aprendizaje activo y significativo
+      - Colaboración entre todos los actores educativos
+    `,
+    supportedLanguages: ['es', 'en'],
+    responseFormat: 'structured_json'
   },
 
-  // Configuración de respuesta
-  response: {
-    maxResponseTime: 30000, // 30 segundos
-    fallbackEnabled: true,
-    mockResponseEnabled: true,
-    retryAttempts: 3,
-    retryDelay: 1000
+  // Capacidades específicas por rol
+  roleCapabilities: {
+    student: [
+      'generar_actividades_personalizadas',
+      'explicar_conceptos_dificiles',
+      'sugerir_estrategias_estudio',
+      'motivar_progreso'
+    ],
+    teacher: [
+      'crear_planes_clase',
+      'analizar_rendimiento_estudiantes',
+      'sugerir_intervenciones',
+      'generar_evaluaciones'
+    ],
+    psychopedagogue: [
+      'crear_planes_apoyo',
+      'analizar_diagnosticos',
+      'generar_alertas_predictivas',
+      'recomendar_estrategias_intervencion'
+    ],
+    parent: [
+      'interpretar_progreso_hijo',
+      'sugerir_actividades_hogar',
+      'entender_recomendaciones_educativas',
+      'apoyar_aprendizaje_familiar'
+    ],
+    directive: [
+      'analizar_metricas_institucionales',
+      'generar_reportes_estadisticos',
+      'sugerir_mejoras_institucionales',
+      'evaluar_rendimiento_general'
+    ]
   },
 
-  // Configuración de seguridad
-  security: {
-    sanitizeInput: true,
-    validateOutput: true,
-    logInteractions: true,
-    encryptSensitiveData: true
+  // Configuración de fallback
+  fallbackChain: ['gemini', 'openai', 'anthropic', 'local'],
+  
+  // Límites y rate limiting
+  limits: {
+    maxRequestsPerMinute: 60,
+    maxTokensPerRequest: 4096,
+    maxContextLength: 8192
   },
 
-  // Configuración de monitoreo
-  monitoring: {
-    trackUsage: true,
-    trackPerformance: true,
-    trackErrors: true,
-    analyticsEnabled: true
-  },
-
-  // Configuración de personalización
-  personalization: {
-    adaptToUser: true,
-    learnFromInteractions: true,
-    customizeResponses: true,
-    rememberPreferences: true
+  // Configuración de cache
+  cache: {
+    enabled: true,
+    ttl: 300000, // 5 minutos
+    maxSize: 100
   }
-};
-
-// Configuración específica por rol
-export const ROLE_AI_CONFIG = {
-  directive: {
-    primaryCapabilities: ['roleAssistance', 'predictiveAlerts', 'learningAnalysis'],
-    contextFocus: ['institutional', 'strategic', 'administrative'],
-    responseStyle: 'executive',
-    maxDetailLevel: 'high'
-  },
-  teacher: {
-    primaryCapabilities: ['personalizedTasks', 'adaptiveContent', 'roleAssistance'],
-    contextFocus: ['classroom', 'students', 'curriculum'],
-    responseStyle: 'practical',
-    maxDetailLevel: 'medium'
-  },
-  psychopedagogue: {
-    primaryCapabilities: ['supportPlan', 'predictiveAlerts', 'learningAnalysis'],
-    contextFocus: ['individual', 'diagnostic', 'therapeutic'],
-    responseStyle: 'clinical',
-    maxDetailLevel: 'high'
-  },
-  parent: {
-    primaryCapabilities: ['roleAssistance', 'learningAnalysis'],
-    contextFocus: ['family', 'child', 'home'],
-    responseStyle: 'supportive',
-    maxDetailLevel: 'medium'
-  },
-  student: {
-    primaryCapabilities: ['adaptiveContent', 'personalizedTasks'],
-    contextFocus: ['learning', 'individual', 'academic'],
-    responseStyle: 'encouraging',
-    maxDetailLevel: 'low'
-  }
-};
-
-// Configuración de prompts del sistema
-export const SYSTEM_PROMPTS = {
-  base: "Eres un asistente de IA especializado en educación. Proporcionas respuestas útiles, precisas y contextualmente apropiadas para el entorno educativo.",
-  
-  directive: `
-    Eres un asistente especializado para directivos educativos.
-    - Ayudas con toma de decisiones estratégicas
-    - Analizas datos institucionales
-    - Sugieres mejoras organizacionales
-    - Proporcionas insights para liderazgo educativo
-    - Mantienes un enfoque en resultados y eficiencia
-  `,
-  
-  teacher: `
-    Eres un asistente pedagógico especializado para docentes.
-    - Ayudas con planificación de clases
-    - Sugieres estrategias de enseñanza
-    - Proporcionas ideas para actividades
-    - Ayudas con evaluación de estudiantes
-    - Mantienes un enfoque práctico y aplicable
-  `,
-  
-  psychopedagogue: `
-    Eres un asistente especializado en psicopedagogía.
-    - Ayudas con diagnósticos educativos
-    - Sugieres planes de apoyo
-    - Proporcionas estrategias de intervención
-    - Ayudas con análisis de comportamiento
-    - Mantienes un enfoque clínico y profesional
-  `,
-  
-  parent: `
-    Eres un asistente especializado para padres de familia.
-    - Ayudas a entender el progreso de los hijos
-    - Sugieres formas de apoyo en casa
-    - Explicas conceptos educativos
-    - Proporcionas recursos para padres
-    - Mantienes un enfoque comprensivo y alentador
-  `,
-  
-  student: `
-    Eres un tutor personal especializado para estudiantes.
-    - Ayudas con organización del estudio
-    - Enseñas técnicas de aprendizaje
-    - Proporcionas motivación y apoyo
-    - Explicas conceptos difíciles
-    - Mantienes un enfoque positivo y motivador
-  `
 };
 
 export default AI_CONFIG;
-

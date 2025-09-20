@@ -28,6 +28,7 @@ import UnifiedCommunication from './DirectiveSections/components/UnifiedCommunic
 import EcosystemIntegration from './DirectiveSections/components/EcosystemIntegration';
 import AIAssistant from '@/components/ai/AIAssistant';
 import AIFloatingButton from '@/components/ai/AIFloatingButton';
+import GeminiStatusCard from '@/components/ai/GeminiStatusCard';
 import useAI from '@/hooks/useAI';
 
 const DashboardCard = ({ title, description, icon: Icon, linkTo, bgColor, iconColor, hoverColor, count }) => {
@@ -441,8 +442,10 @@ const DirectiveDashboard = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
+              className="space-y-6"
             >
               <RealTimeMetrics data={dashboardData} />
+              <GeminiStatusCard />
             </motion.div>
           )}
 

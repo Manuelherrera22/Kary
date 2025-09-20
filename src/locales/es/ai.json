@@ -11,7 +11,10 @@
     "providers": "Proveedores",
     "connected": "Conectado",
     "disconnected": "Desconectado",
-    "refresh": "Actualizar"
+    "refresh": "Actualizar",
+    "gemini": "Google Gemini",
+    "geminiStatus": "Gemini AI activo",
+    "primaryProvider": "Proveedor principal"
   },
   "capabilities": {
     "title": "Capacidades de IA",

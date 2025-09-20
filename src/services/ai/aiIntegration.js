@@ -3,6 +3,8 @@
  * Maneja la comunicación con diferentes proveedores de IA
  */
 
+import GeminiService from './geminiService.js';
+
 class AIIntegration {
   constructor() {
     this.providers = {
@@ -29,11 +31,19 @@ class AIIntegration {
           llama: 'llama2',
           mistral: 'mistral'
         }
+      },
+      gemini: {
+        apiKey: import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBfQj3LxYUtLngyn3YPGJXiVs4xa0yb7QU',
+        models: {
+          geminiPro: 'gemini-pro',
+          geminiProVision: 'gemini-pro-vision'
+        },
+        service: new GeminiService()
       }
     };
     
-    this.defaultProvider = import.meta.env.VITE_DEFAULT_AI_PROVIDER || 'openai';
-    this.fallbackChain = ['openai', 'anthropic', 'local'];
+    this.defaultProvider = import.meta.env.VITE_DEFAULT_AI_PROVIDER || 'gemini';
+    this.fallbackChain = ['gemini', 'openai', 'anthropic', 'local'];
   }
 
   /**
@@ -87,6 +97,8 @@ class AIIntegration {
         return await this.callAnthropic(providerConfig, prompt, type, options);
       case 'local':
         return await this.callLocalAI(providerConfig, prompt, type, options);
+      case 'gemini':
+        return await this.callGemini(providerConfig, prompt, type, options);
       default:
         throw new Error(`Provider ${provider} not implemented`);
     }
@@ -526,6 +538,38 @@ class AIIntegration {
     }
     
     return availability;
+  }
+
+  /**
+   * Integración con Google Gemini
+   */
+  async callGemini(config, prompt, type, options) {
+    if (!config.service) {
+      throw new Error('Gemini service not initialized');
+    }
+
+    try {
+      // Usar el servicio de Gemini especializado para educación
+      const response = await config.service.generateEducationalContent(prompt, {
+        type,
+        ...options
+      });
+
+      if (!response.success) {
+        throw new Error(response.error || 'Gemini API error');
+      }
+
+      return {
+        content: response.content,
+        model: response.model,
+        provider: 'gemini',
+        timestamp: response.timestamp,
+        context: response.context
+      };
+    } catch (error) {
+      console.error('Gemini API error:', error);
+      throw new Error(`Gemini API error: ${error.message}`);
+    }
   }
 
   /**

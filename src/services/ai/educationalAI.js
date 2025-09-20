@@ -4,12 +4,16 @@
  */
 
 import { supabase } from '@/lib/supabaseClient';
+import aiIntegration from './aiIntegration.js';
+import GeminiService from './geminiService.js';
 
 class EducationalAI {
   constructor() {
     this.apiEndpoint = import.meta.env.VITE_AI_ENDPOINT || 'http://localhost:3001/api/ai';
     this.contextCache = new Map();
     this.diagnosticPatterns = new Map();
+    this.geminiService = new GeminiService();
+    this.aiIntegration = aiIntegration;
   }
 
   /**
@@ -314,35 +318,69 @@ class EducationalAI {
     `;
   }
 
-  async callAI(prompt, type) {
+  async callAI(prompt, type, options = {}) {
     try {
-      const response = await fetch(`${this.apiEndpoint}/${type}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_AI_API_KEY}`
-        },
-        body: JSON.stringify({
-          prompt,
-          type,
-          timestamp: new Date().toISOString(),
-          context: {
-            platform: 'kary',
-            version: '1.0.0'
-          }
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`AI API error: ${response.status}`);
+      // Usar la nueva integración de IA con Gemini como principal
+      const response = await this.aiIntegration.generateResponse(prompt, type, options);
+      
+      // Si es una respuesta de Gemini, procesarla especialmente
+      if (response.provider === 'gemini') {
+        return this.processGeminiResponse(response, type);
       }
-
-      const data = await response.json();
-      return data;
+      
+      return response;
     } catch (error) {
-      console.error('Error calling AI API:', error);
-      // Fallback a respuesta mock si la API no está disponible
+      console.error('Error calling AI:', error);
+      
+      // Intentar con el servicio de Gemini directamente
+      try {
+        const geminiResponse = await this.geminiService.generateEducationalContent(prompt, {
+          type,
+          ...options
+        });
+        
+        if (geminiResponse.success) {
+          return this.processGeminiResponse(geminiResponse, type);
+        }
+      } catch (geminiError) {
+        console.error('Gemini fallback failed:', geminiError);
+      }
+      
+      // Fallback final a respuesta mock
       return this.getMockResponse(type);
+    }
+  }
+
+  /**
+   * Procesa respuestas específicas de Gemini
+   */
+  processGeminiResponse(response, type) {
+    try {
+      // Intentar parsear como JSON si es posible
+      if (typeof response.content === 'string' && response.content.includes('{')) {
+        const parsedContent = JSON.parse(response.content);
+        return {
+          ...parsedContent,
+          provider: 'gemini',
+          timestamp: response.timestamp || new Date().toISOString()
+        };
+      }
+      
+      // Si no es JSON, devolver como texto estructurado
+      return {
+        content: response.content,
+        provider: 'gemini',
+        timestamp: response.timestamp || new Date().toISOString(),
+        type: type
+      };
+    } catch (parseError) {
+      console.error('Error parsing Gemini response:', parseError);
+      return {
+        content: response.content,
+        provider: 'gemini',
+        timestamp: response.timestamp || new Date().toISOString(),
+        type: type
+      };
     }
   }
 
