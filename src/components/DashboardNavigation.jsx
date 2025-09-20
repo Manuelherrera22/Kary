@@ -302,7 +302,10 @@ const DashboardNavigation = ({
                     ? 'text-white bg-slate-700 border-l-2 border-blue-400' 
                     : 'text-slate-300 hover:text-white hover:bg-slate-700'
                 }`}
-                onClick={() => handleNavigation(item.path)}
+                onClick={() => {
+                  console.log('Button clicked for item:', item.id, 'path:', item.path);
+                  handleNavigation(item.path);
+                }}
               >
                 <Icon size={18} className="mr-3" />
                 <span className="flex-1 text-left">{item.label}</span>
