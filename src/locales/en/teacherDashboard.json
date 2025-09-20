@@ -1,4 +1,9 @@
 {
+  "sidebar": {
+    "studentList": "Student List",
+    "activities": "Activities and Tasks",
+    "cognitiveAlerts": "AI Cognitive Alerts"
+  },
   "title": "Teacher's Dashboard",
   "description": "Manage your students, observations, and educational resources. Access support plans, generate activities, and review progress.",
   "greeting": "Welcome back, {userName}!",

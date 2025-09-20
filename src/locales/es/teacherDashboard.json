@@ -1,4 +1,9 @@
 {
+  "sidebar": {
+    "studentList": "Lista de Estudiantes",
+    "activities": "Actividades y Tareas",
+    "cognitiveAlerts": "Alertas Cognitivas IA"
+  },
   "welcome": "Bienvenido, {name}",
   "subtitle": "Hoy estás guiando el aprendizaje de tu grupo con la ayuda de Kary AI.",
   "assignedStudents": "Estudiantes asignados",
