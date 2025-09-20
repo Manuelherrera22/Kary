@@ -28,8 +28,8 @@ const Navbar = ({ navItems }) => {
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200 shadow-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           <a href="#inicio" className="flex-shrink-0">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -39,7 +39,7 @@ const Navbar = ({ navItems }) => {
               <img
                 src={karyAILogoUrl}
                 alt={t("navbar.karyAILogoAlt")}
-                className="h-12 w-auto sm:h-14" 
+                className="h-10 w-auto sm:h-12 md:h-14" 
               />
             </motion.div>
           </a>
@@ -81,12 +81,12 @@ const Navbar = ({ navItems }) => {
             )}
           </nav>
 
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center space-x-2">
             {availableLanguages.length > 1 && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-purple-600 hover:text-purple-700 mr-2">
-                    <Globe size={22} />
+                  <Button variant="ghost" size="icon" className="text-purple-600 hover:text-purple-700 h-9 w-9">
+                    <Globe size={18} />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-white shadow-lg rounded-md border">
@@ -110,9 +110,9 @@ const Navbar = ({ navItems }) => {
               size="icon"
               onClick={toggleMenu}
               aria-label={t('navbar.mainMenuAriaLabel')}
-              className="text-purple-600 hover:text-purple-700"
+              className="text-purple-600 hover:text-purple-700 h-9 w-9"
             >
-              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
@@ -125,12 +125,12 @@ const Navbar = ({ navItems }) => {
           exit={{ opacity: 0, height: 0 }}
           className="md:hidden bg-white border-t border-gray-200 shadow-md"
         >
-          <div className="px-4 pt-3 pb-4 space-y-2 sm:px-5">
+          <div className="px-4 pt-3 pb-4 space-y-1 sm:px-5">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="block px-3 py-2.5 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-colors duration-200"
+                className="block px-3 py-3 rounded-md text-sm sm:text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t(item.labelKey)}
