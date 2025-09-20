@@ -23,7 +23,8 @@ import {
   Brain,
   Target,
   Heart,
-  BookOpen
+  BookOpen,
+  BarChart3
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import unifiedDataService from '@/services/unifiedDataService';
