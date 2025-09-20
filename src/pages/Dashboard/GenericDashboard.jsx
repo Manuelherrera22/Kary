@@ -52,14 +52,14 @@ const GenericDashboard = ({ user, userProfile }) => {
 
   return (
     <motion.div 
-      className="p-4 sm:p-6 space-y-8"
+      className="p-3 sm:p-4 md:p-6 space-y-6 sm:space-y-8"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <WelcomeUser userName={displayName} />
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {genericFeatures.map((feature, index) => (
           <motion.div
             key={feature.titleKey + index}
