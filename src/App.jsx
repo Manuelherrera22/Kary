@@ -144,6 +144,37 @@ const AppContent = () => {
             <ProtectedRoute>
               <Routes>
                 <Route index element={<DashboardPage />} />
+                
+                {/* Rutas de Estudiante */}
+                <Route path="activities" element={<DashboardPage />} />
+                <Route path="progress" element={<DashboardPage />} />
+                <Route path="kary-chat" element={<DashboardPage />} />
+                <Route path="support-plans" element={<DashboardPage />} />
+                
+                {/* Rutas de Profesor */}
+                <Route path="students" element={<DashboardPage />} />
+                <Route path="observations" element={<DashboardPage />} />
+                <Route path="analytics" element={<DashboardPage />} />
+                
+                {/* Rutas de Padre */}
+                <Route path="children" element={<DashboardPage />} />
+                <Route path="family-progress" element={<DashboardPage />} />
+                <Route path="communication" element={<DashboardPage />} />
+                <Route path="appointments" element={<DashboardPage />} />
+                
+                {/* Rutas de Psicopedagogo */}
+                <Route path="cases" element={<DashboardPage />} />
+                <Route path="evaluations" element={<DashboardPage />} />
+                
+                {/* Rutas de Directivo */}
+                <Route path="institution" element={<DashboardPage />} />
+                <Route path="alerts" element={<DashboardPage />} />
+                
+                {/* Rutas Comunes */}
+                <Route path="notifications" element={<DashboardPage />} />
+                <Route path="settings" element={<DashboardPage />} />
+                
+                {/* Rutas existentes */}
                 <Route path="data-panel" element={<RoleBasedDataPanel />} />
                 <Route path="kary-core" element={<KaryCorePanel />} />
                 <Route path="progress-quick-access" element={<UnifiedProgressQuickAccessPage />} />

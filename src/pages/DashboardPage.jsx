@@ -1,9 +1,11 @@
 import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import NoAccessScreen from '@/pages/Dashboard/components/NoAccessScreen';
 import RoleSelectionScreen from '@/pages/Dashboard/components/RoleSelectionScreen';
 import DashboardLayout from '@/pages/Dashboard/components/DashboardLayout';
+import DashboardRouter from '@/pages/Dashboard/DashboardRouter';
 
 import ParentDashboard from '@/pages/Dashboard/ParentDashboard';
 import DirectiveDashboard from '@/pages/Dashboard/DirectiveDashboard';
@@ -16,6 +18,7 @@ import TeacherDashboard from '@/pages/Dashboard/TeacherDashboard';
 
 const DashboardPage = () => {
   const { user, userProfile, loading, updateUserRoleInProfile } = useMockAuth();
+  const location = useLocation();
 
   if (loading) {
     return <LoadingScreen />;
@@ -31,35 +34,46 @@ const DashboardPage = () => {
     return <RoleSelectionScreen onSelectRole={updateUserRoleInProfile} loading={loading} userName={userProfile?.full_name || user.email} />;
   }
 
-  const renderDashboardContent = () => {
-    if (!userProfile || !userProfile.role) {
-      return <GenericDashboard user={user} userProfile={userProfile} />;
-    }
-
-    switch (userProfile.role) {
-      case 'parent':
-        return <ParentDashboard />;
-      case 'directive':
-        return <DirectiveDashboard />;
-      case 'psychopedagogue':
-        return <PsychopedagogueDashboard />;
-      case 'admin':
-        return <AdminDashboard />;
-      case 'student':
-        return <StudentDashboard />;
-      case 'program_coordinator':
-        return <ProgramCoordinatorDashboard />;
-      case 'teacher':
-        return <TeacherDashboard />; 
-      default:
+  // Si estamos en la ruta raíz del dashboard, mostrar el dashboard principal
+  if (location.pathname === '/dashboard' || location.pathname === '/dashboard/') {
+    const renderDashboardContent = () => {
+      if (!userProfile || !userProfile.role) {
         return <GenericDashboard user={user} userProfile={userProfile} />;
-    }
-  };
+      }
 
+      switch (userProfile.role) {
+        case 'parent':
+          return <ParentDashboard />;
+        case 'directive':
+          return <DirectiveDashboard />;
+        case 'psychopedagogue':
+          return <PsychopedagogueDashboard />;
+        case 'admin':
+          return <AdminDashboard />;
+        case 'student':
+          return <StudentDashboard />;
+        case 'program_coordinator':
+          return <ProgramCoordinatorDashboard />;
+        case 'teacher':
+          return <TeacherDashboard />; 
+        default:
+          return <GenericDashboard user={user} userProfile={userProfile} />;
+      }
+    };
 
+    return (
+      <DashboardLayout user={user} userProfile={userProfile} onLogout={() => {}}>
+        {renderDashboardContent()}
+      </DashboardLayout>
+    );
+  }
+
+  // Para todas las demás rutas, usar el router interno
   return (
-    <DashboardLayout>
-      {renderDashboardContent()}
+    <DashboardLayout user={user} userProfile={userProfile} onLogout={() => {}}>
+      <Routes>
+        <Route path="/*" element={<DashboardRouter />} />
+      </Routes>
     </DashboardLayout>
   );
 };

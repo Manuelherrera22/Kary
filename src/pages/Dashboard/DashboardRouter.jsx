@@ -28,9 +28,9 @@ const DashboardRouter = () => {
   return (
     <Routes>
       {/* Rutas de Estudiante */}
-      <Route path="/activities" element={<StudentActivitiesPage />} />
+      <Route path="activities" element={<StudentActivitiesPage />} />
       <Route 
-        path="/progress" 
+        path="progress" 
         element={
           <GenericPage
             title={t('studentDashboard.progress', 'Mi Progreso')}
@@ -40,7 +40,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/kary-chat" 
+        path="kary-chat" 
         element={
           <GenericPage
             title={t('studentDashboard.karyChat', 'Chatea con Kary')}
@@ -50,7 +50,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/support-plans" 
+        path="support-plans" 
         element={
           <GenericPage
             title={t('studentDashboard.supportPlans', 'Planes de Apoyo')}
@@ -62,7 +62,7 @@ const DashboardRouter = () => {
 
       {/* Rutas de Profesor */}
       <Route 
-        path="/students" 
+        path="students" 
         element={
           <GenericPage
             title={t('common.students', 'Mis Estudiantes')}
@@ -72,7 +72,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/observations" 
+        path="observations" 
         element={
           <GenericPage
             title={t('teacherDashboard.observations', 'Observaciones')}
@@ -82,7 +82,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/analytics" 
+        path="analytics" 
         element={
           <GenericPage
             title={t('common.analytics', 'Analíticas')}
@@ -94,7 +94,7 @@ const DashboardRouter = () => {
 
       {/* Rutas de Padre */}
       <Route 
-        path="/children" 
+        path="children" 
         element={
           <GenericPage
             title={t('parentDashboard.children', 'Mis Hijos')}
@@ -104,7 +104,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/family-progress" 
+        path="family-progress" 
         element={
           <GenericPage
             title={t('parentDashboard.progress', 'Progreso Familiar')}
@@ -114,7 +114,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/communication" 
+        path="communication" 
         element={
           <GenericPage
             title={t('parentDashboard.communication', 'Comunicación')}
@@ -124,7 +124,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/appointments" 
+        path="appointments" 
         element={
           <GenericPage
             title={t('parentDashboard.appointments', 'Citas')}
@@ -136,7 +136,7 @@ const DashboardRouter = () => {
 
       {/* Rutas de Psicopedagogo */}
       <Route 
-        path="/cases" 
+        path="cases" 
         element={
           <GenericPage
             title={t('psychopedagogueDashboard.cases', 'Casos')}
@@ -146,7 +146,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/evaluations" 
+        path="evaluations" 
         element={
           <GenericPage
             title={t('psychopedagogueDashboard.evaluations', 'Evaluaciones')}
@@ -158,7 +158,7 @@ const DashboardRouter = () => {
 
       {/* Rutas de Directivo */}
       <Route 
-        path="/institution" 
+        path="institution" 
         element={
           <GenericPage
             title={t('directiveDashboard.institution', 'Institución')}
@@ -168,7 +168,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/user-management" 
+        path="user-management" 
         element={
           <GenericPage
             title={t('directiveDashboard.userManagement', 'Gestión de Usuarios')}
@@ -178,7 +178,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/reports" 
+        path="reports" 
         element={
           <GenericPage
             title={t('directiveDashboard.reports', 'Reportes')}
@@ -188,7 +188,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/alerts" 
+        path="alerts" 
         element={
           <GenericPage
             title={t('directiveDashboard.alerts', 'Alertas')}
@@ -198,7 +198,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/strategic-summary" 
+        path="strategic-summary" 
         element={
           <GenericPage
             title={t('directiveDashboard.strategicSummary', 'Resumen Estratégico')}
@@ -210,7 +210,7 @@ const DashboardRouter = () => {
 
       {/* Rutas Comunes */}
       <Route 
-        path="/notifications" 
+        path="notifications" 
         element={
           <GenericPage
             title={t('common.notifications', 'Notificaciones')}
@@ -220,7 +220,7 @@ const DashboardRouter = () => {
         } 
       />
       <Route 
-        path="/settings" 
+        path="settings" 
         element={
           <GenericPage
             title={t('common.settings', 'Configuración')}
