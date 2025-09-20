@@ -7,8 +7,8 @@ class AIIntegration {
   constructor() {
     this.providers = {
       openai: {
-        endpoint: process.env.REACT_APP_OPENAI_ENDPOINT || 'https://api.openai.com/v1',
-        apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+        endpoint: import.meta.env.VITE_OPENAI_ENDPOINT || 'https://api.openai.com/v1',
+        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
         models: {
           gpt4: 'gpt-4',
           gpt35: 'gpt-3.5-turbo',
@@ -16,15 +16,15 @@ class AIIntegration {
         }
       },
       anthropic: {
-        endpoint: process.env.REACT_APP_ANTHROPIC_ENDPOINT || 'https://api.anthropic.com/v1',
-        apiKey: process.env.REACT_APP_ANTHROPIC_API_KEY,
+        endpoint: import.meta.env.VITE_ANTHROPIC_ENDPOINT || 'https://api.anthropic.com/v1',
+        apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
         models: {
           claude: 'claude-3-sonnet-20240229',
           claudeHaiku: 'claude-3-haiku-20240307'
         }
       },
       local: {
-        endpoint: process.env.REACT_APP_LOCAL_AI_ENDPOINT || 'http://localhost:11434/api',
+        endpoint: import.meta.env.VITE_LOCAL_AI_ENDPOINT || 'http://localhost:11434/api',
         models: {
           llama: 'llama2',
           mistral: 'mistral'
@@ -32,7 +32,7 @@ class AIIntegration {
       }
     };
     
-    this.defaultProvider = process.env.REACT_APP_DEFAULT_AI_PROVIDER || 'openai';
+    this.defaultProvider = import.meta.env.VITE_DEFAULT_AI_PROVIDER || 'openai';
     this.fallbackChain = ['openai', 'anthropic', 'local'];
   }
 

@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 class EducationalAI {
   constructor() {
-    this.apiEndpoint = process.env.REACT_APP_AI_ENDPOINT || 'http://localhost:3001/api/ai';
+    this.apiEndpoint = import.meta.env.VITE_AI_ENDPOINT || 'http://localhost:3001/api/ai';
     this.contextCache = new Map();
     this.diagnosticPatterns = new Map();
   }
@@ -320,7 +320,7 @@ class EducationalAI {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_AI_API_KEY}`
+          'Authorization': `Bearer ${import.meta.env.VITE_AI_API_KEY}`
         },
         body: JSON.stringify({
           prompt,
