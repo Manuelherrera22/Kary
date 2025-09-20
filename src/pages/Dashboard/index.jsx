@@ -23,7 +23,11 @@ const DashboardComponent = () => {
   }
 
   return (
-    <DashboardLayout />
+    <DashboardLayout 
+      user={user} 
+      userProfile={userProfile}
+      onLogout={handleLogout}
+    />
   );
 };
 

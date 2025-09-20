@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { 
@@ -16,24 +17,79 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const DashboardLayout = ({ children, user, onLogout }) => {
+const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navigationItems = [
-    { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home },
-    { id: 'students', label: t('common.students', 'Estudiantes'), icon: Users },
-    { id: 'activities', label: t('common.activities', 'Actividades'), icon: BookOpen },
-    { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3 },
-    { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell },
-    { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings }
-  ];
+  // Obtener el rol del usuario para mostrar navegación específica
+  const userRole = userProfile?.role || user?.role || 'student';
+
+  // Navegación específica por rol
+  const getNavigationItems = () => {
+    const baseItems = [
+      { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
+      { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell, path: '/dashboard/notifications' },
+      { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
+    ];
+
+    // Agregar elementos específicos según el rol
+    switch (userRole) {
+      case 'student':
+        return [
+          ...baseItems,
+          { id: 'activities', label: t('common.activities', 'Actividades'), icon: BookOpen, path: '/dashboard/activities' },
+          { id: 'progress', label: t('studentDashboard.progress', 'Mi Progreso'), icon: BarChart3, path: '/dashboard/progress' }
+        ];
+      case 'teacher':
+        return [
+          ...baseItems,
+          { id: 'students', label: t('common.students', 'Estudiantes'), icon: Users, path: '/dashboard/students' },
+          { id: 'activities', label: t('common.activities', 'Actividades'), icon: BookOpen, path: '/dashboard/activities' },
+          { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3, path: '/dashboard/analytics' }
+        ];
+      case 'parent':
+        return [
+          ...baseItems,
+          { id: 'children', label: t('parentDashboard.children', 'Mis Hijos'), icon: Users, path: '/dashboard/children' },
+          { id: 'progress', label: t('parentDashboard.progress', 'Progreso Familiar'), icon: BarChart3, path: '/dashboard/family-progress' }
+        ];
+      case 'psychopedagogue':
+        return [
+          ...baseItems,
+          { id: 'students', label: t('common.students', 'Estudiantes'), icon: Users, path: '/dashboard/students' },
+          { id: 'cases', label: t('psychopedagogueDashboard.cases', 'Casos'), icon: BookOpen, path: '/dashboard/cases' },
+          { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3, path: '/dashboard/analytics' }
+        ];
+      case 'directive':
+        return [
+          ...baseItems,
+          { id: 'institution', label: t('directiveDashboard.institution', 'Institución'), icon: Users, path: '/dashboard/institution' },
+          { id: 'reports', label: t('directiveDashboard.reports', 'Reportes'), icon: BarChart3, path: '/dashboard/reports' },
+          { id: 'alerts', label: t('directiveDashboard.alerts', 'Alertas'), icon: Bell, path: '/dashboard/alerts' }
+        ];
+      default:
+        return baseItems;
+    }
+  };
+
+  const navigationItems = getNavigationItems();
 
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
     }
     setIsMobileMenuOpen(false);
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
+  const isActiveRoute = (path) => {
+    return location.pathname === path;
   };
 
   return (
@@ -65,8 +121,8 @@ const DashboardLayout = ({ children, user, onLogout }) => {
                         <User size={20} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">{user?.name || 'Usuario'}</h3>
-                        <p className="text-sm text-slate-400 capitalize">{user?.role || 'usuario'}</p>
+                        <h3 className="font-semibold text-white">{userProfile?.full_name || user?.full_name || 'Usuario'}</h3>
+                        <p className="text-sm text-slate-400 capitalize">{userProfile?.role || user?.role || 'usuario'}</p>
                       </div>
                     </div>
                   </div>
@@ -76,15 +132,21 @@ const DashboardLayout = ({ children, user, onLogout }) => {
                     <ul className="space-y-2">
                       {navigationItems.map((item) => {
                         const Icon = item.icon;
+                        const isActive = isActiveRoute(item.path);
                         return (
                           <li key={item.id}>
                             <Button
                               variant="ghost"
-                              className="w-full justify-start text-slate-300 hover:text-white hover:bg-slate-700"
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              className={`w-full justify-start transition-all duration-200 ${
+                                isActive 
+                                  ? 'text-white bg-slate-700 border-l-2 border-blue-400' 
+                                  : 'text-slate-300 hover:text-white hover:bg-slate-700'
+                              }`}
+                              onClick={() => handleNavigation(item.path)}
                             >
                               <Icon size={18} className="mr-3" />
                               {item.label}
+                              {isActive && <ChevronRight size={16} className="ml-auto" />}
                             </Button>
                           </li>
                         );
