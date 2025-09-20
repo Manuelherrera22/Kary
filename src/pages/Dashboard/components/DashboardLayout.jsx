@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
@@ -23,15 +23,31 @@ import {
   Target
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import useRealData from '@/hooks/useRealData';
+import DashboardNavigation from '@/components/DashboardNavigation';
 
 const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Usar datos reales de Supabase
+  const { 
+    user: realUser, 
+    userProfile: realUserProfile, 
+    dashboardData, 
+    loading: realDataLoading,
+    handleLogout: realHandleLogout 
+  } = useRealData();
+
+  // Usar datos reales si están disponibles, sino usar los props
+  const currentUser = realUser || user;
+  const currentUserProfile = realUserProfile || userProfile;
+  const currentOnLogout = realHandleLogout || onLogout;
 
   // Obtener el rol del usuario para mostrar navegación específica
-  const userRole = userProfile?.role || user?.role || 'student';
+  const userRole = currentUserProfile?.role || currentUser?.role || 'student';
 
   // Navegación específica por rol con funciones reales
   const getNavigationItems = () => {
@@ -102,11 +118,15 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
 
   const navigationItems = getNavigationItems();
 
-  const handleLogout = () => {
-    if (onLogout) {
-      onLogout();
+  const handleLogout = async () => {
+    try {
+      if (currentOnLogout) {
+        await currentOnLogout();
+      }
+      setIsMobileMenuOpen(false);
+    } catch (error) {
+      console.error('Error during logout:', error);
     }
-    setIsMobileMenuOpen(false);
   };
 
   const handleNavigation = (path) => {
@@ -147,38 +167,19 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
                         <User size={20} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">{userProfile?.full_name || user?.full_name || 'Usuario'}</h3>
-                        <p className="text-sm text-slate-400 capitalize">{userProfile?.role || user?.role || 'usuario'}</p>
+                        <h3 className="font-semibold text-white">{currentUserProfile?.full_name || currentUser?.full_name || 'Usuario'}</h3>
+                        <p className="text-sm text-slate-400 capitalize">{currentUserProfile?.role || currentUser?.role || 'usuario'}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Navigation */}
-                  <nav className="flex-1 p-4">
-                    <ul className="space-y-2">
-                      {navigationItems.map((item) => {
-                        const Icon = item.icon;
-                        const isActive = isActiveRoute(item.path);
-                        return (
-                          <li key={item.id}>
-                            <Button
-                              variant="ghost"
-                              className={`w-full justify-start transition-all duration-200 ${
-                                isActive 
-                                  ? 'text-white bg-slate-700 border-l-2 border-blue-400' 
-                                  : 'text-slate-300 hover:text-white hover:bg-slate-700'
-                              }`}
-                              onClick={() => handleNavigation(item.path)}
-                            >
-                              <Icon size={18} className="mr-3" />
-                              {item.label}
-                              {isActive && <ChevronRight size={16} className="ml-auto" />}
-                            </Button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </nav>
+                  <DashboardNavigation
+                    userRole={userRole}
+                    dashboardData={dashboardData}
+                    onNavigate={handleNavigation}
+                    onClose={() => setIsMobileMenuOpen(false)}
+                  />
 
                   {/* Logout */}
                   <div className="p-4 border-t border-slate-700">

@@ -1,9 +1,11 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from '@/pages/Dashboard/components/LoadingScreen';
 import NoAccessScreen from '@/pages/Dashboard/components/NoAccessScreen';
 import RoleSelectionScreen from '@/pages/Dashboard/components/RoleSelectionScreen';
 import DashboardLayout from '@/pages/Dashboard/components/DashboardLayout';
+import DashboardRouter from '@/pages/Dashboard/DashboardRouter';
 
 const DashboardComponent = () => {
   const { user, userProfile, loading, handleLogout, updateUserRoleInProfile } = useMockAuth();
@@ -27,7 +29,11 @@ const DashboardComponent = () => {
       user={user} 
       userProfile={userProfile}
       onLogout={handleLogout}
-    />
+    >
+      <Routes>
+        <Route path="/*" element={<DashboardRouter />} />
+      </Routes>
+    </DashboardLayout>
   );
 };
 

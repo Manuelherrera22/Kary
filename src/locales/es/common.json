@@ -92,5 +92,19 @@
   "retryingDescription": "Intentando reconectar con el servidor...",
   "retryButton": "Reintentar",
   "navigation": "Navegación",
-  "navigationDescription": "Menú de navegación principal del dashboard"
+  "navigationDescription": "Menú de navegación principal del dashboard",
+  "back": "Volver",
+  "comingSoon": "Próximamente",
+  "featureInDevelopment": "Esta funcionalidad está en desarrollo. Pronto estará disponible.",
+  "backToDashboard": "Volver al Dashboard",
+  "completed": "Completada",
+  "inProgress": "En Progreso",
+  "pending": "Pendiente",
+  "unknown": "Desconocido",
+  "progress": "Progreso",
+  "subject": "Materia",
+  "grade": "Grado",
+  "dueDate": "Fecha límite",
+  "notificationsDescription": "Gestiona tus notificaciones",
+  "settingsDescription": "Configura tu cuenta y preferencias"
 }

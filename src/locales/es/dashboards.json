@@ -56,6 +56,11 @@
     "alerts": "Alertas",
     "userManagement": "Gestión de Usuarios",
     "strategicSummary": "Resumen Estratégico",
+    "institutionDescription": "Datos y métricas institucionales",
+    "userManagementDescription": "Administra usuarios y roles del sistema",
+    "reportsDescription": "Genera y visualiza reportes institucionales",
+    "alertsDescription": "Monitorea alertas críticas del sistema",
+    "strategicSummaryDescription": "Análisis estratégico institucional",
     "stats": {
       "schoolData": "Datos Institucionales",
       "schoolDataDesc": "Métricas académicas y asistenciales de la institución",
@@ -294,6 +299,10 @@
     "progress": "Mi Progreso",
     "karyChat": "Chatea con Kary",
     "supportPlans": "Planes de Apoyo",
+    "activitiesDescription": "Gestiona y completa tus actividades asignadas",
+    "progressDescription": "Visualiza tu progreso académico y personal",
+    "karyChatDescription": "Tu asistente de IA para apoyo académico y emocional",
+    "supportPlansDescription": "Revisa tus planes de apoyo personalizados",
     "cards": {
       "karyChat": "Chatea con Kary AI",
       "karyChatDesc": "Tu asistente IA para apoyo emocional y académico.",
@@ -325,12 +334,17 @@
     "learningResources": "Recursos de Aprendizaje",
     "assignedResources": "Recursos Asignados",
     "tasks": "Tareas y Actividades",
-    "observations": "Observaciones"
+    "observations": "Observaciones",
+    "studentsDescription": "Gestiona y monitorea a tus estudiantes",
+    "observationsDescription": "Registra y revisa observaciones de estudiantes",
+    "analyticsDescription": "Analiza el rendimiento y progreso de tus estudiantes"
   },
   "psychopedagogueDashboard": {
     "cases": "Casos",
     "supportPlans": "Planes de Apoyo",
-    "evaluations": "Evaluaciones"
+    "evaluations": "Evaluaciones",
+    "casesDescription": "Gestiona casos de estudiantes",
+    "evaluationsDescription": "Realiza y revisa evaluaciones psicológicas"
   },
   "psychopedagogue": {
     "latestCasesTitle": "Casos Recientes y Seguimiento",
@@ -341,7 +355,11 @@
     "children": "Mis Hijos",
     "progress": "Progreso Familiar",
     "communication": "Comunicación",
-    "appointments": "Citas"
+    "appointments": "Citas",
+    "childrenDescription": "Información y seguimiento de tus hijos",
+    "progressDescription": "Seguimiento del progreso familiar",
+    "communicationDescription": "Comunicación con la institución",
+    "appointmentsDescription": "Gestiona citas y reuniones"
   },
   "parent": {
     "unified": {
