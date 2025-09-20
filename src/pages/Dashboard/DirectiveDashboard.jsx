@@ -35,20 +35,20 @@ const DashboardCard = ({ title, description, icon: Icon, linkTo, bgColor, iconCo
   return (
     <motion.div
       whileHover={{ scale: 1.03, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
-      className={`rounded-xl shadow-lg p-3 sm:p-4 md:p-6 transition-all duration-300 ease-out group ${bgColor} border border-slate-700/60`}
+      className={`rounded-2xl shadow-lg p-6 sm:p-8 md:p-10 transition-all duration-300 ease-out group ${bgColor} border border-slate-700/60`}
     >
       <Link to={linkTo} className="block">
         <div className="flex items-start justify-between">
-          <div className={`p-2 sm:p-3 rounded-full ${iconColor.replace('text-', 'bg-').replace('400', '600')} mb-3 sm:mb-4`}>
-            <Icon size={20} className={`${iconColor} sm:hidden`} />
-            <Icon size={28} className={`${iconColor} hidden sm:block`} />
+          <div className={`p-3 sm:p-4 rounded-2xl ${iconColor.replace('text-', 'bg-').replace('400', '600')} mb-4 sm:mb-6`}>
+            <Icon size={24} className={`${iconColor} sm:hidden`} />
+            <Icon size={32} className={`${iconColor} hidden sm:block`} />
           </div>
           {count !== undefined && (
-            <span className={`text-xl sm:text-2xl md:text-3xl font-bold ${iconColor}`}>{count}</span>
+            <span className={`text-2xl sm:text-3xl md:text-4xl font-bold ${iconColor}`}>{count}</span>
           )}
         </div>
-        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-slate-100 mb-1 group-hover:text-sky-300 transition-colors">{title}</h3>
-        <p className="text-xs sm:text-sm text-slate-400 group-hover:text-slate-300 transition-colors">{description}</p>
+        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-slate-100 mb-2 group-hover:text-sky-300 transition-colors">{title}</h3>
+        <p className="text-sm sm:text-base text-slate-400 group-hover:text-slate-300 transition-colors">{description}</p>
       </Link>
     </motion.div>
   );
@@ -59,15 +59,15 @@ const SectionItem = ({ label, description, icon: Icon, linkTo, bgColor, iconColo
     <Link to={linkTo}>
       <motion.div
         whileHover={{ x: 5, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-        className={`flex items-center p-2 sm:p-3 rounded-lg cursor-pointer transition-all duration-200 ${bgColor} mb-2 border border-transparent hover:border-slate-600`}
+        className={`flex items-center p-4 sm:p-6 rounded-xl cursor-pointer transition-all duration-200 ${bgColor} mb-3 border border-transparent hover:border-slate-600`}
       >
-        <div className={`p-1.5 sm:p-2 rounded-md mr-2 sm:mr-3 ${iconColor.replace('text-', 'bg-').replace('400', '600')}`}>
-          <Icon size={16} className={`${iconColor} sm:hidden`} />
-          <Icon size={20} className={`${iconColor} hidden sm:block`} />
+        <div className={`p-2 sm:p-3 rounded-lg mr-3 sm:mr-4 ${iconColor.replace('text-', 'bg-').replace('400', '600')}`}>
+          <Icon size={20} className={`${iconColor} sm:hidden`} />
+          <Icon size={24} className={`${iconColor} hidden sm:block`} />
         </div>
         <div>
-          <h4 className="text-xs sm:text-sm font-medium text-slate-200">{label}</h4>
-          <p className="text-xs text-slate-400">{description}</p>
+          <h4 className="text-sm sm:text-base font-semibold text-slate-200">{label}</h4>
+          <p className="text-sm text-slate-400">{description}</p>
         </div>
       </motion.div>
     </Link>
@@ -324,27 +324,27 @@ const DirectiveDashboard = () => {
       className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
     >
       {/* Header */}
-      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50 px-4 py-3">
+      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50 px-4 sm:px-6 py-4 sm:py-5">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h1 className="text-lg font-semibold text-white">
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-white">
               {t('common.dashboard')}
             </h1>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
-              <Bell size={18} />
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white p-2">
+              <Bell size={20} />
             </Button>
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-              <User size={16} className="text-white" />
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+              <User size={20} className="text-white" />
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={handleLogout}
-              className="text-red-400 hover:text-red-300 hover:bg-red-500/20"
+              className="text-red-400 hover:text-red-300 hover:bg-red-500/20 px-3 py-2"
             >
-              <LogOut size={18} className="mr-2" />
+              <LogOut size={20} className="mr-2" />
               {t('common.logout')}
             </Button>
           </div>
@@ -354,12 +354,12 @@ const DirectiveDashboard = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20"></div>
-        <div className="relative p-6">
+        <div className="relative p-6 sm:p-8">
           <WelcomeUser />
           
           {/* Navigation Tabs */}
-          <div className="mt-6 sm:mt-8">
-            <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6">
+          <div className="mt-8 sm:mt-10">
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
               {sections.map((section) => (
                 <Button
                   key={section.id}
@@ -369,9 +369,9 @@ const DirectiveDashboard = () => {
                     activeSection === section.id
                       ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
                       : 'bg-slate-800/50 border-slate-700 text-slate-300 hover:bg-slate-700/50'
-                  } transition-all duration-300 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2`}
+                  } transition-all duration-300 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3`}
                 >
-                  <section.icon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <section.icon className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" />
                   <span className="hidden sm:inline">{section.label}</span>
                   <span className="sm:hidden">{section.label.split(' ')[0]}</span>
                 </Button>
@@ -382,7 +382,7 @@ const DirectiveDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="p-3 sm:p-4 md:p-6 space-y-6 sm:space-y-8">
+      <div className="p-4 sm:p-6 md:p-8 space-y-8 sm:space-y-10">
         <AnimatePresence mode="wait">
           {activeSection === 'overview' && (
             <motion.div
@@ -394,7 +394,7 @@ const DirectiveDashboard = () => {
               className="space-y-8"
             >
               {/* Main Stats Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                 {mainStats.map((stat, index) => (
                   <motion.div
                     key={stat.titleKey}
@@ -423,27 +423,27 @@ const DirectiveDashboard = () => {
               
               {/* Quick Access */}
               <Card className="bg-slate-800/50 border-slate-700/60 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300">
+                <CardHeader className="p-6 sm:p-8">
+                  <CardTitle className="text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300">
                     {t('directiveDashboard.quickAccessTitle')}
                   </CardTitle>
-                  <CardDescription className="text-slate-400">
+                  <CardDescription className="text-slate-400 text-base sm:text-lg">
                     {t('directiveDashboard.quickAccessDesc')}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-6 sm:p-8 pt-0">
                   <ScrollArea className="h-[450px] pr-3">
-                    <Accordion type="multiple" defaultValue={['strategy']} className="w-full space-y-3">
+                    <Accordion type="multiple" defaultValue={['strategy']} className="w-full space-y-4">
                       {accordionSections.map((section) => (
-                        <AccordionItem key={section.titleKey} value={section.titleKey} className="bg-slate-700/30 rounded-lg border-slate-700/50 px-4 data-[state=open]:bg-slate-700/50 transition-colors">
-                          <AccordionTrigger className="hover:no-underline py-3 text-base font-medium text-slate-200 hover:text-sky-300 transition-colors">
+                        <AccordionItem key={section.titleKey} value={section.titleKey} className="bg-slate-700/30 rounded-xl border-slate-700/50 px-6 data-[state=open]:bg-slate-700/50 transition-colors">
+                          <AccordionTrigger className="hover:no-underline py-4 text-lg font-semibold text-slate-200 hover:text-sky-300 transition-colors">
                             <div className="flex items-center">
-                              <section.icon size={20} className={`mr-3 ${section.iconColor}`} />
+                              <section.icon size={24} className={`mr-4 ${section.iconColor}`} />
                               {t(section.titleKey)}
                             </div>
                           </AccordionTrigger>
-                          <AccordionContent className="pt-2 pb-3 border-t border-slate-600/50">
-                            <div className="space-y-1.5">
+                          <AccordionContent className="pt-3 pb-4 border-t border-slate-600/50">
+                            <div className="space-y-2">
                               {section.items.map(item => (
                                  <SectionItem
                                   key={item.labelKey}
@@ -473,7 +473,7 @@ const DirectiveDashboard = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="space-y-6"
+              className="space-y-8"
             >
               <RealTimeMetrics data={dashboardData} />
               <GeminiStatusCard />
