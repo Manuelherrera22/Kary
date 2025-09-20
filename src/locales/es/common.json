@@ -106,5 +106,7 @@
   "grade": "Grado",
   "dueDate": "Fecha límite",
   "notificationsDescription": "Gestiona tus notificaciones",
-  "settingsDescription": "Configura tu cuenta y preferencias"
+  "settingsDescription": "Configura tu cuenta y preferencias",
+  "pageNotFound": "Página no encontrada",
+  "pageNotFoundDescription": "La página que buscas no existe o no está disponible"
 }

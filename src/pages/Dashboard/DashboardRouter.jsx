@@ -25,6 +25,8 @@ import {
 const DashboardRouter = () => {
   const { t } = useLanguage();
 
+  console.log('DashboardRouter rendering');
+
   return (
     <Routes>
       {/* Rutas de Estudiante */}
@@ -225,6 +227,18 @@ const DashboardRouter = () => {
           <GenericPage
             title={t('common.settings', 'Configuración')}
             description={t('common.settingsDescription', 'Configura tu cuenta y preferencias')}
+            icon={Settings}
+          />
+        } 
+      />
+      
+      {/* Ruta catch-all para rutas no encontradas */}
+      <Route 
+        path="*" 
+        element={
+          <GenericPage
+            title={t('common.pageNotFound', 'Página no encontrada')}
+            description={t('common.pageNotFoundDescription', 'La página que buscas no existe o no está disponible')}
             icon={Settings}
           />
         } 

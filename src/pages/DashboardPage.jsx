@@ -34,45 +34,40 @@ const DashboardPage = () => {
     return <RoleSelectionScreen onSelectRole={updateUserRoleInProfile} loading={loading} userName={userProfile?.full_name || user.email} />;
   }
 
-  // Si estamos en la ruta raíz del dashboard, mostrar el dashboard principal
-  if (location.pathname === '/dashboard' || location.pathname === '/dashboard/') {
-    const renderDashboardContent = () => {
-      if (!userProfile || !userProfile.role) {
+  // Función para renderizar el contenido del dashboard principal
+  const renderDashboardContent = () => {
+    if (!userProfile || !userProfile.role) {
+      return <GenericDashboard user={user} userProfile={userProfile} />;
+    }
+
+    switch (userProfile.role) {
+      case 'parent':
+        return <ParentDashboard />;
+      case 'directive':
+        return <DirectiveDashboard />;
+      case 'psychopedagogue':
+        return <PsychopedagogueDashboard />;
+      case 'admin':
+        return <AdminDashboard />;
+      case 'student':
+        return <StudentDashboard />;
+      case 'program_coordinator':
+        return <ProgramCoordinatorDashboard />;
+      case 'teacher':
+        return <TeacherDashboard />; 
+      default:
         return <GenericDashboard user={user} userProfile={userProfile} />;
-      }
+    }
+  };
 
-      switch (userProfile.role) {
-        case 'parent':
-          return <ParentDashboard />;
-        case 'directive':
-          return <DirectiveDashboard />;
-        case 'psychopedagogue':
-          return <PsychopedagogueDashboard />;
-        case 'admin':
-          return <AdminDashboard />;
-        case 'student':
-          return <StudentDashboard />;
-        case 'program_coordinator':
-          return <ProgramCoordinatorDashboard />;
-        case 'teacher':
-          return <TeacherDashboard />; 
-        default:
-          return <GenericDashboard user={user} userProfile={userProfile} />;
-      }
-    };
-
-    return (
-      <DashboardLayout user={user} userProfile={userProfile} onLogout={() => {}}>
-        {renderDashboardContent()}
-      </DashboardLayout>
-    );
-  }
-
-  // Para todas las demás rutas, usar el router interno
   return (
     <DashboardLayout user={user} userProfile={userProfile} onLogout={() => {}}>
       <Routes>
-        <Route path="/*" element={<DashboardRouter />} />
+        {/* Ruta raíz del dashboard */}
+        <Route index element={renderDashboardContent()} />
+        
+        {/* Todas las demás rutas */}
+        <Route path="*" element={<DashboardRouter />} />
       </Routes>
     </DashboardLayout>
   );
