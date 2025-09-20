@@ -502,7 +502,7 @@ INSTRUCCIONES:
 
 Responde en español y adapta tu respuesta al contexto educativo y al rol del usuario.`;
 
-      const geminiResponse = await educationalAI.generateEducationalContent(
+      const geminiResponse = await educationalAI.geminiService.generateEducationalContent(
         contextualPrompt,
         {
           type: 'chat',
