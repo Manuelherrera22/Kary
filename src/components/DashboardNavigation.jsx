@@ -31,9 +31,12 @@ const DashboardNavigation = ({
   const location = useLocation();
 
   const handleNavigation = (path) => {
+    console.log('DashboardNavigation handleNavigation called with path:', path);
     if (onNavigate) {
+      console.log('Using onNavigate function');
       onNavigate(path);
     } else {
+      console.log('Using navigate function directly');
       navigate(path);
     }
     if (onClose) {

@@ -151,6 +151,7 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
   };
 
   const handleNavigation = (path) => {
+    console.log('Navigating to:', path);
     navigate(path);
     setIsMobileMenuOpen(false);
   };
