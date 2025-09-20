@@ -188,7 +188,7 @@ const TeacherDashboard = () => {
 
   return (
     <motion.div 
-      className="space-y-8"
+      className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -201,24 +201,25 @@ const TeacherDashboard = () => {
       {/* Navegación de secciones */}
       <div className="flex flex-wrap gap-2 justify-center">
         {[
-          { id: 'overview', label: 'Resumen', icon: '📊' },
-          { id: 'analytics', label: 'Analytics', icon: '📈' },
-          { id: 'ai', label: 'Asistente IA', icon: '🤖' },
-          { id: 'activities', label: 'Actividades', icon: '📚' },
-          { id: 'ecosystem', label: 'Ecosistema', icon: '🔄' },
-          { id: 'gamification', label: 'Progreso', icon: '🏆' }
+          { id: 'overview', label: 'Resumen', icon: '📊', shortLabel: 'Resumen' },
+          { id: 'analytics', label: 'Analytics', icon: '📈', shortLabel: 'Analytics' },
+          { id: 'ai', label: 'Asistente IA', icon: '🤖', shortLabel: 'IA' },
+          { id: 'activities', label: 'Actividades', icon: '📚', shortLabel: 'Actividades' },
+          { id: 'ecosystem', label: 'Ecosistema', icon: '🔄', shortLabel: 'Ecosistema' },
+          { id: 'gamification', label: 'Progreso', icon: '🏆', shortLabel: 'Progreso' }
         ].map((section) => (
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
               activeSection === section.id
                 ? 'bg-purple-600 text-white shadow-lg'
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
           >
-            <span className="mr-2">{section.icon}</span>
-            {section.label}
+            <span className="mr-1 sm:mr-2">{section.icon}</span>
+            <span className="hidden sm:inline">{section.label}</span>
+            <span className="sm:hidden">{section.shortLabel}</span>
           </button>
         ))}
       </div>
@@ -227,7 +228,7 @@ const TeacherDashboard = () => {
       {activeSection === 'overview' && (
         <>
           {/* Estadísticas principales */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {statCards.map((card, index) => (
           <StatCard
             key={index}
@@ -249,8 +250,8 @@ const TeacherDashboard = () => {
       />
 
       {/* Gestión masiva de actividades */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-slate-200">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-200">
           {t('teacherDashboard.quickActions', 'Acciones Rápidas')}
         </h2>
         <BulkActivityManager 
@@ -261,10 +262,10 @@ const TeacherDashboard = () => {
 
       {/* Tarjetas de resumen de estudiantes */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-slate-200">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-200">
           {t('teacherDashboard.studentOverview', 'Resumen de Estudiantes')}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {students.map((student) => (
             <StudentOverviewCard
               key={student.id}
