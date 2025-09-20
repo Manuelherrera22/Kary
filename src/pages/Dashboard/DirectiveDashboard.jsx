@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMockAuth } from '@/contexts/MockAuthContext';
-import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { 
   BarChart2, Users, FileText, Settings, ShieldAlert, Activity, Link2, Users2, Edit3, Eye, 
@@ -77,8 +76,7 @@ const SectionItem = ({ label, description, icon: Icon, linkTo, bgColor, iconColo
 
 const DirectiveDashboard = () => {
   const { t } = useLanguage();
-  const { userProfile, user } = useMockAuth(); 
-  const { handleLogout } = useAuth();
+  const { userProfile, user, handleLogout } = useMockAuth(); 
   const [loadingDashboard, setLoadingDashboard] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
