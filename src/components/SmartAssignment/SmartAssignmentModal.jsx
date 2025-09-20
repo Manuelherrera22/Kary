@@ -124,18 +124,18 @@ const SmartAssignmentModal = ({ isOpen, onOpenChange, triggerButton }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       {triggerButton && <DialogTrigger asChild>{triggerButton}</DialogTrigger>}
-      <DialogContent className="sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl h-[90vh] flex flex-col bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-slate-50 p-0 overflow-hidden">
-        <DialogHeader className="p-6 border-b border-purple-800/50">
-          <DialogTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 flex items-center">
-            <Sparkles size={28} className="mr-3 text-purple-400" />
+      <DialogContent className="w-[95vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl h-[95vh] sm:h-[90vh] flex flex-col bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-slate-50 p-0 overflow-hidden">
+        <DialogHeader className="p-4 sm:p-6 border-b border-purple-800/50">
+          <DialogTitle className="text-lg sm:text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 flex items-center">
+            <Sparkles size={20} className="mr-2 sm:mr-3 text-purple-400 sm:w-7 sm:h-7" />
             {t('smartAssignment.modalTitle')}
           </DialogTitle>
-          <DialogDescription className="text-slate-400">
+          <DialogDescription className="text-slate-400 text-sm sm:text-base">
             {t('smartAssignment.modalDescription')}: {currentStepTitle} (Paso {currentStepIndex + 1} de {steps.length})
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex-grow overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-purple-700 scrollbar-track-slate-800">
+        <div className="flex-grow overflow-y-auto p-4 sm:p-6 scrollbar-thin scrollbar-thumb-purple-700 scrollbar-track-slate-800">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStepIndex}
@@ -154,7 +154,7 @@ const SmartAssignmentModal = ({ isOpen, onOpenChange, triggerButton }) => {
           </AnimatePresence>
         </div>
 
-        <DialogFooter className="p-6 border-t border-purple-800/50 sm:justify-between gap-3 bg-slate-900/50">
+        <DialogFooter className="p-4 sm:p-6 border-t border-purple-800/50 sm:justify-between gap-3 bg-slate-900/50">
           <DialogClose asChild>
             <Button variant="outline" className="text-slate-300 border-slate-600 hover:bg-slate-700 hover:text-slate-100">
                <X size={18} className="mr-2" /> {t('common.closeButton')}
