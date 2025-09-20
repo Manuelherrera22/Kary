@@ -428,11 +428,8 @@ const AIAssistant = ({
           if (capability) {
             response = await capability.action();
           } else {
-            response = await educationalAI.getRoleBasedAssistance(
-              role || 'general',
-              { message: currentInput, context, queryType },
-              context
-            );
+            // Usar Gemini para respuestas generales
+            response = await callGeminiDirectly(currentInput, context, queryType);
           }
           break;
           
@@ -445,19 +442,12 @@ const AIAssistant = ({
           break;
           
         case 'data_request':
-          response = await educationalAI.getRoleBasedAssistance(
-            role || 'general',
-            { message: currentInput, context, queryType, dataRequest: true },
-            context
-          );
+          response = await callGeminiDirectly(currentInput, context, queryType);
           break;
           
         default:
-          response = await educationalAI.getRoleBasedAssistance(
-            role || 'general',
-            { message: currentInput, context, queryType },
-            context
-          );
+          // Usar Gemini para todas las consultas generales
+          response = await callGeminiDirectly(currentInput, context, queryType);
       }
 
       const aiMessage = {
@@ -485,6 +475,110 @@ const AIAssistant = ({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Función para llamar a Gemini directamente
+  const callGeminiDirectly = async (message, context, queryType) => {
+    try {
+      // Crear prompt contextualizado
+      const roleName = context?.role || 'usuario';
+      const userName = user?.name || 'Usuario';
+      
+      const contextualPrompt = `Eres un asistente de IA especializado en educación para la plataforma Kary. 
+
+CONTEXTO:
+- Usuario: ${userName}
+- Rol: ${roleName}
+- Consulta: ${message}
+- Tipo de consulta: ${queryType.type}
+
+INSTRUCCIONES:
+- Responde de manera útil y específica para el rol del usuario
+- Proporciona recomendaciones accionables
+- Usa un tono profesional pero amigable
+- Incluye emojis apropiados para hacer la respuesta más atractiva
+- Si es relevante, sugiere capacidades específicas de la plataforma
+- Mantén las respuestas concisas pero informativas
+
+Responde en español y adapta tu respuesta al contexto educativo y al rol del usuario.`;
+
+      const geminiResponse = await educationalAI.generateEducationalContent(
+        contextualPrompt,
+        {
+          type: 'chat',
+          role: roleName,
+          user: userName,
+          context: context
+        }
+      );
+
+      if (geminiResponse.success) {
+        return {
+          content: geminiResponse.content,
+          recommendations: extractRecommendations(geminiResponse.content),
+          actions: extractActions(geminiResponse.content),
+          confidence: 0.9
+        };
+      } else {
+        throw new Error(geminiResponse.error || 'Error en Gemini');
+      }
+    } catch (error) {
+      console.error('Error calling Gemini:', error);
+      // Fallback a respuesta local
+      return {
+        content: `Disculpa ${user?.name || 'Usuario'}, no pude procesar tu consulta en este momento. 
+
+**Tu consulta:** "${message}"
+
+**Sugerencias:**
+• Intenta reformular tu pregunta
+• Usa palabras clave específicas de tu rol (${context?.role || 'usuario'})
+• Verifica que tu consulta esté relacionada con la educación
+
+¿Te gustaría intentar con una consulta diferente?`,
+        recommendations: [
+          "Reformular la consulta de manera más específica",
+          "Usar palabras clave relacionadas con tu rol",
+          "Verificar que la consulta esté relacionada con la educación"
+        ],
+        actions: [],
+        confidence: 0.5
+      };
+    }
+  };
+
+  // Función para extraer recomendaciones del texto de Gemini
+  const extractRecommendations = (text) => {
+    const recommendations = [];
+    const lines = text.split('\n');
+    
+    for (const line of lines) {
+      if (line.includes('•') || line.includes('-') || line.includes('*')) {
+        const cleanLine = line.replace(/^[\s•\-*]+/, '').trim();
+        if (cleanLine.length > 10 && cleanLine.length < 100) {
+          recommendations.push(cleanLine);
+        }
+      }
+    }
+    
+    return recommendations.slice(0, 4); // Máximo 4 recomendaciones
+  };
+
+  // Función para extraer acciones del texto de Gemini
+  const extractActions = (text) => {
+    const actions = [];
+    const lines = text.split('\n');
+    
+    for (const line of lines) {
+      if (line.toLowerCase().includes('acción') || line.toLowerCase().includes('paso') || line.toLowerCase().includes('siguiente')) {
+        const cleanLine = line.replace(/^[\s•\-*]+/, '').trim();
+        if (cleanLine.length > 10 && cleanLine.length < 100) {
+          actions.push(cleanLine);
+        }
+      }
+    }
+    
+    return actions.slice(0, 3); // Máximo 3 acciones
   };
 
   // Función para analizar el tipo de consulta del usuario
@@ -1667,8 +1761,8 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
           animate={{ y: 0, opacity: 1 }}
           className={`ai-assistant-modal bg-slate-900 border-2 border-slate-500 rounded-lg sm:rounded-xl shadow-2xl ${
             isExpanded 
-              ? 'w-[98vw] h-[98vh] sm:w-[95vw] sm:h-[95vh] md:w-[90vw] md:h-[90vh]' 
-              : 'w-[98vw] h-[98vh] sm:w-[95vw] sm:h-[95vh] md:w-[700px] md:h-[750px] lg:w-[800px] lg:h-[800px]'
+              ? 'w-[99vw] h-[99vh] sm:w-[98vw] sm:h-[98vh] md:w-[95vw] md:h-[95vh]' 
+              : 'w-[99vw] h-[99vh] sm:w-[98vw] sm:h-[98vh] md:w-[90vw] md:h-[90vh] lg:w-[85vw] lg:h-[85vh] xl:w-[80vw] xl:h-[80vh] 2xl:w-[75vw] 2xl:h-[75vh]'
           } flex flex-col`}
           style={{ backgroundColor: '#0f172a', opacity: 1, border: '2px solid #475569' }}
         >
@@ -1711,14 +1805,14 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
           </div>
 
           {/* Content */}
-          <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-            {/* Sidebar - Capabilities */}
-            <div className="ai-assistant-sidebar w-full lg:w-1/3 border-r-0 lg:border-r-2 border-slate-500 p-2 sm:p-3 lg:p-4 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
-              <h3 className="text-xs sm:text-sm font-semibold text-slate-300 mb-2 sm:mb-3">
+          <div className="flex-1 flex flex-col xl:flex-row overflow-hidden">
+            {/* Sidebar - Capabilities - Mucho más pequeña */}
+            <div className="ai-assistant-sidebar w-full xl:w-1/4 border-r-0 xl:border-r-2 border-slate-500 p-1 sm:p-2 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+              <h3 className="text-xs font-semibold text-slate-300 mb-1 sm:mb-2 px-1">
                 {t('dashboards.ai.capabilities.title')}
               </h3>
               
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {aiCapabilities.map((capability) => (
                   <motion.div
                     key={capability.id}
@@ -1727,21 +1821,21 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
                   >
                     <Card 
                       className={`ai-assistant-capability-card cursor-pointer transition-all duration-200 hover:bg-slate-700 bg-slate-800 ${
-                        currentCapability?.id === capability.id ? 'ring-2 ring-blue-500' : ''
+                        currentCapability?.id === capability.id ? 'ring-1 ring-blue-500' : ''
                       }`}
                       style={{ backgroundColor: '#1e293b', opacity: 1, border: '1px solid #475569' }}
                       onClick={() => executeCapability(capability)}
                     >
-                      <CardContent className="p-2 sm:p-3">
-                        <div className="flex items-start space-x-2 sm:space-x-3">
-                          <div className={`p-1.5 sm:p-2 rounded-lg ${capability.color} flex-shrink-0`}>
-                            <capability.icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                      <CardContent className="p-1.5 sm:p-2">
+                        <div className="flex items-center space-x-2">
+                          <div className={`p-1 rounded-md ${capability.color} flex-shrink-0`}>
+                            <capability.icon className="w-3 h-3 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-xs sm:text-sm font-medium text-white truncate">
+                            <h4 className="text-xs font-medium text-white truncate">
                               {capability.title}
                             </h4>
-                            <p className="text-xs text-slate-400 mt-1 line-clamp-2">
+                            <p className="text-xs text-slate-400 line-clamp-1">
                               {capability.description}
                             </p>
                           </div>
@@ -1753,10 +1847,10 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
               </div>
             </div>
 
-            {/* Main Chat Area */}
-            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full lg:w-2/3" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
+            {/* Main Chat Area - Más espacio */}
+            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full xl:w-3/4" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
               {/* Messages */}
-              <div className="flex-1 p-2 sm:p-3 lg:p-4 overflow-y-auto space-y-3 sm:space-y-4">
+              <div className="flex-1 p-2 sm:p-3 lg:p-4 overflow-y-auto space-y-2 sm:space-y-3">
                 {messages.map((message) => (
                   <motion.div
                     key={message.id}
@@ -1764,7 +1858,7 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
                     animate={{ opacity: 1, y: 0 }}
                     className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`max-w-[85%] sm:max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
+                    <div className={`max-w-[90%] sm:max-w-[85%] md:max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
                       <div className={`p-2 sm:p-3 rounded-lg ${
                         message.type === 'user' 
                           ? 'ai-assistant-user-message bg-blue-600 text-white' 
@@ -1878,12 +1972,12 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
 
               {/* Input Area */}
               <div className="ai-assistant-input-area border-t-2 border-slate-500 p-2 sm:p-3 lg:p-4 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 sm:space-x-3">
                   <Textarea
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     placeholder={t('dashboards.ai.inputPlaceholder')}
-                    className="flex-1 resize-none text-xs sm:text-sm"
+                    className="flex-1 resize-none text-sm sm:text-base"
                     rows={2}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
@@ -1895,10 +1989,10 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
                   <Button
                     onClick={sendMessage}
                     disabled={!inputMessage.trim() || isLoading}
-                    className="bg-blue-500 hover:bg-blue-600 p-2 sm:p-3"
+                    className="bg-blue-500 hover:bg-blue-600 p-2 sm:p-3 flex-shrink-0"
                     size="sm"
                   >
-                    <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Button>
                 </div>
                 

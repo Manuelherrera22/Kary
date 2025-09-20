@@ -3,27 +3,63 @@
   background-color: #0f172a !important; 
   opacity: 1 !important; 
   border: 2px solid #475569 !important;
-  max-height: 98vh !important;
-  max-width: 98vw !important;
+  max-height: 99vh !important;
+  max-width: 99vw !important;
 }
 
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .ai-assistant-modal {
-    margin: 1vh !important;
+    margin: 0.5vh !important;
     border-radius: 0.5rem !important;
+    width: 99vw !important;
+    height: 99vh !important;
   }
   
   .ai-assistant-header {
-    padding: 0.75rem !important;
+    padding: 0.5rem !important;
   }
   
   .ai-assistant-sidebar {
-    max-height: 40vh !important;
+    max-height: 30vh !important;
+    width: 100% !important;
   }
   
   .ai-assistant-main {
-    min-height: 50vh !important;
+    min-height: 60vh !important;
+    width: 100% !important;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .ai-assistant-modal {
+    width: 95vw !important;
+    height: 95vh !important;
+  }
+  
+  .ai-assistant-sidebar {
+    width: 30% !important;
+  }
+  
+  .ai-assistant-main {
+    width: 70% !important;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  .ai-assistant-modal {
+    width: 90vw !important;
+    height: 90vh !important;
+  }
+  
+  .ai-assistant-sidebar {
+    width: 25% !important;
+  }
+  
+  .ai-assistant-main {
+    width: 75% !important;
   }
 }
 
