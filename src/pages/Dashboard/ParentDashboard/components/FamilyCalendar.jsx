@@ -219,26 +219,27 @@ const FamilyCalendar = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30">
-              <Calendar size={24} className="text-blue-400" />
+      <CardHeader className="p-3 sm:p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 sm:p-3 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30 flex-shrink-0">
+              <Calendar size={20} className="sm:hidden text-blue-400" />
+              <Calendar size={24} className="hidden sm:block text-blue-400" />
             </div>
-            <div>
-              <CardTitle className="text-xl font-bold text-blue-300">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-blue-300 leading-tight">
                 Calendario Familiar
               </CardTitle>
-              <p className="text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
                 Organiza y gestiona las actividades familiares y escolares
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2">
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-3 py-1 text-sm"
+              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm w-full sm:w-auto"
             >
               <option value="all">Todos</option>
               <option value="appointment">Citas</option>
@@ -248,25 +249,28 @@ const FamilyCalendar = () => {
             </select>
             <Button
               onClick={() => setShowAddEvent(true)}
-              className="bg-purple-600 hover:bg-purple-700 text-white"
+              className="bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3"
             >
-              <Plus size={16} className="mr-2" />
-              Nuevo Evento
+              <Plus size={14} className="sm:hidden mr-1" />
+              <Plus size={16} className="hidden sm:block mr-2" />
+              <span className="sm:hidden">Nuevo</span>
+              <span className="hidden sm:inline">Nuevo Evento</span>
             </Button>
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
         {/* Resumen del día */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <Card className="bg-slate-700/30 border-slate-600/30">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3">
-                <Calendar size={24} className="text-blue-400" />
-                <div>
-                  <h4 className="font-semibold text-slate-200">Hoy</h4>
-                  <p className="text-2xl font-bold text-blue-400">
+            <CardContent className="p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Calendar size={20} className="sm:hidden text-blue-400 flex-shrink-0" />
+                <Calendar size={24} className="hidden sm:block text-blue-400 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-semibold text-slate-200 text-sm sm:text-base">Hoy</h4>
+                  <p className="text-xl sm:text-2xl font-bold text-blue-400">
                     {getTodayEvents().length}
                   </p>
                   <p className="text-xs text-slate-400">eventos programados</p>
@@ -276,12 +280,13 @@ const FamilyCalendar = () => {
           </Card>
 
           <Card className="bg-slate-700/30 border-slate-600/30">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3">
-                <Clock size={24} className="text-green-400" />
-                <div>
-                  <h4 className="font-semibold text-slate-200">Próximos</h4>
-                  <p className="text-2xl font-bold text-green-400">
+            <CardContent className="p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Clock size={20} className="sm:hidden text-green-400 flex-shrink-0" />
+                <Clock size={24} className="hidden sm:block text-green-400 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-semibold text-slate-200 text-sm sm:text-base">Próximos</h4>
+                  <p className="text-xl sm:text-2xl font-bold text-green-400">
                     {getUpcomingEvents().length}
                   </p>
                   <p className="text-xs text-slate-400">eventos esta semana</p>
@@ -291,12 +296,13 @@ const FamilyCalendar = () => {
           </Card>
 
           <Card className="bg-slate-700/30 border-slate-600/30">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3">
-                <CheckCircle size={24} className="text-purple-400" />
-                <div>
-                  <h4 className="font-semibold text-slate-200">Completados</h4>
-                  <p className="text-2xl font-bold text-purple-400">
+            <CardContent className="p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <CheckCircle size={20} className="sm:hidden text-purple-400 flex-shrink-0" />
+                <CheckCircle size={24} className="hidden sm:block text-purple-400 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-semibold text-slate-200 text-sm sm:text-base">Completados</h4>
+                  <p className="text-xl sm:text-2xl font-bold text-purple-400">
                     {events.filter(e => e.status === 'completed').length}
                   </p>
                   <p className="text-xs text-slate-400">este mes</p>
@@ -307,46 +313,50 @@ const FamilyCalendar = () => {
         </div>
 
         {/* Lista de eventos */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
-            <Activity size={20} className="text-blue-400" />
+        <div className="space-y-3 sm:space-y-4">
+          <h3 className="text-base sm:text-lg font-semibold text-slate-200 flex items-center gap-2">
+            <Activity size={18} className="sm:hidden text-blue-400" />
+            <Activity size={20} className="hidden sm:block text-blue-400" />
             Eventos Programados
           </h3>
           
           {filteredEvents.length === 0 ? (
-            <div className="text-center py-8">
-              <Calendar size={48} className="text-slate-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-slate-300 mb-2">
+            <div className="text-center py-6 sm:py-8">
+              <Calendar size={40} className="sm:hidden text-slate-500 mx-auto mb-4" />
+              <Calendar size={48} className="hidden sm:block text-slate-500 mx-auto mb-4" />
+              <h3 className="text-base sm:text-lg font-semibold text-slate-300 mb-2">
                 No hay eventos
               </h3>
-              <p className="text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400">
                 Los eventos aparecerán aquí cuando se programen
               </p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {filteredEvents.map((event) => (
                 <motion.div
                   key={event.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-lg border bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200"
+                  className="p-3 sm:p-4 rounded-lg border bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-slate-600/30 rounded-lg">
-                      {getEventIcon(event.type)}
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className="p-1.5 sm:p-2 bg-slate-600/30 rounded-lg flex-shrink-0">
+                      {React.cloneElement(getEventIcon(event.type), { 
+                        size: window.innerWidth < 640 ? 16 : 16 
+                      })}
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-slate-200 text-sm">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-2">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-slate-200 text-xs sm:text-sm truncate">
                             {event.title}
                           </h4>
-                          <p className="text-xs text-slate-400 mb-2">
+                          <p className="text-xs text-slate-400 mb-2 leading-relaxed">
                             {event.description}
                           </p>
-                          <div className="flex items-center gap-4 text-xs text-slate-500">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs text-slate-500">
                             <span className="flex items-center gap-1">
                               <Clock size={12} />
                               {formatDate(event.date)} - {formatTime(event.time)}
@@ -362,31 +372,33 @@ const FamilyCalendar = () => {
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-2 ml-4">
-                          <Badge className={getPriorityColor(event.priority)}>
+                        <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                          <Badge className={`${getPriorityColor(event.priority)} text-xs`}>
                             {event.priority}
                           </Badge>
-                          <Badge className={getStatusColor(event.status)}>
+                          <Badge className={`${getStatusColor(event.status)} text-xs`}>
                             {event.status}
                           </Badge>
-                          <Badge className={getTypeColor(event.type)}>
+                          <Badge className={`${getTypeColor(event.type)} text-xs`}>
                             {event.type}
                           </Badge>
                         </div>
                       </div>
                       
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-slate-400">
+                          <span className="text-xs text-slate-400 truncate">
                             Participantes: {event.participants.join(', ')}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline" className="text-slate-300 border-slate-600">
-                            <Edit size={14} />
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <Button size="sm" variant="outline" className="text-slate-300 border-slate-600 text-xs px-2 py-1">
+                            <Edit size={12} className="sm:hidden" />
+                            <Edit size={14} className="hidden sm:block" />
                           </Button>
-                          <Button size="sm" variant="outline" className="text-slate-300 border-slate-600">
-                            <Bell size={14} />
+                          <Button size="sm" variant="outline" className="text-slate-300 border-slate-600 text-xs px-2 py-1">
+                            <Bell size={12} className="sm:hidden" />
+                            <Bell size={14} className="hidden sm:block" />
                           </Button>
                         </div>
                       </div>

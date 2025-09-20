@@ -248,104 +248,110 @@ const FamilyGamification = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-500/30">
-              <Trophy size={24} className="text-yellow-400" />
+      <CardHeader className="p-3 sm:p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 sm:p-3 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-500/30 flex-shrink-0">
+              <Trophy size={20} className="sm:hidden text-yellow-400" />
+              <Trophy size={24} className="hidden sm:block text-yellow-400" />
             </div>
-            <div>
-              <CardTitle className="text-xl font-bold text-yellow-300">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-300 leading-tight">
                 Gamificación Familiar
               </CardTitle>
-              <p className="text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
                 Convierte el aprendizaje en una aventura divertida
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30">
+          <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+            <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30 text-xs">
               Nivel {familyStats.currentLevel}
             </Badge>
-            <Badge className="text-blue-400 bg-blue-500/20 border-blue-500/30">
+            <Badge className="text-blue-400 bg-blue-500/20 border-blue-500/30 text-xs">
               #{familyStats.familyRank} de {familyStats.totalFamilies}
             </Badge>
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
         {/* Tabs de navegación */}
-        <div className="flex space-x-1 bg-slate-700/30 rounded-lg p-1">
+        <div className="flex overflow-x-auto scrollbar-hide space-x-1 bg-slate-700/30 rounded-lg p-1">
           {[
-            { id: 'overview', label: 'Resumen', icon: '📊' },
-            { id: 'achievements', label: 'Logros', icon: '🏆' },
-            { id: 'challenges', label: 'Desafíos', icon: '🎯' },
-            { id: 'leaderboard', label: 'Ranking', icon: '👑' }
+            { id: 'overview', label: 'Resumen', shortLabel: 'Res', icon: '📊' },
+            { id: 'achievements', label: 'Logros', shortLabel: 'Log', icon: '🏆' },
+            { id: 'challenges', label: 'Desafíos', shortLabel: 'Des', icon: '🎯' },
+            { id: 'leaderboard', label: 'Ranking', shortLabel: 'Ran', icon: '👑' }
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`flex-shrink-0 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-yellow-600 text-white'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <span>{tab.icon}</span>
-              {tab.label}
+              <span className="text-sm sm:text-base">{tab.icon}</span>
+              <span className="sm:hidden">{tab.shortLabel}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
             </button>
           ))}
         </div>
 
         {/* Tab: Resumen */}
         {activeTab === 'overview' && (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Estadísticas principales */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <Star size={24} className="text-yellow-400" />
-                    <div>
-                      <h4 className="font-semibold text-slate-200">Puntos Totales</h4>
-                      <p className="text-2xl font-bold text-yellow-400">{familyStats.totalPoints}</p>
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Star size={20} className="sm:hidden text-yellow-400 flex-shrink-0" />
+                    <Star size={24} className="hidden sm:block text-yellow-400 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Puntos Totales</h4>
+                      <p className="text-xl sm:text-2xl font-bold text-yellow-400">{familyStats.totalPoints}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <Crown size={24} className="text-purple-400" />
-                    <div>
-                      <h4 className="font-semibold text-slate-200">Nivel Actual</h4>
-                      <p className="text-2xl font-bold text-purple-400">{familyStats.currentLevel}</p>
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Crown size={20} className="sm:hidden text-purple-400 flex-shrink-0" />
+                    <Crown size={24} className="hidden sm:block text-purple-400 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Nivel Actual</h4>
+                      <p className="text-xl sm:text-2xl font-bold text-purple-400">{familyStats.currentLevel}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <Flame size={24} className="text-orange-400" />
-                    <div>
-                      <h4 className="font-semibold text-slate-200">Racha Semanal</h4>
-                      <p className="text-2xl font-bold text-orange-400">{familyStats.weeklyStreak} días</p>
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Flame size={20} className="sm:hidden text-orange-400 flex-shrink-0" />
+                    <Flame size={24} className="hidden sm:block text-orange-400 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Racha Semanal</h4>
+                      <p className="text-xl sm:text-2xl font-bold text-orange-400">{familyStats.weeklyStreak} días</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <Target size={24} className="text-green-400" />
-                    <div>
-                      <h4 className="font-semibold text-slate-200">Metas Completadas</h4>
-                      <p className="text-2xl font-bold text-green-400">{familyStats.completedGoals}/{familyStats.monthlyGoals}</p>
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Target size={20} className="sm:hidden text-green-400 flex-shrink-0" />
+                    <Target size={24} className="hidden sm:block text-green-400 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Metas Completadas</h4>
+                      <p className="text-xl sm:text-2xl font-bold text-green-400">{familyStats.completedGoals}/{familyStats.monthlyGoals}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -354,19 +360,19 @@ const FamilyGamification = () => {
 
             {/* Progreso del nivel */}
             <Card className="bg-slate-700/30 border-slate-600/30">
-              <CardHeader>
-                <CardTitle className="text-lg text-slate-200">Progreso del Nivel</CardTitle>
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="text-base sm:text-lg text-slate-200">Progreso del Nivel</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="space-y-3 sm:space-y-4">
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-xs sm:text-sm mb-2">
                       <span className="text-slate-400">Progreso hacia el siguiente nivel</span>
                       <span className="text-slate-200">{familyStats.levelProgress}%</span>
                     </div>
-                    <Progress value={familyStats.levelProgress} className="h-3" />
+                    <Progress value={familyStats.levelProgress} className="h-2 sm:h-3" />
                   </div>
-                  <div className="flex justify-between text-sm text-slate-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 text-xs sm:text-sm text-slate-400">
                     <span>Puntos actuales: {familyStats.totalPoints}</span>
                     <span>Próximo nivel: {familyStats.nextLevelPoints}</span>
                   </div>
@@ -378,37 +384,37 @@ const FamilyGamification = () => {
 
         {/* Tab: Logros */}
         {activeTab === 'achievements' && (
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="space-y-3 sm:space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {achievements.map((achievement) => (
                 <motion.div
                   key={achievement.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                  className={`p-3 sm:p-4 rounded-lg border transition-all duration-200 ${
                     achievement.unlocked 
                       ? 'bg-green-500/10 border-green-500/30' 
                       : 'bg-slate-700/30 border-slate-600/30'
                   }`}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className={`p-2 rounded-lg ${
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className={`p-1.5 sm:p-2 rounded-lg flex-shrink-0 ${
                       achievement.unlocked ? 'bg-green-500/20' : 'bg-slate-600/30'
                     }`}>
-                      <span className="text-2xl">{achievement.icon}</span>
+                      <span className="text-lg sm:text-2xl">{achievement.icon}</span>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-slate-200 text-sm mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-slate-200 text-xs sm:text-sm mb-1 truncate">
                         {achievement.title}
                       </h4>
-                      <p className="text-xs text-slate-400 mb-2">
+                      <p className="text-xs text-slate-400 mb-2 leading-relaxed">
                         {achievement.description}
                       </p>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Badge className={getRarityColor(achievement.rarity)}>
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-2">
+                        <Badge className={`${getRarityColor(achievement.rarity)} text-xs`}>
                           {achievement.rarity}
                         </Badge>
-                        <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30">
+                        <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30 text-xs">
                           {achievement.points} pts
                         </Badge>
                       </div>
@@ -439,35 +445,36 @@ const FamilyGamification = () => {
 
         {/* Tab: Desafíos */}
         {activeTab === 'challenges' && (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {challenges.map((challenge) => (
               <motion.div
                 key={challenge.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-4 rounded-lg border bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200"
+                className="p-3 sm:p-4 rounded-lg border bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200"
               >
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-slate-600/30 rounded-lg">
-                    <Target size={20} className="text-blue-400" />
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="p-1.5 sm:p-2 bg-slate-600/30 rounded-lg flex-shrink-0">
+                    <Target size={18} className="sm:hidden text-blue-400" />
+                    <Target size={20} className="hidden sm:block text-blue-400" />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h4 className="font-semibold text-slate-200 text-sm">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-slate-200 text-xs sm:text-sm truncate">
                           {challenge.title}
                         </h4>
-                        <p className="text-xs text-slate-400 mb-2">
+                        <p className="text-xs text-slate-400 mb-2 leading-relaxed">
                           {challenge.description}
                         </p>
-                        <div className="flex items-center gap-2">
-                          <Badge className={getDifficultyColor(challenge.difficulty)}>
+                        <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                          <Badge className={`${getDifficultyColor(challenge.difficulty)} text-xs`}>
                             {challenge.difficulty}
                           </Badge>
-                          <Badge className={getStatusColor(challenge.status)}>
+                          <Badge className={`${getStatusColor(challenge.status)} text-xs`}>
                             {challenge.status}
                           </Badge>
-                          <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30">
+                          <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30 text-xs">
                             {challenge.points} pts
                           </Badge>
                         </div>
@@ -496,7 +503,7 @@ const FamilyGamification = () => {
 
         {/* Tab: Ranking */}
         {activeTab === 'leaderboard' && (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div className="space-y-2">
               {leaderboard.map((family, index) => (
                 <motion.div
@@ -504,33 +511,33 @@ const FamilyGamification = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                  className={`p-3 sm:p-4 rounded-lg border transition-all duration-200 ${
                     family.rank <= 3 
                       ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-500/30' 
                       : 'bg-slate-700/30 border-slate-600/30'
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-600/30">
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-600/30 flex-shrink-0">
                       {family.rank <= 3 ? (
-                        <span className="text-2xl">
+                        <span className="text-lg sm:text-2xl">
                           {family.rank === 1 ? '🥇' : family.rank === 2 ? '🥈' : '🥉'}
                         </span>
                       ) : (
-                        <span className="text-slate-400 font-bold">#{family.rank}</span>
+                        <span className="text-slate-400 font-bold text-xs sm:text-sm">#{family.rank}</span>
                       )}
                     </div>
-                    <div className="text-2xl">{family.avatar}</div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-slate-200">
+                    <div className="text-lg sm:text-2xl flex-shrink-0">{family.avatar}</div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">
                         {family.name}
                       </h4>
-                      <p className="text-sm text-slate-400">
+                      <p className="text-xs sm:text-sm text-slate-400">
                         Nivel {family.level} • {family.points} puntos
                       </p>
                     </div>
-                    <div className="text-right">
-                      <div className="text-lg font-bold text-slate-200">
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-sm sm:text-lg font-bold text-slate-200">
                         {family.points}
                       </div>
                       <div className="text-xs text-slate-400">puntos</div>

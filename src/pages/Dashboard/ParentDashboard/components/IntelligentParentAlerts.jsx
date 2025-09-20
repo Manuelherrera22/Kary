@@ -251,26 +251,27 @@ const IntelligentParentAlerts = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg border border-orange-500/30">
-              <Brain size={24} className="text-orange-400" />
+      <CardHeader className="p-3 sm:p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 sm:p-3 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg border border-orange-500/30 flex-shrink-0">
+              <Brain size={20} className="sm:hidden text-orange-400" />
+              <Brain size={24} className="hidden sm:block text-orange-400" />
             </div>
-            <div>
-              <CardTitle className="text-xl font-bold text-orange-300">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-orange-300 leading-tight">
                 Alertas Inteligentes para Padres
               </CardTitle>
-              <p className="text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
                 Recomendaciones personalizadas basadas en el comportamiento de tu hijo/a
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2">
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-3 py-1 text-sm"
+              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm w-full sm:w-auto"
             >
               <option value="all">Todas</option>
               <option value="unread">No leídas</option>
@@ -286,27 +287,29 @@ const IntelligentParentAlerts = () => {
               variant="ghost"
               size="sm"
               onClick={loadAlerts}
-              className="text-slate-400 hover:text-slate-200"
+              className="text-slate-400 hover:text-slate-200 text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3"
             >
-              <RefreshCw size={16} />
+              <RefreshCw size={14} className="sm:hidden" />
+              <RefreshCw size={16} className="hidden sm:block" />
             </Button>
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-4 md:p-6">
         {filteredAlerts.length === 0 ? (
-          <div className="text-center py-8">
-            <Shield size={48} className="text-slate-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-slate-300 mb-2">
+          <div className="text-center py-6 sm:py-8">
+            <Shield size={40} className="sm:hidden text-slate-500 mx-auto mb-4" />
+            <Shield size={48} className="hidden sm:block text-slate-500 mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-semibold text-slate-300 mb-2">
               No hay alertas activas
             </h3>
-            <p className="text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400">
               El sistema está monitoreando el progreso de tu hijo/a
             </p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {filteredAlerts.map((alert) => {
               const isExpanded = expandedAlert === alert.id;
               const Icon = getAlertIcon(alert.alertType);
@@ -316,34 +319,36 @@ const IntelligentParentAlerts = () => {
                   key={alert.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                  className={`p-3 sm:p-4 rounded-lg border transition-all duration-200 ${
                     alert.read 
                       ? 'bg-slate-700/30 border-slate-600/30' 
                       : 'bg-orange-500/10 border-orange-500/30'
                   }`}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className={`p-2 rounded-lg ${
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className={`p-1.5 sm:p-2 rounded-lg flex-shrink-0 ${
                       alert.read ? 'bg-slate-600/30' : 'bg-orange-500/20'
                     }`}>
-                      {Icon}
+                      {React.cloneElement(Icon, { 
+                        size: window.innerWidth < 640 ? 18 : 20 
+                      })}
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h4 className="font-semibold text-slate-200 text-sm">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
+                            <h4 className="font-semibold text-slate-200 text-xs sm:text-sm truncate">
                               {alert.title}
                             </h4>
-                            <Badge className={getPriorityColor(alert.priority)}>
+                            <Badge className={`${getPriorityColor(alert.priority)} text-xs`}>
                               {alert.priority}
                             </Badge>
-                            <Badge className={getCategoryColor(alert.category)}>
+                            <Badge className={`${getCategoryColor(alert.category)} text-xs`}>
                               {alert.category}
                             </Badge>
                             {!alert.read && (
-                              <Badge className="text-orange-300 bg-orange-500/20 border-orange-500/30">
+                              <Badge className="text-orange-300 bg-orange-500/20 border-orange-500/30 text-xs">
                                 Nuevo
                               </Badge>
                             )}
@@ -351,7 +356,7 @@ const IntelligentParentAlerts = () => {
                           <p className="text-xs text-slate-300 leading-relaxed mb-2">
                             {alert.description}
                           </p>
-                          <div className="flex items-center gap-4 text-xs text-slate-400">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs text-slate-400">
                             <span className="flex items-center gap-1">
                               <Users size={12} />
                               {alert.studentName}
@@ -367,22 +372,24 @@ const IntelligentParentAlerts = () => {
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-2 ml-4">
+                        <div className="flex items-center gap-1 sm:gap-2">
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => setExpandedAlert(isExpanded ? null : alert.id)}
-                            className="text-slate-400 hover:text-slate-200"
+                            className="text-slate-400 hover:text-slate-200 text-xs px-2 py-1"
                           >
-                            {isExpanded ? <X size={16} /> : <Eye size={16} />}
+                            {isExpanded ? <X size={14} className="sm:hidden" /> : <Eye size={14} className="sm:hidden" />}
+                            {isExpanded ? <X size={16} className="hidden sm:block" /> : <Eye size={16} className="hidden sm:block" />}
                           </Button>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDismissAlert(alert.id)}
-                            className="text-slate-400 hover:text-red-400"
+                            className="text-slate-400 hover:text-red-400 text-xs px-2 py-1"
                           >
-                            <X size={16} />
+                            <X size={14} className="sm:hidden" />
+                            <X size={16} className="hidden sm:block" />
                           </Button>
                         </div>
                       </div>
