@@ -210,80 +210,86 @@ const InterdisciplinaryCollaborationPanel = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30">
-            <Users size={24} className="text-blue-400" />
+      <CardHeader className="p-3 sm:p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+          <div className="p-2 sm:p-3 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30 flex-shrink-0">
+            <Users size={20} className="sm:hidden text-blue-400" />
+            <Users size={24} className="hidden sm:block text-blue-400" />
           </div>
-          <div>
-            <CardTitle className="text-xl font-bold text-blue-300">
+          <div className="flex-1 min-w-0">
+            <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-blue-300 leading-tight">
               Colaboración Interdisciplinaria
             </CardTitle>
-            <p className="text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
               Comunicación coordinada entre psicopedagogo, profesor y estudiante
             </p>
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
         {/* Tabs de navegación */}
-        <div className="flex space-x-1 bg-slate-700/30 rounded-lg p-1">
+        <div className="flex overflow-x-auto scrollbar-hide space-x-1 bg-slate-700/30 rounded-lg p-1">
           {[
-            { id: 'overview', label: 'Resumen', icon: BarChart3 },
-            { id: 'collaborations', label: 'Colaboraciones', icon: Users },
-            { id: 'messages', label: 'Mensajes', icon: MessageSquare },
-            { id: 'coordination', label: 'Coordinación', icon: Calendar }
+            { id: 'overview', label: 'Resumen', shortLabel: 'Resumen', icon: BarChart3 },
+            { id: 'collaborations', label: 'Colaboraciones', shortLabel: 'Colab', icon: Users },
+            { id: 'messages', label: 'Mensajes', shortLabel: 'Mensa', icon: MessageSquare },
+            { id: 'coordination', label: 'Coordinación', shortLabel: 'Coord', icon: Calendar }
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`flex-shrink-0 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-purple-600 text-white'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <tab.icon size={16} />
-              {tab.label}
+              <tab.icon size={14} className="sm:hidden" />
+              <tab.icon size={16} className="hidden sm:block" />
+              <span className="sm:hidden">{tab.shortLabel}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
             </button>
           ))}
         </div>
 
         {/* Tab: Resumen */}
         {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <Card className="bg-slate-700/30 border-slate-600/30">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <Users size={24} className="text-blue-400" />
-                  <div>
-                    <h4 className="font-semibold text-slate-200">Colaboraciones Activas</h4>
-                    <p className="text-2xl font-bold text-blue-400">{collaborations.length}</p>
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <Users size={20} className="sm:hidden text-blue-400 flex-shrink-0" />
+                  <Users size={24} className="hidden sm:block text-blue-400 flex-shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Colaboraciones Activas</h4>
+                    <p className="text-xl sm:text-2xl font-bold text-blue-400">{collaborations.length}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="bg-slate-700/30 border-slate-600/30">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <MessageSquare size={24} className="text-green-400" />
-                  <div>
-                    <h4 className="font-semibold text-slate-200">Mensajes Recientes</h4>
-                    <p className="text-2xl font-bold text-green-400">{messages.length}</p>
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <MessageSquare size={20} className="sm:hidden text-green-400 flex-shrink-0" />
+                  <MessageSquare size={24} className="hidden sm:block text-green-400 flex-shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Mensajes Recientes</h4>
+                    <p className="text-xl sm:text-2xl font-bold text-green-400">{messages.length}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-700/30 border-slate-600/30">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <Target size={24} className="text-purple-400" />
-                  <div>
-                    <h4 className="font-semibold text-slate-200">Casos Prioritarios</h4>
-                    <p className="text-2xl font-bold text-purple-400">
+            <Card className="bg-slate-700/30 border-slate-600/30 sm:col-span-2 lg:col-span-1">
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <Target size={20} className="sm:hidden text-purple-400 flex-shrink-0" />
+                  <Target size={24} className="hidden sm:block text-purple-400 flex-shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Casos Prioritarios</h4>
+                    <p className="text-xl sm:text-2xl font-bold text-purple-400">
                       {collaborations.filter(c => c.priority === 'high').length}
                     </p>
                   </div>
@@ -339,35 +345,35 @@ const InterdisciplinaryCollaborationPanel = () => {
 
         {/* Tab: Mensajes */}
         {activeTab === 'messages' && (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* Formulario de nuevo mensaje */}
             <Card className="bg-slate-700/30 border-slate-600/30">
-              <CardContent className="p-4">
-                <h4 className="font-semibold text-slate-200 mb-3">Enviar Mensaje</h4>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <CardContent className="p-3 sm:p-4">
+                <h4 className="font-semibold text-slate-200 mb-2 sm:mb-3 text-sm sm:text-base">Enviar Mensaje</h4>
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <Select value={selectedStudent} onValueChange={setSelectedStudent}>
-                      <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200">
+                      <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200 text-sm">
                         <SelectValue placeholder="Seleccionar estudiante" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-800 border-slate-600">
                         {collaborations.map((collab) => (
-                          <SelectItem key={collab.studentId} value={collab.studentId}>
+                          <SelectItem key={collab.studentId} value={collab.studentId} className="text-sm">
                             {collab.studentName}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                     <Select value={messageType} onValueChange={setMessageType}>
-                      <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200">
+                      <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200 text-sm">
                         <SelectValue placeholder="Tipo de mensaje" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-800 border-slate-600">
-                        <SelectItem value="general">General</SelectItem>
-                        <SelectItem value="progress_update">Actualización de Progreso</SelectItem>
-                        <SelectItem value="recommendation">Recomendación</SelectItem>
-                        <SelectItem value="coordination">Coordinación</SelectItem>
-                        <SelectItem value="alert">Alerta</SelectItem>
+                        <SelectItem value="general" className="text-sm">General</SelectItem>
+                        <SelectItem value="progress_update" className="text-sm">Actualización de Progreso</SelectItem>
+                        <SelectItem value="recommendation" className="text-sm">Recomendación</SelectItem>
+                        <SelectItem value="coordination" className="text-sm">Coordinación</SelectItem>
+                        <SelectItem value="alert" className="text-sm">Alerta</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -375,43 +381,49 @@ const InterdisciplinaryCollaborationPanel = () => {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Escribe tu mensaje aquí..."
-                    className="bg-slate-800 border-slate-600 text-slate-200"
+                    className="bg-slate-800 border-slate-600 text-slate-200 text-sm min-h-[80px] sm:min-h-[100px]"
                     rows={3}
                   />
                   <Button
                     onClick={handleSendMessage}
                     disabled={!newMessage.trim() || !selectedStudent}
-                    className="bg-purple-600 hover:bg-purple-700 text-white"
+                    className="bg-purple-600 hover:bg-purple-700 text-white w-full sm:w-auto text-sm py-2 px-4"
                   >
-                    <Send size={16} className="mr-2" />
-                    Enviar Mensaje
+                    <Send size={14} className="sm:hidden mr-1" />
+                    <Send size={16} className="hidden sm:block mr-2" />
+                    <span className="sm:hidden">Enviar</span>
+                    <span className="hidden sm:inline">Enviar Mensaje</span>
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
             {/* Lista de mensajes */}
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {messages.map((message) => (
                 <Card key={message.id} className="bg-slate-700/30 border-slate-600/30">
-                  <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 bg-slate-600/30 rounded-lg">
-                        {getMessageTypeIcon(message.type)}
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="p-1.5 sm:p-2 bg-slate-600/30 rounded-lg flex-shrink-0">
+                        {React.cloneElement(getMessageTypeIcon(message.type), { 
+                          size: window.innerWidth < 640 ? 16 : 20 
+                        })}
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge className={getSenderRoleColor(message.senderRole)}>
-                            {message.senderName}
-                          </Badge>
-                          <Badge className="text-xs text-slate-400 bg-slate-600/30">
-                            {message.type}
-                          </Badge>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2">
+                          <div className="flex flex-wrap gap-1 sm:gap-2">
+                            <Badge className={`${getSenderRoleColor(message.senderRole)} text-xs`}>
+                              {message.senderName}
+                            </Badge>
+                            <Badge className="text-xs text-slate-400 bg-slate-600/30">
+                              {message.type}
+                            </Badge>
+                          </div>
                           <span className="text-xs text-slate-500">
                             {new Date(message.timestamp).toLocaleString()}
                           </span>
                         </div>
-                        <p className="text-sm text-slate-300">{message.content}</p>
+                        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{message.content}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -423,29 +435,33 @@ const InterdisciplinaryCollaborationPanel = () => {
 
         {/* Tab: Coordinación */}
         {activeTab === 'coordination' && (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <Card className="bg-slate-700/30 border-slate-600/30">
-              <CardContent className="p-4">
-                <h4 className="font-semibold text-slate-200 mb-3">Próximas Reuniones</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-3 bg-slate-600/30 rounded-lg">
-                    <Calendar size={20} className="text-blue-400" />
-                    <div className="flex-1">
-                      <h5 className="font-medium text-slate-200">Reunión de Seguimiento - María García</h5>
-                      <p className="text-sm text-slate-400">Mañana 10:00 AM - Sala de Reuniones</p>
+              <CardContent className="p-3 sm:p-4">
+                <h4 className="font-semibold text-slate-200 mb-2 sm:mb-3 text-sm sm:text-base">Próximas Reuniones</h4>
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-600/30 rounded-lg">
+                    <Calendar size={18} className="sm:hidden text-blue-400 flex-shrink-0 mt-0.5" />
+                    <Calendar size={20} className="hidden sm:block text-blue-400 flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <h5 className="font-medium text-slate-200 text-sm sm:text-base truncate">Reunión de Seguimiento - María García</h5>
+                      <p className="text-xs sm:text-sm text-slate-400">Mañana 10:00 AM - Sala de Reuniones</p>
                     </div>
-                    <Button size="sm" variant="outline" className="text-slate-300 border-slate-600">
-                      <Eye size={16} />
+                    <Button size="sm" variant="outline" className="text-slate-300 border-slate-600 flex-shrink-0">
+                      <Eye size={14} className="sm:hidden" />
+                      <Eye size={16} className="hidden sm:block" />
                     </Button>
                   </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-600/30 rounded-lg">
-                    <Calendar size={20} className="text-green-400" />
-                    <div className="flex-1">
-                      <h5 className="font-medium text-slate-200">Evaluación Trimestral - Carlos López</h5>
-                      <p className="text-sm text-slate-400">Viernes 2:00 PM - Virtual</p>
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-600/30 rounded-lg">
+                    <Calendar size={18} className="sm:hidden text-green-400 flex-shrink-0 mt-0.5" />
+                    <Calendar size={20} className="hidden sm:block text-green-400 flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <h5 className="font-medium text-slate-200 text-sm sm:text-base truncate">Evaluación Trimestral - Carlos López</h5>
+                      <p className="text-xs sm:text-sm text-slate-400">Viernes 2:00 PM - Virtual</p>
                     </div>
-                    <Button size="sm" variant="outline" className="text-slate-300 border-slate-600">
-                      <Eye size={16} />
+                    <Button size="sm" variant="outline" className="text-slate-300 border-slate-600 flex-shrink-0">
+                      <Eye size={14} className="sm:hidden" />
+                      <Eye size={16} className="hidden sm:block" />
                     </Button>
                   </div>
                 </div>
