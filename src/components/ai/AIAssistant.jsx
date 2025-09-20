@@ -18,6 +18,7 @@ import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import educationalAI from '@/services/ai/educationalAI';
 import educationalContext from '@/services/ai/educationalContext';
+import intelligentDataService from '@/services/ai/intelligentDataService';
 import aiIntegration from '@/services/ai/aiIntegration';
 
 const AIAssistant = ({ 
@@ -477,30 +478,66 @@ const AIAssistant = ({
     }
   };
 
-  // Función para llamar a Gemini directamente
+  // Función para llamar a Gemini directamente con datos reales
   const callGeminiDirectly = async (message, context, queryType) => {
     try {
-      // Crear prompt contextualizado
+      // Obtener datos reales e inteligentes del contexto
+      let realTimeData = {};
+      try {
+        if (context?.role) {
+          realTimeData = await intelligentDataService.getRoleBasedIntelligence(context.role, user?.id);
+        }
+      } catch (error) {
+        console.warn('Error getting real-time data:', error);
+      }
+
+      // Crear prompt contextualizado con datos reales
       const roleName = context?.role || 'usuario';
       const userName = user?.name || 'Usuario';
       
       const contextualPrompt = `Eres un asistente de IA especializado en educación para la plataforma Kary. 
 
-CONTEXTO:
+CONTEXTO DEL USUARIO:
 - Usuario: ${userName}
 - Rol: ${roleName}
 - Consulta: ${message}
 - Tipo de consulta: ${queryType.type}
 
+DATOS REALES DE LA INSTITUCIÓN:
+${realTimeData.demographics ? `
+- Total de estudiantes: ${realTimeData.demographics.totalStudents || 'N/A'}
+- Total de profesores: ${realTimeData.demographics.totalTeachers || 'N/A'}
+- Estudiantes activos: ${realTimeData.demographics.activeStudents || 'N/A'}
+` : ''}
+
+${realTimeData.academic ? `
+- Actividades totales: ${realTimeData.academic.totalActivities || 'N/A'}
+- Actividades completadas: ${realTimeData.academic.completedActivities || 'N/A'}
+- Tasa de finalización: ${realTimeData.academic.averageCompletionRate || 'N/A'}%
+` : ''}
+
+${realTimeData.support ? `
+- Planes de apoyo activos: ${realTimeData.support.activeSupportPlans || 'N/A'}
+- Efectividad del apoyo: ${realTimeData.support.supportEffectiveness || 'N/A'}%
+` : ''}
+
+${realTimeData.insights ? `
+- Estudiantes destacados: ${realTimeData.insights.topPerformingStudents?.length || 0}
+- Estudiantes que necesitan atención: ${realTimeData.insights.studentsNeedingAttention?.length || 0}
+- Desafíos institucionales: ${realTimeData.insights.institutionalChallenges?.join(', ') || 'N/A'}
+` : ''}
+
 INSTRUCCIONES:
 - Responde de manera útil y específica para el rol del usuario
-- Proporciona recomendaciones accionables
+- Usa los datos reales de la institución cuando sea relevante
+- Proporciona recomendaciones accionables basadas en datos reales
 - Usa un tono profesional pero amigable
 - Incluye emojis apropiados para hacer la respuesta más atractiva
 - Si es relevante, sugiere capacidades específicas de la plataforma
 - Mantén las respuestas concisas pero informativas
+- Menciona métricas reales cuando sea apropiado
 
-Responde en español y adapta tu respuesta al contexto educativo y al rol del usuario.`;
+Responde en español y adapta tu respuesta al contexto educativo, al rol del usuario y a los datos reales de la institución.`;
 
       const geminiResponse = await educationalAI.geminiService.generateEducationalContent(
         contextualPrompt,
@@ -508,7 +545,8 @@ Responde en español y adapta tu respuesta al contexto educativo y al rol del us
           type: 'chat',
           role: roleName,
           user: userName,
-          context: context
+          context: context,
+          realTimeData: realTimeData
         }
       );
 
@@ -517,14 +555,15 @@ Responde en español y adapta tu respuesta al contexto educativo y al rol del us
           content: geminiResponse.content,
           recommendations: extractRecommendations(geminiResponse.content),
           actions: extractActions(geminiResponse.content),
-          confidence: 0.9
+          confidence: 0.9,
+          realTimeData: realTimeData
         };
       } else {
         throw new Error(geminiResponse.error || 'Error en Gemini');
       }
     } catch (error) {
       console.error('Error calling Gemini:', error);
-      // Fallback a respuesta local
+      // Fallback a respuesta local con datos básicos
       return {
         content: `Disculpa ${user?.name || 'Usuario'}, no pude procesar tu consulta en este momento. 
 

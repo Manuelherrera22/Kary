@@ -4,6 +4,7 @@
  */
 
 import { supabase } from '@/lib/supabaseClient';
+import intelligentDataService from './intelligentDataService';
 
 class EducationalContext {
   constructor() {
@@ -81,7 +82,7 @@ class EducationalContext {
   }
 
   /**
-   * Obtiene el contexto institucional
+   * Obtiene el contexto institucional con datos reales e inteligentes
    */
   async getInstitutionalContext() {
     const cacheKey = 'institutional';
@@ -90,40 +91,26 @@ class EducationalContext {
     }
 
     try {
-      const [
-        students,
-        teachers,
-        supportStaff,
-        academicPrograms,
-        institutionalData
-      ] = await Promise.all([
-        this.getAllStudents(),
-        this.getAllTeachers(),
-        this.getAllSupportStaff(),
-        this.getAcademicPrograms(),
-        this.getInstitutionalData()
-      ]);
-
+      // Usar el servicio de datos inteligentes para obtener datos reales
+      const intelligence = await intelligentDataService.getInstitutionalIntelligence();
+      
       const context = {
-        demographics: {
-          totalStudents: students.length,
-          totalTeachers: teachers.length,
-          totalSupportStaff: supportStaff.length,
-          gradeDistribution: this.calculateGradeDistribution(students),
-          ageDistribution: this.calculateAgeDistribution(students)
-        },
+        demographics: intelligence.demographics,
         academic: {
-          programs: academicPrograms,
-          performance: this.calculateInstitutionalPerformance(students),
-          trends: this.analyzeInstitutionalTrends(students),
-          challenges: this.identifyInstitutionalChallenges(students)
+          programs: await this.getAcademicPrograms(),
+          performance: intelligence.academic,
+          trends: intelligence.academic.trends,
+          challenges: intelligence.insights.institutionalChallenges
         },
         support: {
           resources: await this.getSupportResources(),
-          capacity: this.calculateSupportCapacity(supportStaff),
-          utilization: this.calculateSupportUtilization(supportStaff)
+          capacity: intelligence.support,
+          utilization: intelligence.support.supportEffectiveness
         },
-        institutional: institutionalData
+        emotional: intelligence.emotional,
+        insights: intelligence.insights,
+        realTime: intelligence.realTime,
+        institutional: await this.getInstitutionalData()
       };
 
       this.contextCache.set(cacheKey, context);
@@ -135,7 +122,7 @@ class EducationalContext {
   }
 
   /**
-   * Obtiene el contexto del rol específico
+   * Obtiene el contexto del rol específico con datos inteligentes
    */
   async getRoleContext(role, userId) {
     const cacheKey = `role_${role}_${userId}`;
@@ -144,26 +131,63 @@ class EducationalContext {
     }
 
     try {
-      let context = {};
+      // Usar el servicio de datos inteligentes para obtener contexto específico del rol
+      const intelligence = await intelligentDataService.getRoleBasedIntelligence(role, userId);
+      
+      let context = {
+        ...intelligence,
+        role,
+        userId,
+        timestamp: new Date().toISOString()
+      };
 
+      // Agregar contexto específico adicional según el rol
       switch (role) {
         case 'directive':
-          context = await this.getDirectiveContext(userId);
+          context.responsibilities = [
+            'Toma de decisiones estratégicas',
+            'Gestión de recursos',
+            'Supervisión académica',
+            'Liderazgo institucional'
+          ];
+          context.currentFocus = 'Mejora continua';
           break;
         case 'teacher':
-          context = await this.getTeacherContext(userId);
+          context.responsibilities = [
+            'Planificación de clases',
+            'Evaluación de estudiantes',
+            'Comunicación con familias',
+            'Desarrollo profesional'
+          ];
+          context.currentFocus = 'Diferenciación instruccional';
           break;
         case 'psychopedagogue':
-          context = await this.getPsychopedagogueContext(userId);
+          context.responsibilities = [
+            'Evaluación psicopedagógica',
+            'Planes de apoyo',
+            'Intervención especializada',
+            'Colaboración multidisciplinaria'
+          ];
+          context.currentFocus = 'Intervención temprana';
           break;
         case 'parent':
-          context = await this.getParentContext(userId);
+          context.responsibilities = [
+            'Apoyo en casa',
+            'Comunicación con escuela',
+            'Participación en actividades',
+            'Seguimiento del progreso'
+          ];
+          context.currentFocus = 'Apoyo al aprendizaje';
           break;
         case 'student':
-          context = await this.getStudentContext(userId);
+          context.responsibilities = [
+            'Participar activamente en clases',
+            'Completar tareas asignadas',
+            'Seguir planes de apoyo',
+            'Comunicar necesidades'
+          ];
+          context.currentFocus = 'Aprendizaje y crecimiento';
           break;
-        default:
-          context = await this.getGenericRoleContext(role, userId);
       }
 
       this.contextCache.set(cacheKey, context);
