@@ -17,13 +17,13 @@ import { useMockAuth } from "@/contexts/MockAuthContext";
 
 const UserRoleSelector = ({ t, userRoles }) => (
   <div>
-    <Label htmlFor="role-signup" className="text-sm font-medium text-gray-700 flex items-center">
+    <Label htmlFor="role-signup" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
       <Shield size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formRole")}
     </Label>
     <select 
       name="role" 
       id="role-signup" 
-      className="mt-1 block w-full py-2.5 px-3 border border-gray-300 bg-white text-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+      className="mt-1 block w-full py-2.5 px-3 text-sm sm:text-base border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
       required
     >
       <option value="">{t("demoDialog.formRolePlaceholder")}</option>
@@ -41,27 +41,52 @@ const EmailAuthFormFields = ({ t, isSignUpFlow, showPassword, setShowPassword, u
     {isSignUpFlow && (
       <>
         <div>
-          <Label htmlFor="fullName-signup" className="text-sm font-medium text-gray-700 flex items-center">
+          <Label htmlFor="fullName-signup" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
             <Users size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formFullName")}
           </Label>
-          <Input name="fullName" id="fullName-signup" type="text" placeholder={t("demoDialog.formFullNamePlaceholder")} className="mt-1 py-2.5 bg-white text-gray-900 border-gray-300" required />
+          <Input 
+            name="fullName" 
+            id="fullName-signup" 
+            type="text" 
+            placeholder={t("demoDialog.formFullNamePlaceholder")} 
+            className="mt-1 py-2.5 px-3 text-sm sm:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors" 
+            required 
+          />
         </div>
         <UserRoleSelector t={t} userRoles={userRoles} />
       </>
     )}
     <div>
-      <Label htmlFor="email-auth" className="text-sm font-medium text-gray-700 flex items-center">
+      <Label htmlFor="email-auth" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
         <Mail size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formEmail")}
       </Label>
-      <Input name="email" id="email-auth" type="email" placeholder={t("demoDialog.formEmailPlaceholder")} className="mt-1 py-2.5 bg-white text-gray-900 border-gray-300" required />
+      <Input 
+        name="email" 
+        id="email-auth" 
+        type="email" 
+        placeholder={t("demoDialog.formEmailPlaceholder")} 
+        className="mt-1 py-2.5 px-3 text-sm sm:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors" 
+        required 
+      />
     </div>
     <div>
-      <Label htmlFor="password-auth" className="text-sm font-medium text-gray-700 flex items-center">
+      <Label htmlFor="password-auth" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
         <KeyRound size={14} className="mr-1.5 text-purple-500"/>{t("demoDialog.formPassword")}
       </Label>
       <div className="relative">
-        <Input name="password" id="password-auth" type={showPassword ? "text" : "password"} placeholder={t("demoDialog.formPasswordPlaceholder")} className="mt-1 py-2.5 pr-10 bg-white text-gray-900 border-gray-300" required />
-        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-500 hover:text-purple-600">
+        <Input 
+          name="password" 
+          id="password-auth" 
+          type={showPassword ? "text" : "password"} 
+          placeholder={t("demoDialog.formPasswordPlaceholder")} 
+          className="mt-1 py-2.5 px-3 pr-10 text-sm sm:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors" 
+          required 
+        />
+        <button 
+          type="button" 
+          onClick={() => setShowPassword(!showPassword)} 
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+        >
           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>
       </div>
@@ -201,29 +226,33 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
         </>
       )}
 
-      <form onSubmit={handleEmailAuth} className="space-y-5">
+      <form onSubmit={handleEmailAuth} className="space-y-4 sm:space-y-5">
         <EmailAuthFormFields t={t} isSignUpFlow={isSignUpFlow} showPassword={showPassword} setShowPassword={setShowPassword} userRoles={userRoles} />
         
         <FormErrorDisplay errorText={loginErrorExt} />
         
         {!isSignUpFlow && (
           <div className="flex items-center justify-between text-sm">
-            <a href="#" className="font-medium text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300 hover:underline">{t("demoDialog.forgotPasswordLink")}</a>
+            <a href="#" className="font-medium text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300 hover:underline transition-colors">{t("demoDialog.forgotPasswordLink")}</a>
           </div>
         )}
 
-        <div className="pt-4">
-          <Button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white py-3 text-base font-semibold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5" disabled={loadingEmail}>
+        <div className="pt-3 sm:pt-4">
+          <Button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white py-3 px-4 text-sm sm:text-base font-semibold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
+            disabled={loadingEmail}
+          >
             {loadingEmail ? (
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
             ) : (
-               <><LogIn size={18} className="mr-2" /> {t(isSignUpFlow ? "demoDialog.buttonRegister" : "demoDialog.buttonLogin")}</>
+               <><LogIn size={16} className="mr-2 sm:hidden" /><LogIn size={18} className="mr-2 hidden sm:block" /> {t(isSignUpFlow ? "demoDialog.buttonRegister" : "demoDialog.buttonLogin")}</>
             )}
           </Button>
         </div>
         {!isSignUpFlow && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-            {t("demoDialog.accederRedirectText")} <a href="https://demo.karyeduca.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">https://demo.karyeduca.com</a>.
+          <p className="text-xs text-gray-500 dark:text-gray-400 text-center leading-relaxed">
+            {t("demoDialog.accederRedirectText")} <a href="https://demo.karyeduca.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline transition-colors break-all">https://demo.karyeduca.com</a>.
           </p>
         )}
       </form>
