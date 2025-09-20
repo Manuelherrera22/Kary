@@ -90,5 +90,7 @@
   "logout": "Cerrar Sesión",
   "retrying": "Reintentando...",
   "retryingDescription": "Intentando reconectar con el servidor...",
-  "retryButton": "Reintentar"
+  "retryButton": "Reintentar",
+  "navigation": "Navegación",
+  "navigationDescription": "Menú de navegación principal del dashboard"
 }

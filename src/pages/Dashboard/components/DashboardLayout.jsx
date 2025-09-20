@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { 
   Menu, 
@@ -49,6 +49,14 @@ const DashboardLayout = ({ children, user, onLogout }) => {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-80 bg-slate-800 border-slate-700">
+                {/* Hidden title and description for accessibility */}
+                <SheetTitle className="sr-only">
+                  {t('common.dashboard', 'Panel de Control')} - {t('common.navigation', 'Navegación')}
+                </SheetTitle>
+                <SheetDescription className="sr-only">
+                  {t('common.navigationDescription', 'Menú de navegación principal del dashboard')}
+                </SheetDescription>
+                
                 <div className="flex flex-col h-full">
                   {/* User Info */}
                   <div className="p-4 border-b border-slate-700">
