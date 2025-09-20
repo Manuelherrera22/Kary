@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import './ai-assistant-solid.css';
 import { Brain, Sparkles, X, MessageSquare, Settings, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -67,10 +68,11 @@ const AIFloatingButton = () => {
                   variant="outline"
                   size="sm"
                   onClick={handleOpenAssistant}
-                  className="w-full justify-start bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700"
+                  className="ai-floating-button w-full justify-start bg-slate-700 border-slate-500 text-slate-100 hover:bg-slate-600"
+                  style={{ backgroundColor: '#334155', opacity: 1 }}
                 >
                   <Brain className="w-4 h-4 mr-2" />
-                  {t('ai.quickActions.assistant')}
+                  {t('dashboards.ai.quickActions.assistant')}
                 </Button>
               </motion.div>
 
@@ -82,10 +84,11 @@ const AIFloatingButton = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full justify-start bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700"
+                  className="ai-floating-button w-full justify-start bg-slate-700 border-slate-500 text-slate-100 hover:bg-slate-600"
+                  style={{ backgroundColor: '#334155', opacity: 1 }}
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
-                  {t('ai.quickActions.suggestions')}
+                  {t('dashboards.ai.quickActions.suggestions')}
                 </Button>
               </motion.div>
 
@@ -97,10 +100,11 @@ const AIFloatingButton = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full justify-start bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700"
+                  className="ai-floating-button w-full justify-start bg-slate-700 border-slate-500 text-slate-100 hover:bg-slate-600"
+                  style={{ backgroundColor: '#334155', opacity: 1 }}
                 >
                   <HelpCircle className="w-4 h-4 mr-2" />
-                  {t('ai.quickActions.help')}
+                  {t('dashboards.ai.quickActions.help')}
                 </Button>
               </motion.div>
             </motion.div>
@@ -144,7 +148,7 @@ const AIFloatingButton = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-900"
-            title={t('ai.status.ready')}
+            title={t('dashboards.ai.status.ready')}
           />
         </motion.div>
       </motion.div>
@@ -170,9 +174,9 @@ const AIFloatingButton = () => {
             exit={{ opacity: 0, x: -10 }}
             className="fixed bottom-6 right-24 z-30"
           >
-            <div className="bg-slate-800 text-slate-200 px-3 py-2 rounded-lg shadow-lg border border-slate-600">
-              <p className="text-sm font-medium">{t('ai.tooltip.title')}</p>
-              <p className="text-xs text-slate-400">{t('ai.tooltip.description')}</p>
+            <div className="ai-tooltip bg-slate-700 text-slate-100 px-3 py-2 rounded-lg shadow-lg border border-slate-500" style={{ backgroundColor: '#334155', opacity: 1 }}>
+              <p className="text-sm font-medium">{t('dashboards.ai.tooltip.title')}</p>
+              <p className="text-xs text-slate-400">{t('dashboards.ai.tooltip.description')}</p>
             </div>
           </motion.div>
         )}
