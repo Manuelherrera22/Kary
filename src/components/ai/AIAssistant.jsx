@@ -386,22 +386,24 @@ const AIAssistant = ({
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className={`ai-assistant-modal bg-slate-900 border-2 border-slate-500 rounded-xl shadow-2xl ${
-            isExpanded ? 'w-[95vw] h-[95vh] sm:w-[90vw] sm:h-[90vh]' : 'w-[95vw] h-[95vh] sm:w-[600px] sm:h-[700px]'
+          className={`ai-assistant-modal bg-slate-900 border-2 border-slate-500 rounded-lg sm:rounded-xl shadow-2xl ${
+            isExpanded 
+              ? 'w-[98vw] h-[98vh] sm:w-[95vw] sm:h-[95vh] md:w-[90vw] md:h-[90vh]' 
+              : 'w-[98vw] h-[98vh] sm:w-[95vw] sm:h-[95vh] md:w-[700px] md:h-[750px] lg:w-[800px] lg:h-[800px]'
           } flex flex-col`}
           style={{ backgroundColor: '#0f172a', opacity: 1, border: '2px solid #475569' }}
         >
           {/* Header */}
-          <div className="ai-assistant-header flex items-center justify-between p-4 border-b-2 border-slate-500 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
-                <Brain className="w-6 h-6 text-white" />
+          <div className="ai-assistant-header flex items-center justify-between p-3 sm:p-4 border-b-2 border-slate-500 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex-shrink-0">
+                <Brain className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
               </div>
-              <div>
-                <h2 className="text-lg font-semibold text-white">
+              <div className="min-w-0 flex-1">
+                <h2 className="text-base sm:text-lg font-semibold text-white truncate">
                   {t('dashboards.ai.assistantTitle')}
                 </h2>
-                <p className="text-sm text-slate-400">
+                <p className="text-xs sm:text-sm text-slate-400 truncate">
                   {aiStatus === 'ready' ? t('dashboards.ai.status.ready') : 
                    aiStatus === 'error' ? t('dashboards.ai.status.error') : 
                    t('dashboards.ai.status.loading')}
@@ -409,31 +411,31 @@ const AIAssistant = ({
               </div>
             </div>
             
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-white p-1 sm:p-2"
               >
-                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                {isExpanded ? <Minimize2 className="w-3 h-3 sm:w-4 sm:h-4" /> : <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4" />}
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-white p-1 sm:p-2"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3 h-3 sm:w-4 sm:h-4" />
               </Button>
             </div>
           </div>
 
           {/* Content */}
-          <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+          <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
             {/* Sidebar - Capabilities */}
-            <div className="ai-assistant-sidebar w-full sm:w-1/3 border-r-0 sm:border-r-2 border-slate-500 p-3 sm:p-4 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
-              <h3 className="text-sm font-semibold text-slate-300 mb-3">
+            <div className="ai-assistant-sidebar w-full lg:w-1/3 border-r-0 lg:border-r-2 border-slate-500 p-2 sm:p-3 lg:p-4 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+              <h3 className="text-xs sm:text-sm font-semibold text-slate-300 mb-2 sm:mb-3">
                 {t('dashboards.ai.capabilities.title')}
               </h3>
               
@@ -451,16 +453,16 @@ const AIAssistant = ({
                       style={{ backgroundColor: '#1e293b', opacity: 1, border: '1px solid #475569' }}
                       onClick={() => executeCapability(capability)}
                     >
-                      <CardContent className="p-3">
-                        <div className="flex items-start space-x-3">
-                          <div className={`p-2 rounded-lg ${capability.color}`}>
-                            <capability.icon className="w-4 h-4 text-white" />
+                      <CardContent className="p-2 sm:p-3">
+                        <div className="flex items-start space-x-2 sm:space-x-3">
+                          <div className={`p-1.5 sm:p-2 rounded-lg ${capability.color} flex-shrink-0`}>
+                            <capability.icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-medium text-white truncate">
+                            <h4 className="text-xs sm:text-sm font-medium text-white truncate">
                               {capability.title}
                             </h4>
-                            <p className="text-xs text-slate-400 mt-1">
+                            <p className="text-xs text-slate-400 mt-1 line-clamp-2">
                               {capability.description}
                             </p>
                           </div>
@@ -473,9 +475,9 @@ const AIAssistant = ({
             </div>
 
             {/* Main Chat Area */}
-            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full sm:w-2/3" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
+            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full lg:w-2/3" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
               {/* Messages */}
-              <div className="flex-1 p-4 overflow-y-auto space-y-4">
+              <div className="flex-1 p-2 sm:p-3 lg:p-4 overflow-y-auto space-y-3 sm:space-y-4">
                 {messages.map((message) => (
                   <motion.div
                     key={message.id}
@@ -483,8 +485,8 @@ const AIAssistant = ({
                     animate={{ opacity: 1, y: 0 }}
                     className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
-                      <div className={`p-3 rounded-lg ${
+                    <div className={`max-w-[85%] sm:max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
+                      <div className={`p-2 sm:p-3 rounded-lg ${
                         message.type === 'user' 
                           ? 'ai-assistant-user-message bg-blue-600 text-white' 
                           : 'ai-assistant-message bg-slate-800 text-slate-100'
@@ -493,7 +495,7 @@ const AIAssistant = ({
                         opacity: 1,
                         border: message.type === 'user' ? '1px solid #3b82f6' : '1px solid #475569'
                       }}>
-                        <p className="text-sm">{message.content}</p>
+                        <p className="text-xs sm:text-sm leading-relaxed">{message.content}</p>
                         
                         {message.recommendations && message.recommendations.length > 0 && (
                           <div className="mt-2 space-y-1">
@@ -530,10 +532,10 @@ const AIAssistant = ({
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="bg-slate-800 p-3 rounded-lg border border-slate-600" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+                    <div className="bg-slate-800 p-2 sm:p-3 rounded-lg border border-slate-600" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
                       <div className="flex items-center space-x-2">
-                        <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
-                        <span className="text-sm text-slate-300">
+                        <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 animate-spin text-blue-400" />
+                        <span className="text-xs sm:text-sm text-slate-300">
                           {t('dashboards.ai.thinking')}...
                         </span>
                       </div>
@@ -543,13 +545,13 @@ const AIAssistant = ({
               </div>
 
               {/* Input Area */}
-              <div className="ai-assistant-input-area border-t-2 border-slate-500 p-4 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+              <div className="ai-assistant-input-area border-t-2 border-slate-500 p-2 sm:p-3 lg:p-4 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
                 <div className="flex space-x-2">
                   <Textarea
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     placeholder={t('dashboards.ai.inputPlaceholder')}
-                    className="flex-1 resize-none"
+                    className="flex-1 resize-none text-xs sm:text-sm"
                     rows={2}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
@@ -561,19 +563,20 @@ const AIAssistant = ({
                   <Button
                     onClick={sendMessage}
                     disabled={!inputMessage.trim() || isLoading}
-                    className="bg-blue-500 hover:bg-blue-600"
+                    className="bg-blue-500 hover:bg-blue-600 p-2 sm:p-3"
+                    size="sm"
                   >
-                    <MessageSquare className="w-4 h-4" />
+                    <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </div>
                 
-                <div className="flex items-center justify-between mt-2">
-                  <div className="flex space-x-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 gap-2">
+                  <div className="flex space-x-1 sm:space-x-2">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={clearConversation}
-                      className="text-slate-400 hover:text-white"
+                      className="text-slate-400 hover:text-white text-xs px-2 py-1"
                     >
                       {t('dashboards.ai.clear')}
                     </Button>
@@ -581,13 +584,13 @@ const AIAssistant = ({
                       variant="ghost"
                       size="sm"
                       onClick={exportConversation}
-                      className="text-slate-400 hover:text-white"
+                      className="text-slate-400 hover:text-white text-xs px-2 py-1"
                     >
                       {t('dashboards.ai.export')}
                     </Button>
                   </div>
                   
-                  <Badge variant="outline" className="text-xs">
+                  <Badge variant="outline" className="text-xs px-2 py-1">
                     {t('dashboards.ai.capabilities.count', { count: aiCapabilities.length })}
                   </Badge>
                 </div>

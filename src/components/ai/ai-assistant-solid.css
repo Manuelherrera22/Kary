@@ -3,6 +3,28 @@
   background-color: #0f172a !important; 
   opacity: 1 !important; 
   border: 2px solid #475569 !important;
+  max-height: 98vh !important;
+  max-width: 98vw !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .ai-assistant-modal {
+    margin: 1vh !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  .ai-assistant-header {
+    padding: 0.75rem !important;
+  }
+  
+  .ai-assistant-sidebar {
+    max-height: 40vh !important;
+  }
+  
+  .ai-assistant-main {
+    min-height: 50vh !important;
+  }
 }
 
 .ai-assistant-header { 
