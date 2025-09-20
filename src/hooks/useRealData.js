@@ -13,7 +13,14 @@ export const useRealData = () => {
   const getCurrentUser = useCallback(async () => {
     try {
       const { data: { user }, error } = await supabase.auth.getUser();
-      if (error) throw error;
+      if (error) {
+        // Si no hay sesión de Supabase, retornar null sin error
+        if (error.message.includes('Auth session missing') || error.message.includes('AuthSessionMissingError')) {
+          console.log('No Supabase session found, using mock auth');
+          return null;
+        }
+        throw error;
+      }
       return user;
     } catch (error) {
       console.error('Error getting current user:', error);

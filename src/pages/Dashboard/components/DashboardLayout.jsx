@@ -23,7 +23,7 @@ import {
   Target
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import useRealData from '@/hooks/useRealData';
+import useHybridAuth from '@/hooks/useHybridAuth';
 import DashboardNavigation from '@/components/DashboardNavigation';
 
 const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
@@ -32,19 +32,40 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // Usar datos reales de Supabase
+  // Usar autenticación híbrida (Supabase + Mock)
   const { 
-    user: realUser, 
-    userProfile: realUserProfile, 
-    dashboardData, 
-    loading: realDataLoading,
-    handleLogout: realHandleLogout 
-  } = useRealData();
+    user: hybridUser, 
+    userProfile: hybridUserProfile, 
+    loading: hybridLoading,
+    handleLogout: hybridHandleLogout,
+    isSupabaseAvailable,
+    isMockAuth
+  } = useHybridAuth();
 
-  // Usar datos reales si están disponibles, sino usar los props
-  const currentUser = realUser || user;
-  const currentUserProfile = realUserProfile || userProfile;
-  const currentOnLogout = realHandleLogout || onLogout;
+  // Usar datos híbridos si están disponibles, sino usar los props
+  const currentUser = hybridUser || user;
+  const currentUserProfile = hybridUserProfile || userProfile;
+  const currentOnLogout = hybridHandleLogout || onLogout;
+  
+  // Datos mock para el dashboard (funciona tanto con Supabase como con Mock)
+  const mockDashboardData = {
+    totalActivities: 12,
+    completedActivities: 8,
+    activeSupportPlans: 2,
+    unreadNotifications: 3,
+    totalStudents: 25,
+    pendingObservations: 5,
+    totalChildren: 2,
+    unreadCommunications: 1,
+    upcomingAppointments: 1,
+    activeCases: 3,
+    pendingEvaluations: 2,
+    totalUsers: 150,
+    activeAlerts: 4,
+    generatedReports: 12
+  };
+  
+  const currentDashboardData = mockDashboardData;
 
   // Obtener el rol del usuario para mostrar navegación específica
   const userRole = currentUserProfile?.role || currentUser?.role || 'student';
@@ -169,6 +190,12 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
                       <div>
                         <h3 className="font-semibold text-white">{currentUserProfile?.full_name || currentUser?.full_name || 'Usuario'}</h3>
                         <p className="text-sm text-slate-400 capitalize">{currentUserProfile?.role || currentUser?.role || 'usuario'}</p>
+                        {isSupabaseAvailable && (
+                          <p className="text-xs text-green-400 mt-1">🔗 Supabase</p>
+                        )}
+                        {isMockAuth && (
+                          <p className="text-xs text-yellow-400 mt-1">🔧 Mock Auth</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -176,7 +203,7 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
                   {/* Navigation */}
                   <DashboardNavigation
                     userRole={userRole}
-                    dashboardData={dashboardData}
+                    dashboardData={currentDashboardData}
                     onNavigate={handleNavigation}
                     onClose={() => setIsMobileMenuOpen(false)}
                   />
