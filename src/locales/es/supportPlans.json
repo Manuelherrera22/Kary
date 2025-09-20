@@ -175,5 +175,24 @@
   "confirmForceCompleteMessage": "¿Estás seguro de que quieres marcar el plan \"{planName}\" para el estudiante {studentName} como 'Completado'?",
   "confirmForceCompleteWarning": "Esta acción es irreversible y cerrará el plan sin completar todos los pasos manualmente.",
   "errorForceCompletingPlan": "Error al intentar completar el plan automáticamente.",
-  "forceCompleteSuccess": "Plan marcado como 'Completado' exitosamente."
+  "forceCompleteSuccess": "Plan marcado como 'Completado' exitosamente.",
+  "aiGenerator": {
+    "generateModalTitle": "Generar Plan de Apoyo con IA",
+    "generateModalDescription": "Genera un plan de apoyo personalizado para {studentName} usando inteligencia artificial.",
+    "planViewerTitle": "Visualizador de Plan de Apoyo",
+    "planViewerDescription": "Revisa los detalles del plan de apoyo generado.",
+    "contextLabel": "Contexto del Estudiante",
+    "contextPlaceholder": "Describe la situación, necesidades y cualquier información relevante...",
+    "emotionalContextLabel": "Contexto Emocional",
+    "generateAction": "Generar Plan",
+    "generatingTitle": "Generando Plan de Apoyo",
+    "generatingDescription": "La IA está analizando el contexto y creando un plan personalizado...",
+    "planHistoryTitle": "Historial de Planes",
+    "planHistoryDescription": "Historial de planes generados para este estudiante",
+    "noHistory": "No hay historial de planes disponible",
+    "generatedBy": "Generado por",
+    "generatedOn": "Generado el",
+    "viewPlan": "Ver Plan",
+    "successMessage": "Plan de apoyo generado exitosamente"
+  }
 }

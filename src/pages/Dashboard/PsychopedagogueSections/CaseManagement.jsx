@@ -26,7 +26,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import psychopedagogueService from '@/services/psychopedagogueService';
@@ -171,6 +171,9 @@ const CaseManagement = () => {
           <DialogContent className="bg-slate-800 border-slate-700 text-slate-100">
             <DialogHeader>
               <DialogTitle className="text-xl font-bold text-slate-200">Crear Nuevo Caso</DialogTitle>
+              <DialogDescription className="text-slate-400">
+                Completa la información para crear un nuevo caso psicopedagógico
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
               <div>

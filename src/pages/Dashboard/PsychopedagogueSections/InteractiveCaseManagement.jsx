@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { 
   Plus, 
   Search, 
@@ -246,6 +246,9 @@ const InteractiveCaseManagement = ({ onViewStudent }) => {
           <DialogContent className="max-w-2xl bg-slate-800 border-slate-700">
             <DialogHeader>
               <DialogTitle className="text-slate-200">Crear Nuevo Caso</DialogTitle>
+              <DialogDescription className="text-slate-400">
+                Completa la información para crear un nuevo caso psicopedagógico
+              </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -481,6 +484,9 @@ const InteractiveCaseManagement = ({ onViewStudent }) => {
         <DialogContent className="max-w-2xl bg-slate-800 border-slate-700">
           <DialogHeader>
             <DialogTitle className="text-slate-200">Editar Caso</DialogTitle>
+            <DialogDescription className="text-slate-400">
+              Modifica la información del caso psicopedagógico
+            </DialogDescription>
           </DialogHeader>
           {selectedCase && (
             <div className="space-y-4">

@@ -136,6 +136,9 @@ const PlanHistoryDrawer = ({ isOpen, onOpenChange, studentId }) => {
             <DialogContent className="sm:max-w-2xl bg-slate-800 border-slate-700 text-white">
                 <DialogHeader>
                     <DialogTitle>{t('supportPlans.aiGenerator.planViewerTitle', { ns: 'supportPlans' })}</DialogTitle>
+                    <DialogDescription className="text-slate-400">
+                        {t('supportPlans.aiGenerator.planViewerDescription', { ns: 'supportPlans' })}
+                    </DialogDescription>
                 </DialogHeader>
                 <GeneratedPlanViewer plan={selectedPlan} />
             </DialogContent>
