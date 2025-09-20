@@ -14,7 +14,6 @@ import EmotionalAuraCard from './StudentDashboard/components/EmotionalAuraCard';
 import MagicPortalCard from './StudentDashboard/components/MagicPortalCard';
 import KarySuggestionCard from './StudentDashboard/components/KarySuggestionCard';
 import WeeklyProgressWidget from './StudentDashboard/components/WeeklyProgressWidget';
-import QuickActionsWidget from './StudentDashboard/components/QuickActionsWidget';
 import SmartNotificationsWidget from './StudentDashboard/components/SmartNotificationsWidget';
 import MyStrengthsWidget from './StudentDashboard/components/MyStrengthsWidget';
 import AdaptiveActivitiesWidget from './StudentDashboard/components/AdaptiveActivitiesWidget';
@@ -121,10 +120,7 @@ const StudentDashboard = () => {
               <ComfortZoneWidget t={t} />
               
               {/* Smart Kary Chat */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                <SmartKaryChat t={t} />
-                <QuickActionsWidget t={t} />
-              </div>
+              <SmartKaryChat t={t} />
               
               {/* Actividades del Estudiante */}
               <StudentActivities />
