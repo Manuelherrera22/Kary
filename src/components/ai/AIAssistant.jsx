@@ -1805,14 +1805,14 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
           </div>
 
           {/* Content */}
-          <div className="flex-1 flex flex-col xl:flex-row overflow-hidden">
-            {/* Sidebar - Capabilities - Mucho más pequeña */}
-            <div className="ai-assistant-sidebar w-full xl:w-1/4 border-r-0 xl:border-r-2 border-slate-500 p-1 sm:p-2 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
-              <h3 className="text-xs font-semibold text-slate-300 mb-1 sm:mb-2 px-1">
+          <div className="flex-1 flex flex-col 2xl:flex-row overflow-hidden">
+            {/* Sidebar - Capabilities - Ultra pequeña */}
+            <div className="ai-assistant-sidebar w-full 2xl:w-1/6 border-r-0 2xl:border-r-2 border-slate-500 p-1 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+              <h3 className="text-xs font-semibold text-slate-300 mb-1 px-1">
                 {t('dashboards.ai.capabilities.title')}
               </h3>
               
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {aiCapabilities.map((capability) => (
                   <motion.div
                     key={capability.id}
@@ -1826,18 +1826,15 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
                       style={{ backgroundColor: '#1e293b', opacity: 1, border: '1px solid #475569' }}
                       onClick={() => executeCapability(capability)}
                     >
-                      <CardContent className="p-1.5 sm:p-2">
-                        <div className="flex items-center space-x-2">
-                          <div className={`p-1 rounded-md ${capability.color} flex-shrink-0`}>
-                            <capability.icon className="w-3 h-3 text-white" />
+                      <CardContent className="p-1">
+                        <div className="flex items-center space-x-1">
+                          <div className={`p-0.5 rounded ${capability.color} flex-shrink-0`}>
+                            <capability.icon className="w-2.5 h-2.5 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h4 className="text-xs font-medium text-white truncate">
                               {capability.title}
                             </h4>
-                            <p className="text-xs text-slate-400 line-clamp-1">
-                              {capability.description}
-                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -1847,8 +1844,8 @@ He creado un plan de estudio adaptado a tu nivel actual y objetivos de aprendiza
               </div>
             </div>
 
-            {/* Main Chat Area - Más espacio */}
-            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full xl:w-3/4" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
+            {/* Main Chat Area - Máximo espacio */}
+            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full 2xl:w-5/6" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
               {/* Messages */}
               <div className="flex-1 p-2 sm:p-3 lg:p-4 overflow-y-auto space-y-2 sm:space-y-3">
                 {messages.map((message) => (
