@@ -1,6 +1,5 @@
 import main from '../es/main.json';
 import common from '../es/common.json';
-import dashboard from '../es/dashboard.json';
 import dashboards from '../es/dashboards.json';
 import notifications from '../es/notifications.json';
 import roles from '../es/roles.json';
@@ -24,6 +23,7 @@ import parentDashboard from '../es/parentDashboard.json';
 import directiveDashboard from '../es/directiveDashboard.json';
 import psychopedagogueDashboard from '../es/psychopedagogueDashboard.json';
 import teacherDashboard from '../es/teacherDashboard.json';
+import dashboard from '../es/dashboard.json';
 import adminUserRolePage from '../es/adminUserRolePage.json';
 import notificationAuditPage from '../es/notificationAuditPage.json';
 import studentProfilePage from '../es/studentProfilePage.json';
@@ -88,6 +88,7 @@ export const esTranslations = {
   parentDashboard,
   directiveDashboard,
   psychopedagogueDashboard,
+  dashboard,
   teacherDashboard,
   adminUserRolePage,
   notificationAuditPage,

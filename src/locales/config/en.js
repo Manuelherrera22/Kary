@@ -35,6 +35,7 @@ import enKaryCore from '@/locales/en/karyCore.json';
 import enSupportPlans from '@/locales/en/supportPlans.json';
 import enRecentCasesPage from '@/locales/en/recentCasesPage.json';
 import enPsychopedagogueDashboard from '@/locales/en/psychopedagogueDashboard.json';
+import enTeacherDashboard from '@/locales/en/teacherDashboard.json';
 import enEmotionalTrends from '@/locales/en/emotionalTrends.json';
 import enAssignTaskPage from '@/locales/en/assignTaskPage.json';
 import enPredictiveRiskPage from '@/locales/en/predictiveRiskPage.json';
@@ -97,6 +98,7 @@ export const enTranslations = {
   supportPlans: enSupportPlans,
   recentCasesPage: enRecentCasesPage,
   psychopedagogueDashboard: enPsychopedagogueDashboard,
+  teacherDashboard: enTeacherDashboard,
   emotionalTrends: enEmotionalTrends,
   assignTaskPage: enAssignTaskPage,
   predictiveRiskPage: enPredictiveRiskPage,
