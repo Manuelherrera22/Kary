@@ -411,7 +411,7 @@ const AISuggestionsEngine = () => {
               </div>
               <div>
                 <p className="text-2xl font-bold text-slate-200">
-                  {Math.round(suggestions.reduce((acc, s) => acc + s.confidence, 0) / suggestions.length * 100)}%
+                  {suggestions.length > 0 ? Math.round(suggestions.reduce((acc, s) => acc + s.confidence, 0) / suggestions.length * 100) : 0}%
                 </p>
                 <p className="text-sm text-slate-400">Confianza Promedio</p>
               </div>

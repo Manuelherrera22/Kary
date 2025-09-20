@@ -391,8 +391,8 @@ class EducationalContext {
     const recentScores = records.slice(0, 5).map(r => r.score || 0);
     const olderScores = records.slice(5, 10).map(r => r.score || 0);
     
-    const recentAvg = recentScores.reduce((a, b) => a + b, 0) / recentScores.length;
-    const olderAvg = olderScores.reduce((a, b) => a + b, 0) / olderScores.length;
+    const recentAvg = recentScores.length > 0 ? recentScores.reduce((a, b) => a + b, 0) / recentScores.length : 0;
+    const olderAvg = olderScores.length > 0 ? olderScores.reduce((a, b) => a + b, 0) / olderScores.length : 0;
     
     const change = recentAvg - olderAvg;
     
@@ -417,7 +417,7 @@ class EducationalContext {
 
     const strengths = [];
     Object.entries(subjectScores).forEach(([subject, scores]) => {
-      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
       if (avg >= 8.0) { // Asumiendo escala 0-10
         strengths.push({ subject, average: avg, consistency: this.calculateConsistency(scores) });
       }
@@ -439,7 +439,7 @@ class EducationalContext {
 
     const weaknesses = [];
     Object.entries(subjectScores).forEach(([subject, scores]) => {
-      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
       if (avg < 6.0) { // Asumiendo escala 0-10
         weaknesses.push({ subject, average: avg, consistency: this.calculateConsistency(scores) });
       }
@@ -739,8 +739,8 @@ class EducationalContext {
 
   calculateConsistency(scores) {
     if (scores.length < 2) return 1.0;
-    const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-    const variance = scores.reduce((sum, score) => sum + Math.pow(score - avg, 2), 0) / scores.length;
+    const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
+    const variance = scores.length > 0 ? scores.reduce((sum, score) => sum + Math.pow(score - avg, 2), 0) / scores.length : 0;
     const standardDeviation = Math.sqrt(variance);
     return Math.max(0, 1 - (standardDeviation / 10)); // Normalizar a escala 0-1
   }

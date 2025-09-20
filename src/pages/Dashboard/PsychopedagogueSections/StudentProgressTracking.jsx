@@ -460,7 +460,7 @@ const StudentProgressTracking = () => {
               </div>
               <div>
                 <p className="text-2xl font-bold text-slate-200">
-                  {Math.round(students.reduce((acc, s) => acc + s.progress.academic, 0) / students.length)}%
+                  {students.length > 0 ? Math.round(students.reduce((acc, s) => acc + s.progress.academic, 0) / students.length) : 0}%
                 </p>
                 <p className="text-sm text-slate-400">Progreso Promedio</p>
               </div>

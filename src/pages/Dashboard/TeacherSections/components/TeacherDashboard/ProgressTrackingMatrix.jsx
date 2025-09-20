@@ -291,7 +291,9 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-slate-700/50">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-400">
-              {Math.round(progressData.reduce((acc, s) => acc + s.metricValue, 0) / progressData.length)}
+              {progressData.length > 0 
+                ? Math.round(progressData.reduce((acc, s) => acc + s.metricValue, 0) / progressData.length)
+                : 0}
             </div>
             <div className="text-sm text-slate-400">
               {t('teacherDashboard.progressMatrix.average', 'Promedio')}
