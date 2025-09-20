@@ -13,7 +13,14 @@ import {
   Bell,
   User,
   LogOut,
-  ChevronRight
+  ChevronRight,
+  MessageSquare,
+  ShieldCheck,
+  Eye,
+  Calendar,
+  FileText,
+  Users2,
+  Target
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -26,7 +33,7 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
   // Obtener el rol del usuario para mostrar navegación específica
   const userRole = userProfile?.role || user?.role || 'student';
 
-  // Navegación específica por rol
+  // Navegación específica por rol con funciones reales
   const getNavigationItems = () => {
     const baseItems = [
       { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
@@ -34,40 +41,59 @@ const DashboardLayout = ({ children, user, userProfile, onLogout }) => {
       { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
     ];
 
-    // Agregar elementos específicos según el rol
+    // Agregar elementos específicos según el rol con funciones reales
     switch (userRole) {
       case 'student':
         return [
-          ...baseItems,
-          { id: 'activities', label: t('common.activities', 'Actividades'), icon: BookOpen, path: '/dashboard/activities' },
-          { id: 'progress', label: t('studentDashboard.progress', 'Mi Progreso'), icon: BarChart3, path: '/dashboard/progress' }
+          { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
+          { id: 'activities', label: t('common.activities', 'Mis Actividades'), icon: BookOpen, path: '/dashboard/activities' },
+          { id: 'progress', label: t('studentDashboard.progress', 'Mi Progreso'), icon: BarChart3, path: '/dashboard/progress' },
+          { id: 'kary-chat', label: t('studentDashboard.karyChat', 'Chatea con Kary'), icon: MessageSquare, path: '/dashboard/kary-chat' },
+          { id: 'support-plans', label: t('studentDashboard.supportPlans', 'Planes de Apoyo'), icon: ShieldCheck, path: '/dashboard/support-plans' },
+          { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell, path: '/dashboard/notifications' },
+          { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
         ];
       case 'teacher':
         return [
-          ...baseItems,
-          { id: 'students', label: t('common.students', 'Estudiantes'), icon: Users, path: '/dashboard/students' },
+          { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
+          { id: 'students', label: t('common.students', 'Mis Estudiantes'), icon: Users, path: '/dashboard/students' },
           { id: 'activities', label: t('common.activities', 'Actividades'), icon: BookOpen, path: '/dashboard/activities' },
-          { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3, path: '/dashboard/analytics' }
+          { id: 'observations', label: t('teacherDashboard.observations', 'Observaciones'), icon: Eye, path: '/dashboard/observations' },
+          { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3, path: '/dashboard/analytics' },
+          { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell, path: '/dashboard/notifications' },
+          { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
         ];
       case 'parent':
         return [
-          ...baseItems,
+          { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
           { id: 'children', label: t('parentDashboard.children', 'Mis Hijos'), icon: Users, path: '/dashboard/children' },
-          { id: 'progress', label: t('parentDashboard.progress', 'Progreso Familiar'), icon: BarChart3, path: '/dashboard/family-progress' }
+          { id: 'progress', label: t('parentDashboard.progress', 'Progreso Familiar'), icon: BarChart3, path: '/dashboard/family-progress' },
+          { id: 'communication', label: t('parentDashboard.communication', 'Comunicación'), icon: MessageSquare, path: '/dashboard/communication' },
+          { id: 'appointments', label: t('parentDashboard.appointments', 'Citas'), icon: Calendar, path: '/dashboard/appointments' },
+          { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell, path: '/dashboard/notifications' },
+          { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
         ];
       case 'psychopedagogue':
         return [
-          ...baseItems,
+          { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
           { id: 'students', label: t('common.students', 'Estudiantes'), icon: Users, path: '/dashboard/students' },
           { id: 'cases', label: t('psychopedagogueDashboard.cases', 'Casos'), icon: BookOpen, path: '/dashboard/cases' },
-          { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3, path: '/dashboard/analytics' }
+          { id: 'support-plans', label: t('psychopedagogueDashboard.supportPlans', 'Planes de Apoyo'), icon: ShieldCheck, path: '/dashboard/support-plans' },
+          { id: 'evaluations', label: t('psychopedagogueDashboard.evaluations', 'Evaluaciones'), icon: FileText, path: '/dashboard/evaluations' },
+          { id: 'analytics', label: t('common.analytics', 'Analíticas'), icon: BarChart3, path: '/dashboard/analytics' },
+          { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell, path: '/dashboard/notifications' },
+          { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
         ];
       case 'directive':
         return [
-          ...baseItems,
+          { id: 'overview', label: t('common.overview', 'Resumen'), icon: Home, path: '/dashboard' },
           { id: 'institution', label: t('directiveDashboard.institution', 'Institución'), icon: Users, path: '/dashboard/institution' },
+          { id: 'user-management', label: t('directiveDashboard.userManagement', 'Gestión de Usuarios'), icon: Users2, path: '/dashboard/user-management' },
           { id: 'reports', label: t('directiveDashboard.reports', 'Reportes'), icon: BarChart3, path: '/dashboard/reports' },
-          { id: 'alerts', label: t('directiveDashboard.alerts', 'Alertas'), icon: Bell, path: '/dashboard/alerts' }
+          { id: 'alerts', label: t('directiveDashboard.alerts', 'Alertas'), icon: Bell, path: '/dashboard/alerts' },
+          { id: 'strategic-summary', label: t('directiveDashboard.strategicSummary', 'Resumen Estratégico'), icon: Target, path: '/dashboard/strategic-summary' },
+          { id: 'notifications', label: t('common.notifications', 'Notificaciones'), icon: Bell, path: '/dashboard/notifications' },
+          { id: 'settings', label: t('common.settings', 'Configuración'), icon: Settings, path: '/dashboard/settings' }
         ];
       default:
         return baseItems;
