@@ -98,22 +98,22 @@ const MyStrengthsWidget = ({ t }) => {
       className="space-y-6"
     >
       {/* Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 mb-4">
-          <div className="p-3 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-xl border border-yellow-500/30">
-            <Sparkles size={24} className="text-yellow-400" />
+      <div className="text-center mb-10">
+        <div className="inline-flex items-center gap-3 mb-6">
+          <div className="p-4 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-xl border border-yellow-500/30">
+            <Sparkles size={28} className="text-yellow-400" />
           </div>
-          <h2 className="text-2xl font-bold text-yellow-300">
+          <h2 className="text-3xl font-bold text-yellow-300">
             {t('studentDashboard.myStrengths.title', 'Lo que haces muy bien')}
           </h2>
         </div>
-        <p className="text-slate-400 text-lg">
+        <p className="text-slate-400 text-xl">
           {t('studentDashboard.myStrengths.subtitle', 'Kary ha notado estas cosas increíbles sobre ti')}
         </p>
       </div>
 
       {/* Strengths Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {strengths.map((strength, index) => (
           <motion.div
             key={strength.id}
@@ -122,27 +122,27 @@ const MyStrengthsWidget = ({ t }) => {
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <Card className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700/50 text-slate-100 hover:shadow-lg transition-all duration-200 h-full">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-3 rounded-lg ${strength.color}`}>
-                    <strength.icon size={24} />
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className={`p-4 rounded-xl ${strength.color}`}>
+                    <strength.icon size={28} />
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-200">
+                  <h3 className="text-xl font-semibold text-slate-200">
                     {strength.title}
                   </h3>
                 </div>
                 
-                <p className="text-slate-300 mb-4">
+                <p className="text-slate-300 mb-5 text-base leading-relaxed">
                   {strength.description}
                 </p>
                 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <p className="text-sm font-medium text-slate-400">Ejemplos:</p>
                   <div className="flex flex-wrap gap-2">
                     {strength.examples.map((example, idx) => (
                       <Badge 
                         key={idx}
-                        className="bg-slate-700/50 text-slate-300 border-slate-600/50 text-xs"
+                        className="bg-slate-700/50 text-slate-300 border-slate-600/50 text-sm px-3 py-1"
                       >
                         {example}
                       </Badge>
@@ -157,28 +157,28 @@ const MyStrengthsWidget = ({ t }) => {
 
       {/* Recent Achievements */}
       <Card className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700/50 text-slate-100">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold text-green-300 flex items-center gap-2">
-            <Trophy size={20} className="text-green-400" />
+        <CardHeader className="pb-6">
+          <CardTitle className="text-2xl font-bold text-green-300 flex items-center gap-3">
+            <Trophy size={24} className="text-green-400" />
             {t('studentDashboard.myStrengths.recentAchievements', 'Logros Recientes')}
           </CardTitle>
-          <p className="text-slate-400">
+          <p className="text-base text-slate-400 mt-2">
             {t('studentDashboard.myStrengths.recentAchievementsDesc', 'Cosas increíbles que has hecho últimamente')}
           </p>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {recentAchievements.map((achievement, index) => (
               <motion.div
                 key={achievement.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className={`p-4 rounded-lg border ${achievement.color} hover:scale-105 transition-transform duration-200`}
+                className={`p-5 rounded-xl border ${achievement.color} hover:scale-105 transition-transform duration-200`}
               >
-                <div className="flex items-center gap-3">
-                  <achievement.icon size={20} />
-                  <p className="text-sm font-medium text-slate-200">
+                <div className="flex items-center gap-4">
+                  <achievement.icon size={24} />
+                  <p className="text-base font-medium text-slate-200">
                     {achievement.title}
                   </p>
                 </div>
@@ -190,14 +190,14 @@ const MyStrengthsWidget = ({ t }) => {
 
       {/* Motivational Message */}
       <Card className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30 text-slate-100">
-        <CardContent className="p-6 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Sparkles size={24} className="text-purple-400" />
-            <h3 className="text-xl font-bold text-purple-300">
+        <CardContent className="p-8 text-center">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <Sparkles size={28} className="text-purple-400" />
+            <h3 className="text-2xl font-bold text-purple-300">
               {t('studentDashboard.myStrengths.motivationalTitle', '¡Eres único y especial!')}
             </h3>
           </div>
-          <p className="text-slate-300 text-lg">
+          <p className="text-slate-300 text-xl leading-relaxed">
             {t('studentDashboard.myStrengths.motivationalMessage', 'Cada día aprendes algo nuevo y creces como persona. Kary está aquí para apoyarte en tu camino de aprendizaje.')}
           </p>
         </CardContent>

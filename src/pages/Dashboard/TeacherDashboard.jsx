@@ -201,7 +201,7 @@ const TeacherDashboard = () => {
     <>
       <style>{scrollbarHideStyles}</style>
       <motion.div 
-        className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8 p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 w-full"
+        className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 w-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -212,7 +212,7 @@ const TeacherDashboard = () => {
       />
 
       {/* Navegación de secciones */}
-      <div className="flex gap-1 sm:gap-2 justify-start sm:justify-center overflow-x-auto scrollbar-hide pb-2">
+      <div className="flex gap-2 sm:gap-3 justify-start sm:justify-center overflow-x-auto scrollbar-hide pb-3">
         {[
           { id: 'overview', label: 'Resumen', icon: '📊', shortLabel: 'Resumen' },
           { id: 'analytics', label: 'Analytics', icon: '📈', shortLabel: 'Analytics' },
@@ -224,13 +224,13 @@ const TeacherDashboard = () => {
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-md text-xs sm:text-sm font-medium transition-all duration-200 flex-shrink-0 whitespace-nowrap ${
+            className={`px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-xl text-sm sm:text-base font-medium transition-all duration-200 flex-shrink-0 whitespace-nowrap ${
               activeSection === section.id
                 ? 'bg-purple-600 text-white shadow-lg'
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
           >
-            <span className="mr-1 sm:mr-2">{section.icon}</span>
+            <span className="mr-2 sm:mr-3">{section.icon}</span>
             <span className="hidden sm:inline">{section.label}</span>
             <span className="sm:hidden">{section.shortLabel}</span>
           </button>
@@ -241,7 +241,7 @@ const TeacherDashboard = () => {
       {activeSection === 'overview' && (
         <>
           {/* Estadísticas principales */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
         {statCards.map((card, index) => (
           <StatCard
             key={index}
@@ -263,8 +263,8 @@ const TeacherDashboard = () => {
       />
 
       {/* Gestión masiva de actividades */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-3 md:gap-4">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-200">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 md:gap-8">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-200">
           {t('teacherDashboard.quickActions', 'Acciones Rápidas')}
         </h2>
         <BulkActivityManager 
@@ -274,11 +274,11 @@ const TeacherDashboard = () => {
       </div>
 
       {/* Tarjetas de resumen de estudiantes */}
-      <div className="space-y-3 sm:space-y-4">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-200">
+      <div className="space-y-6 sm:space-y-8">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-200">
           {t('teacherDashboard.studentOverview', 'Resumen de Estudiantes')}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
           {students.map((student) => (
             <StudentOverviewCard
               key={student.id}
@@ -292,34 +292,48 @@ const TeacherDashboard = () => {
       </div>
 
           {/* Matriz de seguimiento de progreso */}
-          <ProgressTrackingMatrix 
-            students={students}
-            activities={activities}
-          />
+          <div className="mt-8">
+            <ProgressTrackingMatrix 
+              students={students}
+              activities={activities}
+            />
+          </div>
 
           {/* Lista detallada de estudiantes (versión compacta) */}
-          <AssignedStudentsList teacherId={userProfile.id} />
+          <div className="mt-8">
+            <AssignedStudentsList teacherId={userProfile.id} />
+          </div>
         </>
       )}
 
       {activeSection === 'analytics' && (
-        <AdvancedAnalytics />
+        <div className="mt-8">
+          <AdvancedAnalytics />
+        </div>
       )}
 
       {activeSection === 'ai' && (
-        <IntelligentAIAssistant />
+        <div className="mt-8">
+          <IntelligentAIAssistant />
+        </div>
       )}
 
       {activeSection === 'activities' && (
-        <IntelligentActivityGenerator />
+        <div className="mt-8">
+          <IntelligentActivityGenerator />
+        </div>
       )}
 
       {activeSection === 'ecosystem' && (
-        <EcosystemDemo />
+        <div className="mt-8">
+          <EcosystemDemo />
+        </div>
       )}
 
       {activeSection === 'gamification' && (
-        <TeacherGamification />
+        <div className="mt-8">
+          <TeacherGamification />
+        </div>
       )}
       </motion.div>
     </>

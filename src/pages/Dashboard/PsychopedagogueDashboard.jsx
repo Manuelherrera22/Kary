@@ -278,7 +278,7 @@ const PsychopedagogueDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap gap-2 justify-center mb-6 sm:mb-8"
+          className="flex flex-wrap gap-3 justify-center mb-8 sm:mb-10"
         >
           {[
             { id: 'overview', label: 'Resumen', shortLabel: 'Resumen', icon: BarChart3, color: 'blue' },
@@ -290,14 +290,14 @@ const PsychopedagogueDashboard = () => {
             <Button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-xs sm:text-sm ${
+              className={`px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                 activeTab === tab.id
                   ? `bg-${tab.color}-500/20 text-${tab.color}-300 border-${tab.color}-500/50 shadow-lg`
                   : 'bg-slate-800/40 text-slate-400 border-slate-600/30 hover:bg-slate-700/40'
               }`}
             >
-              <tab.icon size={16} className="sm:hidden mr-1" />
-              <tab.icon size={20} className="hidden sm:block mr-2" />
+              <tab.icon size={20} className="sm:hidden mr-2" />
+              <tab.icon size={24} className="hidden sm:block mr-3" />
               <span className="hidden sm:inline">{tab.label}</span>
               <span className="sm:hidden">{tab.shortLabel}</span>
             </Button>
@@ -308,7 +308,7 @@ const PsychopedagogueDashboard = () => {
         {activeTab === 'overview' && (
           <>
             {/* Stats Cards - Enhanced */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -318,21 +318,21 @@ const PsychopedagogueDashboard = () => {
           >
             <Card className="relative overflow-hidden bg-gradient-to-br from-blue-600/20 to-blue-800/20 backdrop-blur-sm border border-blue-500/30 text-slate-100 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent"></div>
-              <CardContent className="relative z-10 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 bg-blue-500/20 rounded-xl backdrop-blur-sm group-hover:bg-blue-500/30 transition-colors">
-                    <Briefcase size={28} className="text-blue-300" />
+              <CardContent className="relative z-10 p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-4 bg-blue-500/20 rounded-2xl backdrop-blur-sm group-hover:bg-blue-500/30 transition-colors">
+                    <Briefcase size={32} className="text-blue-300" />
                   </div>
                   <div className="text-right">
-                    <p className="text-4xl font-bold text-blue-300 mb-1">{stats.activeCases}</p>
-                    <p className="text-sm text-blue-200/80">Casos Activos</p>
+                    <p className="text-5xl font-bold text-blue-300 mb-2">{stats.activeCases}</p>
+                    <p className="text-base text-blue-200/80">Casos Activos</p>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-slate-200 mb-2">Gestión de Casos</h3>
-                <p className="text-sm text-slate-400 mb-4">Estudiantes con seguimiento activo</p>
+                <h3 className="text-xl font-semibold text-slate-200 mb-3">Gestión de Casos</h3>
+                <p className="text-base text-slate-400 mb-6">Estudiantes con seguimiento activo</p>
                 <Button 
                   variant="ghost" 
-                  className="w-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300"
+                  className="w-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 text-base py-3"
                 >
                   Ver Detalles →
                 </Button>

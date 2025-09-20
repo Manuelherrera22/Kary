@@ -182,36 +182,36 @@ const AdaptiveActivitiesWidget = ({ t }) => {
       className="space-y-4 sm:space-y-6"
     >
       {/* Header */}
-      <div className="text-center mb-6 sm:mb-8">
-        <div className="inline-flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-          <div className="p-2 sm:p-3 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl border border-emerald-500/30">
-            <Sparkles size={20} className="sm:hidden text-emerald-400" />
-            <Sparkles size={24} className="hidden sm:block text-emerald-400" />
+      <div className="text-center mb-8 sm:mb-10">
+        <div className="inline-flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="p-3 sm:p-4 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl border border-emerald-500/30">
+            <Sparkles size={24} className="sm:hidden text-emerald-400" />
+            <Sparkles size={28} className="hidden sm:block text-emerald-400" />
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-emerald-300">
+          <h2 className="text-2xl sm:text-3xl font-bold text-emerald-300">
             {t('studentDashboard.adaptiveActivities.title', 'Mis Actividades Personalizadas')}
           </h2>
         </div>
-        <p className="text-slate-400 text-sm sm:text-base lg:text-lg px-2">
+        <p className="text-slate-400 text-base sm:text-lg lg:text-xl px-2">
           {t('studentDashboard.adaptiveActivities.subtitle', 'Actividades divertidas y personalizadas para ti')}
         </p>
       </div>
 
       {/* Subject Selector */}
       <Card className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700/50 text-slate-100">
-        <CardHeader className="p-4 sm:p-6">
-          <CardTitle className="text-base sm:text-lg font-bold text-slate-200">
+        <CardHeader className="p-6 sm:p-8">
+          <CardTitle className="text-lg sm:text-xl font-bold text-slate-200">
             {t('studentDashboard.adaptiveActivities.chooseSubject', 'Elige una materia')}
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-4 sm:p-6 pt-0">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+        <CardContent className="p-6 sm:p-8 pt-0">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {Object.entries(subjects).map(([key, subject]) => (
               <Button
                 key={key}
                 variant={selectedSubject === key ? "default" : "outline"}
                 onClick={() => setSelectedSubject(key)}
-                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-200 text-sm sm:text-base ${
+                className={`px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-medium transition-all duration-200 text-base sm:text-lg ${
                   selectedSubject === key
                     ? `bg-gradient-to-r ${subject.color} text-white shadow-lg`
                     : 'text-slate-300 border-slate-600 hover:bg-slate-700 hover:text-slate-100'
@@ -247,38 +247,38 @@ const AdaptiveActivitiesWidget = ({ t }) => {
                       </div>
                       
                       <div className="flex-1 min-w-0">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                          <h3 className="text-base sm:text-lg font-semibold text-slate-200 leading-tight">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-3">
+                          <h3 className="text-lg sm:text-xl font-semibold text-slate-200 leading-tight">
                             {activity.title}
                           </h3>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-3">
                             {getStatusIcon(activity.status)}
-                            <span className="text-xs sm:text-sm text-slate-400">
+                            <span className="text-sm sm:text-base text-slate-400">
                               {getStatusText(activity.status)}
                             </span>
                           </div>
                         </div>
                         
-                        <p className="text-sm sm:text-base text-slate-300 mb-3 leading-relaxed">
+                        <p className="text-base sm:text-lg text-slate-300 mb-4 leading-relaxed">
                           {activity.description}
                         </p>
                         
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-                          <Badge className={`text-xs ${getDifficultyColor(activity.difficulty)}`}>
+                        <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
+                          <Badge className={`text-sm px-3 py-1 ${getDifficultyColor(activity.difficulty)}`}>
                             {activity.difficulty}
                           </Badge>
-                          <Badge className="bg-slate-600/20 text-slate-300 border-slate-600/30 text-xs">
-                            <Clock size={10} className="mr-1" />
+                          <Badge className="bg-slate-600/20 text-slate-300 border-slate-600/30 text-sm px-3 py-1">
+                            <Clock size={12} className="mr-1" />
                             {activity.duration}
                           </Badge>
-                          <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-xs">
-                            <Sparkles size={10} className="mr-1" />
+                          <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-sm px-3 py-1">
+                            <Sparkles size={12} className="mr-1" />
                             Adaptada
                           </Badge>
                         </div>
                         
-                        <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3 mb-3 sm:mb-4">
-                          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        <div className="bg-slate-700/30 rounded-xl p-4 sm:p-5 mb-4 sm:mb-5">
+                          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                             <strong>Lo especial de esta actividad:</strong> {activity.adaptation}
                           </p>
                         </div>
@@ -289,7 +289,7 @@ const AdaptiveActivitiesWidget = ({ t }) => {
                       <Button
                         variant={activity.status === 'completed' ? 'outline' : 'default'}
                         size="sm"
-                        className={`px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 text-xs sm:text-sm ${
+                        className={`px-4 sm:px-6 py-3 rounded-xl transition-all duration-200 text-sm sm:text-base ${
                           activity.status === 'completed'
                             ? 'text-green-400 border-green-500/30 hover:bg-green-500/20'
                             : 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white'
@@ -297,26 +297,26 @@ const AdaptiveActivitiesWidget = ({ t }) => {
                       >
                         {activity.status === 'completed' ? (
                           <>
-                            <CheckCircle size={14} className="sm:hidden mr-1" />
-                            <CheckCircle size={16} className="hidden sm:block mr-2" />
+                            <CheckCircle size={16} className="sm:hidden mr-2" />
+                            <CheckCircle size={18} className="hidden sm:block mr-2" />
                             <span className="hidden sm:inline">Completada</span>
                             <span className="sm:hidden">✓</span>
                           </>
                         ) : activity.status === 'in_progress' ? (
                           <>
-                            <Pause size={14} className="sm:hidden mr-1" />
-                            <Pause size={16} className="hidden sm:block mr-2" />
+                            <Pause size={16} className="sm:hidden mr-2" />
+                            <Pause size={18} className="hidden sm:block mr-2" />
                             <span className="hidden sm:inline">Continuar</span>
                             <span className="sm:hidden">▶</span>
                           </>
                         ) : (
                           <>
-                            <Play size={14} className="sm:hidden mr-1" />
-                            <Play size={16} className="hidden sm:block mr-2" />
+                            <Play size={16} className="sm:hidden mr-2" />
+                            <Play size={18} className="hidden sm:block mr-2" />
                             <span className="hidden sm:inline">Empezar</span>
                             <span className="sm:hidden">▶</span>
-                            <ArrowRight size={14} className="sm:hidden ml-1" />
-                            <ArrowRight size={16} className="hidden sm:block ml-2" />
+                            <ArrowRight size={16} className="sm:hidden ml-2" />
+                            <ArrowRight size={18} className="hidden sm:block ml-2" />
                           </>
                         )}
                       </Button>
