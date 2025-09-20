@@ -220,19 +220,19 @@ const AdminDashboard = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8 p-4 sm:p-6"
+      className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6"
     >
-      <div className="text-center mb-12">
-        <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300">
+      <div className="text-center mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300 leading-tight px-2">
           {t('dashboards.adminDashboard.pageTitle')}
         </h1>
-        <p className="text-lg text-slate-300 mt-2 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-slate-300 mt-2 max-w-2xl mx-auto leading-relaxed px-2">
           {t('dashboards.adminDashboard.welcomeMessage', { userName: userProfile?.full_name || user?.email })}
         </p>
       </div>
 
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
         initial="hidden"
         animate="visible"
         variants={{
