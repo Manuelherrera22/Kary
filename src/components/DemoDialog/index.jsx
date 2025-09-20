@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
 import LoginVisualPanel from "@/components/DemoDialog/LoginVisualPanel";
 import LoginForm from "@/components/DemoDialog/LoginForm";
@@ -44,6 +44,18 @@ const DemoDialog = ({ open, onOpenChange, initialFlow = "login" }) => {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="w-[98vw] max-w-[98vw] sm:w-[95vw] sm:max-w-[95vw] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] bg-white p-0 rounded-xl shadow-2xl overflow-hidden mx-auto">
+        {/* Hidden title and description for accessibility */}
+        <DialogTitle className="sr-only">
+          {activeTab === "acceder" ? "Iniciar Sesión" : 
+           activeTab === "registrarse" ? "Registrarse" : 
+           "Agendar Demo"}
+        </DialogTitle>
+        <DialogDescription className="sr-only">
+          {activeTab === "acceder" ? "Accede a tu cuenta de Kary" : 
+           activeTab === "registrarse" ? "Crea una nueva cuenta en Kary" : 
+           "Agenda una demostración de la plataforma Kary"}
+        </DialogDescription>
+        
         <div className="flex flex-col md:flex-row min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[650px]">
           <LoginVisualPanel />
           <div className="w-full md:w-3/5 p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 overflow-y-auto max-h-[calc(100vh-60px)] sm:max-h-[calc(100vh-80px)] md:max-h-full flex flex-col bg-white rounded-b-xl md:rounded-r-xl md:rounded-l-none">

@@ -2,13 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMockAuth } from '@/contexts/MockAuthContext';
+import { useAuth } from '@/pages/Dashboard/hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { 
   BarChart2, Users, FileText, Settings, ShieldAlert, Activity, Link2, Users2, Edit3, Eye, 
   Briefcase, Maximize2, Brain, TrendingUp, AlertTriangle, CheckCircle, Clock, 
   Target, Zap, Globe, Calendar, MessageSquare, PieChart, LineChart, 
   ArrowUpRight, ArrowDownRight, Minus, Star, Award, BookOpen, 
-  GraduationCap, Heart, Lightbulb, Shield, RefreshCw
+  GraduationCap, Heart, Lightbulb, Shield, RefreshCw, LogOut, Bell, User
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -77,6 +78,7 @@ const SectionItem = ({ label, description, icon: Icon, linkTo, bgColor, iconColo
 const DirectiveDashboard = () => {
   const { t } = useLanguage();
   const { userProfile, user } = useMockAuth(); 
+  const { handleLogout } = useAuth();
   const [loadingDashboard, setLoadingDashboard] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
@@ -323,6 +325,34 @@ const DirectiveDashboard = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
     >
+      {/* Header */}
+      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h1 className="text-lg font-semibold text-white">
+              {t('common.dashboard')}
+            </h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
+              <Bell size={18} />
+            </Button>
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+              <User size={16} className="text-white" />
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-red-400 hover:text-red-300 hover:bg-red-500/20"
+            >
+              <LogOut size={18} className="mr-2" />
+              {t('common.logout')}
+            </Button>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20"></div>
