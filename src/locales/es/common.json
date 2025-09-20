@@ -87,5 +87,8 @@
   "analytics": "Analíticas",
   "notifications": "Notificaciones",
   "settings": "Configuración",
-  "logout": "Cerrar Sesión"
+  "logout": "Cerrar Sesión",
+  "retrying": "Reintentando...",
+  "retryingDescription": "Intentando reconectar con el servidor...",
+  "retryButton": "Reintentar"
 }

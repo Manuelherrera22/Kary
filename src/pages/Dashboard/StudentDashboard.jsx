@@ -33,25 +33,47 @@ const StudentDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
+  const [retrying, setRetrying] = useState(false);
 
-  const fetchStudentData = useCallback(async () => {
+  const fetchStudentData = useCallback(async (retryCount = 0) => {
     if (!user?.id) return;
     setLoading(true);
     setError(null);
+    
+    const maxRetries = 2;
+    
     try {
       const payload = { role: 'student', user_id: user.id };
       const { data, error: fetchError } = await mockEdgeFunctionService.getDashboardSummary(payload);
       
-      if (fetchError) throw new Error(fetchError.message || t('studentDashboard.dataLoadedError'));
+      if (fetchError) {
+        // Si es un error de conexión temporal y aún tenemos reintentos, intentar de nuevo
+        if (fetchError.message.includes('Error temporal de conexión') && retryCount < maxRetries) {
+          console.log(`[StudentDashboard] Retry attempt ${retryCount + 1}/${maxRetries} for connection error`);
+          setRetrying(true);
+          setTimeout(() => {
+            setRetrying(false);
+            fetchStudentData(retryCount + 1);
+          }, 1000 * (retryCount + 1)); // Delay incremental
+          return;
+        }
+        throw new Error(fetchError.message || t('studentDashboard.dataLoadedError'));
+      }
+      
       setDashboardData(data);
+      setError(null); // Limpiar errores previos en caso de éxito
     } catch (err) {
       console.error("Error fetching student dashboard data:", err);
       setError(err.message);
-      toast({
-        title: t('toasts.error'),
-        description: err.message,
-        variant: 'destructive',
-      });
+      
+      // Solo mostrar toast en el último intento
+      if (retryCount >= maxRetries) {
+        toast({
+          title: t('toasts.error'),
+          description: err.message,
+          variant: 'destructive',
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -89,9 +111,15 @@ const StudentDashboard = () => {
           <div className="text-center p-4 sm:p-6 md:p-8 bg-red-500/10 rounded-2xl border border-red-400/30">
             <h2 className="text-xl sm:text-2xl font-bold text-red-300">{t('common.errorTitle')}</h2>
             <p className="text-slate-400 mt-2 text-sm sm:text-base">{error}</p>
-            <Button onClick={fetchStudentData} className="mt-4 sm:mt-6 bg-purple-600 hover:bg-purple-700 text-sm sm:text-base">
+            <Button onClick={() => fetchStudentData()} className="mt-4 sm:mt-6 bg-purple-600 hover:bg-purple-700 text-sm sm:text-base">
               {t('common.retryButton')}
             </Button>
+          </div>
+        ) : retrying ? (
+          <div className="text-center p-4 sm:p-6 md:p-8 bg-blue-500/10 rounded-2xl border border-blue-400/30">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
+            <h2 className="text-xl sm:text-2xl font-bold text-blue-300">{t('common.retrying', 'Reintentando...')}</h2>
+            <p className="text-slate-400 mt-2 text-sm sm:text-base">{t('common.retryingDescription', 'Intentando reconectar con el servidor...')}</p>
           </div>
         ) : (
           <>

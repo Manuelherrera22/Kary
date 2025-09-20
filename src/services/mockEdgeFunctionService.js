@@ -50,9 +50,9 @@ const simulateNetworkDelay = (ms = 500) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-// Simular error ocasional
+// Simular error ocasional (reducido para mayor estabilidad)
 const simulateError = () => {
-  return Math.random() < 0.1; // 10% de probabilidad de error
+  return Math.random() < 0.02; // 2% de probabilidad de error (reducido de 10%)
 };
 
 async function invokeMockEdgeFunction(functionName, payload) {
