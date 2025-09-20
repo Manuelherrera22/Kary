@@ -32,21 +32,21 @@ const DashboardCard = ({
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
-  const cardBaseClasses = `p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
+  const cardBaseClasses = `p-4 sm:p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
   
   const content = (
     <>
       <div className="flex-grow">
         {IconComponent && (
-          <div className={`mb-3 p-2.5 rounded-lg inline-block ${iconColor.replace('text-', 'bg-')}/10`}>
-            <IconComponent className={`w-6 h-6 ${iconColor}`} />
+          <div className={`mb-3 p-2 sm:p-2.5 rounded-lg inline-block ${iconColor.replace('text-', 'bg-')}/10`}>
+            <IconComponent className={`w-5 h-5 sm:w-6 sm:h-6 ${iconColor}`} />
           </div>
         )}
         {title && (
-          <h3 className={`text-lg font-semibold text-slate-100 mb-1.5 ${IconComponent ? '' : 'mt-2'}`}>{title}</h3>
+          <h3 className={`text-base sm:text-lg font-semibold text-slate-100 mb-1.5 sm:mb-2 ${IconComponent ? '' : 'mt-2'} leading-tight`}>{title}</h3>
         )}
         {description && (
-          <p className="text-sm text-slate-400 mb-3 leading-relaxed">{description}</p>
+          <p className="text-xs sm:text-sm text-slate-400 mb-3 leading-relaxed">{description}</p>
         )}
         
         {/* Mostrar métricas si están disponibles */}
