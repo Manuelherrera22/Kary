@@ -35,19 +35,20 @@ const DashboardCard = ({ title, description, icon: Icon, linkTo, bgColor, iconCo
   return (
     <motion.div
       whileHover={{ scale: 1.03, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
-      className={`rounded-xl shadow-lg p-6 transition-all duration-300 ease-out group ${bgColor} border border-slate-700/60`}
+      className={`rounded-xl shadow-lg p-3 sm:p-4 md:p-6 transition-all duration-300 ease-out group ${bgColor} border border-slate-700/60`}
     >
       <Link to={linkTo} className="block">
         <div className="flex items-start justify-between">
-          <div className={`p-3 rounded-full ${iconColor.replace('text-', 'bg-')}/20 mb-4`}>
-            <Icon size={28} className={iconColor} />
+          <div className={`p-2 sm:p-3 rounded-full ${iconColor.replace('text-', 'bg-').replace('400', '600')} mb-3 sm:mb-4`}>
+            <Icon size={20} className={`${iconColor} sm:hidden`} />
+            <Icon size={28} className={`${iconColor} hidden sm:block`} />
           </div>
           {count !== undefined && (
-            <span className={`text-3xl font-bold ${iconColor}`}>{count}</span>
+            <span className={`text-xl sm:text-2xl md:text-3xl font-bold ${iconColor}`}>{count}</span>
           )}
         </div>
-        <h3 className="text-lg font-semibold text-slate-100 mb-1 group-hover:text-sky-300 transition-colors">{title}</h3>
-        <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">{description}</p>
+        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-slate-100 mb-1 group-hover:text-sky-300 transition-colors">{title}</h3>
+        <p className="text-xs sm:text-sm text-slate-400 group-hover:text-slate-300 transition-colors">{description}</p>
       </Link>
     </motion.div>
   );
@@ -58,13 +59,14 @@ const SectionItem = ({ label, description, icon: Icon, linkTo, bgColor, iconColo
     <Link to={linkTo}>
       <motion.div
         whileHover={{ x: 5, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-        className={`flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 ${bgColor} mb-2 border border-transparent hover:border-slate-600`}
+        className={`flex items-center p-2 sm:p-3 rounded-lg cursor-pointer transition-all duration-200 ${bgColor} mb-2 border border-transparent hover:border-slate-600`}
       >
-        <div className={`p-2 rounded-md mr-3 ${iconColor.replace('text-', 'bg-')}/10`}>
-          <Icon size={20} className={iconColor} />
+        <div className={`p-1.5 sm:p-2 rounded-md mr-2 sm:mr-3 ${iconColor.replace('text-', 'bg-').replace('400', '600')}`}>
+          <Icon size={16} className={`${iconColor} sm:hidden`} />
+          <Icon size={20} className={`${iconColor} hidden sm:block`} />
         </div>
         <div>
-          <h4 className="text-sm font-medium text-slate-200">{label}</h4>
+          <h4 className="text-xs sm:text-sm font-medium text-slate-200">{label}</h4>
           <p className="text-xs text-slate-400">{description}</p>
         </div>
       </motion.div>
@@ -205,7 +207,7 @@ const DirectiveDashboard = () => {
       descriptionKey: "directiveDashboard.stats.schoolDataDesc", 
       icon: BarChart2, 
       linkTo: "/dashboard/school-data", 
-      bgColor: "bg-sky-600/20 hover:bg-sky-600/30", 
+      bgColor: "bg-sky-600 hover:bg-sky-700", 
       iconColor: "text-sky-300",
       count: dashboardData?.total_students 
     },
@@ -214,7 +216,7 @@ const DirectiveDashboard = () => {
       descriptionKey: "directiveDashboard.stats.userManagementDesc", 
       icon: Users, 
       linkTo: "/dashboard/user-management", 
-      bgColor: "bg-purple-600/20 hover:bg-purple-600/30", 
+      bgColor: "bg-purple-600 hover:bg-purple-700", 
       iconColor: "text-purple-300",
       count: dashboardData?.active_users 
     },
@@ -223,7 +225,7 @@ const DirectiveDashboard = () => {
       descriptionKey: "directiveDashboard.stats.reportsDesc", 
       icon: FileText, 
       linkTo: "/dashboard/reports", 
-      bgColor: "bg-teal-600/20 hover:bg-teal-600/30", 
+      bgColor: "bg-teal-600 hover:bg-teal-700", 
       iconColor: "text-teal-300",
       count: dashboardData?.generated_reports
     },
@@ -232,7 +234,7 @@ const DirectiveDashboard = () => {
       descriptionKey: "directiveDashboard.stats.alertsDesc", 
       icon: ShieldAlert, 
       linkTo: "/dashboard/institutional-alerts", 
-      bgColor: "bg-red-600/20 hover:bg-red-600/30", 
+      bgColor: "bg-red-600 hover:bg-red-700", 
       iconColor: "text-red-300",
       count: dashboardData?.active_alerts
     },
@@ -244,8 +246,8 @@ const DirectiveDashboard = () => {
       icon: Brain,
       iconColor: "text-pink-400",
       items: [
-        { labelKey: "directiveDashboard.sections.strategy.strategicSummary", descriptionKey: "directiveDashboard.sections.strategy.strategicSummaryDesc", icon: Maximize2, linkTo: "/dashboard/strategic-summary", bgColor: "bg-pink-500/10", iconColor: "text-pink-400" },
-        { labelKey: "directiveDashboard.sections.strategy.karyCorePanel", descriptionKey: "directiveDashboard.sections.strategy.karyCorePanelDesc", icon: Brain, linkTo: "/dashboard/kary-core", bgColor: "bg-pink-500/10", iconColor: "text-pink-400" },
+        { labelKey: "directiveDashboard.sections.strategy.strategicSummary", descriptionKey: "directiveDashboard.sections.strategy.strategicSummaryDesc", icon: Maximize2, linkTo: "/dashboard/strategic-summary", bgColor: "bg-pink-600", iconColor: "text-pink-300" },
+        { labelKey: "directiveDashboard.sections.strategy.karyCorePanel", descriptionKey: "directiveDashboard.sections.strategy.karyCorePanelDesc", icon: Brain, linkTo: "/dashboard/kary-core", bgColor: "bg-pink-600", iconColor: "text-pink-300" },
       ]
     },
     {
@@ -253,9 +255,9 @@ const DirectiveDashboard = () => {
       icon: Users2,
       iconColor: "text-indigo-400",
       items: [
-        { labelKey: "directiveDashboard.sections.management.userManagement", descriptionKey: "directiveDashboard.sections.management.userManagementDesc", icon: Users, linkTo: "/dashboard/user-management", bgColor: "bg-indigo-500/10", iconColor: "text-indigo-400" },
-        { labelKey: "directiveDashboard.sections.management.accessManagement", descriptionKey: "directiveDashboard.sections.management.accessManagementDesc", icon: Edit3, linkTo: "/dashboard/access-management", bgColor: "bg-indigo-500/10", iconColor: "text-indigo-400" },
-        { labelKey: "directiveDashboard.sections.management.familyLinkValidation", descriptionKey: "directiveDashboard.sections.management.familyLinkValidationDesc", icon: Link2, linkTo: "/dashboard/family-validation", bgColor: "bg-indigo-500/10", iconColor: "text-indigo-400" },
+        { labelKey: "directiveDashboard.sections.management.userManagement", descriptionKey: "directiveDashboard.sections.management.userManagementDesc", icon: Users, linkTo: "/dashboard/user-management", bgColor: "bg-indigo-600", iconColor: "text-indigo-300" },
+        { labelKey: "directiveDashboard.sections.management.accessManagement", descriptionKey: "directiveDashboard.sections.management.accessManagementDesc", icon: Edit3, linkTo: "/dashboard/access-management", bgColor: "bg-indigo-600", iconColor: "text-indigo-300" },
+        { labelKey: "directiveDashboard.sections.management.familyLinkValidation", descriptionKey: "directiveDashboard.sections.management.familyLinkValidationDesc", icon: Link2, linkTo: "/dashboard/family-validation", bgColor: "bg-indigo-600", iconColor: "text-indigo-300" },
       ]
     },
     {
@@ -263,9 +265,9 @@ const DirectiveDashboard = () => {
       icon: Activity,
       iconColor: "text-green-400",
       items: [
-        { labelKey: "directiveDashboard.sections.monitoring.roleActivity", descriptionKey: "directiveDashboard.sections.monitoring.roleActivityDesc", icon: Activity, linkTo: "/dashboard/role-activity", bgColor: "bg-green-500/10", iconColor: "text-green-400" },
-        { labelKey: "directiveDashboard.sections.monitoring.institutionalAlerts", descriptionKey: "directiveDashboard.sections.monitoring.institutionalAlertsDesc", icon: ShieldAlert, linkTo: "/dashboard/institutional-alerts", bgColor: "bg-green-500/10", iconColor: "text-green-400" },
-        { labelKey: "directiveDashboard.sections.monitoring.notificationAudit", descriptionKey: "directiveDashboard.sections.monitoring.notificationAuditDesc", icon: Eye, linkTo: "/dashboard/admin/notification-audit", bgColor: "bg-green-500/10", iconColor: "text-green-400" },
+        { labelKey: "directiveDashboard.sections.monitoring.roleActivity", descriptionKey: "directiveDashboard.sections.monitoring.roleActivityDesc", icon: Activity, linkTo: "/dashboard/role-activity", bgColor: "bg-green-600", iconColor: "text-green-300" },
+        { labelKey: "directiveDashboard.sections.monitoring.institutionalAlerts", descriptionKey: "directiveDashboard.sections.monitoring.institutionalAlertsDesc", icon: ShieldAlert, linkTo: "/dashboard/institutional-alerts", bgColor: "bg-green-600", iconColor: "text-green-300" },
+        { labelKey: "directiveDashboard.sections.monitoring.notificationAudit", descriptionKey: "directiveDashboard.sections.monitoring.notificationAuditDesc", icon: Eye, linkTo: "/dashboard/admin/notification-audit", bgColor: "bg-green-600", iconColor: "text-green-300" },
       ]
     },
     {
@@ -273,8 +275,8 @@ const DirectiveDashboard = () => {
       icon: BarChart2,
       iconColor: "text-amber-400",
       items: [
-        { labelKey: "directiveDashboard.sections.data.schoolDataPanel", descriptionKey: "directiveDashboard.sections.data.schoolDataPanelDesc", icon: BarChart2, linkTo: "/dashboard/school-data", bgColor: "bg-amber-500/10", iconColor: "text-amber-400" },
-        { labelKey: "directiveDashboard.sections.data.reports", descriptionKey: "directiveDashboard.sections.data.reportsDesc", icon: FileText, linkTo: "/dashboard/reports", bgColor: "bg-amber-500/10", iconColor: "text-amber-400" },
+        { labelKey: "directiveDashboard.sections.data.schoolDataPanel", descriptionKey: "directiveDashboard.sections.data.schoolDataPanelDesc", icon: BarChart2, linkTo: "/dashboard/school-data", bgColor: "bg-amber-600", iconColor: "text-amber-300" },
+        { labelKey: "directiveDashboard.sections.data.reports", descriptionKey: "directiveDashboard.sections.data.reportsDesc", icon: FileText, linkTo: "/dashboard/reports", bgColor: "bg-amber-600", iconColor: "text-amber-300" },
       ]
     },
      {
@@ -328,8 +330,8 @@ const DirectiveDashboard = () => {
           <WelcomeUser />
           
           {/* Navigation Tabs */}
-          <div className="mt-8">
-            <div className="flex flex-wrap gap-2 mb-6">
+          <div className="mt-6 sm:mt-8">
+            <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6">
               {sections.map((section) => (
                 <Button
                   key={section.id}
@@ -339,10 +341,11 @@ const DirectiveDashboard = () => {
                     activeSection === section.id
                       ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
                       : 'bg-slate-800/50 border-slate-700 text-slate-300 hover:bg-slate-700/50'
-                  } transition-all duration-300`}
+                  } transition-all duration-300 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2`}
                 >
-                  <section.icon className="w-4 h-4 mr-2" />
-                  {section.label}
+                  <section.icon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">{section.label}</span>
+                  <span className="sm:hidden">{section.label.split(' ')[0]}</span>
                 </Button>
               ))}
             </div>
@@ -351,7 +354,7 @@ const DirectiveDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="p-6 space-y-8">
+      <div className="p-3 sm:p-4 md:p-6 space-y-6 sm:space-y-8">
         <AnimatePresence mode="wait">
           {activeSection === 'overview' && (
             <motion.div
@@ -363,7 +366,7 @@ const DirectiveDashboard = () => {
               className="space-y-8"
             >
               {/* Main Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
                 {mainStats.map((stat, index) => (
                   <motion.div
                     key={stat.titleKey}

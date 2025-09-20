@@ -32,21 +32,21 @@ const DashboardCard = ({
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
-  const cardBaseClasses = `p-4 sm:p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
+  const cardBaseClasses = `p-3 sm:p-4 md:p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
   
   const content = (
     <>
       <div className="flex-grow">
         {IconComponent && (
-          <div className={`mb-3 p-2 sm:p-2.5 rounded-lg inline-block ${iconColor.replace('text-', 'bg-')}/10`}>
-            <IconComponent className={`w-5 h-5 sm:w-6 sm:h-6 ${iconColor}`} />
+          <div className={`mb-2 sm:mb-3 p-1.5 sm:p-2 md:p-2.5 rounded-lg inline-block ${iconColor.replace('text-', 'bg-')}/10`}>
+            <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ${iconColor}`} />
           </div>
         )}
         {title && (
-          <h3 className={`text-base sm:text-lg font-semibold text-slate-100 mb-1.5 sm:mb-2 ${IconComponent ? '' : 'mt-2'} leading-tight`}>{title}</h3>
+          <h3 className={`text-sm sm:text-base md:text-lg font-semibold text-slate-100 mb-1 sm:mb-1.5 md:mb-2 ${IconComponent ? '' : 'mt-2'} leading-tight`}>{title}</h3>
         )}
         {description && (
-          <p className="text-xs sm:text-sm text-slate-400 mb-3 leading-relaxed">{description}</p>
+          <p className="text-xs sm:text-sm text-slate-400 mb-2 sm:mb-3 leading-relaxed">{description}</p>
         )}
         
         {/* Mostrar métricas si están disponibles */}
@@ -81,13 +81,14 @@ const DashboardCard = ({
       {children}
       
       {/* Footer con información adicional */}
-      <div className="mt-auto pt-3 border-t border-slate-700/50">
+      <div className="mt-auto pt-2 sm:pt-3 border-t border-slate-700/50">
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             {link && !children && (
-              <span className={`inline-flex items-center text-sm font-medium ${iconColor.replace('text-','text-')} group-hover:underline`}>
+              <span className={`inline-flex items-center text-xs sm:text-sm font-medium ${iconColor.replace('text-','text-')} group-hover:underline`}>
                 {t(buttonTextKey || 'common.accessNowButton')}
-                <ArrowRight size={16} className="ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight size={14} className="sm:hidden ml-1" />
+                <ArrowRight size={16} className="hidden sm:block ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
               </span>
             )}
             {specialValue && (

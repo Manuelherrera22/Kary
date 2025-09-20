@@ -38,12 +38,13 @@ class AIIntegration {
           geminiFlash: 'gemini-1.5-flash',
           geminiPro: 'gemini-1.5-pro'
         },
-        service: new GeminiService()
+        service: new GeminiService(),
+        available: true
       }
     };
     
     this.defaultProvider = import.meta.env.VITE_DEFAULT_AI_PROVIDER || 'gemini';
-    this.fallbackChain = ['gemini', 'openai', 'anthropic', 'local'];
+    this.fallbackChain = ['gemini', 'openai', 'anthropic'];
   }
 
   /**
@@ -200,34 +201,45 @@ class AIIntegration {
     const model = this.selectModel('local', type, options);
     const systemPrompt = this.getSystemPrompt(type, options);
 
-    const response = await fetch(`${config.endpoint}/generate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model,
-        prompt: `${systemPrompt}\n\n${prompt}`,
-        stream: false,
-        options: {
-          temperature: options.temperature || 0.7,
-          top_p: options.topP || 1,
-          max_tokens: options.maxTokens || 2000
-        }
-      })
-    });
+    try {
+      const response = await fetch(`${config.endpoint}/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model,
+          prompt: `${systemPrompt}\n\n${prompt}`,
+          stream: false,
+          options: {
+            temperature: options.temperature || 0.7,
+            top_p: options.topP || 1,
+            max_tokens: options.maxTokens || 2000
+          }
+        }),
+        signal: AbortSignal.timeout(10000) // 10 segundos timeout
+      });
 
-    if (!response.ok) {
-      throw new Error(`Local AI error: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`Local AI error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        content: data.response || '',
+        usage: { total_tokens: data.prompt_eval_count + data.eval_count },
+        model: data.model,
+        provider: 'local'
+      };
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        throw new Error('Local AI request timeout');
+      }
+      if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+        throw new Error('Local AI service not available');
+      }
+      throw error;
     }
-
-    const data = await response.json();
-    return {
-      content: data.response || '',
-      usage: { total_tokens: data.prompt_eval_count + data.eval_count },
-      model: data.model,
-      provider: 'local'
-    };
   }
 
   /**
@@ -528,14 +540,22 @@ class AIIntegration {
   async checkProviderAvailability() {
     const availability = {};
     
-    for (const [provider, config] of Object.entries(this.providers)) {
-      try {
-        await this.callProvider(provider, 'Test', 'general', { maxTokens: 10 });
-        availability[provider] = { available: true, error: null };
-      } catch (error) {
-        availability[provider] = { available: false, error: error.message };
+    // Solo verificar Gemini como proveedor principal
+    try {
+      const geminiConfig = this.providers.gemini;
+      if (geminiConfig && geminiConfig.apiKey) {
+        availability['gemini'] = { available: true, error: null };
+      } else {
+        availability['gemini'] = { available: false, error: 'No Gemini API key configured' };
       }
+    } catch (error) {
+      availability['gemini'] = { available: false, error: error.message };
     }
+    
+    // Marcar otros proveedores como no disponibles para evitar errores
+    availability['openai'] = { available: false, error: 'Not configured' };
+    availability['anthropic'] = { available: false, error: 'Not configured' };
+    availability['local'] = { available: false, error: 'Not configured' };
     
     return availability;
   }

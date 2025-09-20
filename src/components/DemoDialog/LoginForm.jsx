@@ -226,7 +226,7 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
         </>
       )}
 
-      <form onSubmit={handleEmailAuth} className="space-y-4 sm:space-y-5">
+      <form onSubmit={handleEmailAuth} className="space-y-3 sm:space-y-4 md:space-y-5">
         <EmailAuthFormFields t={t} isSignUpFlow={isSignUpFlow} showPassword={showPassword} setShowPassword={setShowPassword} userRoles={userRoles} />
         
         <FormErrorDisplay errorText={loginErrorExt} />
@@ -237,7 +237,7 @@ const LoginForm = ({ setLoginErrorExt, loginErrorExt, onOpenChange, isSignUpFlow
           </div>
         )}
 
-        <div className="pt-3 sm:pt-4">
+        <div className="pt-2 sm:pt-3 md:pt-4">
           <Button 
             type="submit" 
             className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white py-3 px-4 text-sm sm:text-base font-semibold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 

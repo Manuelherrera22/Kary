@@ -42,38 +42,38 @@ const RoleCard = ({ role, data, index }) => {
       className="group"
     >
       <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/60 hover:border-slate-600/80 transition-all duration-300 group-hover:shadow-xl">
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className={`p-3 rounded-lg ${getRoleColor(role.type).split(' ')[1]}`}>
-                {getRoleIcon(role.type)}
+        <CardHeader className="pb-3 p-3 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+              <div className={`p-2 sm:p-3 rounded-lg flex-shrink-0 ${getRoleColor(role.type).split(' ')[1]}`}>
+                {React.cloneElement(getRoleIcon(role.type), { className: "w-4 h-4 sm:w-6 sm:h-6" })}
               </div>
-              <div>
-                <CardTitle className="text-lg font-semibold text-slate-200 group-hover:text-white transition-colors">
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-base sm:text-lg font-semibold text-slate-200 group-hover:text-white transition-colors truncate">
                   {role.name}
                 </CardTitle>
-                <p className="text-sm text-slate-400">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                   {role.description}
                 </p>
               </div>
             </div>
             <Badge 
               variant="outline" 
-              className={`${getRoleColor(role.type)} border-current`}
+              className={`${getRoleColor(role.type)} border-current text-xs flex-shrink-0`}
             >
               {data.activeUsers} activos
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="pt-0">
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+        <CardContent className="pt-0 p-3 sm:p-6">
+          <div className="space-y-3 sm:space-y-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">{data.totalUsers}</div>
+                <div className="text-lg sm:text-2xl font-bold text-white">{data.totalUsers}</div>
                 <div className="text-xs text-slate-500">Total Usuarios</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-400">{data.engagement}%</div>
+                <div className="text-lg sm:text-2xl font-bold text-green-400">{data.engagement}%</div>
                 <div className="text-xs text-slate-500">Compromiso</div>
               </div>
             </div>
@@ -85,12 +85,12 @@ const RoleCard = ({ role, data, index }) => {
               </div>
               <Progress 
                 value={data.engagement} 
-                className="h-2 bg-slate-700"
+                className="h-1.5 sm:h-2 bg-slate-700"
               />
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-sm font-medium text-slate-200">Métricas Clave</h4>
+              <h4 className="text-xs sm:text-sm font-medium text-slate-200">Métricas Clave</h4>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Progreso:</span>
@@ -111,9 +111,9 @@ const RoleCard = ({ role, data, index }) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-2">
               <div className="flex items-center space-x-2">
-                <div className={`w-2 h-2 rounded-full ${data.status === 'online' ? 'bg-green-400' : 'bg-gray-400'}`} />
+                <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${data.status === 'online' ? 'bg-green-400' : 'bg-gray-400'}`} />
                 <span className="text-xs text-slate-500">
                   {data.status === 'online' ? 'En línea' : 'Desconectado'}
                 </span>
@@ -121,10 +121,11 @@ const RoleCard = ({ role, data, index }) => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="opacity-0 group-hover:opacity-100 transition-opacity text-blue-400 hover:text-blue-300"
+                className="opacity-0 group-hover:opacity-100 transition-opacity text-blue-400 hover:text-blue-300 text-xs sm:text-sm py-1 sm:py-2 px-2 sm:px-3"
               >
-                Ver Dashboard
-                <ArrowRight className="w-3 h-3 ml-1" />
+                <span className="hidden sm:inline">Ver Dashboard</span>
+                <span className="sm:hidden">Ver</span>
+                <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1" />
               </Button>
             </div>
           </div>
@@ -157,21 +158,21 @@ const ActivityFeed = ({ activities }) => {
   };
 
   return (
-    <div className="space-y-3">
-      <h3 className="text-lg font-semibold text-slate-200 mb-4">Actividad del Ecosistema</h3>
+    <div className="space-y-2 sm:space-y-3">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-200 mb-3 sm:mb-4">Actividad del Ecosistema</h3>
       {activities.map((activity, index) => (
         <motion.div
           key={activity.id}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: index * 0.05 }}
-          className="flex items-start space-x-3 p-3 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 transition-colors"
+          className="flex items-start space-x-2 sm:space-x-3 p-2 sm:p-3 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 transition-colors"
         >
-          <div className="flex-shrink-0 mt-1">
-            {getActivityIcon(activity.type)}
+          <div className="flex-shrink-0 mt-0.5 sm:mt-1">
+            {React.cloneElement(getActivityIcon(activity.type), { className: "w-3 h-3 sm:w-4 sm:h-4" })}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               <span className="font-medium text-slate-200">{activity.user}</span>
               {' '}{activity.action}
             </p>
@@ -306,58 +307,60 @@ const EcosystemIntegration = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8 p-3 sm:p-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
             Integración del Ecosistema
           </h2>
-          <p className="text-slate-400 mt-1">
+          <p className="text-sm sm:text-base text-slate-400 mt-1 leading-relaxed">
             Vista unificada de todos los roles y su interacción en la plataforma
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Button
             onClick={handleRefresh}
             disabled={isRefreshing}
             variant="outline"
-            className="border-slate-600 hover:bg-slate-700"
+            className="border-slate-600 hover:bg-slate-700 text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2"
           >
-            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-            {isRefreshing ? 'Actualizando...' : 'Actualizar'}
+            <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">{isRefreshing ? 'Actualizando...' : 'Actualizar'}</span>
+            <span className="sm:hidden">{isRefreshing ? '...' : '↻'}</span>
           </Button>
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            <Settings className="w-4 h-4 mr-2" />
-            Configurar
+          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2">
+            <Settings className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Configurar</span>
+            <span className="sm:hidden">Config</span>
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+        <div className="xl:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {roles.map((role, index) => (
               <RoleCard key={role.type} role={role} data={role.data} index={index} />
             ))}
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/60">
-            <CardHeader>
-              <CardTitle className="text-lg text-slate-200 flex items-center">
-                <Activity className="w-5 h-5 mr-2 text-blue-400" />
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-slate-200 flex items-center">
+                <Activity className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-400" />
                 Resumen del Ecosistema
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-6 pt-0">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-400">323</div>
+                  <div className="text-lg sm:text-2xl font-bold text-blue-400">323</div>
                   <div className="text-xs text-slate-500">Total Usuarios</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400">270</div>
+                  <div className="text-lg sm:text-2xl font-bold text-green-400">270</div>
                   <div className="text-xs text-slate-500">Activos Ahora</div>
                 </div>
               </div>
@@ -366,7 +369,7 @@ const EcosystemIntegration = () => {
                   <span>Compromiso General</span>
                   <span>88%</span>
                 </div>
-                <Progress value={88} className="h-2 bg-slate-700" />
+                <Progress value={88} className="h-1.5 sm:h-2 bg-slate-700" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-xs text-slate-500">
@@ -386,40 +389,40 @@ const EcosystemIntegration = () => {
           </Card>
 
           <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/60">
-            <CardHeader>
-              <CardTitle className="text-lg text-slate-200 flex items-center">
-                <TrendingUp className="w-5 h-5 mr-2 text-green-400" />
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-slate-200 flex items-center">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-400" />
                 Tendencias
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
+            <CardContent className="p-3 sm:p-6 pt-0">
+              <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-300">Progreso Académico</span>
-                  <div className="flex items-center space-x-2">
-                    <TrendingUp className="w-4 h-4 text-green-400" />
-                    <span className="text-sm text-green-400">+12%</span>
+                  <span className="text-xs sm:text-sm text-slate-300 truncate">Progreso Académico</span>
+                  <div className="flex items-center space-x-1 sm:space-x-2">
+                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm text-green-400">+12%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-300">Bienestar Emocional</span>
-                  <div className="flex items-center space-x-2">
-                    <TrendingUp className="w-4 h-4 text-green-400" />
-                    <span className="text-sm text-green-400">+8%</span>
+                  <span className="text-xs sm:text-sm text-slate-300 truncate">Bienestar Emocional</span>
+                  <div className="flex items-center space-x-1 sm:space-x-2">
+                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm text-green-400">+8%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-300">Participación Familiar</span>
-                  <div className="flex items-center space-x-2">
-                    <TrendingUp className="w-4 h-4 text-green-400" />
-                    <span className="text-sm text-green-400">+15%</span>
+                  <span className="text-xs sm:text-sm text-slate-300 truncate">Participación Familiar</span>
+                  <div className="flex items-center space-x-1 sm:space-x-2">
+                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm text-green-400">+15%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-300">Eficiencia Docente</span>
-                  <div className="flex items-center space-x-2">
-                    <TrendingUp className="w-4 h-4 text-green-400" />
-                    <span className="text-sm text-green-400">+6%</span>
+                  <span className="text-xs sm:text-sm text-slate-300 truncate">Eficiencia Docente</span>
+                  <div className="flex items-center space-x-1 sm:space-x-2">
+                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm text-green-400">+6%</span>
                   </div>
                 </div>
               </div>
@@ -429,7 +432,7 @@ const EcosystemIntegration = () => {
       </div>
 
       <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/60">
-        <CardContent className="p-6">
+        <CardContent className="p-3 sm:p-6">
           <ActivityFeed activities={activities} />
         </CardContent>
       </Card>

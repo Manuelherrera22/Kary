@@ -6,6 +6,7 @@
 import { supabase } from '@/lib/supabaseClient';
 import aiIntegration from './aiIntegration.js';
 import GeminiService from './geminiService.js';
+import mockAIService from './mockAIService.js';
 
 class EducationalAI {
   constructor() {
@@ -14,12 +15,38 @@ class EducationalAI {
     this.diagnosticPatterns = new Map();
     this.geminiService = new GeminiService();
     this.aiIntegration = aiIntegration;
+    this.mockService = mockAIService;
+    this.useMock = false;
+  }
+
+  /**
+   * Verifica si debe usar respuestas simuladas
+   */
+  async checkAIAvailability() {
+    try {
+      const availability = await this.aiIntegration.checkProviderAvailability();
+      const hasAvailableProvider = Object.values(availability).some(provider => provider.available);
+      this.useMock = !hasAvailableProvider;
+      return hasAvailableProvider;
+    } catch (error) {
+      console.warn('Error checking AI availability, using mock responses:', error);
+      this.useMock = true;
+      return false;
+    }
   }
 
   /**
    * Genera un plan de apoyo personalizado basado en diagnósticos
    */
   async generateSupportPlan(studentId, diagnosticData, context = {}) {
+    // Verificar disponibilidad de IA
+    await this.checkAIAvailability();
+    
+    if (this.useMock) {
+      console.log('Using mock AI service for support plan generation');
+      return await this.mockService.generateSupportPlan(studentId, diagnosticData, context);
+    }
+    
     try {
       const studentProfile = await this.getStudentProfile(studentId);
       const diagnosticContext = await this.analyzeDiagnosticPatterns(diagnosticData);
@@ -29,8 +56,8 @@ class EducationalAI {
       
       return this.parseSupportPlanResponse(response);
     } catch (error) {
-      console.error('Error generating support plan:', error);
-      return this.getFallbackSupportPlan(studentId);
+      console.error('Error generating support plan, using mock service:', error);
+      return await this.mockService.generateSupportPlan(studentId, diagnosticData, context);
     }
   }
 
@@ -38,6 +65,14 @@ class EducationalAI {
    * Genera alertas predictivas basadas en patrones de comportamiento
    */
   async generatePredictiveAlerts(studentId, behaviorData, academicData) {
+    // Verificar disponibilidad de IA
+    await this.checkAIAvailability();
+    
+    if (this.useMock) {
+      console.log('Using mock AI service for predictive alerts generation');
+      return await this.mockService.generatePredictiveAlerts(studentId, behaviorData, academicData);
+    }
+    
     try {
       const patterns = await this.analyzeBehaviorPatterns(behaviorData, academicData);
       const riskAssessment = await this.assessRiskLevel(studentId, patterns);

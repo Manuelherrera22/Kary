@@ -17,11 +17,12 @@ const GoogleAuthButton = ({ onClick, loading, t }) => {
     <Button 
       onClick={onClick} 
       variant="outline" 
-      className="w-full mb-4 py-3 text-base border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 group text-gray-700 dark:text-gray-200"
+      className="w-full mb-2 sm:mb-3 md:mb-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 group text-gray-700 dark:text-gray-200"
       disabled={loading}
     >
-      {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <GoogleIcon />}
-      {t("demoDialog.loginWithGoogleButton")}
+      {loading ? <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" /> : <GoogleIcon />}
+      <span className="hidden sm:inline">{t("demoDialog.loginWithGoogleButton")}</span>
+      <span className="sm:hidden">Continuar con Google</span>
     </Button>
   );
 };

@@ -27,9 +27,11 @@ export const useAI = (options = {}) => {
       
       if (!hasAvailableProvider) {
         console.warn('⚠️ No AI providers available, using mock responses');
+        setIsAvailable(false);
       }
     } catch (error) {
       console.error('Error checking AI availability:', error);
+      console.warn('⚠️ AI availability check failed, using mock responses');
       setIsAvailable(false);
     }
   };
@@ -347,4 +349,6 @@ export const useAI = (options = {}) => {
 };
 
 export default useAI;
+
+
 

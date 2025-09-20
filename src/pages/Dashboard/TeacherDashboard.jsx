@@ -4,6 +4,17 @@ import { useLanguage } from '@/contexts/LanguageContext.jsx';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import { toast } from '@/components/ui/use-toast';
 import { AlertTriangle, Loader2, FileText, ListChecks, Edit, Users } from 'lucide-react';
+
+// Estilos para ocultar el scrollbar
+const scrollbarHideStyles = `
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+`;
 import TeacherWelcomeHeader from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/TeacherWelcomeHeader.jsx';
 import StatCard from '@/pages/Dashboard/TeacherSections/components/StatCard.jsx';
 import AssignedStudentsList from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/AssignedStudentsList.jsx';
@@ -187,19 +198,21 @@ const TeacherDashboard = () => {
   ];
 
   return (
-    <motion.div 
-      className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
+      <style>{scrollbarHideStyles}</style>
+      <motion.div 
+        className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8 p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 w-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
       <TeacherWelcomeHeader 
         teacherName={userProfile.full_name}
         assignedStudentsCount={students.length}
       />
 
       {/* Navegación de secciones */}
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex gap-1 sm:gap-2 justify-start sm:justify-center overflow-x-auto scrollbar-hide pb-2">
         {[
           { id: 'overview', label: 'Resumen', icon: '📊', shortLabel: 'Resumen' },
           { id: 'analytics', label: 'Analytics', icon: '📈', shortLabel: 'Analytics' },
@@ -211,7 +224,7 @@ const TeacherDashboard = () => {
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
+            className={`px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-md text-xs sm:text-sm font-medium transition-all duration-200 flex-shrink-0 whitespace-nowrap ${
               activeSection === section.id
                 ? 'bg-purple-600 text-white shadow-lg'
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
@@ -228,7 +241,7 @@ const TeacherDashboard = () => {
       {activeSection === 'overview' && (
         <>
           {/* Estadísticas principales */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
         {statCards.map((card, index) => (
           <StatCard
             key={index}
@@ -250,8 +263,8 @@ const TeacherDashboard = () => {
       />
 
       {/* Gestión masiva de actividades */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-200">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-3 md:gap-4">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-200">
           {t('teacherDashboard.quickActions', 'Acciones Rápidas')}
         </h2>
         <BulkActivityManager 
@@ -261,11 +274,11 @@ const TeacherDashboard = () => {
       </div>
 
       {/* Tarjetas de resumen de estudiantes */}
-      <div className="space-y-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-200">
+      <div className="space-y-3 sm:space-y-4">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-200">
           {t('teacherDashboard.studentOverview', 'Resumen de Estudiantes')}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {students.map((student) => (
             <StudentOverviewCard
               key={student.id}
@@ -308,7 +321,8 @@ const TeacherDashboard = () => {
       {activeSection === 'gamification' && (
         <TeacherGamification />
       )}
-    </motion.div>
+      </motion.div>
+    </>
   );
 };
 

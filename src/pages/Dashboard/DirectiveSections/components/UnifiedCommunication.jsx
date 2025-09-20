@@ -91,30 +91,31 @@ const CommunicationCard = ({ communication, index }) => {
       className="group"
     >
       <Card className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 border-slate-700/60 hover:border-slate-600/80 transition-all duration-300 group-hover:shadow-lg">
-        <CardContent className="p-4">
-          <div className="flex items-start space-x-3">
-            <Avatar className="w-10 h-10">
+        <CardContent className="p-3 sm:p-4">
+          <div className="flex items-start space-x-2 sm:space-x-3">
+            <Avatar className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
               <AvatarImage src={communication.avatar} />
-              <AvatarFallback className="bg-slate-700 text-slate-300">
+              <AvatarFallback className="bg-slate-700 text-slate-300 text-xs sm:text-sm">
                 {communication.sender.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             
             <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
-                  <h4 className="font-medium text-slate-200 group-hover:text-white transition-colors">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div className="flex items-center space-x-2 min-w-0">
+                  <h4 className="font-medium text-sm sm:text-base text-slate-200 group-hover:text-white transition-colors truncate">
                     {communication.sender}
                   </h4>
                   <Badge 
                     variant="outline" 
-                    className={`${getPriorityColor(communication.priority)} text-xs`}
+                    className={`${getPriorityColor(communication.priority)} text-xs flex-shrink-0`}
                   >
-                    {communication.priority.toUpperCase()}
+                    <span className="hidden sm:inline">{communication.priority.toUpperCase()}</span>
+                    <span className="sm:hidden">{communication.priority.substr(0,3).toUpperCase()}</span>
                   </Badge>
                 </div>
                 <div className="flex items-center space-x-2">
-                  {getStatusIcon(communication.status)}
+                  {React.cloneElement(getStatusIcon(communication.status), { className: "w-3 h-3 sm:w-4 sm:h-4" })}
                   <span className="text-xs text-slate-500">
                     {formatTime(communication.timestamp)}
                   </span>
@@ -122,20 +123,20 @@ const CommunicationCard = ({ communication, index }) => {
               </div>
               
               <div className="flex items-center space-x-2 mb-2">
-                <div className={`p-1 rounded ${getPriorityColor(communication.priority).split(' ')[1]}`}>
-                  {getTypeIcon(communication.type)}
+                <div className={`p-0.5 sm:p-1 rounded ${getPriorityColor(communication.priority).split(' ')[1]}`}>
+                  {React.cloneElement(getTypeIcon(communication.type), { className: "w-3 h-3 sm:w-4 sm:h-4" })}
                 </div>
-                <span className="text-sm text-slate-400">
+                <span className="text-xs sm:text-sm text-slate-400 truncate">
                   {communication.subject}
                 </span>
               </div>
               
-              <p className="text-sm text-slate-300 mb-3 line-clamp-2">
+              <p className="text-xs sm:text-sm text-slate-300 mb-3 line-clamp-2 leading-relaxed">
                 {communication.message}
               </p>
               
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div className="flex items-center space-x-2 flex-wrap">
                   <Badge variant="outline" className="text-xs border-slate-600">
                     {communication.role}
                   </Badge>
@@ -145,15 +146,15 @@ const CommunicationCard = ({ communication, index }) => {
                     </Badge>
                   )}
                 </div>
-                <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                    <Reply className="w-3 h-3" />
+                <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity self-start sm:self-center">
+                  <Button variant="ghost" size="sm" className="h-6 w-6 sm:h-8 sm:w-8 p-0">
+                    <Reply className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                   </Button>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                    <Forward className="w-3 h-3" />
+                  <Button variant="ghost" size="sm" className="h-6 w-6 sm:h-8 sm:w-8 p-0">
+                    <Forward className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                   </Button>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                    <MoreVertical className="w-3 h-3" />
+                  <Button variant="ghost" size="sm" className="h-6 w-6 sm:h-8 sm:w-8 p-0">
+                    <MoreVertical className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                   </Button>
                 </div>
               </div>
@@ -242,41 +243,43 @@ const UnifiedCommunication = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+    <div className="space-y-4 sm:space-y-6 p-3 sm:p-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
             Comunicación Unificada
           </h2>
-          <p className="text-slate-400 mt-1">
+          <p className="text-sm sm:text-base text-slate-400 mt-1 leading-relaxed">
             Centro de comunicación integrado con todos los actores del ecosistema educativo
           </p>
         </div>
-        <div className="flex items-center space-x-2">
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            <Send className="w-4 h-4 mr-2" />
-            Nueva Comunicación
+        <div className="flex items-center">
+          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-2.5">
+            <Send className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Nueva Comunicación</span>
+            <span className="sm:hidden">Nueva</span>
           </Button>
         </div>
       </div>
 
-      <div className="flex items-center space-x-4">
-        <div className="flex space-x-1 bg-slate-800/50 rounded-lg p-1">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+        <div className="flex overflow-x-auto scrollbar-hide space-x-1 bg-slate-800/50 rounded-lg p-1 min-w-0">
           {tabs.map(tab => (
             <Button
               key={tab.id}
               variant={activeTab === tab.id ? "default" : "ghost"}
               size="sm"
               onClick={() => setActiveTab(tab.id)}
-              className={`${
+              className={`flex-shrink-0 text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${
                 activeTab === tab.id 
                   ? 'bg-blue-600 text-white' 
                   : 'hover:bg-slate-700 text-slate-400'
               }`}
             >
-              {tab.label}
+              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="sm:hidden">{tab.label.substr(0, 3)}</span>
               {tab.count > 0 && (
-                <Badge variant="secondary" className="ml-2 text-xs">
+                <Badge variant="secondary" className="ml-1 sm:ml-2 text-xs px-1 py-0.5">
                   {tab.count}
                 </Badge>
               )}
@@ -284,19 +287,19 @@ const UnifiedCommunication = () => {
           ))}
         </div>
         
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+        <div className="relative flex-1 max-w-full sm:max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-3 h-3 sm:w-4 sm:h-4" />
           <Input
             placeholder="Buscar comunicaciones..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-slate-800/50 border-slate-700"
+            className="pl-8 sm:pl-10 bg-slate-800/50 border-slate-700 text-sm sm:text-base"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-4">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+        <div className="xl:col-span-2 space-y-3 sm:space-y-4">
           <AnimatePresence>
             {filteredCommunications.map((communication, index) => (
               <CommunicationCard key={communication.id} communication={communication} index={index} />
@@ -304,78 +307,78 @@ const UnifiedCommunication = () => {
           </AnimatePresence>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/60">
-            <CardHeader>
-              <CardTitle className="text-lg text-slate-200 flex items-center">
-                <MessageSquare className="w-5 h-5 mr-2 text-blue-400" />
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-slate-200 flex items-center">
+                <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-400" />
                 Mensaje Rápido
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-6 pt-0">
               <div>
-                <label className="text-sm font-medium text-slate-300 mb-2 block">
+                <label className="text-xs sm:text-sm font-medium text-slate-300 mb-1 sm:mb-2 block">
                   Destinatario
                 </label>
                 <Input 
                   placeholder="Seleccionar destinatario..."
-                  className="bg-slate-800/50 border-slate-700"
+                  className="bg-slate-800/50 border-slate-700 text-sm sm:text-base"
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-300 mb-2 block">
+                <label className="text-xs sm:text-sm font-medium text-slate-300 mb-1 sm:mb-2 block">
                   Asunto
                 </label>
                 <Input 
                   placeholder="Asunto del mensaje..."
-                  className="bg-slate-800/50 border-slate-700"
+                  className="bg-slate-800/50 border-slate-700 text-sm sm:text-base"
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-300 mb-2 block">
+                <label className="text-xs sm:text-sm font-medium text-slate-300 mb-1 sm:mb-2 block">
                   Mensaje
                 </label>
                 <Textarea 
                   placeholder="Escribe tu mensaje aquí..."
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
-                  className="bg-slate-800/50 border-slate-700 min-h-[100px]"
+                  className="bg-slate-800/50 border-slate-700 min-h-[80px] sm:min-h-[100px] text-sm sm:text-base"
                 />
               </div>
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                <Send className="w-4 h-4 mr-2" />
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-base py-2 sm:py-2.5">
+                <Send className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                 Enviar Mensaje
               </Button>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/60">
-            <CardHeader>
-              <CardTitle className="text-lg text-slate-200 flex items-center">
-                <Users className="w-5 h-5 mr-2 text-green-400" />
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-slate-200 flex items-center">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-400" />
                 Actividad Reciente
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm text-slate-300">Ana Rodríguez en línea</p>
+            <CardContent className="p-3 sm:p-6 pt-0">
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full flex-shrink-0"></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm text-slate-300 truncate">Ana Rodríguez en línea</p>
                     <p className="text-xs text-slate-500">Acudiente</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm text-slate-300">Prof. Carlos López</p>
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-400 rounded-full flex-shrink-0"></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm text-slate-300 truncate">Prof. Carlos López</p>
                     <p className="text-xs text-slate-500">Última actividad: 5 min</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm text-slate-300">Psic. María González</p>
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full flex-shrink-0"></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm text-slate-300 truncate">Psic. María González</p>
                     <p className="text-xs text-slate-500">Última actividad: 1 hora</p>
                   </div>
                 </div>

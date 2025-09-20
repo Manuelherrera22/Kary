@@ -185,39 +185,41 @@ const InstitutionalAlertsPage = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="p-4 sm:p-6 bg-gradient-to-br from-slate-900 via-red-900 to-orange-800 min-h-screen text-white"
+      className="p-3 sm:p-4 md:p-6 bg-gradient-to-br from-slate-900 via-red-900 to-orange-800 min-h-screen text-white"
     >
       {/* Botón de regreso */}
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <button
           onClick={() => navigate('/dashboard')}
           className="inline-flex items-center text-red-300 hover:text-red-100 transition-colors group"
         >
-          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
-          <span className="text-sm font-medium">{t('common.backToDashboard')}</span>
+          <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200 sm:hidden" />
+          <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform duration-200 hidden sm:block" />
+          <span className="text-xs sm:text-sm font-medium">{t('common.backToDashboard')}</span>
         </button>
       </div>
 
-      <header className="mb-8 text-center">
-        <AlertTriangleIcon size={48} className="mx-auto mb-4 text-red-300" />
-        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-300 via-orange-300 to-yellow-300">
+      <header className="mb-6 sm:mb-8 text-center">
+        <AlertTriangleIcon size={32} className="mx-auto mb-3 sm:mb-4 text-red-300 sm:hidden" />
+        <AlertTriangleIcon size={48} className="mx-auto mb-4 text-red-300 hidden sm:block" />
+        <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-300 via-orange-300 to-yellow-300">
           {t('dashboards.directive.institutionalAlerts.pageTitle')}
         </h1>
-        <p className="text-slate-300 mt-2 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-slate-300 mt-2 max-w-2xl mx-auto px-2">
           {t('dashboards.directive.institutionalAlerts.pageDescription')}
         </p>
       </header>
 
-      <Card className="mb-8 bg-slate-800/80 border-slate-600 shadow-2xl">
-        <CardHeader>
-          <CardTitle className="text-xl text-orange-300">{t('dashboards.directive.institutionalAlerts.summaryTitle')}</CardTitle>
+      <Card className="mb-6 sm:mb-8 bg-slate-800/80 border-slate-600 shadow-2xl">
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle className="text-lg sm:text-xl text-orange-300">{t('dashboards.directive.institutionalAlerts.summaryTitle')}</CardTitle>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+        <CardContent className="p-4 sm:p-6">
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-              <XAxis dataKey="name" stroke="#94a3b8" />
-              <YAxis stroke="#94a3b8" />
+              <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} />
+              <YAxis stroke="#94a3b8" fontSize={12} />
               <RechartsTooltip contentStyle={{ backgroundColor: 'rgba(30, 41, 59, 0.9)', border: '1px solid #475569', borderRadius: '0.5rem' }} itemStyle={{ color: '#e2e8f0' }}/>
               <Legend />
               <Bar dataKey="count" fill="#f97316" name={t('dashboards.directive.institutionalAlerts.chart.alertCount')} />
@@ -228,19 +230,25 @@ const InstitutionalAlertsPage = () => {
 
 
       <Card className="bg-slate-800/90 border-slate-600 shadow-2xl">
-        <CardHeader>
-          <CardTitle className="text-xl text-orange-300 flex items-center">
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle className="text-lg sm:text-xl text-orange-300 flex items-center">
             {t('dashboards.directive.institutionalAlerts.alertsListTitle')}
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <CardContent className="p-4 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <Select onValueChange={(value) => handleFilterChange('course', value)} defaultValue="all">
-              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterCourse')} /></SelectTrigger>
-              <SelectContent className="bg-slate-700 border-slate-500 text-white"><SelectItem value="all">{t('common.allCourses')}</SelectItem></SelectContent>
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white text-sm">
+                <SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterCourse')} />
+              </SelectTrigger>
+              <SelectContent className="bg-slate-700 border-slate-500 text-white">
+                <SelectItem value="all">{t('common.allCourses')}</SelectItem>
+              </SelectContent>
             </Select>
             <Select onValueChange={(value) => handleFilterChange('severity', value)} defaultValue="all">
-              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterSeverity')} /></SelectTrigger>
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white text-sm">
+                <SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterSeverity')} />
+              </SelectTrigger>
               <SelectContent className="bg-slate-700 border-slate-500 text-white">
                 <SelectItem value="all">{t('common.allSeverities')}</SelectItem>
                 <SelectItem value="alto">{t('dashboards.directive.institutionalAlerts.severityHigh')}</SelectItem>
@@ -249,7 +257,9 @@ const InstitutionalAlertsPage = () => {
               </SelectContent>
             </Select>
              <Select onValueChange={(value) => handleFilterChange('status', value)} defaultValue="all">
-              <SelectTrigger className="bg-slate-700 border-slate-500 text-white"><SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterStatus')} /></SelectTrigger>
+              <SelectTrigger className="bg-slate-700 border-slate-500 text-white text-sm">
+                <SelectValue placeholder={t('dashboards.directive.institutionalAlerts.filterStatus')} />
+              </SelectTrigger>
               <SelectContent className="bg-slate-700 border-slate-500 text-white">
                 <SelectItem value="all">{t('common.allStatuses')}</SelectItem>
                 <SelectItem value="pending">{t('dashboards.directive.institutionalAlerts.statusPending')}</SelectItem>
@@ -263,34 +273,43 @@ const InstitutionalAlertsPage = () => {
               placeholder={t('common.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-slate-700 border-slate-500 text-white placeholder-slate-300 focus:ring-orange-500 focus:border-orange-500 pl-10"
+              className="w-full bg-slate-700 border-slate-500 text-white placeholder-slate-300 focus:ring-orange-500 focus:border-orange-500 pl-8 sm:pl-10 text-sm sm:text-base"
             />
           </div>
 
-          {isLoading && filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4">{t('common.loadingText')}</p> : 
-            filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4">{t('dashboards.directive.institutionalAlerts.noAlertsFound')}</p> : (
-            <ScrollArea className="h-[400px]">
+          {isLoading && filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4 text-sm sm:text-base">{t('common.loadingText')}</p> : 
+            filteredAlerts.length === 0 ? <p className="text-center text-slate-400 py-4 text-sm sm:text-base">{t('dashboards.directive.institutionalAlerts.noAlertsFound')}</p> : (
+            <ScrollArea className="h-[300px] sm:h-[400px]">
               <Table>
                 <TableHeader>
                   <TableRow className="border-slate-600 hover:bg-slate-700/40">
-                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.type')}</TableHead>
-                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.title')}</TableHead>
-                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.severity')}</TableHead>
-                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.date')}</TableHead>
-                    <TableHead className="text-orange-300">{t('dashboards.directive.institutionalAlerts.table.status')}</TableHead>
-                    <TableHead className="text-right text-orange-300">{t('dashboards.directive.institutionalAlerts.table.actions')}</TableHead>
+                    <TableHead className="text-orange-300 text-xs sm:text-sm">{t('dashboards.directive.institutionalAlerts.table.type')}</TableHead>
+                    <TableHead className="text-orange-300 text-xs sm:text-sm">{t('dashboards.directive.institutionalAlerts.table.title')}</TableHead>
+                    <TableHead className="text-orange-300 text-xs sm:text-sm">{t('dashboards.directive.institutionalAlerts.table.severity')}</TableHead>
+                    <TableHead className="text-orange-300 text-xs sm:text-sm hidden sm:table-cell">{t('dashboards.directive.institutionalAlerts.table.date')}</TableHead>
+                    <TableHead className="text-orange-300 text-xs sm:text-sm">{t('dashboards.directive.institutionalAlerts.table.status')}</TableHead>
+                    <TableHead className="text-right text-orange-300 text-xs sm:text-sm">{t('dashboards.directive.institutionalAlerts.table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredAlerts.map(alert => (
                     <TableRow key={alert.id} className="border-slate-600 hover:bg-slate-700/40">
-                      <TableCell>{alertTypeIcons[alert.type] || alertTypeIcons.default} {t(`dashboards.directive.institutionalAlerts.alertTypes.${alert.type}`, alert.type)}</TableCell>
-                      <TableCell className="max-w-xs truncate" title={alert.title}>{alert.title}</TableCell>
-                      <TableCell>{getSeverityBadge(alert.severity)}</TableCell>
-                      <TableCell>{format(new Date(alert.date), 'PPP', { locale: es })}</TableCell>
-                      <TableCell>{getStatusIcon(alert.status)}</TableCell>
+                      <TableCell className="text-xs sm:text-sm">
+                        <div className="flex items-center">
+                          {alertTypeIcons[alert.type] || alertTypeIcons.default}
+                          <span className="hidden sm:inline">{t(`dashboards.directive.institutionalAlerts.alertTypes.${alert.type}`, alert.type)}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="max-w-xs truncate text-xs sm:text-sm" title={alert.title}>{alert.title}</TableCell>
+                      <TableCell className="text-xs sm:text-sm">{getSeverityBadge(alert.severity)}</TableCell>
+                      <TableCell className="text-xs sm:text-sm hidden sm:table-cell">{format(new Date(alert.date), 'PPP', { locale: es })}</TableCell>
+                      <TableCell className="text-xs sm:text-sm">{getStatusIcon(alert.status)}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" className="text-orange-300 hover:text-white hover:bg-orange-600/20 border border-orange-600/30"><Eye size={16}/> {t('common.viewDetailsButton')}</Button>
+                        <Button variant="ghost" size="sm" className="text-orange-300 hover:text-white hover:bg-orange-600/20 border border-orange-600/30 text-xs sm:text-sm py-1 px-2">
+                          <Eye size={14} className="sm:hidden"/>
+                          <Eye size={16} className="hidden sm:block"/>
+                          <span className="hidden sm:inline ml-1">{t('common.viewDetailsButton')}</span>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}

@@ -169,13 +169,13 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
       
       <CardContent className="relative z-10 space-y-6">
         {/* Controls */}
-        <div className="flex flex-wrap gap-4">
-          <div className="flex-1 min-w-[200px]">
-            <label className="text-sm font-medium text-slate-300 mb-2 block">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="flex-1 min-w-0">
+            <label className="text-xs sm:text-sm font-medium text-slate-300 mb-1 sm:mb-2 block">
               {t('teacherDashboard.progressMatrix.metric', 'Métrica')}
             </label>
             <Select value={selectedMetric} onValueChange={setSelectedMetric}>
-              <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200">
+              <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200 text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -184,8 +184,9 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
                   return (
                     <SelectItem key={metric.value} value={metric.value}>
                       <div className="flex items-center gap-2">
-                        <Icon size={14} />
-                        {metric.label}
+                        <Icon size={12} className="sm:hidden" />
+                        <Icon size={14} className="hidden sm:block" />
+                        <span className="text-xs sm:text-sm">{metric.label}</span>
                       </div>
                     </SelectItem>
                   );
@@ -194,18 +195,18 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
             </Select>
           </div>
           
-          <div className="flex-1 min-w-[150px]">
-            <label className="text-sm font-medium text-slate-300 mb-2 block">
+          <div className="flex-1 min-w-0">
+            <label className="text-xs sm:text-sm font-medium text-slate-300 mb-1 sm:mb-2 block">
               {t('teacherDashboard.progressMatrix.period', 'Período')}
             </label>
             <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-              <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200">
+              <SelectTrigger className="bg-slate-800 border-slate-600 text-slate-200 text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 {periods.map((period) => (
                   <SelectItem key={period.value} value={period.value}>
-                    {period.label}
+                    <span className="text-xs sm:text-sm">{period.label}</span>
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -214,39 +215,39 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
         </div>
 
         {/* Progress Matrix */}
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           {sortedData.map((student, index) => (
             <motion.div
               key={student.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/50 hover:bg-slate-700/50 transition-all duration-200"
+              className="bg-slate-700/30 rounded-lg p-3 sm:p-4 border border-slate-600/50 hover:bg-slate-700/50 transition-all duration-200"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="text-lg font-bold text-slate-300 w-8">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <div className="text-base sm:text-lg font-bold text-slate-300 w-6 sm:w-8 flex-shrink-0">
                     #{index + 1}
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-200">{student.full_name}</h4>
-                    <p className="text-sm text-slate-400">{student.grade}</p>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">{student.full_name}</h4>
+                    <p className="text-xs sm:text-sm text-slate-400 truncate">{student.grade}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 lg:gap-6">
                   <div className="text-center">
-                    <div className={`text-2xl font-bold ${getMetricColor(student.metricValue, selectedMetric)}`}>
+                    <div className={`text-xl sm:text-2xl font-bold ${getMetricColor(student.metricValue, selectedMetric)}`}>
                       {student.metricValue}{getMetricSuffix(selectedMetric)}
                     </div>
-                    <div className="text-xs text-slate-400">
+                    <div className="text-xs text-slate-400 truncate">
                       {metrics.find(m => m.value === selectedMetric)?.label}
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     {getTrendIcon(student.trend)}
-                    <span className={`text-sm font-medium ${getTrendColor(student.trend)}`}>
+                    <span className={`text-xs sm:text-sm font-medium ${getTrendColor(student.trend)}`}>
                       {student.trendValue > 0 ? '+' : ''}{student.trendValue}
                     </span>
                   </div>
@@ -263,18 +264,19 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-slate-400 hover:text-slate-200"
+                    className="text-slate-400 hover:text-slate-200 p-1 sm:p-2 flex-shrink-0"
                   >
-                    <Eye size={16} />
+                    <Eye size={14} className="sm:hidden" />
+                    <Eye size={16} className="hidden sm:block" />
                   </Button>
                 </div>
               </div>
               
               {/* Progress Bar */}
-              <div className="mt-3">
-                <div className="w-full bg-slate-600 rounded-full h-2">
+              <div className="mt-2 sm:mt-3">
+                <div className="w-full bg-slate-600 rounded-full h-1.5 sm:h-2">
                   <div
-                    className={`h-2 rounded-full transition-all duration-500 ${
+                    className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${
                       selectedMetric === 'completion_rate' 
                         ? student.metricValue >= 80 ? 'bg-green-500' : student.metricValue >= 60 ? 'bg-yellow-500' : 'bg-red-500'
                         : 'bg-blue-500'
@@ -288,7 +290,7 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-slate-700/50">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 pt-3 sm:pt-4 border-t border-slate-700/50">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-400">
               {progressData.length > 0 
@@ -330,5 +332,7 @@ const ProgressTrackingMatrix = ({ students, activities }) => {
 };
 
 export default ProgressTrackingMatrix;
+
+
 
 

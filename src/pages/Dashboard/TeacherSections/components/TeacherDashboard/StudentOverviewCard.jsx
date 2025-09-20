@@ -77,28 +77,30 @@ const StudentOverviewCard = ({ student, onViewDetails, onAddActivity, onViewProg
              style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
         
         <CardHeader className="relative pb-3">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30">
-                <User size={20} className="text-blue-400" />
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="p-1.5 sm:p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30">
+                <User size={16} className="sm:hidden text-blue-400" />
+                <User size={20} className="hidden sm:block text-blue-400" />
               </div>
-              <div>
-                <h3 className="font-semibold text-slate-200 text-lg">{student.full_name}</h3>
-                <p className="text-sm text-slate-400">{student.grade || 'Nivel no especificado'}</p>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-slate-200 text-base sm:text-lg truncate">{student.full_name}</h3>
+                <p className="text-xs sm:text-sm text-slate-400 truncate">{student.grade || 'Nivel no especificado'}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Badge className={`${getStatusColor(student.general_status)} flex items-center gap-1`}>
-                {getStatusIcon(student.general_status)}
-                {t(`teacherDashboard.studentStatus.${student.general_status}`, student.general_status)}
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Badge className={`${getStatusColor(student.general_status)} flex items-center gap-1 text-xs`}>
+                <span className="hidden sm:inline">{getStatusIcon(student.general_status)}</span>
+                <span className="truncate">{t(`teacherDashboard.studentStatus.${student.general_status}`, student.general_status)}</span>
               </Badge>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-slate-400 hover:text-slate-200 p-1"
+                className="text-slate-400 hover:text-slate-200 p-1 flex-shrink-0"
               >
-                <MoreVertical size={16} />
+                <MoreVertical size={14} className="sm:hidden" />
+                <MoreVertical size={16} className="hidden sm:block" />
               </Button>
             </div>
           </div>
@@ -119,41 +121,44 @@ const StudentOverviewCard = ({ student, onViewDetails, onAddActivity, onViewProg
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50">
-              <div className="flex items-center gap-2 mb-1">
-                <BookOpen size={14} className="text-green-400" />
-                <span className="text-xs font-medium text-slate-300">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3 border border-slate-600/50">
+              <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                <BookOpen size={12} className="sm:hidden text-green-400" />
+                <BookOpen size={14} className="hidden sm:block text-green-400" />
+                <span className="text-xs font-medium text-slate-300 truncate">
                   {t('teacherDashboard.activitiesCompleted', 'Actividades')}
                 </span>
               </div>
-              <div className="text-lg font-bold text-green-300">
+              <div className="text-base sm:text-lg font-bold text-green-300">
                 {student.completed_activities || 0}
               </div>
             </div>
 
-            <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50">
-              <div className="flex items-center gap-2 mb-1">
-                <Clock size={14} className="text-orange-400" />
-                <span className="text-xs font-medium text-slate-300">
+            <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3 border border-slate-600/50">
+              <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                <Clock size={12} className="sm:hidden text-orange-400" />
+                <Clock size={14} className="hidden sm:block text-orange-400" />
+                <span className="text-xs font-medium text-slate-300 truncate">
                   {t('teacherDashboard.pendingTasks', 'Pendientes')}
                 </span>
               </div>
-              <div className="text-lg font-bold text-orange-300">
+              <div className="text-base sm:text-lg font-bold text-orange-300">
                 {student.pending_tasks || 0}
               </div>
             </div>
           </div>
 
           {/* Last Activity */}
-          <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50">
-            <div className="flex items-center gap-2 mb-2">
-              <Calendar size={14} className="text-purple-400" />
+          <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3 border border-slate-600/50">
+            <div className="flex items-center gap-1 sm:gap-2 mb-2">
+              <Calendar size={12} className="sm:hidden text-purple-400" />
+              <Calendar size={14} className="hidden sm:block text-purple-400" />
               <span className="text-xs font-medium text-slate-300">
                 {t('teacherDashboard.lastActivity', 'Última Actividad')}
               </span>
             </div>
-            <p className="text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400 truncate">
               {student.last_activity ? formatDate(student.last_activity) : t('teacherDashboard.noRecentActivity', 'Sin actividad reciente')}
             </p>
           </div>
@@ -234,6 +239,3 @@ const StudentOverviewCard = ({ student, onViewDetails, onAddActivity, onViewProg
 };
 
 export default StudentOverviewCard;
-
-
-

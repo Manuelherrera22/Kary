@@ -63,13 +63,13 @@ const GeminiStatusCard = () => {
   const getStatusColor = () => {
     switch (status) {
       case 'connected':
-        return 'bg-green-500/20 border-green-500/30 text-green-300';
+        return 'bg-green-600 border-green-500 text-green-100';
       case 'error':
-        return 'bg-red-500/20 border-red-500/30 text-red-300';
+        return 'bg-red-600 border-red-500 text-red-100';
       case 'checking':
-        return 'bg-yellow-500/20 border-yellow-500/30 text-yellow-300';
+        return 'bg-yellow-600 border-yellow-500 text-yellow-100';
       default:
-        return 'bg-gray-500/20 border-gray-500/30 text-gray-300';
+        return 'bg-gray-600 border-gray-500 text-gray-100';
     }
   };
 
@@ -87,7 +87,7 @@ const GeminiStatusCard = () => {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700/50 text-slate-100 overflow-hidden relative">
+    <Card className="bg-slate-800 border-slate-600 text-slate-100 overflow-hidden relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-purple-500 to-blue-500" 
            style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
@@ -95,7 +95,7 @@ const GeminiStatusCard = () => {
       <CardHeader className="relative pb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg border border-purple-500/30">
+            <div className="p-2 bg-purple-600 rounded-lg border border-purple-500">
               <Bot size={24} className="text-purple-400" />
             </div>
             <div>
@@ -166,7 +166,7 @@ const GeminiStatusCard = () => {
           </div>
           <div className="grid grid-cols-2 gap-2">
             {modelInfo?.capabilities?.slice(0, 4).map((capability, index) => (
-              <div key={index} className="text-xs text-slate-400 bg-slate-700/30 rounded px-2 py-1">
+              <div key={index} className="text-xs text-slate-400 bg-slate-700 rounded px-2 py-1">
                 {capability}
               </div>
             ))}
@@ -185,7 +185,7 @@ const GeminiStatusCard = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="flex-1 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50"
+            className="flex-1 text-slate-400 hover:text-slate-200 hover:bg-slate-700"
             onClick={() => {
               // Abrir modal de configuración de Gemini
               console.log('Configurar Gemini');
@@ -196,7 +196,7 @@ const GeminiStatusCard = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="flex-1 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50"
+            className="flex-1 text-slate-400 hover:text-slate-200 hover:bg-slate-700"
             onClick={() => {
               // Abrir documentación de Gemini
               window.open('https://ai.google.dev/', '_blank');

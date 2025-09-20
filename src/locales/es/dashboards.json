@@ -47,7 +47,59 @@
     "studentProfilesDesc": "Acceso rápido a información detallada de estudiantes."
   },
   "directiveDashboard": {
-    "pageTitle": "Panel del Directivo"
+    "pageTitle": "Panel del Directivo",
+    "welcomeMessage": "Bienvenido/a, {userName}",
+    "quickAccessTitle": "Acceso Rápido",
+    "quickAccessDesc": "Herramientas y funciones principales para la gestión institucional",
+    "stats": {
+      "schoolData": "Datos Institucionales",
+      "schoolDataDesc": "Métricas académicas y asistenciales de la institución",
+      "userManagement": "Gestión de Usuarios",
+      "userManagementDesc": "Administra usuarios, roles y permisos del sistema",
+      "reports": "Reportes",
+      "reportsDesc": "Genera y visualiza reportes institucionales",
+      "alerts": "Alertas",
+      "alertsDesc": "Monitorea alertas críticas del sistema"
+    },
+    "sections": {
+      "strategy": {
+        "title": "Estrategia",
+        "strategicSummary": "Resumen Estratégico",
+        "strategicSummaryDesc": "Análisis integral de métricas institucionales",
+        "karyCorePanel": "Panel Kary Core",
+        "karyCorePanelDesc": "Herramientas centrales de la plataforma"
+      },
+      "management": {
+        "title": "Gestión",
+        "userManagement": "Gestión de Usuarios",
+        "userManagementDesc": "Administra usuarios y sus roles",
+        "accessManagement": "Gestión de Asignaciones",
+        "accessManagementDesc": "Asigna estudiantes a docentes y acudientes",
+        "familyLinkValidation": "Validación de Vínculos",
+        "familyLinkValidationDesc": "Gestiona solicitudes de vinculación familiar"
+      },
+      "monitoring": {
+        "title": "Monitoreo",
+        "roleActivity": "Actividad por Roles",
+        "roleActivityDesc": "Monitorea acciones realizadas por cada rol",
+        "institutionalAlerts": "Alertas Institucionales",
+        "institutionalAlertsDesc": "Gestiona alertas críticas del sistema",
+        "notificationAudit": "Auditoría de Notificaciones",
+        "notificationAuditDesc": "Revisa el historial de notificaciones"
+      },
+      "data": {
+        "title": "Datos",
+        "schoolDataPanel": "Panel de Datos",
+        "schoolDataPanelDesc": "Visualiza métricas académicas y asistenciales",
+        "reports": "Reportes",
+        "reportsDesc": "Genera reportes institucionales"
+      },
+      "settings": {
+        "title": "Configuración",
+        "accountSettings": "Configuración de Cuenta",
+        "accountSettingsDesc": "Gestiona tu información personal y preferencias"
+      }
+    }
   },
   "directive": {
     "schoolData": {
@@ -227,32 +279,6 @@
       "rejectSuccess": "Solicitud rechazada exitosamente",
       "actionError": "Error al procesar la solicitud",
       "linkUpsertWarning": "Advertencia al vincular: {details}"
-    },
-    "userManagement": {
-      "pageTitle": "Gestión de Usuarios",
-      "pageSubtitle": "Administra usuarios, roles y permisos del sistema",
-      "createButton": "Crear Usuario",
-      "searchPlaceholder": "Buscar usuarios...",
-      "editTitle": "Editar Usuario",
-      "createTitle": "Crear Usuario",
-      "editDesc": "Modifica la información del usuario",
-      "createDesc": "Agrega un nuevo usuario al sistema",
-      "suspendUser": "Suspender Usuario",
-      "activateUser": "Activar Usuario",
-      "fetchError": "Error al cargar los usuarios",
-      "actionSuccess": "Acción realizada exitosamente",
-      "actionError": "Error al realizar la acción",
-      "noUsersFound": "No se encontraron usuarios",
-      "table": {
-        "name": "Nombre",
-        "email": "Correo",
-        "role": "Rol",
-        "status": "Estado",
-        "grade": "Grado",
-        "institution": "Institución",
-        "admissionDate": "Fecha de Ingreso",
-        "actions": "Acciones"
-      }
     }
   },
   "studentDashboard": {
@@ -307,5 +333,111 @@
       "upcomingAppointmentsCardTitle": "Próximas Citas"
     },
     "scheduleAppointmentTitle": "Agendar Cita"
+  },
+  "ai": {
+    "quickActions": {
+      "assistant": "Asistente IA",
+      "suggestions": "Sugerencias",
+      "help": "Ayuda"
+    },
+    "status": {
+      "synchronized": "Sincronizado",
+      "connecting": "Conectando...",
+      "disconnected": "Desconectado",
+      "error": "Error de conexión",
+      "ready": "Listo",
+      "loading": "Cargando..."
+    },
+    "assistant": {
+      "title": "Asistente IA",
+      "description": "Tu asistente inteligente para apoyo académico y emocional",
+      "placeholder": "Escribe tu pregunta aquí...",
+      "sendButton": "Enviar",
+      "clearButton": "Limpiar",
+      "thinking": "Pensando...",
+      "error": "Error al procesar tu solicitud",
+      "retry": "Reintentar"
+    },
+    "suggestions": {
+      "title": "Sugerencias Inteligentes",
+      "description": "Recomendaciones personalizadas basadas en tu actividad",
+      "noSuggestions": "No hay sugerencias disponibles en este momento",
+      "loadMore": "Cargar más sugerencias"
+    },
+    "help": {
+      "title": "Centro de Ayuda",
+      "description": "Encuentra respuestas a tus preguntas más frecuentes",
+      "searchPlaceholder": "Buscar ayuda...",
+      "categories": {
+        "gettingStarted": "Primeros Pasos",
+        "features": "Características",
+        "troubleshooting": "Solución de Problemas",
+        "contact": "Contacto"
+      },
+      "faq": {
+        "title": "Preguntas Frecuentes",
+        "noResults": "No se encontraron resultados para tu búsqueda"
+      }
+    },
+    "settings": {
+      "title": "Configuración de IA",
+      "description": "Personaliza tu experiencia con la inteligencia artificial",
+      "language": "Idioma de la IA",
+      "tone": "Tono de respuesta",
+      "notifications": "Notificaciones de IA",
+      "privacy": "Privacidad",
+      "save": "Guardar Configuración",
+      "reset": "Restablecer",
+      "saved": "Configuración guardada exitosamente"
+    },
+    "tooltip": {
+      "title": "Asistente IA",
+      "description": "Haz clic para acceder a las herramientas de IA"
+    },
+    "errorTitle": "Error de IA",
+    "initializationError": "Error al inicializar el asistente de IA",
+    "assistantTitle": "Asistente de IA",
+    "inputPlaceholder": "Escribe tu mensaje aquí...",
+    "clear": "Limpiar",
+    "export": "Exportar",
+    "capabilities": {
+      "title": "Capacidades",
+      "chat": "Chat inteligente",
+      "analysis": "Análisis de datos",
+      "suggestions": "Sugerencias personalizadas",
+      "reports": "Generación de reportes",
+      "supportPlan": "Plan de Apoyo",
+      "supportPlanDesc": "Generar plan de apoyo personalizado",
+      "predictiveAlerts": "Alertas Predictivas",
+      "predictiveAlertsDesc": "Identificar riesgos futuros",
+      "personalizedTasks": "Tareas Personalizadas",
+      "personalizedTasksDesc": "Crear actividades adaptadas",
+      "learningAnalysis": "Análisis de Aprendizaje",
+      "learningAnalysisDesc": "Evaluar patrones de aprendizaje",
+      "roleAssistance": "Asistencia por Rol",
+      "roleAssistanceDesc": "Ayuda específica para tu función",
+      "adaptiveContent": "Contenido Adaptativo",
+      "adaptiveContentDesc": "Material educativo personalizado",
+      "count": "{{count}} capacidades disponibles"
+    },
+    "welcomeStudent": "¡Hola {{studentName}}! Soy tu asistente de IA educativo. ¿En qué puedo ayudarte hoy?",
+    "welcomeRole": "¡Hola! Soy tu asistente de IA para {{role}}. ¿Cómo puedo asistirte?",
+    "noResponse": "Lo siento, no pude procesar tu solicitud en este momento.",
+    "errorResponse": "Ocurrió un error al procesar tu mensaje. Por favor, inténtalo de nuevo.",
+    "capabilityError": "Error al ejecutar {{capability}}. Inténtalo de nuevo.",
+    "successTitle": "¡Éxito!",
+    "capabilitySuccess": "{{capability}} ejecutado correctamente",
+    "results": {
+      "supportPlan": "Plan de apoyo generado: {{title}} con {{objectives}} objetivos y {{strategies}} estrategias",
+      "predictiveAlerts": "Se generaron {{count}} alertas predictivas",
+      "personalizedTasks": "Se crearon {{count}} tareas personalizadas",
+      "learningAnalysis": "Análisis completado: {{patterns}} patrones identificados y {{needs}} necesidades detectadas",
+      "roleAssistance": "Asistencia generada: {{recommendations}} recomendaciones y {{actions}} acciones inmediatas",
+      "adaptiveContent": "Contenido adaptativo creado: {{activities}} actividades y {{resources}} recursos adicionales",
+      "general": "{{capability}} ejecutado exitosamente"
+    },
+    "recommendations": "Recomendaciones",
+    "confidence": "Confianza",
+    "thinking": "Pensando"
   }
 }

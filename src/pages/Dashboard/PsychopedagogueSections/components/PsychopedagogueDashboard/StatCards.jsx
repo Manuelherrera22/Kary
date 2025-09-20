@@ -27,31 +27,32 @@ const StatCard = ({ title, value, icon, description, link, loading, color, iconC
         boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
         borderColor: color
       }}
-      className="bg-slate-800/50 p-6 rounded-xl shadow-lg border border-slate-700 hover:border-opacity-70 transition-all duration-300 flex flex-col justify-between cursor-pointer h-full"
+      className="bg-slate-800/50 p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border border-slate-700 hover:border-opacity-70 transition-all duration-300 flex flex-col justify-between cursor-pointer h-full"
       onClick={handleClick}
     >
       <div>
-        <div className="flex items-center justify-between mb-3">
-          <CardTitle className="text-xl font-semibold text-slate-200 group-hover:text-white transition-colors">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <CardTitle className="text-base sm:text-lg md:text-xl font-semibold text-slate-200 group-hover:text-white transition-colors">
             {title}
           </CardTitle>
-          <div className={`p-2 rounded-full`} style={{ backgroundColor: `${color}20` }}>
-            <IconComponent size={24} style={{ color: color }} />
+          <div className={`p-1.5 sm:p-2 rounded-full`} style={{ backgroundColor: `${color}20` }}>
+            <IconComponent size={18} className="sm:hidden" style={{ color: color }} />
+            <IconComponent size={24} className="hidden sm:block" style={{ color: color }} />
           </div>
         </div>
         {loading ? (
-          <div className="h-10 w-20 bg-slate-700 rounded animate-pulse mb-2"></div>
+          <div className="h-8 sm:h-10 w-16 sm:w-20 bg-slate-700 rounded animate-pulse mb-2"></div>
         ) : (
-          <p className="text-4xl font-bold text-white mb-1">{value ?? '0'}</p>
+          <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{value ?? '0'}</p>
         )}
-        <CardDescription className="text-slate-400 text-sm">
+        <CardDescription className="text-slate-400 text-xs sm:text-sm">
           {description}
         </CardDescription>
       </div>
       {link && (
         <Button
           variant="link"
-          className="mt-4 px-0 self-start transition-colors"
+          className="mt-3 sm:mt-4 px-0 self-start transition-colors text-xs sm:text-sm"
           style={{ color: color }}
           onClick={(e) => { e.stopPropagation(); navigate(link); }}
         >
@@ -108,7 +109,7 @@ const StatCards = ({ data, loading }) => {
 
   return (
     <motion.div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8"
       variants={cardVariants}
       initial="hidden"
       animate="visible"
@@ -129,4 +130,5 @@ const StatCards = ({ data, loading }) => {
   );
 };
 
+export default StatCards;
 export default StatCards;

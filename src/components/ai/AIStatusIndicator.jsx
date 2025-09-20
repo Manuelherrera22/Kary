@@ -48,14 +48,14 @@ const AIStatusIndicator = ({ className = "" }) => {
   const getStatusColor = () => {
     switch (status) {
       case 'available':
-        return 'bg-green-500/20 border-green-500/30 text-green-400';
+        return 'bg-green-600 border-green-500 text-green-100';
       case 'unavailable':
-        return 'bg-red-500/20 border-red-500/30 text-red-400';
+        return 'bg-red-600 border-red-500 text-red-100';
       case 'error':
-        return 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400';
+        return 'bg-yellow-600 border-yellow-500 text-yellow-100';
       case 'checking':
       default:
-        return 'bg-blue-500/20 border-blue-500/30 text-blue-400';
+        return 'bg-blue-600 border-blue-500 text-blue-100';
     }
   };
 

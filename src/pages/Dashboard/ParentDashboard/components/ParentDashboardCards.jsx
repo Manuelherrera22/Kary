@@ -34,9 +34,10 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
         riskColor = 'text-yellow-400';
       }
       return (
-        <div className="text-sm">
+        <div className="text-xs sm:text-sm">
           <p className={`${riskColor} font-semibold flex items-center`}>
-            <AlertTriangle size={16} className="mr-2" />
+            <AlertTriangle size={14} className="sm:hidden mr-1.5" />
+            <AlertTriangle size={16} className="hidden sm:block mr-2" />
             {t(`parentDashboard.wellbeingAlerts.level.${riskLevel}`)}
           </p>
           <p className="text-slate-400 mt-1">{t('parentDashboard.wellbeingAlerts.academicRisk', { risk: academicRisk || 'N/A' })}</p>
@@ -46,14 +47,14 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
     }
     if (card.id === 'homeSupport' && studentData.homeSupportTips?.length > 0) {
       return (
-        <ul className="space-y-1 text-sm list-disc list-inside text-slate-300">
+        <ul className="space-y-1 text-xs sm:text-sm list-disc list-inside text-slate-300">
           {studentData.homeSupportTips.slice(0, 2).map(tip => <li key={tip.id}>{tip.tip}</li>)}
         </ul>
       );
     }
     if (card.id === 'studentGeneralProgress' && studentData.progressSummary) {
         return (
-            <div className="text-sm text-slate-300">
+            <div className="text-xs sm:text-sm text-slate-300">
                 <p>{t('parentDashboard.studentGeneralProgress.attendancePlaceholder')}</p>
                 <p>{t('parentDashboard.studentGeneralProgress.emotionalEvolutionPlaceholder', { evolution: studentData.progressSummary.emotionalEvolution?.join(', ') || 'N/A' })}</p>
             </div>
@@ -62,7 +63,7 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
     if (card.id === 'currentSupportPlanInfo' && studentData.currentSupportPlan) {
         const { goal, status, professional } = studentData.currentSupportPlan;
         return (
-            <div className="text-sm">
+            <div className="text-xs sm:text-sm">
                 <p className="font-semibold text-slate-200">{goal}</p>
                 <p className="text-slate-400">{t('common.status')}: {status}</p>
                 <p className="text-slate-400">{t('supportPlans.responsiblePersonLabel')}: {professional}</p>
@@ -71,14 +72,14 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
     }
      if (card.id === 'schoolNotes' && studentData.schoolNotes?.length > 0) {
       return (
-        <ul className="space-y-1 text-sm list-disc list-inside text-slate-300">
+        <ul className="space-y-1 text-xs sm:text-sm list-disc list-inside text-slate-300">
           {studentData.schoolNotes.slice(0, 2).map(note => <li key={note.id}>{note.note}</li>)}
         </ul>
       );
     }
     // For cards that don't have custom content but rely on descriptionKey when a child is linked.
     if (hasLinkedStudents && !card.customContent && card.id !== 'childProfile' && card.id !== 'childInteractions' && card.id !== 'accessReports') {
-        return <p className="text-sm text-slate-300">{t(card.descriptionKey)}</p>;
+        return <p className="text-xs sm:text-sm text-slate-300">{t(card.descriptionKey)}</p>;
     }
     return null;
   };
@@ -89,7 +90,7 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
       variants={cardContainerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6" // Adjusted for 2 columns on larger screens as per image
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6" // Responsive grid with better mobile spacing
     >
       {cards.map((card) => {
         const isClickable = !(card.requiresChild && !hasLinkedStudents) && card.link;
@@ -109,26 +110,28 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
                 iconColor={card.color}
                 bgColor={isDisabled ? "bg-slate-800/40" : card.bgColor}
                 hoverBgColor={isDisabled ? "hover:bg-slate-800/50" : card.hoverBgColor}
-                className={`min-h-[180px] ${isDisabled ? "opacity-60 cursor-not-allowed" : ""}`}
+                className={`min-h-[160px] sm:min-h-[180px] ${isDisabled ? "opacity-60 cursor-not-allowed" : ""}`}
               >
                 {card.customContent && hasLinkedStudents && renderCardContent(card)}
                 
-                <div className="mt-auto pt-4">
+                <div className="mt-auto pt-3 sm:pt-4">
                     {isDisabled ? (
-                         <p className="text-xs text-yellow-400/80">{t('parentDashboard.requiresChildLink')}</p>
+                         <p className="text-xs sm:text-sm text-yellow-400/80">{t('parentDashboard.requiresChildLink')}</p>
                     ): (
                         isClickable ? (
-                            <span className={`inline-flex items-center text-sm font-medium ${card.color.replace('text-','text-')} group-hover:underline`}>
+                            <span className={`inline-flex items-center text-xs sm:text-sm font-medium ${card.color.replace('text-','text-')} group-hover:underline`}>
                                 {t('common.accessNowButton')}
-                                <ChevronRight size={16} className="ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
+                                <ChevronRight size={14} className="sm:hidden ml-1" />
+                                <ChevronRight size={16} className="hidden sm:block ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
                             </span>
                         ) : card.customContent && hasLinkedStudents ? (
-                            <span className={`inline-flex items-center text-sm font-medium ${card.color.replace('text-','text-')} group-hover:underline`}>
+                            <span className={`inline-flex items-center text-xs sm:text-sm font-medium ${card.color.replace('text-','text-')} group-hover:underline`}>
                                 {t('common.viewDetailsButton')}
-                                <ChevronRight size={16} className="ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
+                                <ChevronRight size={14} className="sm:hidden ml-1" />
+                                <ChevronRight size={16} className="hidden sm:block ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
                            </span>
                         ) : (
-                           <p className="text-sm text-slate-300">{t(card.descriptionKey)}</p>
+                           <p className="text-xs sm:text-sm text-slate-300">{t(card.descriptionKey)}</p>
                         )
                     )}
                 </div>
@@ -139,6 +142,9 @@ const ParentDashboardCards = ({ cards, hasLinkedStudents, studentData }) => {
       })}
     </motion.div>
   );
+};
+
+export default ParentDashboardCards;
 };
 
 export default ParentDashboardCards;

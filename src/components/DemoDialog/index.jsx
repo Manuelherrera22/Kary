@@ -43,12 +43,12 @@ const DemoDialog = ({ open, onOpenChange, initialFlow = "login" }) => {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[800px] md:max-w-[900px] lg:max-w-[1000px] xl:max-w-[1100px] bg-white p-0 rounded-xl shadow-2xl overflow-hidden">
-        <div className="flex flex-col md:flex-row min-h-[600px] md:min-h-[650px] lg:min-h-[700px]">
+      <DialogContent className="w-[98vw] max-w-[98vw] sm:w-[95vw] sm:max-w-[95vw] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] bg-white p-0 rounded-xl shadow-2xl overflow-hidden mx-auto">
+        <div className="flex flex-col md:flex-row min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[650px]">
           <LoginVisualPanel />
-          <div className="w-full md:w-3/5 p-8 md:p-10 lg:p-12 overflow-y-auto max-h-[calc(100vh-100px)] md:max-h-full flex flex-col bg-white rounded-r-xl md:rounded-r-xl md:rounded-l-none">
+          <div className="w-full md:w-3/5 p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 overflow-y-auto max-h-[calc(100vh-60px)] sm:max-h-[calc(100vh-80px)] md:max-h-full flex flex-col bg-white rounded-b-xl md:rounded-r-xl md:rounded-l-none">
             <DialogTabs activeTab={activeTab} setActiveTab={setActiveTab} setLoginError={setAuthError} availableTabs={availableDialogTabs} />
-            <div className="flex-grow mt-8">
+            <div className="flex-grow mt-4 sm:mt-6 md:mt-8">
               {activeTab === "acceder" && (
                 <motion.div 
                   key="accederForm"
