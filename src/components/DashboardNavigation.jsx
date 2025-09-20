@@ -15,7 +15,8 @@ import {
   Calendar,
   FileText,
   Users2,
-  Target
+  Target,
+  ChevronRight
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
