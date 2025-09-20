@@ -248,52 +248,52 @@ const FamilyGamification = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader className="p-3 sm:p-4 md:p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="p-2 sm:p-3 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-500/30 flex-shrink-0">
-              <Trophy size={20} className="sm:hidden text-yellow-400" />
-              <Trophy size={24} className="hidden sm:block text-yellow-400" />
+        <CardHeader className="p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="p-3 sm:p-4 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-xl border border-yellow-500/30 flex-shrink-0">
+                <Trophy size={24} className="sm:hidden text-yellow-400" />
+                <Trophy size={28} className="hidden sm:block text-yellow-400" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-300 leading-tight">
+                  Gamificación Familiar
+                </CardTitle>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed mt-2">
+                  Convierte el aprendizaje en una aventura divertida
+                </p>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-300 leading-tight">
-                Gamificación Familiar
-              </CardTitle>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
-                Convierte el aprendizaje en una aventura divertida
-              </p>
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+              <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30 text-sm font-medium px-3 py-1">
+                Nivel {familyStats.currentLevel}
+              </Badge>
+              <Badge className="text-blue-400 bg-blue-500/20 border-blue-500/30 text-sm font-medium px-3 py-1">
+                #{familyStats.familyRank} de {familyStats.totalFamilies}
+              </Badge>
             </div>
           </div>
-          <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
-            <Badge className="text-yellow-400 bg-yellow-500/20 border-yellow-500/30 text-xs">
-              Nivel {familyStats.currentLevel}
-            </Badge>
-            <Badge className="text-blue-400 bg-blue-500/20 border-blue-500/30 text-xs">
-              #{familyStats.familyRank} de {familyStats.totalFamilies}
-            </Badge>
-          </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
       
-      <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+      <CardContent className="space-y-6 sm:space-y-8 p-4 sm:p-6 md:p-8">
         {/* Tabs de navegación */}
-        <div className="flex overflow-x-auto scrollbar-hide space-x-1 bg-slate-700/30 rounded-lg p-1">
+        <div className="flex overflow-x-auto scrollbar-hide space-x-2 bg-slate-700/30 rounded-xl p-2">
           {[
-            { id: 'overview', label: 'Resumen', shortLabel: 'Res', icon: '📊' },
-            { id: 'achievements', label: 'Logros', shortLabel: 'Log', icon: '🏆' },
-            { id: 'challenges', label: 'Desafíos', shortLabel: 'Des', icon: '🎯' },
-            { id: 'leaderboard', label: 'Ranking', shortLabel: 'Ran', icon: '👑' }
+            { id: 'overview', label: 'Resumen', shortLabel: 'Resumen', icon: '📊' },
+            { id: 'achievements', label: 'Logros', shortLabel: 'Logros', icon: '🏆' },
+            { id: 'challenges', label: 'Desafíos', shortLabel: 'Desafíos', icon: '🎯' },
+            { id: 'leaderboard', label: 'Ranking', shortLabel: 'Ranking', icon: '👑' }
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-shrink-0 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
+              className={`flex-shrink-0 flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-lg text-sm sm:text-base font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-yellow-600 text-white'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-yellow-600 text-white shadow-lg'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-600/50'
               }`}
             >
-              <span className="text-sm sm:text-base">{tab.icon}</span>
+              <span className="text-lg sm:text-xl">{tab.icon}</span>
               <span className="sm:hidden">{tab.shortLabel}</span>
               <span className="hidden sm:inline">{tab.label}</span>
             </button>
@@ -302,17 +302,19 @@ const FamilyGamification = () => {
 
         {/* Tab: Resumen */}
         {activeTab === 'overview' && (
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-6 sm:space-y-8">
             {/* Estadísticas principales */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-3 sm:p-4">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <Star size={20} className="sm:hidden text-yellow-400 flex-shrink-0" />
-                    <Star size={24} className="hidden sm:block text-yellow-400 flex-shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <Card className="bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-yellow-500/20 rounded-lg">
+                      <Star size={24} className="sm:hidden text-yellow-400 flex-shrink-0" />
+                      <Star size={28} className="hidden sm:block text-yellow-400 flex-shrink-0" />
+                    </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Puntos Totales</h4>
-                      <p className="text-xl sm:text-2xl font-bold text-yellow-400">{familyStats.totalPoints}</p>
+                      <h4 className="font-semibold text-slate-200 text-base sm:text-lg truncate">Puntos Totales</h4>
+                      <p className="text-2xl sm:text-3xl font-bold text-yellow-400 mt-1">{familyStats.totalPoints}</p>
                     </div>
                   </div>
                 </CardContent>

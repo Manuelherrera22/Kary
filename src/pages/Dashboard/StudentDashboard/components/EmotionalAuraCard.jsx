@@ -32,12 +32,12 @@ const EmotionalAuraCard = ({ emotionalState }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.3 }}
       className={cn(
-        'p-6 rounded-3xl shadow-2xl border border-white/10 flex flex-col md:flex-row items-center gap-6 relative overflow-hidden',
+        'p-8 sm:p-10 rounded-3xl shadow-2xl border border-white/10 flex flex-col md:flex-row items-center gap-8 sm:gap-10 relative overflow-hidden',
         bgColor
       )}
     >
       <motion.div 
-        className={cn('absolute -inset-16 rounded-full opacity-20 blur-3xl', auraColor)}
+        className={cn('absolute -inset-20 rounded-full opacity-20 blur-3xl', auraColor)}
         animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
       />
@@ -46,16 +46,16 @@ const EmotionalAuraCard = ({ emotionalState }) => {
         animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
-        <Icon size={56} className={color} />
+        <Icon size={64} className={color} />
       </motion.div>
       <div className="flex-grow text-center md:text-left z-10">
-        <p className="text-xl text-slate-200">{message}</p>
+        <p className="text-xl sm:text-2xl text-slate-200 font-medium leading-relaxed">{message}</p>
       </div>
       <Button 
         onClick={() => navigate('/dashboard/kary-chat')}
-        className="bg-purple-600/80 hover:bg-purple-600 text-white rounded-full px-8 py-4 text-base shadow-lg transition-all hover:scale-105 hover:shadow-purple-500/40 z-10 border border-purple-400/50"
+        className="bg-purple-600/80 hover:bg-purple-600 text-white rounded-full px-10 py-5 text-lg font-semibold shadow-lg transition-all hover:scale-105 hover:shadow-purple-500/40 z-10 border border-purple-400/50"
       >
-        <MessageSquare size={22} className="mr-2" />
+        <MessageSquare size={24} className="mr-3" />
         {t('studentDashboard.emotionalState.talkToKary')}
       </Button>
     </motion.div>

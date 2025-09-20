@@ -251,65 +251,65 @@ const IntelligentParentAlerts = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader className="p-3 sm:p-4 md:p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="p-2 sm:p-3 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg border border-orange-500/30 flex-shrink-0">
-              <Brain size={20} className="sm:hidden text-orange-400" />
-              <Brain size={24} className="hidden sm:block text-orange-400" />
+        <CardHeader className="p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="p-3 sm:p-4 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl border border-orange-500/30 flex-shrink-0">
+                <Brain size={24} className="sm:hidden text-orange-400" />
+                <Brain size={28} className="hidden sm:block text-orange-400" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-300 leading-tight">
+                  Alertas Inteligentes para Padres
+                </CardTitle>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed mt-2">
+                  Recomendaciones personalizadas basadas en el comportamiento de tu hijo/a
+                </p>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-orange-300 leading-tight">
-                Alertas Inteligentes para Padres
-              </CardTitle>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
-                Recomendaciones personalizadas basadas en el comportamiento de tu hijo/a
-              </p>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3">
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base w-full sm:w-auto font-medium"
+              >
+                <option value="all">Todas</option>
+                <option value="unread">No leídas</option>
+                <option value="urgent">Urgentes</option>
+                <option value="high">Alta</option>
+                <option value="medium">Media</option>
+                <option value="low">Baja</option>
+                <option value="academic">Académicas</option>
+                <option value="emotional">Emocionales</option>
+                <option value="behavioral">Comportamentales</option>
+              </select>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={loadAlerts}
+                className="text-slate-400 hover:text-slate-200 text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4"
+              >
+                <RefreshCw size={18} className="sm:hidden" />
+                <RefreshCw size={20} className="hidden sm:block" />
+              </Button>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2">
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm w-full sm:w-auto"
-            >
-              <option value="all">Todas</option>
-              <option value="unread">No leídas</option>
-              <option value="urgent">Urgentes</option>
-              <option value="high">Alta</option>
-              <option value="medium">Media</option>
-              <option value="low">Baja</option>
-              <option value="academic">Académicas</option>
-              <option value="emotional">Emocionales</option>
-              <option value="behavioral">Comportamentales</option>
-            </select>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={loadAlerts}
-              className="text-slate-400 hover:text-slate-200 text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3"
-            >
-              <RefreshCw size={14} className="sm:hidden" />
-              <RefreshCw size={16} className="hidden sm:block" />
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
       
-      <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-4 md:p-6">
+      <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6 md:p-8">
         {filteredAlerts.length === 0 ? (
-          <div className="text-center py-6 sm:py-8">
-            <Shield size={40} className="sm:hidden text-slate-500 mx-auto mb-4" />
-            <Shield size={48} className="hidden sm:block text-slate-500 mx-auto mb-4" />
-            <h3 className="text-base sm:text-lg font-semibold text-slate-300 mb-2">
+          <div className="text-center py-8 sm:py-12">
+            <Shield size={48} className="sm:hidden text-slate-500 mx-auto mb-6" />
+            <Shield size={56} className="hidden sm:block text-slate-500 mx-auto mb-6" />
+            <h3 className="text-lg sm:text-xl font-semibold text-slate-300 mb-3">
               No hay alertas activas
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-sm sm:text-base text-slate-400">
               El sistema está monitoreando el progreso de tu hijo/a
             </p>
           </div>
         ) : (
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-4 sm:space-y-6">
             {filteredAlerts.map((alert) => {
               const isExpanded = expandedAlert === alert.id;
               const Icon = getAlertIcon(alert.alertType);
@@ -319,77 +319,77 @@ const IntelligentParentAlerts = () => {
                   key={alert.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-3 sm:p-4 rounded-lg border transition-all duration-200 ${
+                  className={`p-4 sm:p-6 rounded-xl border transition-all duration-200 hover:shadow-lg ${
                     alert.read 
                       ? 'bg-slate-700/30 border-slate-600/30' 
                       : 'bg-orange-500/10 border-orange-500/30'
                   }`}
                 >
-                  <div className="flex items-start gap-2 sm:gap-3">
-                    <div className={`p-1.5 sm:p-2 rounded-lg flex-shrink-0 ${
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className={`p-2 sm:p-3 rounded-lg flex-shrink-0 ${
                       alert.read ? 'bg-slate-600/30' : 'bg-orange-500/20'
                     }`}>
                       {React.cloneElement(Icon, { 
-                        size: window.innerWidth < 640 ? 18 : 20 
+                        size: window.innerWidth < 640 ? 20 : 24 
                       })}
                     </div>
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-2">
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
-                            <h4 className="font-semibold text-slate-200 text-xs sm:text-sm truncate">
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+                            <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">
                               {alert.title}
                             </h4>
-                            <Badge className={`${getPriorityColor(alert.priority)} text-xs`}>
+                            <Badge className={`${getPriorityColor(alert.priority)} text-sm font-medium px-2 py-1`}>
                               {alert.priority}
                             </Badge>
-                            <Badge className={`${getCategoryColor(alert.category)} text-xs`}>
+                            <Badge className={`${getCategoryColor(alert.category)} text-sm font-medium px-2 py-1`}>
                               {alert.category}
                             </Badge>
                             {!alert.read && (
-                              <Badge className="text-orange-300 bg-orange-500/20 border-orange-500/30 text-xs">
+                              <Badge className="text-orange-300 bg-orange-500/20 border-orange-500/30 text-sm font-medium px-2 py-1">
                                 Nuevo
                               </Badge>
                             )}
                           </div>
-                          <p className="text-xs text-slate-300 leading-relaxed mb-2">
+                          <p className="text-sm text-slate-300 leading-relaxed mb-3">
                             {alert.description}
                           </p>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs text-slate-400">
-                            <span className="flex items-center gap-1">
-                              <Users size={12} />
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-slate-400">
+                            <span className="flex items-center gap-2">
+                              <Users size={14} />
                               {alert.studentName}
                             </span>
-                            <span className="flex items-center gap-1">
-                              <Target size={12} />
+                            <span className="flex items-center gap-2">
+                              <Target size={14} />
                               {alert.confidence}% confianza
                             </span>
-                            <span className="flex items-center gap-1">
-                              <Clock size={12} />
+                            <span className="flex items-center gap-2">
+                              <Clock size={14} />
                               {new Date(alert.createdAt).toLocaleString()}
                             </span>
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-1 sm:gap-2">
+                        <div className="flex items-center gap-2 sm:gap-3">
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => setExpandedAlert(isExpanded ? null : alert.id)}
-                            className="text-slate-400 hover:text-slate-200 text-xs px-2 py-1"
+                            className="text-slate-400 hover:text-slate-200 text-sm px-3 py-2"
                           >
-                            {isExpanded ? <X size={14} className="sm:hidden" /> : <Eye size={14} className="sm:hidden" />}
-                            {isExpanded ? <X size={16} className="hidden sm:block" /> : <Eye size={16} className="hidden sm:block" />}
+                            {isExpanded ? <X size={16} className="sm:hidden" /> : <Eye size={16} className="sm:hidden" />}
+                            {isExpanded ? <X size={18} className="hidden sm:block" /> : <Eye size={18} className="hidden sm:block" />}
                           </Button>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDismissAlert(alert.id)}
-                            className="text-slate-400 hover:text-red-400 text-xs px-2 py-1"
+                            className="text-slate-400 hover:text-red-400 text-sm px-3 py-2"
                           >
-                            <X size={14} className="sm:hidden" />
-                            <X size={16} className="hidden sm:block" />
+                            <X size={16} className="sm:hidden" />
+                            <X size={18} className="hidden sm:block" />
                           </Button>
                         </div>
                       </div>
@@ -400,16 +400,16 @@ const IntelligentParentAlerts = () => {
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="mt-3 pt-3 border-t border-slate-600/50"
+                          className="mt-4 pt-4 border-t border-slate-600/50"
                         >
-                          <div className="space-y-4">
+                          <div className="space-y-6">
                             {/* Recomendaciones */}
                             <div>
-                              <h5 className="text-sm font-semibold text-slate-300 mb-2 flex items-center gap-2">
-                                <Lightbulb size={16} className="text-yellow-400" />
+                              <h5 className="text-base font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                                <Lightbulb size={18} className="text-yellow-400" />
                                 Recomendaciones de IA:
                               </h5>
-                              <ul className="list-disc list-inside text-xs text-slate-400 space-y-1">
+                              <ul className="list-disc list-inside text-sm text-slate-400 space-y-2">
                                 {alert.recommendations.map((rec, index) => (
                                   <li key={index}>{rec}</li>
                                 ))}
@@ -418,21 +418,21 @@ const IntelligentParentAlerts = () => {
                             
                             {/* Acciones */}
                             <div>
-                              <h5 className="text-sm font-semibold text-slate-300 mb-2 flex items-center gap-2">
-                                <Zap size={16} className="text-blue-400" />
+                              <h5 className="text-base font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                                <Zap size={18} className="text-blue-400" />
                                 Acciones Sugeridas:
                               </h5>
-                              <div className="flex flex-wrap gap-2">
+                              <div className="flex flex-wrap gap-3">
                                 {alert.actions.map((action) => (
                                   <Button
                                     key={action.id}
                                     size="sm"
                                     onClick={() => handleAction(alert, action)}
-                                    className={`text-xs ${getActionColor(action.type)}`}
+                                    className={`text-sm font-medium px-4 py-2 ${getActionColor(action.type)}`}
                                   >
-                                    {action.type === 'immediate' && <Zap size={12} className="mr-1" />}
-                                    {action.type === 'urgent' && <AlertTriangle size={12} className="mr-1" />}
-                                    {action.type === 'follow_up' && <Clock size={12} className="mr-1" />}
+                                    {action.type === 'immediate' && <Zap size={14} className="mr-2" />}
+                                    {action.type === 'urgent' && <AlertTriangle size={14} className="mr-2" />}
+                                    {action.type === 'follow_up' && <Clock size={14} className="mr-2" />}
                                     {action.label}
                                   </Button>
                                 ))}

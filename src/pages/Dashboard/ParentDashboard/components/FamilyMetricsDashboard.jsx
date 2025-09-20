@@ -163,108 +163,114 @@ const FamilyMetricsDashboard = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader className="p-3 sm:p-4 md:p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="p-2 sm:p-3 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-lg border border-green-500/30 flex-shrink-0">
-              <Home size={20} className="sm:hidden text-green-400" />
-              <Home size={24} className="hidden sm:block text-green-400" />
+        <CardHeader className="p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="p-3 sm:p-4 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-xl border border-green-500/30 flex-shrink-0">
+                <Home size={24} className="sm:hidden text-green-400" />
+                <Home size={28} className="hidden sm:block text-green-400" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-green-300 leading-tight">
+                  Métricas Familiares
+                </CardTitle>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed mt-2">
+                  Indicadores del progreso familiar y educativo
+                </p>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-green-300 leading-tight">
-                Métricas Familiares
-              </CardTitle>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
-                Indicadores del progreso familiar y educativo
-              </p>
-            </div>
+            <select
+              value={timeRange}
+              onChange={(e) => setTimeRange(e.target.value)}
+              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base w-full sm:w-auto font-medium"
+            >
+              <option value="7d">Últimos 7 días</option>
+              <option value="30d">Últimos 30 días</option>
+              <option value="90d">Últimos 90 días</option>
+              <option value="1y">Último año</option>
+            </select>
           </div>
-          <select
-            value={timeRange}
-            onChange={(e) => setTimeRange(e.target.value)}
-            className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm w-full sm:w-auto"
-          >
-            <option value="7d">Últimos 7 días</option>
-            <option value="30d">Últimos 30 días</option>
-            <option value="90d">Últimos 90 días</option>
-            <option value="1y">Último año</option>
-          </select>
-        </div>
-      </CardHeader>
+        </CardHeader>
       
-      <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+      <CardContent className="space-y-6 sm:space-y-8 p-4 sm:p-6 md:p-8">
         {/* Tabs de navegación */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 bg-slate-700/30 h-auto">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-green-600 text-xs sm:text-sm py-2 px-1 sm:px-2">
-              <BarChart3 size={14} className="sm:hidden mr-1" />
-              <BarChart3 size={16} className="hidden sm:block mr-2" />
-              <span className="sm:hidden">Res</span>
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 bg-slate-700/30 h-auto rounded-xl p-1">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-green-600 data-[state=active]:text-white text-sm sm:text-base py-3 px-3 sm:px-4 font-medium">
+              <BarChart3 size={18} className="sm:hidden mr-2" />
+              <BarChart3 size={20} className="hidden sm:block mr-2" />
+              <span className="sm:hidden">Resumen</span>
               <span className="hidden sm:inline">Resumen</span>
             </TabsTrigger>
-            <TabsTrigger value="academic" className="data-[state=active]:bg-green-600 text-xs sm:text-sm py-2 px-1 sm:px-2">
-              <BookOpen size={14} className="sm:hidden mr-1" />
-              <BookOpen size={16} className="hidden sm:block mr-2" />
-              <span className="sm:hidden">Acad</span>
+            <TabsTrigger value="academic" className="data-[state=active]:bg-green-600 data-[state=active]:text-white text-sm sm:text-base py-3 px-3 sm:px-4 font-medium">
+              <BookOpen size={18} className="sm:hidden mr-2" />
+              <BookOpen size={20} className="hidden sm:block mr-2" />
+              <span className="sm:hidden">Académico</span>
               <span className="hidden sm:inline">Académico</span>
             </TabsTrigger>
-            <TabsTrigger value="emotional" className="data-[state=active]:bg-green-600 text-xs sm:text-sm py-2 px-1 sm:px-2">
-              <Heart size={14} className="sm:hidden mr-1" />
-              <Heart size={16} className="hidden sm:block mr-2" />
-              <span className="sm:hidden">Emoc</span>
+            <TabsTrigger value="emotional" className="data-[state=active]:bg-green-600 data-[state=active]:text-white text-sm sm:text-base py-3 px-3 sm:px-4 font-medium">
+              <Heart size={18} className="sm:hidden mr-2" />
+              <Heart size={20} className="hidden sm:block mr-2" />
+              <span className="sm:hidden">Emocional</span>
               <span className="hidden sm:inline">Emocional</span>
             </TabsTrigger>
-            <TabsTrigger value="behavioral" className="data-[state=active]:bg-green-600 text-xs sm:text-sm py-2 px-1 sm:px-2">
-              <Target size={14} className="sm:hidden mr-1" />
-              <Target size={16} className="hidden sm:block mr-2" />
-              <span className="sm:hidden">Comp</span>
+            <TabsTrigger value="behavioral" className="data-[state=active]:bg-green-600 data-[state=active]:text-white text-sm sm:text-base py-3 px-3 sm:px-4 font-medium">
+              <Target size={18} className="sm:hidden mr-2" />
+              <Target size={20} className="hidden sm:block mr-2" />
+              <span className="sm:hidden">Comportamental</span>
               <span className="hidden sm:inline">Comportamental</span>
             </TabsTrigger>
-            <TabsTrigger value="communication" className="data-[state=active]:bg-green-600 text-xs sm:text-sm py-2 px-1 sm:px-2 col-span-2 sm:col-span-1">
-              <MessageSquare size={14} className="sm:hidden mr-1" />
-              <MessageSquare size={16} className="hidden sm:block mr-2" />
-              <span className="sm:hidden">Comun</span>
+            <TabsTrigger value="communication" className="data-[state=active]:bg-green-600 data-[state=active]:text-white text-sm sm:text-base py-3 px-3 sm:px-4 font-medium col-span-2 sm:col-span-1">
+              <MessageSquare size={18} className="sm:hidden mr-2" />
+              <MessageSquare size={20} className="hidden sm:block mr-2" />
+              <span className="sm:hidden">Comunicación</span>
               <span className="hidden sm:inline">Comunicación</span>
             </TabsTrigger>
           </TabsList>
 
           {/* Tab: Resumen */}
-          <TabsContent value="overview" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-3 sm:p-4">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <Users size={20} className="sm:hidden text-blue-400 flex-shrink-0" />
-                    <Users size={24} className="hidden sm:block text-blue-400 flex-shrink-0" />
+          <TabsContent value="overview" className="space-y-6 sm:space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <Card className="bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-blue-500/20 rounded-lg">
+                      <Users size={24} className="sm:hidden text-blue-400 flex-shrink-0" />
+                      <Users size={28} className="hidden sm:block text-blue-400 flex-shrink-0" />
+                    </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Total Hijos</h4>
-                      <p className="text-xl sm:text-2xl font-bold text-blue-400">{metrics.overview.totalChildren}</p>
+                      <h4 className="font-semibold text-slate-200 text-base sm:text-lg truncate">Total Hijos</h4>
+                      <p className="text-2xl sm:text-3xl font-bold text-blue-400 mt-1">{metrics.overview.totalChildren}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-3 sm:p-4">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <Target size={20} className="sm:hidden text-green-400 flex-shrink-0" />
-                    <Target size={24} className="hidden sm:block text-green-400 flex-shrink-0" />
+              <Card className="bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-green-500/20 rounded-lg">
+                      <Target size={24} className="sm:hidden text-green-400 flex-shrink-0" />
+                      <Target size={28} className="hidden sm:block text-green-400 flex-shrink-0" />
+                    </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Planes de Apoyo</h4>
-                      <p className="text-xl sm:text-2xl font-bold text-green-400">{metrics.overview.activeSupportPlans}</p>
+                      <h4 className="font-semibold text-slate-200 text-base sm:text-lg truncate">Planes de Apoyo</h4>
+                      <p className="text-2xl sm:text-3xl font-bold text-green-400 mt-1">{metrics.overview.activeSupportPlans}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-slate-700/30 border-slate-600/30">
-                <CardContent className="p-3 sm:p-4">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <CheckCircle size={20} className="sm:hidden text-purple-400 flex-shrink-0" />
-                    <CheckCircle size={24} className="hidden sm:block text-purple-400 flex-shrink-0" />
+              <Card className="bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-purple-500/20 rounded-lg">
+                      <CheckCircle size={24} className="sm:hidden text-purple-400 flex-shrink-0" />
+                      <CheckCircle size={28} className="hidden sm:block text-purple-400 flex-shrink-0" />
+                    </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-semibold text-slate-200 text-sm sm:text-base truncate">Actividades Completadas</h4>
-                      <p className="text-xl sm:text-2xl font-bold text-purple-400">{metrics.overview.completedActivities}</p>
+                      <h4 className="font-semibold text-slate-200 text-base sm:text-lg truncate">Actividades Completadas</h4>
+                      <p className="text-2xl sm:text-3xl font-bold text-purple-400 mt-1">{metrics.overview.completedActivities}</p>
                     </div>
                   </div>
                 </CardContent>

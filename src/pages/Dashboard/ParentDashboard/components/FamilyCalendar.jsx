@@ -219,61 +219,63 @@ const FamilyCalendar = () => {
 
   return (
     <Card className="bg-slate-800/50 border-slate-700/50">
-      <CardHeader className="p-3 sm:p-4 md:p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="p-2 sm:p-3 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30 flex-shrink-0">
-              <Calendar size={20} className="sm:hidden text-blue-400" />
-              <Calendar size={24} className="hidden sm:block text-blue-400" />
+        <CardHeader className="p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="p-3 sm:p-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl border border-blue-500/30 flex-shrink-0">
+                <Calendar size={24} className="sm:hidden text-blue-400" />
+                <Calendar size={28} className="hidden sm:block text-blue-400" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-300 leading-tight">
+                  Calendario Familiar
+                </CardTitle>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed mt-2">
+                  Organiza y gestiona las actividades familiares y escolares
+                </p>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-blue-300 leading-tight">
-                Calendario Familiar
-              </CardTitle>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-1">
-                Organiza y gestiona las actividades familiares y escolares
-              </p>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3">
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base w-full sm:w-auto font-medium"
+              >
+                <option value="all">Todos</option>
+                <option value="appointment">Citas</option>
+                <option value="academic">Académico</option>
+                <option value="emotional">Emocional</option>
+                <option value="family">Familiar</option>
+              </select>
+              <Button
+                onClick={() => setShowAddEvent(true)}
+                className="bg-purple-600 hover:bg-purple-700 text-white text-sm sm:text-base py-2 sm:py-3 px-4 sm:px-6 font-medium"
+              >
+                <Plus size={18} className="sm:hidden mr-2" />
+                <Plus size={20} className="hidden sm:block mr-2" />
+                <span className="sm:hidden">Nuevo</span>
+                <span className="hidden sm:inline">Nuevo Evento</span>
+              </Button>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2">
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="bg-slate-700 border-slate-600 text-slate-200 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm w-full sm:w-auto"
-            >
-              <option value="all">Todos</option>
-              <option value="appointment">Citas</option>
-              <option value="academic">Académico</option>
-              <option value="emotional">Emocional</option>
-              <option value="family">Familiar</option>
-            </select>
-            <Button
-              onClick={() => setShowAddEvent(true)}
-              className="bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3"
-            >
-              <Plus size={14} className="sm:hidden mr-1" />
-              <Plus size={16} className="hidden sm:block mr-2" />
-              <span className="sm:hidden">Nuevo</span>
-              <span className="hidden sm:inline">Nuevo Evento</span>
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
       
-      <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+      <CardContent className="space-y-6 sm:space-y-8 p-4 sm:p-6 md:p-8">
         {/* Resumen del día */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <Card className="bg-slate-700/30 border-slate-600/30">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center gap-2 sm:gap-3">
-                <Calendar size={20} className="sm:hidden text-blue-400 flex-shrink-0" />
-                <Calendar size={24} className="hidden sm:block text-blue-400 flex-shrink-0" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <Card className="bg-slate-700/30 border-slate-600/30 hover:bg-slate-700/50 transition-all duration-200">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-blue-500/20 rounded-lg">
+                  <Calendar size={24} className="sm:hidden text-blue-400 flex-shrink-0" />
+                  <Calendar size={28} className="hidden sm:block text-blue-400 flex-shrink-0" />
+                </div>
                 <div className="min-w-0 flex-1">
-                  <h4 className="font-semibold text-slate-200 text-sm sm:text-base">Hoy</h4>
-                  <p className="text-xl sm:text-2xl font-bold text-blue-400">
+                  <h4 className="font-semibold text-slate-200 text-base sm:text-lg">Hoy</h4>
+                  <p className="text-2xl sm:text-3xl font-bold text-blue-400 mt-1">
                     {getTodayEvents().length}
                   </p>
-                  <p className="text-xs text-slate-400">eventos programados</p>
+                  <p className="text-sm text-slate-400 mt-1">eventos programados</p>
                 </div>
               </div>
             </CardContent>
