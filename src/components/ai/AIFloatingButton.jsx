@@ -68,8 +68,8 @@ const AIFloatingButton = () => {
                   variant="outline"
                   size="sm"
                   onClick={handleOpenAssistant}
-                  className="ai-floating-button w-full justify-start bg-slate-700 border-slate-500 text-slate-100 hover:bg-slate-600"
-                  style={{ backgroundColor: '#334155', opacity: 1 }}
+                  className="ai-floating-button w-full justify-start bg-slate-800 border-2 border-slate-500 text-slate-100 hover:bg-slate-700"
+                  style={{ backgroundColor: '#1e293b', opacity: 1, border: '2px solid #475569' }}
                 >
                   <Brain className="w-4 h-4 mr-2" />
                   {t('dashboards.ai.quickActions.assistant')}
@@ -84,8 +84,8 @@ const AIFloatingButton = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="ai-floating-button w-full justify-start bg-slate-700 border-slate-500 text-slate-100 hover:bg-slate-600"
-                  style={{ backgroundColor: '#334155', opacity: 1 }}
+                  className="ai-floating-button w-full justify-start bg-slate-800 border-2 border-slate-500 text-slate-100 hover:bg-slate-700"
+                  style={{ backgroundColor: '#1e293b', opacity: 1, border: '2px solid #475569' }}
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   {t('dashboards.ai.quickActions.suggestions')}
@@ -100,8 +100,8 @@ const AIFloatingButton = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="ai-floating-button w-full justify-start bg-slate-700 border-slate-500 text-slate-100 hover:bg-slate-600"
-                  style={{ backgroundColor: '#334155', opacity: 1 }}
+                  className="ai-floating-button w-full justify-start bg-slate-800 border-2 border-slate-500 text-slate-100 hover:bg-slate-700"
+                  style={{ backgroundColor: '#1e293b', opacity: 1, border: '2px solid #475569' }}
                 >
                   <HelpCircle className="w-4 h-4 mr-2" />
                   {t('dashboards.ai.quickActions.help')}
@@ -174,7 +174,7 @@ const AIFloatingButton = () => {
             exit={{ opacity: 0, x: -10 }}
             className="fixed bottom-6 right-24 z-30"
           >
-            <div className="ai-tooltip bg-slate-700 text-slate-100 px-3 py-2 rounded-lg shadow-lg border border-slate-500" style={{ backgroundColor: '#334155', opacity: 1 }}>
+            <div className="ai-tooltip bg-slate-800 text-slate-100 px-3 py-2 rounded-lg shadow-lg border-2 border-slate-500" style={{ backgroundColor: '#1e293b', opacity: 1, border: '2px solid #475569' }}>
               <p className="text-sm font-medium">{t('dashboards.ai.tooltip.title')}</p>
               <p className="text-xs text-slate-400">{t('dashboards.ai.tooltip.description')}</p>
             </div>

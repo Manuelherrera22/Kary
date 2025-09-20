@@ -1,100 +1,120 @@
-/* AI Assistant Solid Backgrounds */
-.ai-assistant-modal {
+/* AI Assistant Solid Backgrounds - Override all transparency */
+.ai-assistant-modal { 
+  background-color: #0f172a !important; 
+  opacity: 1 !important; 
+  border: 2px solid #475569 !important;
+}
+
+.ai-assistant-header { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border-bottom: 2px solid #475569 !important;
+}
+
+.ai-assistant-sidebar { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border-right: 2px solid #475569 !important;
+}
+
+.ai-assistant-main { 
+  background-color: #0f172a !important; 
+  opacity: 1 !important; 
+}
+
+.ai-assistant-input-area { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border-top: 2px solid #475569 !important;
+}
+
+.ai-assistant-message { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border: 1px solid #475569 !important;
+}
+
+.ai-assistant-user-message { 
+  background-color: #1d4ed8 !important; 
+  opacity: 1 !important; 
+  border: 1px solid #3b82f6 !important;
+}
+
+.ai-assistant-capability-card { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border: 1px solid #475569 !important;
+}
+
+.ai-assistant-capability-card:hover { 
+  background-color: #334155 !important; 
+  opacity: 1 !important; 
+  border: 1px solid #64748b !important;
+}
+
+.ai-floating-button { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border: 2px solid #475569 !important;
+}
+
+.ai-tooltip { 
+  background-color: #1e293b !important; 
+  opacity: 1 !important; 
+  border: 1px solid #475569 !important;
+}
+
+/* Overlay background */
+.ai-assistant-overlay {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Force solid backgrounds on all AI assistant elements */
+.ai-assistant-modal * {
+  background-color: inherit !important;
+}
+
+.ai-assistant-modal .bg-slate-800 {
+  background-color: #0f172a !important;
+}
+
+.ai-assistant-modal .bg-slate-700 {
   background-color: #1e293b !important;
-  opacity: 1 !important;
 }
 
-.ai-assistant-header {
+.ai-assistant-modal .bg-slate-600 {
   background-color: #334155 !important;
-  opacity: 1 !important;
 }
 
-.ai-assistant-sidebar {
-  background-color: #334155 !important;
-  opacity: 1 !important;
+/* Specific overrides for better contrast */
+.ai-assistant-modal .text-slate-400 {
+  color: #cbd5e1 !important;
 }
 
-.ai-assistant-main {
+.ai-assistant-modal .text-slate-300 {
+  color: #e2e8f0 !important;
+}
+
+.ai-assistant-modal .text-slate-200 {
+  color: #f1f5f9 !important;
+}
+
+.ai-assistant-modal .text-white {
+  color: #ffffff !important;
+}
+
+/* Card backgrounds */
+.ai-assistant-modal .card {
   background-color: #1e293b !important;
-  opacity: 1 !important;
+  border: 1px solid #475569 !important;
 }
 
-.ai-assistant-input-area {
+.ai-assistant-modal .card-header {
   background-color: #334155 !important;
-  opacity: 1 !important;
+  border-bottom: 1px solid #475569 !important;
 }
 
-.ai-assistant-message {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-user-message {
-  background-color: #3b82f6 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-capability-card {
-  background-color: #475569 !important;
-  opacity: 1 !important;
-}
-
-.ai-floating-button {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-tooltip {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-modal {
+.ai-assistant-modal .card-content {
   background-color: #1e293b !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-header {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-sidebar {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-main {
-  background-color: #1e293b !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-input-area {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-message {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-user-message {
-  background-color: #3b82f6 !important;
-  opacity: 1 !important;
-}
-
-.ai-assistant-capability-card {
-  background-color: #475569 !important;
-  opacity: 1 !important;
-}
-
-.ai-floating-button {
-  background-color: #334155 !important;
-  opacity: 1 !important;
-}
-
-.ai-tooltip {
-  background-color: #334155 !important;
-  opacity: 1 !important;
 }

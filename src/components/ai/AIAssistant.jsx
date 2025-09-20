@@ -379,19 +379,20 @@ const AIAssistant = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-900`}
+        className={`fixed inset-0 z-50 flex items-center justify-center ai-assistant-overlay`}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(8px)' }}
         onClick={(e) => e.target === e.currentTarget && onClose()}
       >
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className={`ai-assistant-modal bg-slate-800 border border-slate-600 rounded-xl shadow-2xl ${
+          className={`ai-assistant-modal bg-slate-900 border-2 border-slate-500 rounded-xl shadow-2xl ${
             isExpanded ? 'w-[95vw] h-[95vh] sm:w-[90vw] sm:h-[90vh]' : 'w-[95vw] h-[95vh] sm:w-[600px] sm:h-[700px]'
           } flex flex-col`}
-          style={{ backgroundColor: '#1e293b', opacity: 1 }}
+          style={{ backgroundColor: '#0f172a', opacity: 1, border: '2px solid #475569' }}
         >
           {/* Header */}
-          <div className="ai-assistant-header flex items-center justify-between p-4 border-b border-slate-600 bg-slate-700" style={{ backgroundColor: '#334155', opacity: 1 }}>
+          <div className="ai-assistant-header flex items-center justify-between p-4 border-b-2 border-slate-500 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
                 <Brain className="w-6 h-6 text-white" />
@@ -431,7 +432,7 @@ const AIAssistant = ({
           {/* Content */}
           <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
             {/* Sidebar - Capabilities */}
-            <div className="ai-assistant-sidebar w-full sm:w-1/3 border-r-0 sm:border-r border-slate-600 p-3 sm:p-4 overflow-y-auto bg-slate-700" style={{ backgroundColor: '#334155', opacity: 1 }}>
+            <div className="ai-assistant-sidebar w-full sm:w-1/3 border-r-0 sm:border-r-2 border-slate-500 p-3 sm:p-4 overflow-y-auto bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
               <h3 className="text-sm font-semibold text-slate-300 mb-3">
                 {t('dashboards.ai.capabilities.title')}
               </h3>
@@ -444,10 +445,10 @@ const AIAssistant = ({
                     whileTap={{ scale: 0.98 }}
                   >
                     <Card 
-                      className={`ai-assistant-capability-card cursor-pointer transition-all duration-200 hover:bg-slate-600 bg-slate-600 ${
+                      className={`ai-assistant-capability-card cursor-pointer transition-all duration-200 hover:bg-slate-700 bg-slate-800 ${
                         currentCapability?.id === capability.id ? 'ring-2 ring-blue-500' : ''
                       }`}
-                      style={{ backgroundColor: '#475569', opacity: 1 }}
+                      style={{ backgroundColor: '#1e293b', opacity: 1, border: '1px solid #475569' }}
                       onClick={() => executeCapability(capability)}
                     >
                       <CardContent className="p-3">
@@ -472,7 +473,7 @@ const AIAssistant = ({
             </div>
 
             {/* Main Chat Area */}
-            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-800 w-full sm:w-2/3" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
+            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-900 w-full sm:w-2/3" style={{ backgroundColor: '#0f172a', opacity: 1 }}>
               {/* Messages */}
               <div className="flex-1 p-4 overflow-y-auto space-y-4">
                 {messages.map((message) => (
@@ -485,11 +486,12 @@ const AIAssistant = ({
                     <div className={`max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
                       <div className={`p-3 rounded-lg ${
                         message.type === 'user' 
-                          ? 'ai-assistant-user-message bg-blue-500 text-white' 
-                          : 'ai-assistant-message bg-slate-700 text-slate-100'
+                          ? 'ai-assistant-user-message bg-blue-600 text-white' 
+                          : 'ai-assistant-message bg-slate-800 text-slate-100'
                       }`} style={{ 
-                        backgroundColor: message.type === 'user' ? '#3b82f6' : '#334155', 
-                        opacity: 1 
+                        backgroundColor: message.type === 'user' ? '#1d4ed8' : '#1e293b', 
+                        opacity: 1,
+                        border: message.type === 'user' ? '1px solid #3b82f6' : '1px solid #475569'
                       }}>
                         <p className="text-sm">{message.content}</p>
                         
@@ -528,7 +530,7 @@ const AIAssistant = ({
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="bg-slate-700 p-3 rounded-lg" style={{ backgroundColor: '#334155', opacity: 1 }}>
+                    <div className="bg-slate-800 p-3 rounded-lg border border-slate-600" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
                       <div className="flex items-center space-x-2">
                         <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
                         <span className="text-sm text-slate-300">
@@ -541,7 +543,7 @@ const AIAssistant = ({
               </div>
 
               {/* Input Area */}
-              <div className="ai-assistant-input-area border-t border-slate-600 p-4 bg-slate-700" style={{ backgroundColor: '#334155', opacity: 1 }}>
+              <div className="ai-assistant-input-area border-t-2 border-slate-500 p-4 bg-slate-800" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
                 <div className="flex space-x-2">
                   <Textarea
                     value={inputMessage}
