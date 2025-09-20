@@ -9,8 +9,8 @@ export const AI_CONFIG = {
       name: 'Google Gemini',
       apiKey: import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBfQj3LxYUtLngyn3YPGJXiVs4xa0yb7QU',
       models: {
-        geminiPro: 'gemini-pro',
-        geminiProVision: 'gemini-pro-vision'
+        geminiFlash: 'gemini-1.5-flash',
+        geminiPro: 'gemini-1.5-pro'
       },
       priority: 1,
       enabled: true

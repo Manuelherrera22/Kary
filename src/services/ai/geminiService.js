@@ -4,7 +4,7 @@ class GeminiService {
   constructor() {
     this.apiKey = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBfQj3LxYUtLngyn3YPGJXiVs4xa0yb7QU';
     this.genAI = new GoogleGenerativeAI(this.apiKey);
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-pro' });
+    this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     
     // Configuración específica para educación
     this.educationalConfig = {
@@ -37,7 +37,7 @@ class GeminiService {
         success: true,
         content: text,
         provider: 'gemini',
-        model: 'gemini-pro',
+        model: 'gemini-1.5-flash',
         timestamp: new Date().toISOString(),
         context: context
       };
@@ -293,7 +293,7 @@ class GeminiService {
    */
   getModelInfo() {
     return {
-      name: 'Gemini Pro',
+      name: 'Gemini 1.5 Flash',
       provider: 'Google',
       capabilities: [
         'Generación de texto educativo',
