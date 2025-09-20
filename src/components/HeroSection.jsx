@@ -42,27 +42,27 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "backOut" }}
-          className="space-y-4 sm:space-y-0 sm:space-x-6 flex flex-col sm:flex-row items-center justify-center"
+          className="space-y-4 sm:space-y-0 sm:space-x-6 flex flex-col sm:flex-row items-center justify-center max-w-md sm:max-w-none mx-auto"
         >
-          <motion.div whileTap={{ scale: 0.95 }}>
+          <motion.div whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
             <Button
               variant="default"
               size="lg"
-              className="bg-white/90 text-purple-700 backdrop-blur-sm hover:bg-white w-full sm:w-auto group px-8 py-3 rounded-[12px] shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="bg-white/90 text-purple-700 backdrop-blur-sm hover:bg-white w-full sm:w-auto group px-6 sm:px-8 py-4 sm:py-3 rounded-[12px] shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-base sm:text-lg font-semibold"
               onClick={() => handleOpenDialog("signup")}
             >
-              <UserPlus size={22} className="mr-2.5 transition-transform duration-300 group-hover:rotate-[-5deg] group-hover:scale-110" />
-              {t("heroSection.buttonSignup", "Crear cuenta gratis")}
+              <UserPlus size={20} className="mr-2 sm:mr-2.5 transition-transform duration-300 group-hover:rotate-[-5deg] group-hover:scale-110" />
+              {t("heroSection.buttonRegister", "Crear cuenta gratis")}
             </Button>
           </motion.div>
-          <motion.div whileTap={{ scale: 0.95 }}>
+          <motion.div whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
             <Button
               variant="custom"
               size="lg"
-              className="w-full sm:w-auto group px-8 py-3 rounded-[12px]"
+              className="w-full sm:w-auto group px-6 sm:px-8 py-4 sm:py-3 rounded-[12px] text-base sm:text-lg font-semibold"
               onClick={() => handleOpenDialog("login")}
             >
-              <LogIn size={22} className="mr-2.5 transition-transform duration-300 group-hover:rotate-[-10deg]" />
+              <LogIn size={20} className="mr-2 sm:mr-2.5 transition-transform duration-300 group-hover:rotate-[-10deg]" />
               {t("heroSection.buttonLogin", "Iniciar Sesión")}
             </Button>
           </motion.div>
