@@ -78,9 +78,25 @@ export const LanguageProvider = ({ children }) => {
     fetchUserLanguage();
   }, []);
 
-  const t = useCallback((key, fallbackOrParams = '', paramsIfFallbackExists = {}) => {
-    return translateFunction(key, language, typeof fallbackOrParams === 'object' ? fallbackOrParams : paramsIfFallbackExists);
-  }, [language]);
+  const t = useCallback((key, fallback = '') => {
+    const keys = key.split('.');
+    let translation = currentTranslations;
+    
+    for (const k of keys) {
+      if (translation && typeof translation === 'object' && k in translation) {
+        translation = translation[k];
+      } else {
+        console.warn(`Translation not found for key: ${key}`);
+        return fallback || key;
+      }
+    }
+    
+    if (typeof translation === 'string') {
+      return translation;
+    }
+    
+    return fallback || key;
+  }, [currentTranslations]);
 
   return (
     <LanguageContext.Provider value={{ language, changeLanguage, t, loadingTranslations: false, availableLanguages }}>

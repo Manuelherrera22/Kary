@@ -79,5 +79,13 @@
   "authenticationError": "Error de autenticación",
   "dataVisualizationComingSoon": "Visualización de datos próximamente...",
   "featureInDevelopment": "Funcionalidad en desarrollo",
-  "unknownStudent": "Estudiante desconocido"
+  "unknownStudent": "Estudiante desconocido",
+  "dashboard": "Panel de Control",
+  "overview": "Resumen",
+  "students": "Estudiantes",
+  "activities": "Actividades",
+  "analytics": "Analíticas",
+  "notifications": "Notificaciones",
+  "settings": "Configuración",
+  "logout": "Cerrar Sesión"
 }
