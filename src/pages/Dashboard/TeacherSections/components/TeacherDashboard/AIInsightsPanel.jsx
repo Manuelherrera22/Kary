@@ -279,3 +279,4 @@ const AIInsightsPanel = ({ students, onInsightAction }) => {
 export default AIInsightsPanel;
 
 
+
