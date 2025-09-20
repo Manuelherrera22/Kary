@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-const Progress = React.forwardRef(({ className, value = 0, ...props }, ref) => {
+const Progress = React.forwardRef(({ className, value = 0, indicatorClassName, ...props }, ref) => {
   const percentage = Math.min(Math.max(value, 0), 100)
   
   return (
@@ -14,7 +14,10 @@ const Progress = React.forwardRef(({ className, value = 0, ...props }, ref) => {
       {...props}
     >
       <div
-        className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ease-in-out"
+        className={cn(
+          "h-full transition-all duration-300 ease-in-out",
+          indicatorClassName || "bg-gradient-to-r from-blue-500 to-purple-500"
+        )}
         style={{ width: `${percentage}%` }}
       />
     </div>
