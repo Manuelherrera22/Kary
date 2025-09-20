@@ -464,7 +464,7 @@ const ParentDashboard = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8 p-4 sm:p-6"
+        className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6"
       >
       {/* Hero Section Rediseñado */}
       <motion.div
@@ -476,22 +476,23 @@ const ParentDashboard = () => {
         {/* Background con gradiente animado */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-pink-900/20 rounded-3xl blur-3xl"></div>
         
-        <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl border border-slate-700/50 p-8 shadow-2xl">
+        <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl border border-slate-700/50 p-4 sm:p-6 md:p-8 shadow-2xl">
           <div className="text-center">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-3 mb-6"
+              className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
             >
-              <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg">
-                <UserCircle size={32} className="text-white" />
+              <div className="p-2 sm:p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg">
+                <UserCircle size={24} className="sm:hidden text-white" />
+                <UserCircle size={32} className="hidden sm:block text-white" />
               </div>
               <div className="text-left">
-                <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 leading-tight">
                   Panel de Acudiente
                 </h1>
-                <p className="text-slate-400 text-sm">Kary Educational Platform</p>
+                <p className="text-slate-400 text-xs sm:text-sm">Kary Educational Platform</p>
               </div>
             </motion.div>
 
@@ -499,7 +500,7 @@ const ParentDashboard = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed"
             >
               Bienvenido/a, <span className="text-purple-300 font-semibold">{userProfile?.full_name || user?.email}</span>
               <br />
@@ -514,23 +515,25 @@ const ParentDashboard = () => {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="max-w-2xl mx-auto"
               >
-                <div className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-red-500/10 border border-amber-500/30 rounded-2xl p-6 shadow-xl">
-                  <div className="flex items-center justify-center gap-4 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow-lg">
-                      <AlertTriangle size={24} className="text-white" />
+                <div className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-red-500/10 border border-amber-500/30 rounded-2xl p-4 sm:p-6 shadow-xl">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
+                    <div className="p-2 sm:p-3 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow-lg">
+                      <AlertTriangle size={20} className="sm:hidden text-white" />
+                      <AlertTriangle size={24} className="hidden sm:block text-white" />
                     </div>
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-amber-300 mb-1">Vinculación Requerida</h3>
-                      <p className="text-amber-200/80">
+                      <h3 className="text-lg sm:text-xl font-bold text-amber-300 mb-1">Vinculación Requerida</h3>
+                      <p className="text-amber-200/80 text-sm sm:text-base">
                         Conecta tu cuenta con el perfil de tu hijo/a para acceder a todas las funcionalidades
                       </p>
                     </div>
                   </div>
                   <Button
                     onClick={() => setIsLinkModalOpen(true)}
-                    className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
                   >
-                    <UserPlus size={20} className="mr-2" />
+                    <UserPlus size={16} className="sm:hidden mr-2" />
+                    <UserPlus size={20} className="hidden sm:block mr-2" />
                     Vincular Estudiante
                   </Button>
                 </div>
@@ -544,29 +547,30 @@ const ParentDashboard = () => {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="max-w-2xl mx-auto"
               >
-                <div className="bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 border border-green-500/30 rounded-2xl p-6 shadow-xl">
-                  <div className="flex items-center justify-center gap-4 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl shadow-lg">
-                      <CheckCircle size={24} className="text-white" />
+                <div className="bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 border border-green-500/30 rounded-2xl p-4 sm:p-6 shadow-xl">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
+                    <div className="p-2 sm:p-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl shadow-lg">
+                      <CheckCircle size={20} className="sm:hidden text-white" />
+                      <CheckCircle size={24} className="hidden sm:block text-white" />
                     </div>
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-green-300 mb-1">Estudiante Vinculado</h3>
-                      <p className="text-green-200/80">
+                      <h3 className="text-lg sm:text-xl font-bold text-green-300 mb-1">Estudiante Vinculado</h3>
+                      <p className="text-green-200/80 text-sm sm:text-base">
                         {syncData.student?.name} - Progreso General: {syncData.progress?.overall}%
                       </p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div className="bg-slate-700/30 rounded-lg p-3">
-                      <div className="text-2xl font-bold text-blue-400">{syncData.progress?.academic || 0}%</div>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
+                    <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3">
+                      <div className="text-lg sm:text-2xl font-bold text-blue-400">{syncData.progress?.academic || 0}%</div>
                       <div className="text-xs text-slate-400">Académico</div>
                     </div>
-                    <div className="bg-slate-700/30 rounded-lg p-3">
-                      <div className="text-2xl font-bold text-pink-400">{syncData.progress?.emotional || 0}%</div>
+                    <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3">
+                      <div className="text-lg sm:text-2xl font-bold text-pink-400">{syncData.progress?.emotional || 0}%</div>
                       <div className="text-xs text-slate-400">Emocional</div>
                     </div>
-                    <div className="bg-slate-700/30 rounded-lg p-3">
-                      <div className="text-2xl font-bold text-purple-400">{syncData.progress?.weeklyStreak || 0}</div>
+                    <div className="bg-slate-700/30 rounded-lg p-2 sm:p-3">
+                      <div className="text-lg sm:text-2xl font-bold text-purple-400">{syncData.progress?.weeklyStreak || 0}</div>
                       <div className="text-xs text-slate-400">Días Racha</div>
                     </div>
                   </div>
@@ -585,23 +589,23 @@ const ParentDashboard = () => {
         className="relative max-w-6xl mx-auto mb-8"
       >
         <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl border border-slate-700/50 p-2 shadow-xl">
-          <div className="flex space-x-2 overflow-x-auto scrollbar-hide">
+          <div className="flex space-x-1 sm:space-x-2 overflow-x-auto scrollbar-hide">
             {[
-              { id: 'overview', label: 'Resumen', icon: BarChart3, color: 'from-blue-500 to-cyan-500' },
-              { id: 'notifications', label: 'Notificaciones', icon: Bell, color: 'from-purple-500 to-pink-500', badge: syncData?.notifications?.filter(n => !n.read).length || 0 },
-              { id: 'communication', label: 'Comunicación', icon: MessageSquareText, color: 'from-green-500 to-emerald-500' },
-              { id: 'metrics', label: 'Métricas', icon: BarChartBig, color: 'from-orange-500 to-red-500' },
-              { id: 'alerts', label: 'Alertas IA', icon: BookOpen, color: 'from-yellow-500 to-amber-500' },
-              { id: 'calendar', label: 'Calendario', icon: CalendarClock, color: 'from-indigo-500 to-purple-500' },
-              { id: 'resources', label: 'Recursos', icon: FileText, color: 'from-teal-500 to-cyan-500' },
-              { id: 'gamification', label: 'Gamificación', icon: Smile, color: 'from-pink-500 to-rose-500' }
+              { id: 'overview', label: 'Resumen', shortLabel: 'Resumen', icon: BarChart3, color: 'from-blue-500 to-cyan-500' },
+              { id: 'notifications', label: 'Notificaciones', shortLabel: 'Notif', icon: Bell, color: 'from-purple-500 to-pink-500', badge: syncData?.notifications?.filter(n => !n.read).length || 0 },
+              { id: 'communication', label: 'Comunicación', shortLabel: 'Comun', icon: MessageSquareText, color: 'from-green-500 to-emerald-500' },
+              { id: 'metrics', label: 'Métricas', shortLabel: 'Métricas', icon: BarChartBig, color: 'from-orange-500 to-red-500' },
+              { id: 'alerts', label: 'Alertas IA', shortLabel: 'Alertas', icon: BookOpen, color: 'from-yellow-500 to-amber-500' },
+              { id: 'calendar', label: 'Calendario', shortLabel: 'Cal', icon: CalendarClock, color: 'from-indigo-500 to-purple-500' },
+              { id: 'resources', label: 'Recursos', shortLabel: 'Recursos', icon: FileText, color: 'from-teal-500 to-cyan-500' },
+              { id: 'gamification', label: 'Gamificación', shortLabel: 'Gamif', icon: Smile, color: 'from-pink-500 to-rose-500' }
             ].map((tab) => (
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`relative flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 min-w-fit ${
+                className={`relative flex items-center gap-2 sm:gap-3 px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 min-w-fit text-xs sm:text-sm ${
                   activeTab === tab.id
                     ? 'text-white shadow-lg'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700/50'
@@ -614,14 +618,16 @@ const ParentDashboard = () => {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <div className="relative flex items-center gap-3">
-                  <tab.icon size={20} className={activeTab === tab.id ? 'text-white' : 'text-slate-400'} />
-                  <span className="whitespace-nowrap">{tab.label}</span>
+                <div className="relative flex items-center gap-2 sm:gap-3">
+                  <tab.icon size={16} className="sm:hidden" />
+                  <tab.icon size={20} className="hidden sm:block" />
+                  <span className="whitespace-nowrap hidden sm:inline">{tab.label}</span>
+                  <span className="whitespace-nowrap sm:hidden">{tab.shortLabel}</span>
                   {tab.badge > 0 && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="bg-red-500 text-white text-xs rounded-full px-2 py-1 min-w-[20px] text-center font-bold shadow-lg"
+                      className="bg-red-500 text-white text-xs rounded-full px-1.5 sm:px-2 py-0.5 sm:py-1 min-w-[16px] sm:min-w-[20px] text-center font-bold shadow-lg"
                     >
                       {tab.badge}
                     </motion.span>
@@ -639,7 +645,7 @@ const ParentDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
           {parentDashboardCards.map((card, index) => {
             const cardData = getCardData(card, syncData);
