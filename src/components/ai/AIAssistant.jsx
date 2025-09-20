@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import './ai-assistant-solid.css';
 import { 
   Brain, Sparkles, MessageSquare, Zap, Target, 
   BookOpen, Users, TrendingUp, AlertTriangle,
@@ -48,21 +49,29 @@ const AIAssistant = ({
     setIsLoading(true);
     try {
       // Obtener contexto educativo
-      let educationalContext = null;
-      if (studentId) {
-        educationalContext = await educationalContext.getStudentContext(studentId);
-      } else if (role) {
-        educationalContext = await educationalContext.getRoleContext(role, user?.id);
+      let contextData = null;
+      if (educationalContext) {
+        if (studentId) {
+          contextData = await educationalContext.getStudentContext(studentId);
+        } else if (role) {
+          contextData = await educationalContext.getRoleContext(role, user?.id);
+        }
       }
 
-      setContext(educationalContext);
+      // Si no se pudo obtener contexto, usar contexto por defecto
+      const finalContext = contextData || {
+        role: role || 'general',
+        profile: user ? { id: user.id, full_name: user.name } : null
+      };
+      
+      setContext(finalContext);
 
       // Cargar capacidades de IA según el contexto
-      const capabilities = await loadAICapabilities(educationalContext);
+      const capabilities = await loadAICapabilities(finalContext);
       setAiCapabilities(capabilities);
 
       // Mensaje de bienvenida
-      const welcomeMessage = generateWelcomeMessage(educationalContext);
+      const welcomeMessage = generateWelcomeMessage(finalContext);
       setMessages([welcomeMessage]);
 
       setAiStatus('ready');
@@ -70,8 +79,8 @@ const AIAssistant = ({
       console.error('Error initializing AI assistant:', error);
       setAiStatus('error');
       toast({
-        title: t('ai.errorTitle'),
-        description: t('ai.initializationError'),
+        title: t('dashboards.ai.errorTitle'),
+        description: t('dashboards.ai.initializationError'),
         variant: 'destructive'
       });
     } finally {
@@ -87,32 +96,32 @@ const AIAssistant = ({
       capabilities.push(
         {
           id: 'support_plan',
-          title: t('ai.capabilities.supportPlan'),
-          description: t('ai.capabilities.supportPlanDesc'),
+          title: t('dashboards.ai.capabilities.supportPlan'),
+          description: t('dashboards.ai.capabilities.supportPlanDesc'),
           icon: Target,
           color: 'bg-blue-500',
           action: () => generateSupportPlan(context)
         },
         {
           id: 'predictive_alerts',
-          title: t('ai.capabilities.predictiveAlerts'),
-          description: t('ai.capabilities.predictiveAlertsDesc'),
+          title: t('dashboards.ai.capabilities.predictiveAlerts'),
+          description: t('dashboards.ai.capabilities.predictiveAlertsDesc'),
           icon: AlertTriangle,
           color: 'bg-red-500',
           action: () => generatePredictiveAlerts(context)
         },
         {
           id: 'personalized_tasks',
-          title: t('ai.capabilities.personalizedTasks'),
-          description: t('ai.capabilities.personalizedTasksDesc'),
+          title: t('dashboards.ai.capabilities.personalizedTasks'),
+          description: t('dashboards.ai.capabilities.personalizedTasksDesc'),
           icon: BookOpen,
           color: 'bg-green-500',
           action: () => generatePersonalizedTasks(context)
         },
         {
           id: 'learning_analysis',
-          title: t('ai.capabilities.learningAnalysis'),
-          description: t('ai.capabilities.learningAnalysisDesc'),
+          title: t('dashboards.ai.capabilities.learningAnalysis'),
+          description: t('dashboards.ai.capabilities.learningAnalysisDesc'),
           icon: TrendingUp,
           color: 'bg-purple-500',
           action: () => analyzeLearningPatterns(context)
@@ -125,8 +134,8 @@ const AIAssistant = ({
       capabilities.push(
         {
           id: 'role_assistance',
-          title: t('ai.capabilities.roleAssistance'),
-          description: t('ai.capabilities.roleAssistanceDesc'),
+          title: t('dashboards.ai.capabilities.roleAssistance'),
+          description: t('dashboards.ai.capabilities.roleAssistanceDesc'),
           icon: Users,
           color: 'bg-indigo-500',
           action: () => getRoleAssistance(context)
@@ -138,8 +147,8 @@ const AIAssistant = ({
     capabilities.push(
       {
         id: 'adaptive_content',
-        title: t('ai.capabilities.adaptiveContent'),
-        description: t('ai.capabilities.adaptiveContentDesc'),
+        title: t('dashboards.ai.capabilities.adaptiveContent'),
+        description: t('dashboards.ai.capabilities.adaptiveContentDesc'),
         icon: Sparkles,
         color: 'bg-yellow-500',
         action: () => generateAdaptiveContent(context)
@@ -157,8 +166,8 @@ const AIAssistant = ({
       id: 'welcome',
       type: 'ai',
       content: studentName 
-        ? t('ai.welcomeStudent', { studentName })
-        : t('ai.welcomeRole', { role: t(`roles.${roleName}`) }),
+        ? t('dashboards.ai.welcomeStudent', { studentName })
+        : t('dashboards.ai.welcomeRole', { role: t(`roles.${roleName}`) }),
       timestamp: new Date().toISOString(),
       capabilities: aiCapabilities.length
     };
@@ -188,7 +197,7 @@ const AIAssistant = ({
       const aiMessage = {
         id: Date.now() + 1,
         type: 'ai',
-        content: response.analysis || response.content || t('ai.noResponse'),
+        content: response.analysis || response.content || t('dashboards.ai.noResponse'),
         recommendations: response.recommendations || [],
         actions: response.immediateActions || [],
         confidence: response.confidence || 0.8,
@@ -201,7 +210,7 @@ const AIAssistant = ({
       const errorMessage = {
         id: Date.now() + 1,
         type: 'ai',
-        content: t('ai.errorResponse'),
+        content: t('dashboards.ai.errorResponse'),
         error: true,
         timestamp: new Date().toISOString()
       };
@@ -221,8 +230,8 @@ const AIAssistant = ({
     } catch (error) {
       console.error(`Error executing capability ${capability.id}:`, error);
       toast({
-        title: t('ai.errorTitle'),
-        description: t('ai.capabilityError', { capability: capability.title }),
+        title: t('dashboards.ai.errorTitle'),
+        description: t('dashboards.ai.capabilityError', { capability: capability.title }),
         variant: 'destructive'
       });
     } finally {
@@ -244,8 +253,8 @@ const AIAssistant = ({
     setMessages(prev => [...prev, message]);
     
     toast({
-      title: t('ai.successTitle'),
-      description: t('ai.capabilitySuccess', { capability: capability.title }),
+      title: t('dashboards.ai.successTitle'),
+      description: t('dashboards.ai.capabilitySuccess', { capability: capability.title }),
       variant: 'default'
     });
   };
@@ -253,36 +262,36 @@ const AIAssistant = ({
   const formatCapabilityResult = (capability, result) => {
     switch (capability.id) {
       case 'support_plan':
-        return t('ai.results.supportPlan', {
+        return t('dashboards.ai.results.supportPlan', {
           title: result.title,
           objectives: result.objectives?.length || 0,
           strategies: result.strategies?.length || 0
         });
       case 'predictive_alerts':
-        return t('ai.results.predictiveAlerts', {
+        return t('dashboards.ai.results.predictiveAlerts', {
           count: Array.isArray(result) ? result.length : 0
         });
       case 'personalized_tasks':
-        return t('ai.results.personalizedTasks', {
+        return t('dashboards.ai.results.personalizedTasks', {
           count: Array.isArray(result) ? result.length : 0
         });
       case 'learning_analysis':
-        return t('ai.results.learningAnalysis', {
+        return t('dashboards.ai.results.learningAnalysis', {
           patterns: result.patterns?.length || 0,
           needs: result.needs ? Object.keys(result.needs).length : 0
         });
       case 'role_assistance':
-        return t('ai.results.roleAssistance', {
+        return t('dashboards.ai.results.roleAssistance', {
           recommendations: result.recommendations?.length || 0,
           actions: result.immediateActions?.length || 0
         });
       case 'adaptive_content':
-        return t('ai.results.adaptiveContent', {
+        return t('dashboards.ai.results.adaptiveContent', {
           activities: result.activities?.length || 0,
           resources: result.additionalResources?.length || 0
         });
       default:
-        return t('ai.results.general', { capability: capability.title });
+        return t('dashboards.ai.results.general', { capability: capability.title });
     }
   };
 
@@ -370,30 +379,31 @@ const AIAssistant = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm`}
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-900`}
         onClick={(e) => e.target === e.currentTarget && onClose()}
       >
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className={`bg-slate-900 border border-slate-700 rounded-xl shadow-2xl ${
-            isExpanded ? 'w-[90vw] h-[90vh]' : 'w-[600px] h-[700px]'
+          className={`ai-assistant-modal bg-slate-800 border border-slate-600 rounded-xl shadow-2xl ${
+            isExpanded ? 'w-[95vw] h-[95vh] sm:w-[90vw] sm:h-[90vh]' : 'w-[95vw] h-[95vh] sm:w-[600px] sm:h-[700px]'
           } flex flex-col`}
+          style={{ backgroundColor: '#1e293b', opacity: 1 }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-slate-700">
+          <div className="ai-assistant-header flex items-center justify-between p-4 border-b border-slate-600 bg-slate-700" style={{ backgroundColor: '#334155', opacity: 1 }}>
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-white">
-                  {t('ai.assistantTitle')}
+                  {t('dashboards.ai.assistantTitle')}
                 </h2>
                 <p className="text-sm text-slate-400">
-                  {aiStatus === 'ready' ? t('ai.status.ready') : 
-                   aiStatus === 'error' ? t('ai.status.error') : 
-                   t('ai.status.loading')}
+                  {aiStatus === 'ready' ? t('dashboards.ai.status.ready') : 
+                   aiStatus === 'error' ? t('dashboards.ai.status.error') : 
+                   t('dashboards.ai.status.loading')}
                 </p>
               </div>
             </div>
@@ -419,11 +429,11 @@ const AIAssistant = ({
           </div>
 
           {/* Content */}
-          <div className="flex-1 flex overflow-hidden">
+          <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
             {/* Sidebar - Capabilities */}
-            <div className="w-1/3 border-r border-slate-700 p-4 overflow-y-auto">
+            <div className="ai-assistant-sidebar w-full sm:w-1/3 border-r-0 sm:border-r border-slate-600 p-3 sm:p-4 overflow-y-auto bg-slate-700" style={{ backgroundColor: '#334155', opacity: 1 }}>
               <h3 className="text-sm font-semibold text-slate-300 mb-3">
-                {t('ai.capabilities.title')}
+                {t('dashboards.ai.capabilities.title')}
               </h3>
               
               <div className="space-y-2">
@@ -434,9 +444,10 @@ const AIAssistant = ({
                     whileTap={{ scale: 0.98 }}
                   >
                     <Card 
-                      className={`cursor-pointer transition-all duration-200 hover:bg-slate-800/50 ${
+                      className={`ai-assistant-capability-card cursor-pointer transition-all duration-200 hover:bg-slate-600 bg-slate-600 ${
                         currentCapability?.id === capability.id ? 'ring-2 ring-blue-500' : ''
                       }`}
+                      style={{ backgroundColor: '#475569', opacity: 1 }}
                       onClick={() => executeCapability(capability)}
                     >
                       <CardContent className="p-3">
@@ -461,7 +472,7 @@ const AIAssistant = ({
             </div>
 
             {/* Main Chat Area */}
-            <div className="flex-1 flex flex-col">
+            <div className="ai-assistant-main flex-1 flex flex-col bg-slate-800 w-full sm:w-2/3" style={{ backgroundColor: '#1e293b', opacity: 1 }}>
               {/* Messages */}
               <div className="flex-1 p-4 overflow-y-auto space-y-4">
                 {messages.map((message) => (
@@ -474,15 +485,18 @@ const AIAssistant = ({
                     <div className={`max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
                       <div className={`p-3 rounded-lg ${
                         message.type === 'user' 
-                          ? 'bg-blue-500 text-white' 
-                          : 'bg-slate-800 text-slate-100'
-                      }`}>
+                          ? 'ai-assistant-user-message bg-blue-500 text-white' 
+                          : 'ai-assistant-message bg-slate-700 text-slate-100'
+                      }`} style={{ 
+                        backgroundColor: message.type === 'user' ? '#3b82f6' : '#334155', 
+                        opacity: 1 
+                      }}>
                         <p className="text-sm">{message.content}</p>
                         
                         {message.recommendations && message.recommendations.length > 0 && (
                           <div className="mt-2 space-y-1">
                             <p className="text-xs font-medium opacity-80">
-                              {t('ai.recommendations')}:
+                              {t('dashboards.ai.recommendations')}:
                             </p>
                             {message.recommendations.map((rec, index) => (
                               <div key={index} className="text-xs opacity-80">
@@ -495,7 +509,7 @@ const AIAssistant = ({
                         {message.confidence && (
                           <div className="mt-2">
                             <Badge variant="secondary" className="text-xs">
-                              {t('ai.confidence')}: {Math.round(message.confidence * 100)}%
+                              {t('dashboards.ai.confidence')}: {Math.round(message.confidence * 100)}%
                             </Badge>
                           </div>
                         )}
@@ -514,11 +528,11 @@ const AIAssistant = ({
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="bg-slate-800 p-3 rounded-lg">
+                    <div className="bg-slate-700 p-3 rounded-lg" style={{ backgroundColor: '#334155', opacity: 1 }}>
                       <div className="flex items-center space-x-2">
                         <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
                         <span className="text-sm text-slate-300">
-                          {t('ai.thinking')}...
+                          {t('dashboards.ai.thinking')}...
                         </span>
                       </div>
                     </div>
@@ -527,12 +541,12 @@ const AIAssistant = ({
               </div>
 
               {/* Input Area */}
-              <div className="border-t border-slate-700 p-4">
+              <div className="ai-assistant-input-area border-t border-slate-600 p-4 bg-slate-700" style={{ backgroundColor: '#334155', opacity: 1 }}>
                 <div className="flex space-x-2">
                   <Textarea
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder={t('ai.inputPlaceholder')}
+                    placeholder={t('dashboards.ai.inputPlaceholder')}
                     className="flex-1 resize-none"
                     rows={2}
                     onKeyDown={(e) => {
@@ -559,7 +573,7 @@ const AIAssistant = ({
                       onClick={clearConversation}
                       className="text-slate-400 hover:text-white"
                     >
-                      {t('ai.clear')}
+                      {t('dashboards.ai.clear')}
                     </Button>
                     <Button
                       variant="ghost"
@@ -567,12 +581,12 @@ const AIAssistant = ({
                       onClick={exportConversation}
                       className="text-slate-400 hover:text-white"
                     >
-                      {t('ai.export')}
+                      {t('dashboards.ai.export')}
                     </Button>
                   </div>
                   
                   <Badge variant="outline" className="text-xs">
-                    {t('ai.capabilities.count', { count: aiCapabilities.length })}
+                    {t('dashboards.ai.capabilities.count', { count: aiCapabilities.length })}
                   </Badge>
                 </div>
               </div>
