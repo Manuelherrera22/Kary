@@ -10,8 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import psychopedagogueService from '@/services/psychopedagogueService';
+import { useStudentsData } from '@/hooks/useStudentsData';
 
 const SupportPlansModal = ({ isOpen, onClose }) => {
+  const { students, isLoading: studentsLoading } = useStudentsData();
   const [formData, setFormData] = useState({
     studentId: '',
     planType: '',
@@ -24,28 +26,10 @@ const SupportPlansModal = ({ isOpen, onClose }) => {
     priority: 'medium',
     notes: ''
   });
-  const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [newObjective, setNewObjective] = useState('');
   const [newIntervention, setNewIntervention] = useState('');
-
-  useEffect(() => {
-    if (isOpen) {
-      loadStudents();
-    }
-  }, [isOpen]);
-
-  const loadStudents = async () => {
-    try {
-      const result = await psychopedagogueService.getAllStudents();
-      if (result.success) {
-        setStudents(result.data);
-      }
-    } catch (err) {
-      console.error('Error loading students:', err);
-    }
-  };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
