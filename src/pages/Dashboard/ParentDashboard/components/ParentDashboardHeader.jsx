@@ -16,7 +16,7 @@ const ParentDashboardHeader = ({ user, userProfile, hasLinkedStudents, authLoadi
         {t('parentDashboard.pageTitle')}
       </h1>
       <p className="text-lg text-slate-300 mt-2 max-w-2xl mx-auto">
-        {t('parentDashboard.pageSubtitle', { userName: userProfile?.full_name || user?.email })}
+        {t('parentDashboard.pageSubtitle', '', { userName: userProfile?.full_name || user?.email })}
       </p>
       {!hasLinkedStudents && !authLoading && (
         <motion.p
