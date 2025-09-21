@@ -31,6 +31,48 @@ export const MOCK_USERS = [
     updated_at: new Date().toISOString()
   },
   {
+    id: 'mock-student-2',
+    email: 'ana.lopez@estudiante.com',
+    full_name: 'Ana López Martínez',
+    role: 'student',
+    status: 'active',
+    grade: '4to Primaria',
+    preferred_language: 'es',
+    timezone: 'America/Mexico_City',
+    notifications_enabled: true,
+    password_hash: 'kary123456',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
+    id: 'mock-student-3',
+    email: 'carlos.ruiz@estudiante.com',
+    full_name: 'Carlos Ruiz Fernández',
+    role: 'student',
+    status: 'active',
+    grade: '6to Primaria',
+    preferred_language: 'es',
+    timezone: 'America/Mexico_City',
+    notifications_enabled: true,
+    password_hash: 'kary123456',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
+    id: 'mock-student-4',
+    email: 'sofia.gonzalez@estudiante.com',
+    full_name: 'Sofía González Silva',
+    role: 'student',
+    status: 'active',
+    grade: '3ro Primaria',
+    preferred_language: 'es',
+    timezone: 'America/Mexico_City',
+    notifications_enabled: true,
+    password_hash: 'kary123456',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
     id: 'mock-teacher-1',
     email: 'profesor@kary.com',
     full_name: 'Carlos López Profesor',
