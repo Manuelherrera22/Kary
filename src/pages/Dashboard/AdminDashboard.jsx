@@ -227,7 +227,7 @@ const AdminDashboard = () => {
           {t('dashboards.adminDashboard.pageTitle')}
         </h1>
         <p className="text-base sm:text-lg text-slate-300 mt-2 max-w-2xl mx-auto leading-relaxed px-2">
-          {t('dashboards.adminDashboard.welcomeMessage', { userName: userProfile?.full_name || user?.email })}
+          {t('dashboards.adminDashboard.welcomeMessage', '', { userName: userProfile?.full_name || user?.email })}
         </p>
       </div>
 
