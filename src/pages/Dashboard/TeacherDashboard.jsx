@@ -207,7 +207,7 @@ const TeacherDashboard = () => {
         transition={{ duration: 0.5 }}
       >
       <TeacherWelcomeHeader 
-        teacherName={userProfile.full_name}
+        teacherName={userProfile?.full_name || userProfile?.name || user?.email || 'Profesor'}
         assignedStudentsCount={students.length}
       />
 
