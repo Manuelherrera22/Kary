@@ -309,7 +309,10 @@ const CreateSupportPlanCanvas = ({ isOpen, onOpenChange, preselectedStudentId, i
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl bg-slate-900/90 backdrop-blur-lg border-slate-700/80 text-white p-0 shadow-2xl rounded-2xl">
+      <DialogContent 
+        className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl border-slate-700 text-white p-0 shadow-2xl rounded-2xl solid-modal-background"
+        forceSolidBackground={true}
+      >
         <DialogHeader className="p-6 border-b border-slate-700/60">
           <DialogTitle className="text-3xl font-bold flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
             <Brain size={28} /> {getDialogTitle()}
