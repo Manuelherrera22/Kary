@@ -35,5 +35,11 @@
   "demoSuccessTitle": "Demonstration Scheduled!",
   "demoSuccessDescription": "Thank you for your interest. We will contact you soon to confirm the details of your demonstration.",
   "demoErrorTitle": "Error Scheduling",
-  "demoErrorDescription": "There was a problem processing your request. Please try again later or contact us directly."
+  "demoErrorDescription": "There was a problem processing your request. Please try again later or contact us directly.",
+  "dialogTitleAcceder": "Log In",
+  "dialogTitleRegistrarse": "Sign Up",
+  "dialogTitleAgendar": "Schedule Demo", 
+  "dialogDescriptionAcceder": "Access your Kary account",
+  "dialogDescriptionRegistrarse": "Create a new Kary account",
+  "dialogDescriptionAgendar": "Schedule a demonstration of the Kary platform"
 }

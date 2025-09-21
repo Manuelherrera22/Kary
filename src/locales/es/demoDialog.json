@@ -35,5 +35,11 @@
   "demoSuccessTitle": "¡Demostración Agendada!",
   "demoSuccessDescription": "Gracias por tu interés. Nos pondremos en contacto contigo pronto para confirmar los detalles de tu demostración.",
   "demoErrorTitle": "Error al Agendar",
-  "demoErrorDescription": "Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde o contáctanos directamente."
+  "demoErrorDescription": "Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde o contáctanos directamente.",
+  "dialogTitleAcceder": "Iniciar Sesión",
+  "dialogTitleRegistrarse": "Registrarse", 
+  "dialogTitleAgendar": "Agendar Demo",
+  "dialogDescriptionAcceder": "Accede a tu cuenta de Kary",
+  "dialogDescriptionRegistrarse": "Crea una nueva cuenta en Kary",
+  "dialogDescriptionAgendar": "Agenda una demostración de la plataforma Kary"
 }
