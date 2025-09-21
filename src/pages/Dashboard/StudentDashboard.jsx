@@ -103,7 +103,7 @@ const StudentDashboard = () => {
     <MagicBackground>
       <Helmet>
         <title>{t('studentDashboard.pageTitle')}</title>
-        <meta name="description" content={t('studentDashboard.welcomeMessage', { userName: userProfile?.full_name || '' })} />
+        <meta name="description" content={t('studentDashboard.welcomeMessage', '', { userName: userProfile?.full_name || '' })} />
       </Helmet>
       
       <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-6 sm:space-y-8 lg:space-y-10">
