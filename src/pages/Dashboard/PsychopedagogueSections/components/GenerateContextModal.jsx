@@ -234,7 +234,10 @@ const GenerateContextModal = ({ isOpen, onOpenChange, studentId, studentName, on
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg md:max-w-3xl bg-slate-900/95 backdrop-blur-md border-slate-700 text-slate-100 shadow-2xl rounded-xl">
+      <DialogContent 
+        className="max-w-lg md:max-w-3xl border-slate-700 text-slate-100 shadow-2xl rounded-xl"
+        forceSolidBackground={true}
+      >
         <DialogHeader className="pb-4 border-b border-slate-700">
           <DialogTitle className="text-2xl font-bold flex items-center gap-2 text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-500">
             <Brain size={26} />
