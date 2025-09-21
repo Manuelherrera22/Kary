@@ -58,6 +58,7 @@ import assignments from '../es/assignments.json';
 import emotionalAttendance from '../es/emotionalAttendance.json';
 import evaluations from '../es/evaluations.json';
 import auditLogActions from '../es/auditLogActions.json';
+import piar from '../es/piar.json';
 
 
 import buttons from '../es/buttons';
@@ -124,5 +125,6 @@ export const esTranslations = {
   emotionalAttendance,
   evaluations,
   auditLogActions,
+  piar,
   ...buttons,
 };
