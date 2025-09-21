@@ -34,6 +34,31 @@
     "accountSettingsTitle": "Account Settings",
     "accountSettingsDesc": "Manage your personal information and preferences."
   },
+  "generic": {
+    "roleNotSetTitle": "Role not assigned",
+    "roleNotSetDesc": "Your account does not have an assigned role. Please contact the administrator to configure your access.",
+    "title": "{role} Dashboard",
+    "settings": "Settings",
+    "viewProfile": "View Profile",
+    "notifications": "Notifications ({count})",
+    "language": "Language",
+    "theme": "Theme",
+    "logout": "Log Out"
+  },
+  "common": {
+    "generalInfoTitle": "General Information",
+    "generalInfoDesc": "Access basic information and system configuration",
+    "settingsTitle": "Settings",
+    "settingsDesc": "Manage your preferences and personal settings",
+    "userManagementTitle": "User Management",
+    "userManagementDesc": "Manage user profiles and access",
+    "systemSettingsTitle": "System Settings",
+    "systemSettingsDesc": "General settings and platform maintenance",
+    "notificationAuditTitle": "Notification Audit",
+    "notificationAuditDesc": "Review and manage notification history",
+    "accountSettingsTitle": "Account Settings",
+    "accountSettingsDesc": "Manage your personal information and preferences"
+  },
   "adminDashboard": {
     "pageTitle": "Administrator Dashboard",
     "welcomeMessage": "Welcome, Administrator {userName}",

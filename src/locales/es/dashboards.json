@@ -34,6 +34,31 @@
     "accountSettingsTitle": "Configuración de Cuenta",
     "accountSettingsDesc": "Gestiona tu información personal y preferencias."
   },
+  "generic": {
+    "roleNotSetTitle": "Rol no asignado",
+    "roleNotSetDesc": "Tu cuenta no tiene un rol asignado. Por favor, contacta al administrador para configurar tu acceso.",
+    "title": "Panel de {role}",
+    "settings": "Configuración",
+    "viewProfile": "Ver Perfil",
+    "notifications": "Notificaciones ({count})",
+    "language": "Idioma",
+    "theme": "Tema",
+    "logout": "Cerrar Sesión"
+  },
+  "common": {
+    "generalInfoTitle": "Información General",
+    "generalInfoDesc": "Accede a información básica y configuración del sistema",
+    "settingsTitle": "Configuración",
+    "settingsDesc": "Gestiona tus preferencias y configuraciones personales",
+    "userManagementTitle": "Gestión de Usuarios",
+    "userManagementDesc": "Administrar perfiles y accesos de usuarios",
+    "systemSettingsTitle": "Configuración del Sistema",
+    "systemSettingsDesc": "Ajustes generales y mantenimiento de la plataforma",
+    "notificationAuditTitle": "Auditoría de Notificaciones",
+    "notificationAuditDesc": "Revisar y gestionar el historial de notificaciones",
+    "accountSettingsTitle": "Configuración de Cuenta",
+    "accountSettingsDesc": "Gestiona tu información personal y preferencias"
+  },
   "adminDashboard": {
     "pageTitle": "Panel de Administrador",
     "welcomeMessage": "Bienvenido/a, {userName}",
