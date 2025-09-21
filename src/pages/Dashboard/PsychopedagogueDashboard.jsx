@@ -33,6 +33,7 @@ import psychopedagogueService from '@/services/psychopedagogueService';
 import activityService from '@/services/activityService';
 import notificationService from '@/services/notificationService';
 import unifiedDataService from '@/services/unifiedDataService';
+import { useStudentsData } from '@/hooks/useStudentsData';
 import InteractiveCaseManagement from './PsychopedagogueSections/InteractiveCaseManagement';
 import RealTimeAlerts from './PsychopedagogueSections/RealTimeAlerts';
 import AISuggestionsEngine from './PsychopedagogueSections/AISuggestionsEngine';
@@ -46,10 +47,13 @@ import UnifiedStudentView from './PsychopedagogueSections/UnifiedStudentView';
 import IntelligentAlertsPanel from './PsychopedagogueSections/IntelligentAlertsPanel';
 import InterdisciplinaryCollaborationPanel from './PsychopedagogueSections/InterdisciplinaryCollaborationPanel';
 import SharedMetricsDashboard from './PsychopedagogueSections/SharedMetricsDashboard';
+import StudentsDebug from '@/components/StudentsDebug';
+import PIARDashboard from '@/components/PIARDashboard';
 
 const PsychopedagogueDashboard = () => {
   const { t } = useLanguage();
   const { userProfile, logout } = useMockAuth();
+  const { students, isLoading: studentsLoading, getStudentById } = useStudentsData();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     activeCases: 0,
@@ -67,7 +71,19 @@ const PsychopedagogueDashboard = () => {
   const [showIntelligentAssignment, setShowIntelligentAssignment] = useState(false);
   const [showSupportPlans, setShowSupportPlans] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'cases', 'analytics', 'tools', 'collaboration'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'cases', 'analytics', 'piars', 'tools', 'collaboration'
+
+  // Actualizar estadísticas cuando cambien los datos de estudiantes
+  useEffect(() => {
+    if (students.length > 0) {
+      setStats(prevStats => ({
+        ...prevStats,
+        activeCases: students.length,
+        activeSupportPlans: Math.floor(students.length * 0.7), // 70% de estudiantes con planes
+        pendingTasks: Math.floor(students.length * 0.3) // 30% con tareas pendientes
+      }));
+    }
+  }, [students]);
 
   useEffect(() => {
     let unsubscribe = null;
@@ -82,7 +98,13 @@ const PsychopedagogueDashboard = () => {
         // Obtener estadísticas del dashboard
         const statsResult = await psychopedagogueService.getDashboardStats();
         if (statsResult.success) {
-          setStats(statsResult.data);
+          setStats(prevStats => ({
+            ...prevStats,
+            ...statsResult.data,
+            // Actualizar con datos reales de estudiantes
+            activeCases: students.length || prevStats.activeCases,
+            activeSupportPlans: Math.floor((students.length || 0) * 0.7)
+          }));
         }
 
         // Cargar actividades recientes
@@ -260,7 +282,7 @@ const PsychopedagogueDashboard = () => {
               </div>
               <div className="flex-1">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent leading-tight">
-                  ¡Bienvenido de nuevo, {userProfile?.name || 'Dr. Luis Martínez'}!
+                  ¡Bienvenido de nuevo, {userProfile?.full_name || userProfile?.name || 'Dr. Luis Martínez'}!
                 </h1>
                 <p className="text-slate-300 text-base sm:text-lg mt-2">
                   Centro de Control Psicopedagógico Inteligente
@@ -284,6 +306,7 @@ const PsychopedagogueDashboard = () => {
             { id: 'overview', label: 'Resumen', shortLabel: 'Resumen', icon: BarChart3, color: 'blue' },
             { id: 'cases', label: 'Casos', shortLabel: 'Casos', icon: Briefcase, color: 'purple' },
             { id: 'analytics', label: 'Analíticas', shortLabel: 'Analíticas', icon: Activity, color: 'green' },
+            { id: 'piars', label: 'PIARs', shortLabel: 'PIARs', icon: FileText, color: 'indigo' },
             { id: 'collaboration', label: 'Colaboración', shortLabel: 'Colab', icon: Users, color: 'cyan' },
             { id: 'tools', label: 'Herramientas', shortLabel: 'Herramientas', icon: Settings, color: 'orange' }
           ].map((tab) => (
@@ -400,6 +423,16 @@ const PsychopedagogueDashboard = () => {
                 </Button>
               </CardContent>
             </Card>
+          </motion.div>
+
+          {/* Debug Component - Temporary */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="col-span-full"
+          >
+            <StudentsDebug />
           </motion.div>
       
       <motion.div
@@ -804,6 +837,18 @@ const PsychopedagogueDashboard = () => {
                 <AISuggestionsEngine />
               </CardContent>
             </Card>
+          </motion.div>
+        )}
+
+        {/* PIARs Tab */}
+        {activeTab === 'piars' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            <PIARDashboard />
           </motion.div>
         )}
 
