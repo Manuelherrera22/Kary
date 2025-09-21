@@ -7,6 +7,9 @@ import { toast } from '@/components/ui/use-toast';
 
 const TeacherWelcomeHeader = ({ teacherName, assignedStudentsCount }) => {
   const { t } = useLanguage();
+  
+  // Fallback para el nombre del profesor
+  const displayName = teacherName || t('common.teacher', 'Profesor');
 
   const containerVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -36,7 +39,7 @@ const TeacherWelcomeHeader = ({ teacherName, assignedStudentsCount }) => {
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 sm:gap-8 md:gap-10">
         <div className="flex-1 min-w-0 w-full">
           <motion.h1 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 leading-tight">
-            👨‍🏫 {t('teacherDashboard.welcome', { name: teacherName })}
+            👨‍🏫 {t('teacherDashboard.welcome', '', { name: displayName })}
           </motion.h1>
           <motion.p variants={itemVariants} className="text-slate-400 mt-3 text-base sm:text-lg md:text-xl leading-relaxed">
             {t('teacherDashboard.subtitle')}
