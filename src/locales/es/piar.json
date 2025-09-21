@@ -1,0 +1,178 @@
+{
+  "title": "PIAR - Plan Individual de Ajustes Razonables",
+  "createNew": "Crear Nuevo PIAR",
+  "editPIAR": "Editar PIAR",
+  "studentPIAR": "PIAR del Estudiante",
+  
+  "basicInformation": {
+    "title": "Información Básica",
+    "student": "Estudiante",
+    "selectStudent": "Seleccionar estudiante",
+    "createdBy": "Creado por",
+    "createdDate": "Fecha de creación",
+    "lastUpdate": "Última actualización",
+    "status": "Estado",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "reviewPending": "Revisión pendiente"
+  },
+  
+  "diagnosticInfo": {
+    "title": "Información Diagnóstica",
+    "learningStyle": "Estilo de Aprendizaje",
+    "visual": "Visual",
+    "auditory": "Auditivo",
+    "kinesthetic": "Kinestésico",
+    "mixed": "Mixto",
+    "attentionSpan": "Capacidad de Atención",
+    "short": "Corta (5-10 min)",
+    "medium": "Media (15-20 min)",
+    "long": "Larga (25+ min)",
+    "readingLevel": "Nivel de Lectura",
+    "basic": "Básico",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado",
+    "mathLevel": "Nivel de Matemáticas",
+    "socialSkills": "Habilidades Sociales",
+    "developing": "En desarrollo",
+    "adequate": "Adecuadas",
+    "advanced": "Avanzadas",
+    "emotionalRegulation": "Regulación Emocional",
+    "needsSupport": "Necesita apoyo",
+    "developing": "En desarrollo",
+    "adequate": "Adecuada",
+    "physicalNeeds": "Necesidades Físicas",
+    "none": "Ninguna",
+    "mobility": "Movilidad",
+    "fineMotor": "Motricidad fina",
+    "other": "Otras",
+    "communicationStyle": "Estilo de Comunicación",
+    "verbalPreferred": "Verbal preferido",
+    "nonVerbalPreferred": "No verbal preferido",
+    "mixed": "Mixto"
+  },
+  
+  "specificNeeds": {
+    "title": "Necesidades Específicas",
+    "addNeed": "Agregar Necesidad",
+    "category": "Categoría",
+    "academic": "Académica",
+    "behavioral": "Conductual",
+    "social": "Social",
+    "emotional": "Emocional",
+    "physical": "Física",
+    "communication": "Comunicación",
+    "need": "Necesidad",
+    "description": "Descripción",
+    "priority": "Prioridad",
+    "high": "Alta",
+    "medium": "Media",
+    "low": "Baja",
+    "strategies": "Estrategias",
+    "addStrategy": "Agregar estrategia",
+    "removeNeed": "Eliminar necesidad"
+  },
+  
+  "reasonableAdjustments": {
+    "title": "Ajustes Razonables",
+    "addAdjustment": "Agregar Ajuste",
+    "type": "Tipo",
+    "instructional": "Instruccional",
+    "environmental": "Ambiental",
+    "assessment": "Evaluación",
+    "behavioral": "Conductual",
+    "adjustment": "Ajuste",
+    "description": "Descripción",
+    "implementation": "Implementación",
+    "removeAdjustment": "Eliminar ajuste"
+  },
+  
+  "goals": {
+    "title": "Objetivos del PIAR",
+    "addGoal": "Agregar Objetivo",
+    "description": "Descripción del objetivo",
+    "targetDate": "Fecha objetivo",
+    "progress": "Progreso",
+    "strategies": "Estrategias",
+    "addStrategy": "Agregar estrategia",
+    "removeGoal": "Eliminar objetivo"
+  },
+  
+  "teachingStrategies": {
+    "title": "Estrategias de Enseñanza",
+    "subject": "Materia",
+    "mathematics": "Matemáticas",
+    "language": "Lenguaje",
+    "science": "Ciencias",
+    "socialStudies": "Estudios Sociales",
+    "art": "Arte",
+    "physicalEducation": "Educación Física",
+    "strategies": "Estrategias",
+    "addStrategy": "Agregar estrategia",
+    "removeSubject": "Eliminar materia"
+  },
+  
+  "personalizedActivities": {
+    "title": "Actividades Personalizadas",
+    "generateActivities": "Generar Actividades",
+    "basedOnPIAR": "Basadas en PIAR",
+    "type": "Tipo",
+    "duration": "Duración (min)",
+    "difficulty": "Dificultad",
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado",
+    "adaptive": "Adaptativo",
+    "progressive": "Progresivo",
+    "guided": "Guiado",
+    "materials": "Materiales",
+    "adaptations": "Adaptaciones",
+    "viewDetails": "Ver detalles",
+    "implementActivity": "Implementar actividad"
+  },
+  
+  "progressTracking": {
+    "title": "Seguimiento del Progreso",
+    "lastAssessment": "Última evaluación",
+    "nextReview": "Próxima revisión",
+    "overallProgress": "Progreso general",
+    "areasImproving": "Áreas mejorando",
+    "areasNeedingWork": "Áreas que necesitan trabajo",
+    "addProgressNote": "Agregar nota de progreso",
+    "progressNote": "Nota de progreso",
+    "date": "Fecha",
+    "saveNote": "Guardar nota"
+  },
+  
+  "actions": {
+    "save": "Guardar PIAR",
+    "saveAndClose": "Guardar y Cerrar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar PIAR",
+    "duplicate": "Duplicar PIAR",
+    "export": "Exportar PIAR",
+    "print": "Imprimir PIAR"
+  },
+  
+  "messages": {
+    "createdSuccessfully": "PIAR creado exitosamente",
+    "createdSuccessfullyDescription": "El Plan Individual de Ajustes Razonables ha sido creado y está listo para implementar",
+    "updatedSuccessfully": "PIAR actualizado exitosamente",
+    "updatedSuccessfullyDescription": "Los cambios en el PIAR han sido guardados correctamente",
+    "errorCreating": "Error al crear PIAR",
+    "errorUpdating": "Error al actualizar PIAR",
+    "errorDeleting": "Error al eliminar PIAR",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar este PIAR? Esta acción no se puede deshacer.",
+    "noPIARFound": "No se encontró PIAR para este estudiante",
+    "createFirstPIAR": "Crear primer PIAR para este estudiante"
+  },
+  
+  "placeholders": {
+    "selectStudent": "Seleccionar estudiante para crear PIAR",
+    "describeNeed": "Describe la necesidad específica...",
+    "describeAdjustment": "Describe el ajuste razonable...",
+    "describeGoal": "Describe el objetivo específico y medible...",
+    "describeStrategy": "Describe la estrategia de enseñanza...",
+    "addProgressNote": "Agrega una nota sobre el progreso del estudiante..."
+  }
+}
