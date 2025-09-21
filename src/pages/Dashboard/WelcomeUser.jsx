@@ -25,9 +25,8 @@ const WelcomeUser = () => {
   const nameToDisplay = userProfile?.full_name || user?.email || t('common.guest');
   const roleToDisplay = userProfile?.role ? t(`roles.${userProfile.role}`) : t('roles.unknown');
 
-  const welcomeTitle = t('dashboard.greeting', 'Hola, {userName}').replace('{userName}', nameToDisplay);
-  const welcomeSubtitle = t('dashboard.welcomeMessage', 'Bienvenido/a de nuevo a tu panel de Kary AI, {userIdentifier}.')
-                          .replace('{userIdentifier}', nameToDisplay);
+  const welcomeTitle = t('dashboard.greeting', 'Hola, {userName}', { userName: nameToDisplay });
+  const welcomeSubtitle = t('dashboard.welcomeMessage', 'Bienvenido/a de nuevo a tu panel de Kary AI, {userIdentifier}.', { userIdentifier: nameToDisplay });
 
 
   return (
