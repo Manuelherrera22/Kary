@@ -78,7 +78,7 @@ export const LanguageProvider = ({ children }) => {
     fetchUserLanguage();
   }, []);
 
-  const t = useCallback((key, fallback = '') => {
+  const t = useCallback((key, fallback = '', replacements = {}) => {
     const keys = key.split('.');
     let translation = currentTranslations;
     
@@ -92,6 +92,19 @@ export const LanguageProvider = ({ children }) => {
     }
     
     if (typeof translation === 'string') {
+      // Manejar interpolación de parámetros (llaves simples y dobles)
+      for (const placeholder in replacements) {
+        // Reemplazar llaves simples {placeholder}
+        translation = translation.replace(
+          new RegExp(`{${placeholder}}`, 'g'),
+          replacements[placeholder]
+        );
+        // Reemplazar dobles llaves {{placeholder}}
+        translation = translation.replace(
+          new RegExp(`{{${placeholder}}}`, 'g'),
+          replacements[placeholder]
+        );
+      }
       return translation;
     }
     
