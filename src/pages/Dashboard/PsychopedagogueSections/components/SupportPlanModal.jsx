@@ -19,6 +19,8 @@ import { es, enUS } from 'date-fns/locale';
 import { Badge } from '@/components/ui/badge';
 import PlanEditor from './CreateSupportPlanCanvas/PlanEditor'; 
 import { useToast } from '@/components/ui/use-toast';
+import { useStudentsData } from '@/hooks/useStudentsData';
+import { supabase } from '@/lib/supabaseClient';
 
 const blockIcons = {
   diagnosis: ClipboardCheck,
@@ -31,12 +33,62 @@ const blockIcons = {
 };
 
 
-const SupportPlanModal = ({ isOpen, onOpenChange, editingPlan, onSubmit, isSubmitting, students, selectedStudentId: preselectedStudentIdForModal }) => {
+const SupportPlanModal = ({ isOpen, onOpenChange, editingPlan, onSubmit, isSubmitting, selectedStudentId: preselectedStudentIdForModal }) => {
   const { t, language } = useLanguage();
   const { toast } = useToast();
+  const { students: hookStudents, isLoading: studentsLoading } = useStudentsData();
   const dateLocale = language === 'es' ? es : enUS;
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [editablePlanBlocks, setEditablePlanBlocks] = useState([]);
+  const [directStudents, setDirectStudents] = useState([]);
+  const [isLoadingDirect, setIsLoadingDirect] = useState(false);
+
+  // Debug: Log students data
+  useEffect(() => {
+    console.log('SupportPlanModal - Hook students:', hookStudents);
+    console.log('SupportPlanModal - Hook loading:', studentsLoading);
+    console.log('SupportPlanModal - Direct students:', directStudents);
+  }, [hookStudents, studentsLoading, directStudents]);
+
+  // Carga directa de estudiantes como respaldo
+  useEffect(() => {
+    if (isOpen && hookStudents.length === 0 && !studentsLoading) {
+      loadStudentsDirectly();
+    }
+  }, [isOpen, hookStudents.length, studentsLoading]);
+
+  const loadStudentsDirectly = async () => {
+    setIsLoadingDirect(true);
+    try {
+      console.log('Cargando estudiantes directamente desde Supabase...');
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .select('id, full_name, email, grade, status')
+        .eq('role', 'student')
+        .eq('status', 'active')
+        .order('full_name', { ascending: true });
+
+      if (error) {
+        console.error('Error loading students directly:', error);
+        toast({
+          title: 'Error',
+          description: 'Error al cargar estudiantes: ' + error.message,
+          variant: 'destructive',
+        });
+      } else {
+        console.log('Estudiantes cargados directamente:', data);
+        setDirectStudents(data || []);
+      }
+    } catch (err) {
+      console.error('Error in loadStudentsDirectly:', err);
+    } finally {
+      setIsLoadingDirect(false);
+    }
+  };
+
+  // Usar estudiantes del hook o los cargados directamente
+  const students = hookStudents.length > 0 ? hookStudents : directStudents;
+  const isLoading = studentsLoading || isLoadingDirect;
 
   const schema = z.object({
     student_id: z.string().min(1, t('supportPlans.errorNoStudentId')),
@@ -92,6 +144,33 @@ const SupportPlanModal = ({ isOpen, onOpenChange, editingPlan, onSubmit, isSubmi
         setEditablePlanBlocks([]);
         setIsEditingMode(true); // Default to edit mode for new plans
       }
+      
+      // Force solid background for modal with multiple attempts
+      const forceSolidBackground = () => {
+        const modalContent = document.querySelector('[data-radix-dialog-content]');
+        const modalOverlay = document.querySelector('[data-radix-dialog-overlay]');
+        
+        if (modalContent) {
+          modalContent.style.setProperty('background-color', '#0f172a', 'important');
+          modalContent.style.setProperty('background', '#0f172a', 'important');
+          modalContent.style.setProperty('opacity', '1', 'important');
+          modalContent.style.setProperty('backdrop-filter', 'none', 'important');
+          modalContent.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+          modalContent.style.setProperty('z-index', '9999', 'important');
+        }
+        
+        if (modalOverlay) {
+          modalOverlay.style.setProperty('background-color', 'rgba(0, 0, 0, 0.95)', 'important');
+          modalOverlay.style.setProperty('background', 'rgba(0, 0, 0, 0.95)', 'important');
+          modalOverlay.style.setProperty('opacity', '1', 'important');
+        }
+      };
+      
+      // Try multiple times to ensure it works
+      forceSolidBackground();
+      setTimeout(forceSolidBackground, 50);
+      setTimeout(forceSolidBackground, 200);
+      setTimeout(forceSolidBackground, 500);
     }
   }, [isOpen, editingPlan, reset, preselectedStudentIdForModal]);
 
@@ -152,7 +231,10 @@ const SupportPlanModal = ({ isOpen, onOpenChange, editingPlan, onSubmit, isSubmi
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) { reset(); setIsEditingMode(false); } onOpenChange(open); }}>
-      <DialogContent className="max-w-2xl md:max-w-3xl lg:max-w-4xl bg-slate-900/90 backdrop-blur-lg border-slate-700/80 text-white p-0 shadow-2xl rounded-2xl">
+      <DialogContent 
+        className="max-w-2xl md:max-w-3xl lg:max-w-4xl border-slate-700 text-white p-0 shadow-2xl rounded-2xl solid-modal-background"
+        forceSolidBackground={true}
+      >
         <DialogHeader className="p-6 border-b border-slate-700/60 flex flex-row justify-between items-center">
           <div>
             <DialogTitle className="text-3xl font-bold flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
@@ -188,9 +270,25 @@ const SupportPlanModal = ({ isOpen, onOpenChange, editingPlan, onSubmit, isSubmi
                         <SelectValue placeholder={t('supportPlans.selectStudentModalPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-800 border-slate-700 text-white">
-                        {students.map(student => (
-                          <SelectItem key={student.id} value={student.id}>{student.full_name}</SelectItem>
-                        ))}
+                        {isLoading ? (
+                          <SelectItem value="loading" disabled>
+                            Cargando estudiantes... ({students.length} encontrados)
+                          </SelectItem>
+                        ) : students.length === 0 ? (
+                          <SelectItem value="no-students" disabled>
+                            No hay estudiantes registrados (Hook: {hookStudents.length}, Direct: {directStudents.length})
+                          </SelectItem>
+                        ) : (
+                          students.map(student => (
+                            <SelectItem key={student.id} value={student.id}>
+                              {student.full_name || student.name || student.email}
+                            </SelectItem>
+                          ))
+                        )}
+                        {/* Debug info */}
+                        <SelectItem value="debug" disabled>
+                          DEBUG: Hook={hookStudents.length}, Direct={directStudents.length}, Total={students.length}
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}
