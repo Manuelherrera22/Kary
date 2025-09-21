@@ -136,6 +136,7 @@ const AppContent = () => {
 
   return (
     <RealTimeSync>
+      
       <div className={`min-h-screen text-gray-800 ${isDashboardRoute ? "dashboard-route bg-gray-100 dark:bg-slate-900" : "bg-gradient-to-b from-sky-100 via-purple-50 to-pink-50"}`}>
         <Routes>
           <Route path="/" element={<MainPageLayout />} />

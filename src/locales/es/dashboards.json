@@ -337,6 +337,9 @@
     "observations": "Observaciones",
     "studentsDescription": "Gestiona y monitorea a tus estudiantes",
     "observationsDescription": "Registra y revisa observaciones de estudiantes",
+    "receivedPlans": "Planes Recibidos",
+    "viewSupportPlans": "Ver Planes",
+    "supportPlansDescription": "Planes de apoyo generados por IA desde el psicopedagogo",
     "analyticsDescription": "Analiza el rendimiento y progreso de tus estudiantes"
   },
   "psychopedagogueDashboard": {

@@ -7,6 +7,63 @@
     "title": "Sugerencia de Kary",
     "defaultSuggestion": "Recuerda que cada pequeño paso es un gran avance. ¡Sigue adelante!"
   },
+  "activitiesReceiver": {
+    "title": "Mis Actividades",
+    "subtitle": "Actividades personalizadas asignadas por tus profesores",
+    "stats": {
+      "total": "Total",
+      "completed": "Completadas",
+      "inProgress": "En Progreso",
+      "points": "Puntos"
+    },
+    "filters": {
+      "all": "Todas",
+      "assigned": "Asignada",
+      "inProgress": "En Progreso",
+      "completed": "Completada"
+    },
+    "status": {
+      "assigned": "Asignada",
+      "inProgress": "En Progreso",
+      "completed": "Completada",
+      "paused": "Pausada"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "actions": {
+      "start": "Iniciar",
+      "pause": "Pausar",
+      "resume": "Reanudar",
+      "complete": "Completar",
+      "viewDetails": "Ver Detalles"
+    },
+    "messages": {
+      "noActivities": "No hay actividades",
+      "noActivitiesAssigned": "No tienes actividades asignadas aún",
+      "noActivitiesFilter": "No hay actividades con estado \"{status}\"",
+      "activityStarted": "Actividad Iniciada",
+      "activityStartedMessage": "¡Buena suerte! Puedes pausar y reanudar cuando quieras.",
+      "activityPaused": "Actividad Pausada",
+      "activityPausedMessage": "Puedes reanudar cuando estés listo.",
+      "activityCompleted": "¡Actividad Completada!",
+      "activityCompletedMessage": "¡Excelente trabajo! Has ganado puntos.",
+      "loading": "Cargando actividades..."
+    },
+    "details": {
+      "duration": "Duración",
+      "teacher": "Profesor",
+      "dueDate": "Fecha límite",
+      "points": "Puntos",
+      "progress": "Progreso",
+      "materials": "Materiales",
+      "objectives": "Objetivos",
+      "moreObjectives": "más objetivos...",
+      "completedOn": "Completada el"
+    }
+  },
   "emotionalState": {
     "happy": {
       "message": "¡Qué bueno verte tan radiante! Sigue brillando."

@@ -9,6 +9,7 @@ import { usePIARData } from '@/hooks/usePIARData';
 import { useStudentsData } from '@/hooks/useStudentsData';
 import PIARModal from './PIARModal';
 import PersonalizedActivityGenerator from './PersonalizedActivityGenerator';
+import AIActivityGenerator from './AIActivityGenerator';
 import { 
   Plus, 
   Search, 
@@ -21,7 +22,8 @@ import {
   Users,
   TrendingUp,
   FileText,
-  Activity
+  Activity,
+  Sparkles
 } from 'lucide-react';
 
 const PIARDashboard = () => {
@@ -34,7 +36,9 @@ const PIARDashboard = () => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [viewMode, setViewMode] = useState('grid'); // grid, list, activities
+  const [viewMode, setViewMode] = useState('grid'); // grid, list, activities, ai-generator
+  const [generatedActivities, setGeneratedActivities] = useState([]);
+  const [generatedPlan, setGeneratedPlan] = useState(null);
 
   // Filtrar PIARs
   const filteredPIARs = piars.filter(piar => {
@@ -42,7 +46,7 @@ const PIARDashboard = () => {
       piar.student_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       piar.student_id?.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesStatus = !statusFilter || piar.status === statusFilter;
+    const matchesStatus = !statusFilter || statusFilter === 'all' || piar.status === statusFilter;
     
     return matchesSearch && matchesStatus;
   });
@@ -62,6 +66,13 @@ const PIARDashboard = () => {
   const openActivitiesView = (studentId) => {
     setSelectedStudentId(studentId);
     setViewMode('activities');
+  };
+
+  const openAIGenerator = (studentId) => {
+    setSelectedStudentId(studentId);
+    setViewMode('ai-generator');
+    setGeneratedActivities([]);
+    setGeneratedPlan(null);
   };
 
   const getStatusColor = (status) => {
@@ -123,6 +134,35 @@ const PIARDashboard = () => {
     );
   }
 
+  if (viewMode === 'ai-generator' && selectedStudentId) {
+    const selectedStudent = students.find(s => s.id === selectedStudentId);
+    const selectedPIAR = getPIARByStudentId(selectedStudentId);
+    
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Button
+            onClick={() => setViewMode('grid')}
+            variant="outline"
+            className="border-slate-500 text-gray-300 hover:bg-slate-700"
+          >
+            ← Volver al Dashboard
+          </Button>
+          <h2 className="text-xl font-semibold text-white flex items-center">
+            <Sparkles className="w-6 h-6 mr-2 text-purple-400" />
+            Generador de IA - {selectedStudent?.full_name}
+          </h2>
+        </div>
+        <AIActivityGenerator 
+          studentData={selectedStudent}
+          piarData={selectedPIAR}
+          onActivitiesGenerated={setGeneratedActivities}
+          onPlanGenerated={setGeneratedPlan}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -169,7 +209,7 @@ const PIARDashboard = () => {
                   <SelectValue placeholder="Estado" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-700 border-slate-600 text-white">
-                  <SelectItem value="">Todos</SelectItem>
+                  <SelectItem value="all">Todos</SelectItem>
                   <SelectItem value="active">Activo</SelectItem>
                   <SelectItem value="inactive">Inactivo</SelectItem>
                   <SelectItem value="review_pending">Revisión pendiente</SelectItem>
@@ -343,6 +383,14 @@ const PIARDashboard = () => {
 
                 {/* Acciones */}
                 <div className="flex gap-2 pt-2">
+                  <Button
+                    onClick={() => openAIGenerator(piar.student_id)}
+                    size="sm"
+                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+                  >
+                    <Sparkles className="w-4 h-4 mr-1" />
+                    IA
+                  </Button>
                   <Button
                     onClick={() => openActivitiesView(piar.student_id)}
                     size="sm"

@@ -16,6 +16,8 @@ import FamilyCalendar from './ParentDashboard/components/FamilyCalendar';
 import ParentResourcesPanel from './ParentDashboard/components/ParentResourcesPanel';
 import FamilyGamification from './ParentDashboard/components/FamilyGamification';
 import StudentLinkModal from './ParentDashboard/components/StudentLinkModal';
+import UniversalGeminiChat from '@/components/UniversalGeminiChat';
+import UserHeader from '@/components/UserHeader';
 import parentStudentSyncService from '@/services/parentStudentSyncService';
 
 // Estilos personalizados para el scrollbar
@@ -37,6 +39,8 @@ const ParentDashboard = () => {
   const [syncData, setSyncData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
+  const [showGeminiChat, setShowGeminiChat] = useState(false);
+  const [geminiChatMinimized, setGeminiChatMinimized] = useState(false);
 
   const parentDashboardCards = [
     {
@@ -460,6 +464,9 @@ const ParentDashboard = () => {
   return (
     <>
       <style>{customStyles}</style>
+      {/* Header de Usuario */}
+      <UserHeader position="top-right" />
+      
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -506,6 +513,21 @@ const ParentDashboard = () => {
               <br />
               <span className="text-slate-400">Gestiona el progreso y bienestar de tu hijo/a</span>
             </motion.p>
+
+            {/* Botón para Chat con Gemini */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex justify-center mb-6"
+            >
+              <Button
+                onClick={() => setShowGeminiChat(true)}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+              >
+                💬 Hablar con Kary (Gemini AI)
+              </Button>
+            </motion.div>
 
             {/* Estado de Vinculación Mejorado */}
             {!hasLinkedStudents && !authLoading && (
@@ -830,6 +852,22 @@ const ParentDashboard = () => {
         isOpen={isLinkModalOpen}
         onClose={() => setIsLinkModalOpen(false)}
         onLinkSuccess={handleLinkSuccess}
+      />
+
+      {/* Chat Universal con Gemini AI */}
+      <UniversalGeminiChat
+        userRole="parent"
+        context={{
+          primaryChildId: primaryChildId,
+          associatedStudents: associatedStudentIds?.length || 0,
+          syncData: syncData,
+          activeTab: activeTab
+        }}
+        isOpen={showGeminiChat}
+        onClose={() => setShowGeminiChat(false)}
+        onMinimize={setGeminiChatMinimized}
+        isMinimized={geminiChatMinimized}
+        position="bottom-right"
       />
       </motion.div>
     </>

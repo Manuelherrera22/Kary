@@ -27,6 +27,11 @@ import IntelligentAIAssistant from '@/pages/Dashboard/TeacherSections/components
 import TeacherGamification from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/TeacherGamification.jsx';
 import IntelligentActivityGenerator from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/IntelligentActivityGenerator.jsx';
 import EcosystemDemo from '@/components/EcosystemDemo';
+import TeacherPlanDashboard from '@/components/TeacherPlanDashboard';
+import SupportPlansNotification from '@/components/SupportPlansNotification';
+import TeacherGeminiInsights from '@/components/TeacherGeminiInsights';
+import UniversalGeminiChat from '@/components/UniversalGeminiChat';
+import UserHeader from '@/components/UserHeader';
 import { supabase } from '@/lib/supabaseClient';
 import unifiedDataService from '@/services/unifiedDataService';
 import mockTeacherDataService from '@/services/mockTeacherDataService';
@@ -39,13 +44,18 @@ const TeacherDashboard = () => {
     activePlans: 0,
     pendingActivities: 0,
     registeredObservations: 0,
+    receivedPlans: 0,
   });
   const [students, setStudents] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [supportPlans, setSupportPlans] = useState([]);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
   const [isLoadingStudents, setIsLoadingStudents] = useState(true);
   const [isLoadingActivities, setIsLoadingActivities] = useState(true);
+  const [isLoadingPlans, setIsLoadingPlans] = useState(true);
   const [activeSection, setActiveSection] = useState('overview');
+  const [showGeminiChat, setShowGeminiChat] = useState(false);
+  const [geminiChatMinimized, setGeminiChatMinimized] = useState(false);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -110,6 +120,33 @@ const TeacherDashboard = () => {
     fetchActivities();
   }, [userProfile?.id]);
 
+  // Cargar planes de apoyo
+  useEffect(() => {
+    const fetchSupportPlans = async () => {
+      if (!userProfile?.id) return;
+      setIsLoadingPlans(true);
+      try {
+        // Importar dinámicamente el servicio
+        const { getTeacherCommunications } = await import('@/services/teacherCommunicationService');
+        const result = await getTeacherCommunications(userProfile.id);
+        if (result.success) {
+          setSupportPlans(result.communications);
+          // Actualizar estadísticas
+          setStats(prev => ({
+            ...prev,
+            receivedPlans: result.total
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching support plans:', error);
+      } finally {
+        setIsLoadingPlans(false);
+      }
+    };
+
+    fetchSupportPlans();
+  }, [userProfile?.id]);
+
   // Handlers para las acciones
   const handleViewStudentDetails = (student) => {
     toast({
@@ -172,12 +209,12 @@ const TeacherDashboard = () => {
 
   const statCards = [
     {
-      title: t('teacherDashboard.activePlans'),
-      value: stats.activePlans,
+      title: t('teacherDashboard.receivedPlans', 'Planes Recibidos'),
+      value: stats.receivedPlans,
       Icon: FileText,
-      color: 'text-green-400',
-      actionText: t('teacherDashboard.viewPlans'),
-      onAction: () => toast({ title: "🚧 Característica no implementada", description: "¡Podrás ver los planes activos desde aquí pronto!" }),
+      color: 'text-purple-400',
+      actionText: t('teacherDashboard.viewSupportPlans', 'Ver Planes'),
+      onAction: () => setActiveSection('support-plans'),
     },
     {
       title: t('teacherDashboard.pendingActivities'),
@@ -200,6 +237,9 @@ const TeacherDashboard = () => {
   return (
     <>
       <style>{scrollbarHideStyles}</style>
+      {/* Header de Usuario */}
+      <UserHeader position="top-right" />
+      
       <motion.div 
         className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 w-full"
         initial={{ opacity: 0 }}
@@ -215,6 +255,7 @@ const TeacherDashboard = () => {
       <div className="flex gap-2 sm:gap-3 justify-start sm:justify-center overflow-x-auto scrollbar-hide pb-3">
         {[
           { id: 'overview', label: 'Resumen', icon: '📊', shortLabel: 'Resumen' },
+          { id: 'support-plans', label: 'Planes de Apoyo', icon: '📋', shortLabel: 'Planes' },
           { id: 'analytics', label: 'Analytics', icon: '📈', shortLabel: 'Analytics' },
           { id: 'ai', label: 'Asistente IA', icon: '🤖', shortLabel: 'IA' },
           { id: 'activities', label: 'Actividades', icon: '📚', shortLabel: 'Actividades' },
@@ -256,10 +297,22 @@ const TeacherDashboard = () => {
         ))}
       </div>
 
+      {/* Notificaciones de Planes de Apoyo */}
+      <SupportPlansNotification 
+        teacherId={userProfile.id}
+        onViewPlans={() => setActiveSection('support-plans')}
+      />
+
       {/* Panel de Insights de IA */}
       <AIInsightsPanel 
         students={students}
         onInsightAction={handleInsightAction}
+      />
+
+      {/* Insights Inteligentes con Gemini AI */}
+      <TeacherGeminiInsights 
+        showChat={showGeminiChat}
+        onToggleChat={() => setShowGeminiChat(!showGeminiChat)}
       />
 
       {/* Gestión masiva de actividades */}
@@ -306,6 +359,12 @@ const TeacherDashboard = () => {
         </>
       )}
 
+      {activeSection === 'support-plans' && (
+        <div className="mt-8">
+          <TeacherPlanDashboard teacherId={userProfile.id} />
+        </div>
+      )}
+
       {activeSection === 'analytics' && (
         <div className="mt-8">
           <AdvancedAnalytics />
@@ -335,6 +394,22 @@ const TeacherDashboard = () => {
           <TeacherGamification />
         </div>
       )}
+
+      {/* Chat Universal con Gemini AI */}
+      <UniversalGeminiChat
+        userRole="teacher"
+        context={{
+          students: students.length,
+          activities: activities.length,
+          supportPlans: supportPlans.length,
+          stats: stats
+        }}
+        isOpen={showGeminiChat}
+        onClose={() => setShowGeminiChat(false)}
+        onMinimize={setGeminiChatMinimized}
+        isMinimized={geminiChatMinimized}
+        position="bottom-right"
+      />
       </motion.div>
     </>
   );

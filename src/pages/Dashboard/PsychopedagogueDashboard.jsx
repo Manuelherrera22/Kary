@@ -49,6 +49,8 @@ import InterdisciplinaryCollaborationPanel from './PsychopedagogueSections/Inter
 import SharedMetricsDashboard from './PsychopedagogueSections/SharedMetricsDashboard';
 import StudentsDebug from '@/components/StudentsDebug';
 import PIARDashboard from '@/components/PIARDashboard';
+import UniversalGeminiChat from '@/components/UniversalGeminiChat';
+import UserHeader from '@/components/UserHeader';
 
 const PsychopedagogueDashboard = () => {
   const { t } = useLanguage();
@@ -72,6 +74,8 @@ const PsychopedagogueDashboard = () => {
   const [showSupportPlans, setShowSupportPlans] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'cases', 'analytics', 'piars', 'tools', 'collaboration'
+  const [showGeminiChat, setShowGeminiChat] = useState(false);
+  const [geminiChatMinimized, setGeminiChatMinimized] = useState(false);
 
   // Actualizar estadísticas cuando cambien los datos de estudiantes
   useEffect(() => {
@@ -265,6 +269,9 @@ const PsychopedagogueDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Header de Usuario */}
+      <UserHeader position="top-right" />
+      
       <div className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6">
         {/* Welcome Header - Enhanced */}
         <motion.div
@@ -292,6 +299,16 @@ const PsychopedagogueDashboard = () => {
             <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed">
               Gestiona casos, monitorea tendencias emocionales y optimiza el desarrollo de tus estudiantes con herramientas de IA avanzadas.
             </p>
+            
+            {/* Botón para Chat con Gemini */}
+            <div className="flex justify-center mt-6">
+              <Button
+                onClick={() => setShowGeminiChat(true)}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+              >
+                💬 Hablar con Kary (Gemini AI)
+              </Button>
+            </div>
           </div>
         </motion.div>
 
@@ -1005,6 +1022,22 @@ const PsychopedagogueDashboard = () => {
             </div>
           </div>
         )}
+
+        {/* Chat Universal con Gemini AI */}
+        <UniversalGeminiChat
+          userRole="psychopedagogue"
+          context={{
+            students: students.length,
+            activeCases: stats.activeCases,
+            supportPlans: stats.activeSupportPlans,
+            activeTab: activeTab
+          }}
+          isOpen={showGeminiChat}
+          onClose={() => setShowGeminiChat(false)}
+          onMinimize={setGeminiChatMinimized}
+          isMinimized={geminiChatMinimized}
+          position="bottom-right"
+        />
       </div>
     </div>
   );

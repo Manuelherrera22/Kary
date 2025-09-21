@@ -7,6 +7,9 @@ import { Shield, Users, Settings, BarChart, LogOut, FileText, SlidersHorizontal,
 import DashboardCard from './components/DashboardCard';
 import LoadingScreen from './components/LoadingScreen';
 import { toast } from '@/components/ui/use-toast';
+import UniversalGeminiChat from '@/components/UniversalGeminiChat';
+import GeminiTestPanel from '@/components/GeminiTestPanel';
+import UserHeader from '@/components/UserHeader';
 import edgeFunctionService from '@/services/edgeFunctionService';
 
 const AdminDashboard = () => {
@@ -15,6 +18,8 @@ const AdminDashboard = () => {
   const [loadingDashboard, setLoadingDashboard] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
+  const [showGeminiChat, setShowGeminiChat] = useState(false);
+  const [geminiChatMinimized, setGeminiChatMinimized] = useState(false);
 
   const fetchAdminData = useCallback(async () => {
     if (!userProfile || userProfile.role !== 'admin' || !user) {
@@ -195,6 +200,18 @@ const AdminDashboard = () => {
       bgColor: 'bg-indigo-500/20',
       hoverBgColor: 'hover:bg-indigo-500/30',
       link: '#' 
+    },
+    {
+      id: 'geminiTests',
+      titleKey: 'Pruebas de Gemini AI',
+      descriptionKey: 'Verificar funcionamiento de IA en todos los dashboards',
+      icon: Brain,
+      color: 'text-purple-400',
+      bgColor: 'bg-purple-500/20',
+      hoverBgColor: 'hover:bg-purple-500/30',
+      link: null,
+      count: 'Test',
+      specialType: 'gemini-tests'
     }
   ];
 
@@ -216,12 +233,16 @@ const AdminDashboard = () => {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6"
-    >
+    <>
+      {/* Header de Usuario */}
+      <UserHeader position="top-right" />
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-6 sm:space-y-8 p-3 sm:p-4 md:p-6"
+      >
       <div className="text-center mb-8 sm:mb-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300 leading-tight px-2">
           {t('dashboards.adminDashboard.pageTitle')}
@@ -229,6 +250,16 @@ const AdminDashboard = () => {
         <p className="text-base sm:text-lg text-slate-300 mt-2 max-w-2xl mx-auto leading-relaxed px-2">
           {t('dashboards.adminDashboard.welcomeMessage', '', { userName: userProfile?.full_name || user?.email })}
         </p>
+        
+        {/* Botón para Chat con Gemini */}
+        <div className="flex justify-center mt-6">
+          <Button
+            onClick={() => setShowGeminiChat(true)}
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+          >
+            💬 Hablar con Kary (Gemini AI)
+          </Button>
+        </div>
       </div>
 
       <motion.div 
@@ -247,31 +278,77 @@ const AdminDashboard = () => {
               visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" }}
             }}
           >
-            <Link to={card.link} className="block group h-full">
-              <DashboardCard
-                title={t(card.titleKey, { studentName: t('common.students') })}
-                description={t(card.descriptionKey)}
-                IconComponent={card.icon}
-                iconColor={card.color}
-                bgColor={card.bgColor}
-                hoverBgColor={card.hoverBgColor}
-                className="h-full"
-              >
-                {card.count !== undefined && (
-                  <div className="text-4xl font-bold text-slate-100 mt-auto pt-2">
-                    {card.count}
+            {card.specialType === 'gemini-tests' ? (
+              <div className="h-full">
+                <DashboardCard
+                  title={card.titleKey}
+                  description={card.descriptionKey}
+                  IconComponent={card.icon}
+                  iconColor={card.color}
+                  bgColor={card.bgColor}
+                  hoverBgColor={card.hoverBgColor}
+                  className="h-full"
+                >
+                  {card.count !== undefined && (
+                    <div className="text-4xl font-bold text-slate-100 mt-auto pt-2">
+                      {card.count}
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center mt-auto pt-3 border-t border-slate-700/50">
+                    <span className="text-sm text-slate-400">Panel de Pruebas</span>
+                    <Brain className={`h-5 w-5 ${card.color} group-hover:translate-x-1 transition-transform`} />
                   </div>
-                )}
-                <div className="flex justify-between items-center mt-auto pt-3 border-t border-slate-700/50">
-                  <span className="text-sm text-slate-400">{t('common.accessNowButton')}</span>
-                  <Shield className={`h-5 w-5 ${card.color} group-hover:translate-x-1 transition-transform`} />
-                </div>
-              </DashboardCard>
-            </Link>
+                </DashboardCard>
+              </div>
+            ) : (
+              <Link to={card.link} className="block group h-full">
+                <DashboardCard
+                  title={t(card.titleKey, { studentName: t('common.students') })}
+                  description={t(card.descriptionKey)}
+                  IconComponent={card.icon}
+                  iconColor={card.color}
+                  bgColor={card.bgColor}
+                  hoverBgColor={card.hoverBgColor}
+                  className="h-full"
+                >
+                  {card.count !== undefined && (
+                    <div className="text-4xl font-bold text-slate-100 mt-auto pt-2">
+                      {card.count}
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center mt-auto pt-3 border-t border-slate-700/50">
+                    <span className="text-sm text-slate-400">{t('common.accessNowButton')}</span>
+                    <Shield className={`h-5 w-5 ${card.color} group-hover:translate-x-1 transition-transform`} />
+                  </div>
+                </DashboardCard>
+              </Link>
+            )}
           </motion.div>
         ))}
       </motion.div>
-    </motion.div>
+
+      {/* Panel de Pruebas de Gemini AI */}
+      <div className="mt-8">
+        <GeminiTestPanel />
+      </div>
+
+      {/* Chat Universal con Gemini AI */}
+      <UniversalGeminiChat
+        userRole="admin"
+        context={{
+          dashboardData: dashboardData,
+          totalUsers: dashboardData?.totalUsers || 0,
+          totalStudents: dashboardData?.totalStudents || 0,
+          totalTeachers: dashboardData?.totalTeachers || 0
+        }}
+        isOpen={showGeminiChat}
+        onClose={() => setShowGeminiChat(false)}
+        onMinimize={setGeminiChatMinimized}
+        isMinimized={geminiChatMinimized}
+        position="bottom-right"
+      />
+      </motion.div>
+    </>
   );
 };
 

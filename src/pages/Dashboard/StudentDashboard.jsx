@@ -26,12 +26,17 @@ import MicroInteractions from './StudentDashboard/components/MicroInteractions';
 import AccessibilityFeatures from './StudentDashboard/components/AccessibilityFeatures';
 import StudentActivities from './StudentDashboard/components/StudentActivities';
 import RealTimeNotificationsPanel from './StudentDashboard/components/RealTimeNotificationsPanel';
+import StudentActivityNotifications from '@/components/StudentActivityNotifications';
+import UniversalGeminiChat from '@/components/UniversalGeminiChat';
+import UserHeader from '@/components/UserHeader';
 
 const StudentDashboard = () => {
   const { t } = useLanguage();
   const { userProfile, user } = useMockAuth();
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
+  const [showGeminiChat, setShowGeminiChat] = useState(false);
+  const [geminiChatMinimized, setGeminiChatMinimized] = useState(false);
   const [error, setError] = useState(null);
   const [retrying, setRetrying] = useState(false);
 
@@ -106,6 +111,9 @@ const StudentDashboard = () => {
         <meta name="description" content={t('studentDashboard.welcomeMessage', '', { userName: userProfile?.full_name || '' })} />
       </Helmet>
       
+      {/* Header de Usuario */}
+      <UserHeader position="top-right" />
+      
       <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-6 sm:space-y-8 lg:space-y-10">
         {error ? (
           <div className="text-center p-4 sm:p-6 md:p-8 bg-red-500/10 rounded-2xl border border-red-400/30">
@@ -124,6 +132,20 @@ const StudentDashboard = () => {
         ) : (
           <>
             <WelcomeHeader userName={userProfile?.full_name} />
+            
+            {/* Botón para Chat con Gemini */}
+            <div className="flex justify-end mb-4">
+              <Button
+                onClick={() => setShowGeminiChat(true)}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+              >
+                💬 Hablar con Kary (Gemini AI)
+              </Button>
+            </div>
+            
+            {/* Notificaciones de Actividades */}
+            <StudentActivityNotifications />
+            
             <EmotionalAuraCard emotionalState={emotionalState} />
             
               {/* New Widgets Section */}
@@ -179,6 +201,22 @@ const StudentDashboard = () => {
             <AccessibilityFeatures />
           </>
         )}
+
+        {/* Chat Universal con Gemini AI */}
+        <UniversalGeminiChat
+          userRole="student"
+          context={{
+            emotionalState: emotionalState?.status || 'neutral',
+            dashboardData: dashboardData,
+            activities: dashboardData?.activities || [],
+            progress: dashboardData?.progress || {}
+          }}
+          isOpen={showGeminiChat}
+          onClose={() => setShowGeminiChat(false)}
+          onMinimize={setGeminiChatMinimized}
+          isMinimized={geminiChatMinimized}
+          position="bottom-right"
+        />
       </div>
     </MagicBackground>
   );

@@ -59,3 +59,29 @@ div[data-radix-dialog-overlay] {
   background: rgba(0, 0, 0, 0.95) !important;
   opacity: 1 !important;
 }
+
+/* Fix for Activity Generator solid backgrounds */
+.activity-generator-card {
+  background-color: #1e293b !important;
+  background: #1e293b !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.activity-generator-info-panel {
+  background-color: #334155 !important;
+  background: #334155 !important;
+  opacity: 1 !important;
+}
+
+.activity-generator-activity-card {
+  background-color: #334155 !important;
+  background: #334155 !important;
+  opacity: 1 !important;
+}
+
+/* Override any gradient backgrounds in activity generator */
+.activity-generator-container * {
+  background-image: none !important;
+}

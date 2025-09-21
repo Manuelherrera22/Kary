@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useStudentsData } from '@/hooks/useStudentsData';
 import { usePIARData } from '@/hooks/usePIARData';
 import { 
   Lightbulb, 
@@ -75,21 +76,21 @@ const PersonalizedActivityGenerator = ({ studentId, onActivityGenerated }) => {
       // Filtrar por criterios seleccionados
       let filteredActivities = activities;
       
-      if (selectedSubject) {
+      if (selectedSubject && selectedSubject !== 'all') {
         filteredActivities = filteredActivities.filter(activity => 
           activity.type === selectedSubject || 
           activity.based_on_need === selectedSubject
         );
       }
       
-      if (selectedDifficulty) {
+      if (selectedDifficulty && selectedDifficulty !== 'all') {
         filteredActivities = filteredActivities.filter(activity => 
           activity.difficulty === selectedDifficulty || 
           activity.difficulty === 'adaptive'
         );
       }
       
-      if (selectedDuration) {
+      if (selectedDuration && selectedDuration !== 'all') {
         filteredActivities = filteredActivities.filter(activity => 
           activity.duration <= parseInt(selectedDuration) || 
           selectedDuration === 'flexible'
@@ -228,7 +229,7 @@ const PersonalizedActivityGenerator = ({ studentId, onActivityGenerated }) => {
                   <SelectValue placeholder="Todas las materias" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-700 border-slate-600 text-white">
-                  <SelectItem value="">Todas las materias</SelectItem>
+                  <SelectItem value="all">Todas las materias</SelectItem>
                   {subjects.map(subject => (
                     <SelectItem key={subject.value} value={subject.value}>
                       {subject.icon} {subject.label}
@@ -247,7 +248,7 @@ const PersonalizedActivityGenerator = ({ studentId, onActivityGenerated }) => {
                   <SelectValue placeholder="Cualquier dificultad" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-700 border-slate-600 text-white">
-                  <SelectItem value="">Cualquier dificultad</SelectItem>
+                  <SelectItem value="all">Cualquier dificultad</SelectItem>
                   {difficulties.map(difficulty => (
                     <SelectItem key={difficulty.value} value={difficulty.value}>
                       <span className="flex items-center">
@@ -269,7 +270,7 @@ const PersonalizedActivityGenerator = ({ studentId, onActivityGenerated }) => {
                   <SelectValue placeholder="Cualquier duración" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-700 border-slate-600 text-white">
-                  <SelectItem value="">Cualquier duración</SelectItem>
+                  <SelectItem value="all">Cualquier duración</SelectItem>
                   {durations.map(duration => (
                     <SelectItem key={duration.value} value={duration.value}>
                       <span className="flex items-center">
