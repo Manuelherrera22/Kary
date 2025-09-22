@@ -52,15 +52,28 @@ class AIIntegration {
    */
   async generateResponse(prompt, type = 'general', options = {}) {
     const startTime = Date.now();
+    const requestId = `ai_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    console.log(`🚀 [${requestId}] Starting AI request - Type: ${type}, Provider: ${this.defaultProvider}`);
     
     try {
       // Intentar con el proveedor por defecto primero
       const response = await this.callProvider(this.defaultProvider, prompt, type, options);
       
-      console.log(`✅ AI Response generated in ${Date.now() - startTime}ms using ${this.defaultProvider}`);
+      const duration = Date.now() - startTime;
+      console.log(`✅ [${requestId}] AI Response generated in ${duration}ms using ${this.defaultProvider}`);
+      
+      // Agregar metadatos de la respuesta
+      response.requestId = requestId;
+      response.duration = duration;
+      response.timestamp = new Date().toISOString();
+      
+      // Actualizar estadísticas
+      this.updateUsageStats(response);
+      
       return response;
     } catch (error) {
-      console.warn(`⚠️ Primary AI provider (${this.defaultProvider}) failed:`, error.message);
+      console.warn(`⚠️ [${requestId}] Primary AI provider (${this.defaultProvider}) failed:`, error.message);
       
       // Intentar con proveedores de fallback
       for (const provider of this.fallbackChain) {
@@ -68,17 +81,38 @@ class AIIntegration {
         
         try {
           const response = await this.callProvider(provider, prompt, type, options);
-          console.log(`✅ AI Response generated using fallback provider: ${provider}`);
+          const duration = Date.now() - startTime;
+          console.log(`✅ [${requestId}] AI Response generated using fallback provider: ${provider} (${duration}ms)`);
+          
+          response.requestId = requestId;
+          response.duration = duration;
+          response.timestamp = new Date().toISOString();
+          response.fallback = true;
+          
+          // Actualizar estadísticas
+          this.updateUsageStats(response);
+          
           return response;
         } catch (fallbackError) {
-          console.warn(`⚠️ Fallback provider (${provider}) failed:`, fallbackError.message);
+          console.warn(`⚠️ [${requestId}] Fallback provider (${provider}) failed:`, fallbackError.message);
           continue;
         }
       }
       
       // Si todos los proveedores fallan, usar respuesta mock
-      console.error('❌ All AI providers failed, using mock response');
-      return this.getMockResponse(type, prompt);
+      const duration = Date.now() - startTime;
+      console.error(`❌ [${requestId}] All AI providers failed, using mock response (${duration}ms)`);
+      
+      const mockResponse = this.getMockResponse(type, prompt);
+      mockResponse.requestId = requestId;
+      mockResponse.duration = duration;
+      mockResponse.timestamp = new Date().toISOString();
+      mockResponse.fallback = true;
+      
+      // Actualizar estadísticas
+      this.updateUsageStats(mockResponse);
+      
+      return mockResponse;
     }
   }
 
@@ -540,11 +574,16 @@ class AIIntegration {
   async checkProviderAvailability() {
     const availability = {};
     
-    // Solo verificar Gemini como proveedor principal
+    // Verificar Gemini como proveedor principal
     try {
       const geminiConfig = this.providers.gemini;
       if (geminiConfig && geminiConfig.apiKey) {
-        availability['gemini'] = { available: true, error: null };
+        // Probar conexión real con Gemini
+        const testResult = await this.testGeminiConnection();
+        availability['gemini'] = { 
+          available: testResult, 
+          error: testResult ? null : 'Connection test failed' 
+        };
       } else {
         availability['gemini'] = { available: false, error: 'No Gemini API key configured' };
       }
@@ -558,6 +597,24 @@ class AIIntegration {
     availability['local'] = { available: false, error: 'Not configured' };
     
     return availability;
+  }
+
+  /**
+   * Prueba la conexión real con Gemini
+   */
+  async testGeminiConnection() {
+    try {
+      const geminiConfig = this.providers.gemini;
+      if (!geminiConfig || !geminiConfig.service) {
+        return false;
+      }
+      
+      const result = await geminiConfig.service.testConnection();
+      return result;
+    } catch (error) {
+      console.error('Gemini connection test failed:', error);
+      return false;
+    }
   }
 
   /**
@@ -596,14 +653,53 @@ class AIIntegration {
    * Obtiene estadísticas de uso
    */
   getUsageStats() {
-    // Implementar lógica de estadísticas
+    // Obtener estadísticas del localStorage si están disponibles
+    const stats = JSON.parse(localStorage.getItem('kary_ai_stats') || '{}');
+    
     return {
-      totalRequests: 0,
-      successfulRequests: 0,
-      failedRequests: 0,
-      averageResponseTime: 0,
-      providerUsage: {}
+      totalRequests: stats.totalRequests || 0,
+      successfulRequests: stats.successfulRequests || 0,
+      failedRequests: stats.failedRequests || 0,
+      averageResponseTime: stats.averageResponseTime || 0,
+      providerUsage: stats.providerUsage || {},
+      lastUpdated: stats.lastUpdated || null
     };
+  }
+
+  /**
+   * Actualiza estadísticas de uso
+   */
+  updateUsageStats(response) {
+    try {
+      const stats = JSON.parse(localStorage.getItem('kary_ai_stats') || '{}');
+      
+      // Actualizar contadores
+      stats.totalRequests = (stats.totalRequests || 0) + 1;
+      
+      if (response.fallback) {
+        stats.failedRequests = (stats.failedRequests || 0) + 1;
+      } else {
+        stats.successfulRequests = (stats.successfulRequests || 0) + 1;
+      }
+      
+      // Actualizar tiempo promedio de respuesta
+      const totalTime = (stats.averageResponseTime || 0) * (stats.totalRequests - 1) + (response.duration || 0);
+      stats.averageResponseTime = totalTime / stats.totalRequests;
+      
+      // Actualizar uso por proveedor
+      const provider = response.provider || 'unknown';
+      stats.providerUsage[provider] = (stats.providerUsage[provider] || 0) + 1;
+      
+      // Actualizar timestamp
+      stats.lastUpdated = new Date().toISOString();
+      
+      // Guardar en localStorage
+      localStorage.setItem('kary_ai_stats', JSON.stringify(stats));
+      
+      console.log(`📊 AI Stats updated - Total: ${stats.totalRequests}, Success: ${stats.successfulRequests}, Failed: ${stats.failedRequests}`);
+    } catch (error) {
+      console.error('Error updating AI usage stats:', error);
+    }
   }
 }
 
