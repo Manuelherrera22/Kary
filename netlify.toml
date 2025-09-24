@@ -1,0 +1,35 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  VITE_GEMINI_API_KEY = "AIzaSyBfQj3LxYUtLngyn3YPGJXiVs4xa0yb7QU"
+  VITE_DEFAULT_AI_PROVIDER = "gemini"
+
+# Optional: Add other environment variables as needed
+# [build.environment]
+#   VITE_OPENAI_API_KEY = "your_openai_api_key_here"
+#   VITE_ANTHROPIC_API_KEY = "your_anthropic_api_key_here"
+#   VITE_LOCAL_AI_ENDPOINT = "http://localhost:11434/api"
+#   VITE_AI_ENDPOINT = "http://localhost:3001/api/ai"
+
+# Redirect rules for SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
