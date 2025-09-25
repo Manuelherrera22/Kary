@@ -203,7 +203,7 @@ const AdminDashboard = () => {
     },
     {
       id: 'geminiTests',
-      titleKey: 'Pruebas de Gemini AI',
+      titleKey: 'Pruebas de IA Avanzada',
       descriptionKey: 'Verificar funcionamiento de IA en todos los dashboards',
       icon: Brain,
       color: 'text-purple-400',
@@ -257,7 +257,7 @@ const AdminDashboard = () => {
             onClick={() => setShowGeminiChat(true)}
             className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
           >
-            💬 Hablar con Kary (Gemini AI)
+            💬 Hablar con Kary (IA Avanzada)
           </Button>
         </div>
       </div>
@@ -327,12 +327,12 @@ const AdminDashboard = () => {
         ))}
       </motion.div>
 
-      {/* Panel de Pruebas de Gemini AI */}
+      {/* Panel de Pruebas de IA Avanzada */}
       <div className="mt-8">
         <GeminiTestPanel />
       </div>
 
-      {/* Chat Universal con Gemini AI */}
+      {/* Chat Universal con IA Avanzada */}
       <UniversalGeminiChat
         userRole="admin"
         context={{

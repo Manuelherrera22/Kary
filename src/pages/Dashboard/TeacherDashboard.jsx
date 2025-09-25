@@ -309,7 +309,7 @@ const TeacherDashboard = () => {
         onInsightAction={handleInsightAction}
       />
 
-      {/* Insights Inteligentes con Gemini AI */}
+      {/* Insights Inteligentes con IA Avanzada */}
       <TeacherGeminiInsights 
         showChat={showGeminiChat}
         onToggleChat={() => setShowGeminiChat(!showGeminiChat)}
@@ -395,7 +395,7 @@ const TeacherDashboard = () => {
         </div>
       )}
 
-      {/* Chat Universal con Gemini AI */}
+      {/* Chat Universal con IA Avanzada */}
       <UniversalGeminiChat
         userRole="teacher"
         context={{

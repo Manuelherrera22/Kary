@@ -525,7 +525,7 @@ const ParentDashboard = () => {
                 onClick={() => setShowGeminiChat(true)}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
               >
-                💬 Hablar con Kary (Gemini AI)
+                💬 Hablar con Kary (IA Avanzada)
               </Button>
             </motion.div>
 
@@ -854,7 +854,7 @@ const ParentDashboard = () => {
         onLinkSuccess={handleLinkSuccess}
       />
 
-      {/* Chat Universal con Gemini AI */}
+      {/* Chat Universal con IA Avanzada */}
       <UniversalGeminiChat
         userRole="parent"
         context={{

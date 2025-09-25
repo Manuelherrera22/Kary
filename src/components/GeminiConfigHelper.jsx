@@ -106,10 +106,10 @@ const GeminiConfigHelper = ({ onConfigUpdate }) => {
       <CardHeader>
         <CardTitle className="text-white flex items-center">
           <Settings className="w-6 h-6 mr-3 text-blue-400" />
-          Configuración de Gemini AI
+          Configuración de IA Avanzada
         </CardTitle>
         <p className="text-gray-300 text-sm">
-          Configura tu API key de Gemini para habilitar todas las funciones de IA
+          Configura tu API key de IA para habilitar todas las funciones avanzadas
         </p>
       </CardHeader>
 
@@ -204,14 +204,14 @@ const GeminiConfigHelper = ({ onConfigUpdate }) => {
           
           <div className="space-y-3">
             <div>
-              <Label htmlFor="apiKey" className="text-gray-300">API Key de Gemini</Label>
+              <Label htmlFor="apiKey" className="text-gray-300">API Key de IA</Label>
               <div className="relative mt-1">
                 <Input
                   id="apiKey"
                   type={showApiKey ? "text" : "password"}
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="Ingresa tu API key de Gemini"
+                  placeholder="Ingresa tu API key de IA"
                   className="bg-slate-800 border-slate-600 text-white pr-10"
                 />
                 <Button

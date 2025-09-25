@@ -116,7 +116,7 @@ const TeacherGeminiInsights = ({
         <CardHeader>
           <CardTitle className="text-white flex items-center">
             <Sparkles className="w-5 h-5 mr-2 text-purple-400" />
-            Insights Inteligentes con Gemini AI
+            Insights Inteligentes con IA Avanzada
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -139,7 +139,7 @@ const TeacherGeminiInsights = ({
         <div className="flex items-center justify-between">
           <CardTitle className="text-white flex items-center">
             <Sparkles className="w-5 h-5 mr-2 text-purple-400" />
-            Insights Inteligentes con Gemini AI
+            Insights Inteligentes con IA Avanzada
           </CardTitle>
           <div className="flex gap-2">
             <Button
@@ -225,7 +225,7 @@ const TeacherGeminiInsights = ({
               <div>
                 <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
                   <Lightbulb className="w-5 h-5 mr-2 text-blue-400" />
-                  Recomendaciones de Gemini
+                  Recomendaciones de IA
                 </h3>
                 <div className="space-y-3">
                   {insights.recommendations.map((rec, index) => (

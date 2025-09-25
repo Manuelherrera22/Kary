@@ -131,7 +131,7 @@ const GeminiResultsPanel = ({
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-400 mx-auto mb-4"></div>
                   <p className="text-gray-300">
                     <Sparkles className="w-4 h-4 inline mr-2" />
-                    Generando análisis personalizado con Gemini AI...
+                    Generando análisis personalizado con IA Avanzada...
                   </p>
                 </div>
               </div>
@@ -188,7 +188,7 @@ const GeminiResultsPanel = ({
                           <Sparkles className="w-6 h-6 text-purple-400 mr-3 mt-1" />
                           <div>
                             <h3 className="text-lg font-semibold text-white mb-2">
-                              Mensaje de Kary (Gemini AI)
+                              Mensaje de Kary (IA Avanzada)
                             </h3>
                             <p className="text-gray-300">
                               {recommendations.motivationalMessage}

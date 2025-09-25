@@ -41,7 +41,7 @@ const GeminiTestPanel = () => {
     try {
       toast({
         title: '🧪 Iniciando Pruebas',
-        description: 'Ejecutando suite completa de pruebas de Gemini AI...',
+        description: 'Ejecutando suite completa de pruebas de IA Avanzada...',
       });
 
       const results = await testSuite.runAllTests();
@@ -73,7 +73,7 @@ const GeminiTestPanel = () => {
     try {
       toast({
         title: '⚡ Prueba Rápida',
-        description: 'Verificando conectividad con Gemini AI...',
+        description: 'Verificando conectividad con IA Avanzada...',
       });
 
       const result = await testSuite.quickTest();
@@ -91,7 +91,7 @@ const GeminiTestPanel = () => {
 
       toast({
         title: result.status === 'passed' ? '✅ Conexión Exitosa' : '❌ Problema de Conexión',
-        description: result.status === 'passed' ? 'Gemini AI está funcionando correctamente' : 'No se pudo conectar con Gemini AI',
+        description: result.status === 'passed' ? 'IA Avanzada está funcionando correctamente' : 'No se pudo conectar con IA Avanzada',
         variant: result.status === 'passed' ? 'default' : 'destructive',
       });
 
@@ -156,7 +156,7 @@ const GeminiTestPanel = () => {
       <CardHeader>
         <CardTitle className="text-white flex items-center">
           <Brain className="w-6 h-6 mr-3 text-purple-400" />
-          Panel de Pruebas de Gemini AI
+          Panel de Pruebas de IA Avanzada
         </CardTitle>
         <p className="text-gray-300 text-sm">
           Verifica que todos los ciclos y herramientas estén funcionando correctamente con IA real
@@ -267,7 +267,7 @@ const GeminiTestPanel = () => {
                   </div>
                   <p className="text-gray-300 mt-2">
                     {testResults.quickTest.status === 'passed' 
-                      ? 'Conexión con Gemini AI establecida correctamente'
+                      ? 'Conexión con IA Avanzada establecida correctamente'
                       : `Error: ${testResults.quickTest.error}`
                     }
                   </p>
@@ -284,7 +284,7 @@ const GeminiTestPanel = () => {
                   {testResults.summary.overallStatus === 'needs_attention' && '🚨 Sistema Necesita Atención'}
                 </h3>
                 <p className="text-white/90 text-sm">
-                  {testResults.summary.overallStatus === 'excellent' && 'Todas las herramientas están operativas con Gemini AI'}
+                  {testResults.summary.overallStatus === 'excellent' && 'Todas las herramientas están operativas con IA Avanzada'}
                   {testResults.summary.overallStatus === 'good' && 'La mayoría de funciones están operativas, revisar fallas menores'}
                   {testResults.summary.overallStatus === 'needs_attention' && 'Hay problemas significativos que requieren revisión inmediata'}
                 </p>
@@ -303,7 +303,7 @@ const GeminiTestPanel = () => {
               </h3>
               <p className="text-gray-300">
                 {isQuickTest 
-                  ? 'Verificando conectividad con Gemini AI'
+                  ? 'Verificando conectividad con IA Avanzada'
                   : 'Probando todos los dashboards y herramientas'
                 }
               </p>

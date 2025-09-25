@@ -76,7 +76,7 @@ const GeminiStatusCard = () => {
   const getStatusText = () => {
     switch (status) {
       case 'connected':
-        return t('ai.status.geminiStatus', 'Gemini AI activo');
+        return t('ai.status.geminiStatus', 'IA Avanzada activa');
       case 'error':
         return t('ai.status.unavailable', 'No disponible');
       case 'checking':
@@ -100,7 +100,7 @@ const GeminiStatusCard = () => {
             </div>
             <div>
               <CardTitle className="text-xl font-bold text-purple-300">
-                {t('ai.status.gemini', 'Google Gemini')}
+                {t('ai.status.gemini', 'IA Avanzada')}
               </CardTitle>
               <p className="text-sm text-slate-400">
                 {t('ai.status.primaryProvider', 'Proveedor principal de IA')}
@@ -187,8 +187,8 @@ const GeminiStatusCard = () => {
             size="sm"
             className="flex-1 text-slate-400 hover:text-slate-200 hover:bg-slate-700"
             onClick={() => {
-              // Abrir modal de configuración de Gemini
-              console.log('Configurar Gemini');
+              // Abrir modal de configuración de IA
+              console.log('Configurar IA');
             }}
           >
             Configurar
@@ -198,7 +198,7 @@ const GeminiStatusCard = () => {
             size="sm"
             className="flex-1 text-slate-400 hover:text-slate-200 hover:bg-slate-700"
             onClick={() => {
-              // Abrir documentación de Gemini
+              // Abrir documentación de IA
               window.open('https://ai.google.dev/', '_blank');
             }}
           >

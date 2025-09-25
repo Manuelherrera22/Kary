@@ -191,7 +191,7 @@ const UniversalGeminiChat = ({
         throw new Error(response.error);
       }
     } catch (error) {
-      console.error('Error en chat con Gemini:', error);
+      console.error('Error en chat con IA:', error);
       
       const errorMessage = {
         id: Date.now() + 1,
@@ -425,7 +425,7 @@ const UniversalGeminiChat = ({
             </p>
             <div className="flex items-center text-xs text-gray-400">
               <Sparkles className="w-3 h-3 mr-1" />
-              Powered by Gemini AI
+              Powered by IA Avanzada
             </div>
           </div>
         </div>

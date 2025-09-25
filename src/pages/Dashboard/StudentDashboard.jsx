@@ -198,7 +198,7 @@ const StudentDashboard = () => {
           </>
         )}
 
-        {/* Chat Universal con Gemini AI */}
+        {/* Chat Universal con IA Avanzada */}
         <UniversalGeminiChat
           userRole="student"
           context={{
