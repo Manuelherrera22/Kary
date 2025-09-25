@@ -90,21 +90,21 @@ const RealTimeSync = ({ children }) => {
     <div className="relative">
       {children}
       
-      {/* Indicador de estado de sincronización */}
-      <div className="fixed bottom-4 right-4 z-50">
-        <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${
+      {/* Indicador de estado de sincronización - Posición menos intrusiva */}
+      <div className="fixed top-4 left-4 z-40">
+        <div className={`flex items-center gap-2 px-2 py-1 rounded-md text-xs ${
           isConnected 
-            ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
-            : 'bg-red-500/20 text-red-400 border border-red-500/30'
+            ? 'bg-green-500/10 text-green-300 border border-green-500/20' 
+            : 'bg-red-500/10 text-red-300 border border-red-500/20'
         }`}>
-          <div className={`w-2 h-2 rounded-full ${
+          <div className={`w-1.5 h-1.5 rounded-full ${
             isConnected ? 'bg-green-400' : 'bg-red-400'
           }`} />
-          <span>
+          <span className="hidden sm:inline">
             {isConnected ? 'Sincronizado' : 'Desconectado'}
           </span>
           {lastSync && (
-            <span className="text-xs opacity-70">
+            <span className="text-xs opacity-60">
               {lastSync.toLocaleTimeString()}
             </span>
           )}

@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-09-24T03:57:20.626Z",
+  "piarService": {
+    "serviceExists": true,
+    "hasPiarData": true,
+    "hasPiarMethods": true,
+    "hasPiarStructure": true,
+    "hasPiarStudents": true,
+    "hasPiarDiagnostics": true,
+    "total": 5
+  },
+  "geminiIntegration": {
+    "serviceExists": true,
+    "hasPiarSupportPlan": true,
+    "hasPiarActivity": true,
+    "hasPiarSuggestion": true,
+    "hasPiarPrompts": true,
+    "hasPiarChain": true,
+    "total": 5
+  },
+  "componentIntegration": {
+    "multipleAdaptationExists": true,
+    "aiContentSuggestionExists": true,
+    "hasPiarImport": true,
+    "hasPiarUsage": true,
+    "hasPiarDisplay": true,
+    "total": 5
+  },
+  "dataFlow": {
+    "piarToSupportPlan": true,
+    "supportPlanToActivity": true,
+    "activityToEvaluation": true,
+    "piarToActivity": true,
+    "completeChain": true
+  },
+  "summary": {
+    "totalChainTests": 4,
+    "passedChainTests": 4,
+    "overallPercentage": 100,
+    "status": "EXCELENTE"
+  }
+}

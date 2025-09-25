@@ -260,11 +260,11 @@ const UniversalGeminiChat = ({
   return (
     <div className={`fixed ${getPositionClasses()} z-50 w-96 h-[500px]`}>
       <Card 
-        className="h-full flex flex-col border-2 border-blue-500/30 shadow-2xl"
+        className="h-full flex flex-col border-2 border-blue-500/30 shadow-2xl bg-slate-800"
         style={{
           backgroundColor: '#1e293b',
           opacity: 1,
-          background: '#1e293b'
+          background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
         }}
       >
         {/* Header */}
@@ -303,7 +303,7 @@ const UniversalGeminiChat = ({
         </CardHeader>
 
         {/* Messages */}
-        <CardContent className="flex-1 overflow-y-auto p-4 space-y-3">
+        <CardContent className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-800/50 backdrop-blur-sm">
           {messages.map((message) => (
             <div
               key={message.id}
@@ -395,7 +395,7 @@ const UniversalGeminiChat = ({
         )}
 
         {/* Input */}
-        <div className="p-4 border-t border-slate-700">
+        <div className="p-4 border-t border-slate-700 bg-slate-800/80 backdrop-blur-sm">
           <div className="flex gap-2">
             <Input
               ref={inputRef}

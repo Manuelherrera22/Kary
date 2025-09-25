@@ -13,6 +13,7 @@ import DashboardLayout from "@/pages/Dashboard/components/DashboardLayout";
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
 import UploadRecursoModal from '@/pages/Dashboard/StudentSections/components/UploadRecursoModal';
 import { Input } from '@/components/ui/input';
+import StudentLayout from '@/components/StudentLayout';
 
 const typeIconMapping = {
   guía: FileText,
@@ -185,11 +186,7 @@ export default function LearningResourcesPage() {
   const canUpload = userProfile && allowedUploadRoles.includes(userProfile.role);
 
   return (
-    <DashboardLayout
-      userRole={userProfile?.role || 'student'} 
-      pageTitle={pageTitle}
-      isLoading={authLoading && !userProfile}
-    >
+    <StudentLayout>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -322,6 +319,6 @@ export default function LearningResourcesPage() {
           )}
         </Tabs>
       </motion.div>
-    </DashboardLayout>
+    </StudentLayout>
   );
 }

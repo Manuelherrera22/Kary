@@ -1,8 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Configuración de Gemini
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(API_KEY || 'demo-key');
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBfQj3LxYUtLngyn3YPGJXiVs4xa0yb7QU';
+const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Verificar configuración de API Key
@@ -655,5 +655,224 @@ class GeminiDashboardService {
     };
   }
 }
+
+// Función para generar planes de apoyo personalizados basados en PIAR
+export const generateSupportPlan = async (studentData, piarData, context) => {
+  if (!isGeminiConfigured()) {
+    return {
+      success: false,
+      error: 'Gemini AI no configurado',
+      mockResponse: getMockResponse('not_configured')
+    };
+  }
+
+  try {
+    const prompt = `Como psicopedagogo especializado, genera un plan de apoyo personalizado basado en el PIAR (Plan Individual de Apoyo y Refuerzo) del estudiante:
+
+DATOS DEL ESTUDIANTE: ${JSON.stringify(studentData)}
+PIAR DEL ESTUDIANTE: ${JSON.stringify(piarData)}
+CONTEXTO ADICIONAL: ${JSON.stringify(context)}
+
+IMPORTANTE: El plan de apoyo DEBE estar directamente ligado al PIAR del estudiante y considerar todas las necesidades específicas identificadas.
+
+Por favor, genera un plan de apoyo que incluya:
+
+1. **ANÁLISIS BASADO EN PIAR**
+   - Fortalezas identificadas en el PIAR
+   - Áreas de mejora específicas del PIAR
+   - Necesidades derivadas del PIAR
+   - Objetivos del PIAR que se abordarán
+
+2. **OBJETIVOS DEL PLAN (LIGADOS AL PIAR)**
+   - Objetivos a corto plazo (1-3 meses) basados en PIAR
+   - Objetivos a mediano plazo (3-6 meses) derivados del PIAR
+   - Objetivos a largo plazo (6-12 meses) alineados con PIAR
+   - Cómo cada objetivo responde a necesidades del PIAR
+
+3. **ESTRATEGIAS DE INTERVENCIÓN (ESPECÍFICAS PARA PIAR)**
+   - Estrategias académicas adaptadas al PIAR
+   - Estrategias emocionales según necesidades del PIAR
+   - Estrategias sociales basadas en el PIAR
+   - Adaptaciones curriculares específicas del PIAR
+
+4. **RECURSOS Y MATERIALES (PARA PIAR)**
+   - Recursos tecnológicos necesarios para PIAR
+   - Materiales didácticos específicos del PIAR
+   - Recursos humanos según necesidades del PIAR
+   - Apoyos específicos requeridos por el PIAR
+
+5. **SEGUIMIENTO Y EVALUACIÓN (DEL PIAR)**
+   - Indicadores de progreso del PIAR
+   - Frecuencia de evaluación según PIAR
+   - Criterios de éxito basados en PIAR
+   - Métricas específicas del PIAR
+
+6. **COLABORACIÓN (PARA IMPLEMENTAR PIAR)**
+   - Rol de la familia en el PIAR
+   - Rol de los profesores en el PIAR
+   - Rol de otros profesionales para el PIAR
+   - Coordinación necesaria para el PIAR
+
+Responde en español, de manera estructurada y profesional, asegurándote de que cada elemento esté directamente relacionado con el PIAR del estudiante.`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    return {
+      success: true,
+      data: {
+        supportPlan: text,
+        timestamp: new Date().toISOString(),
+        studentData: studentData,
+        context: context
+      }
+    };
+  } catch (error) {
+    return handleGeminiError(error);
+  }
+};
+
+// Función para generar actividades adaptadas basadas en PIAR y plan de apoyo
+export const generateAdaptedActivity = async (baseActivity, studentProfiles, supportPlans, piarData) => {
+  if (!isGeminiConfigured()) {
+    return {
+      success: false,
+      error: 'Gemini AI no configurado',
+      mockResponse: getMockResponse('not_configured')
+    };
+  }
+
+  try {
+    const prompt = `Como especialista en educación inclusiva, adapta la siguiente actividad considerando el PIAR y el plan de apoyo de cada estudiante:
+
+ACTIVIDAD BASE: ${JSON.stringify(baseActivity)}
+PERFILES DE ESTUDIANTES: ${JSON.stringify(studentProfiles)}
+PLANES DE APOYO: ${JSON.stringify(supportPlans)}
+DATOS DE PIAR: ${JSON.stringify(piarData)}
+
+IMPORTANTE: Cada actividad DEBE estar directamente ligada al PIAR del estudiante y al plan de apoyo correspondiente.
+
+Para cada estudiante, genera:
+
+1. **ADAPTACIÓN PERSONALIZADA (BASADA EN PIAR)**
+   - Modificaciones específicas según necesidades del PIAR
+   - Nivel de dificultad ajustado al PIAR
+   - Materiales alternativos requeridos por el PIAR
+   - Cómo la actividad responde a objetivos del PIAR
+
+2. **ESTRATEGIAS DE APOYO (DEL PLAN DE APOYO)**
+   - Apoyos visuales según plan de apoyo
+   - Apoyos auditivos según plan de apoyo
+   - Apoyos kinestésicos según plan de apoyo
+   - Estrategias específicas del plan de apoyo
+
+3. **CRITERIOS DE EVALUACIÓN (LIGADOS AL PIAR)**
+   - Criterios adaptados según PIAR
+   - Formas de evaluación alternativas para PIAR
+   - Indicadores de progreso del PIAR
+   - Métricas específicas del PIAR
+
+4. **RECOMENDACIONES (PARA IMPLEMENTAR PIAR)**
+   - Sugerencias para el profesor basadas en PIAR
+   - Sugerencias para la familia según PIAR
+   - Recursos adicionales necesarios para PIAR
+   - Coordinación requerida para el PIAR
+
+5. **SEGUIMIENTO DEL PIAR**
+   - Cómo esta actividad contribuye al PIAR
+   - Qué aspectos del PIAR se trabajan
+   - Cómo registrar el progreso hacia objetivos del PIAR
+   - Próximos pasos según el PIAR
+
+Responde en español, estructurado por estudiante, asegurándote de que cada elemento esté directamente relacionado con su PIAR y plan de apoyo.`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    return {
+      success: true,
+      data: {
+        adaptedActivities: text,
+        timestamp: new Date().toISOString(),
+        baseActivity: baseActivity,
+        studentProfiles: studentProfiles
+      }
+    };
+  } catch (error) {
+    return handleGeminiError(error);
+  }
+};
+
+// Función para generar sugerencias de actividades basadas en PIAR
+export const getAISuggestion = async (context, piarData, supportPlan) => {
+  if (!isGeminiConfigured()) {
+    return {
+      success: false,
+      error: 'Gemini AI no configurado',
+      mockResponse: getMockResponse('not_configured')
+    };
+  }
+
+  try {
+    const prompt = `Como asistente educativo especializado en necesidades especiales, genera una sugerencia de actividad basada en el PIAR del estudiante y su plan de apoyo:
+
+CONTEXTO: ${JSON.stringify(context)}
+PIAR DEL ESTUDIANTE: ${JSON.stringify(piarData)}
+PLAN DE APOYO: ${JSON.stringify(supportPlan)}
+
+IMPORTANTE: La actividad DEBE estar directamente ligada al PIAR del estudiante y considerar su plan de apoyo.
+
+Por favor, proporciona:
+
+1. **ACTIVIDAD EDUCATIVA (BASADA EN PIAR)**
+   - Actividad específica que responda a necesidades del PIAR
+   - Cómo la actividad aborda objetivos del PIAR
+   - Relación con el plan de apoyo del estudiante
+
+2. **OBJETIVOS DE APRENDIZAJE (LIGADOS AL PIAR)**
+   - Objetivos específicos derivados del PIAR
+   - Cómo cada objetivo contribuye al PIAR
+   - Objetivos del plan de apoyo que se trabajan
+
+3. **ADAPTACIONES NECESARIAS (SEGÚN PIAR)**
+   - Adaptaciones específicas requeridas por el PIAR
+   - Modificaciones según necesidades del PIAR
+   - Apoyos necesarios según el PIAR
+
+4. **MATERIALES REQUERIDOS (PARA PIAR)**
+   - Materiales específicos para necesidades del PIAR
+   - Recursos adaptados según PIAR
+   - Herramientas necesarias para el PIAR
+
+5. **CRITERIOS DE EVALUACIÓN (DEL PIAR)**
+   - Criterios adaptados según PIAR
+   - Formas de evaluación para PIAR
+   - Indicadores de progreso del PIAR
+
+6. **SEGUIMIENTO DEL PIAR**
+   - Cómo registrar el progreso hacia objetivos del PIAR
+   - Qué aspectos del PIAR se evalúan
+   - Próximos pasos según el PIAR
+
+Responde en español y de manera clara y estructurada, asegurándote de que cada elemento esté directamente relacionado con el PIAR del estudiante.`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    return {
+      success: true,
+      data: {
+        suggestion: text,
+        timestamp: new Date().toISOString(),
+        context: context
+      }
+    };
+  } catch (error) {
+    return handleGeminiError(error);
+  }
+};
 
 export default new GeminiDashboardService();

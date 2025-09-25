@@ -29,6 +29,7 @@ import RealTimeNotificationsPanel from './StudentDashboard/components/RealTimeNo
 import StudentActivityNotifications from '@/components/StudentActivityNotifications';
 import UniversalGeminiChat from '@/components/UniversalGeminiChat';
 import UserHeader from '@/components/UserHeader';
+import StudentSidebar from '@/components/StudentSidebar';
 
 const StudentDashboard = () => {
   const { t } = useLanguage();
@@ -111,10 +112,13 @@ const StudentDashboard = () => {
         <meta name="description" content={t('studentDashboard.welcomeMessage', '', { userName: userProfile?.full_name || '' })} />
       </Helmet>
       
+      {/* Sidebar de Navegación */}
+      <StudentSidebar />
+      
       {/* Header de Usuario */}
       <UserHeader position="top-right" />
       
-      <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-6 sm:space-y-8 lg:space-y-10">
+      <div className="lg:ml-64 p-4 md:p-6 lg:p-8 max-w-6xl mx-auto space-y-8">
         {error ? (
           <div className="text-center p-4 sm:p-6 md:p-8 bg-red-500/10 rounded-2xl border border-red-400/30">
             <h2 className="text-xl sm:text-2xl font-bold text-red-300">{t('common.errorTitle')}</h2>
@@ -131,56 +135,30 @@ const StudentDashboard = () => {
           </div>
         ) : (
           <>
-            <WelcomeHeader userName={userProfile?.full_name} />
-            
-            {/* Botón para Chat con Gemini */}
-            <div className="flex justify-end mb-4">
-              <Button
-                onClick={() => setShowGeminiChat(true)}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-              >
-                💬 Hablar con Kary (Gemini AI)
-              </Button>
+            {/* Header simplificado */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-white mb-2">
+                ¡Hola, {userProfile?.full_name?.split(' ')[0] || 'Estudiante'}! 👋
+              </h1>
+              <p className="text-slate-300 text-lg">
+                Tu espacio de aprendizaje personalizado
+              </p>
             </div>
             
-            {/* Notificaciones de Actividades */}
-            <StudentActivityNotifications />
-            
-            <EmotionalAuraCard emotionalState={emotionalState} />
-            
-              {/* New Widgets Section */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                <WeeklyProgressWidget t={t} />
-                <GamifiedProgress t={t} />
+            {/* Estado emocional simplificado */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20">
+              <div className="flex items-center justify-center space-x-4">
+                <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse"></div>
+                <span className="text-white text-lg font-medium">
+                  Estado: {emotionalState?.status === 'positive' ? '😊 Muy bien' : 
+                          emotionalState?.status === 'negative' ? '😔 Podemos mejorar' : '😐 Neutral'}
+                </span>
               </div>
-              
-              {/* Real-time Notifications */}
-              <RealTimeNotifications t={t} />
-              
-              {/* Emotional Analytics */}
-              <EmotionalAnalytics t={t} />
-              
-              {/* Student Strengths */}
-              <MyStrengthsWidget t={t} />
-              
-              {/* Adaptive Activities */}
-              <AdaptiveActivitiesWidget t={t} />
-              
-              {/* Comfort Zone for Special Needs */}
-              <ComfortZoneWidget t={t} />
-              
-              {/* Smart Kary Chat */}
-              <SmartKaryChat t={t} />
-              
-              {/* Actividades del Estudiante */}
-              <StudentActivities />
-              
-              {/* Panel de Notificaciones en Tiempo Real */}
-              <RealTimeNotificationsPanel />
+            </div>
             
-            {/* Original Magic Portals */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {magicPortals.map((card, index) => (
+            {/* Acciones principales - Solo las más importantes */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {magicPortals.slice(0, 3).map((card, index) => (
                 <MagicPortalCard
                   key={card.key}
                   title={t(`studentDashboard.cards.${card.key}`)}
@@ -192,13 +170,31 @@ const StudentDashboard = () => {
                 />
               ))}
             </div>
-            <KarySuggestionCard suggestion={karySuggestion} />
             
-            {/* Micro-interacciones */}
-            <MicroInteractions />
+            {/* Progreso semanal simplificado */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20">
+              <h3 className="text-xl font-semibold text-white mb-4 text-center">Tu Progreso Esta Semana</h3>
+              <WeeklyProgressWidget t={t} />
+            </div>
             
-            {/* Características de accesibilidad */}
-            <AccessibilityFeatures />
+            {/* Sugerencia de Kary */}
+            <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm rounded-2xl p-6 border border-purple-400/30">
+              <h3 className="text-xl font-semibold text-white mb-3 text-center">💡 Sugerencia de Kary</h3>
+              <p className="text-slate-200 text-center leading-relaxed">
+                {karySuggestion}
+              </p>
+            </div>
+            
+            {/* Botón de chat flotante */}
+            <div className="fixed bottom-6 right-6 z-50">
+              <Button
+                onClick={() => setShowGeminiChat(true)}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300"
+                size="icon"
+              >
+                💬
+              </Button>
+            </div>
           </>
         )}
 

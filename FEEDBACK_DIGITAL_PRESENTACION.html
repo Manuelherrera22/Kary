@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Kary - Presentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question h3 {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .star {
+            font-size: 2em;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .star.active {
+            color: #ffd700;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .role-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .role-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .role-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Feedback Kary</h1>
+            <p>Tu opinión es importante para mejorar la plataforma</p>
+        </div>
+
+        <div class="content">
+            <div class="role-selector">
+                <button class="role-btn active" onclick="showSection('student')">👨‍🎓 Estudiante</button>
+                <button class="role-btn" onclick="showSection('teacher')">👨‍🏫 Profesor</button>
+                <button class="role-btn" onclick="showSection('director')">🏫 Directivo</button>
+            </div>
+
+            <!-- Sección para Estudiantes -->
+            <div id="student-section" class="section">
+                <h2>👨‍🎓 Para Estudiantes</h2>
+                
+                <div class="question">
+                    <h3>¿Te gusta la plataforma Kary?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">😍</span> ¡Me encanta!
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">😊</span> Me gusta
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">😐</span> Está bien
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">😕</span> No me gusta mucho
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">😞</span> No me gusta
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué es lo que más te gusta?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🎨</span> El diseño bonito
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🎮</span> Las actividades divertidas
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🤖</span> El chat con Kary (IA)
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🏆</span> Los juegos y logros
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">👤</span> Que me conoce personalmente
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué mejorarías?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🎮</span> Más juegos
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🎨</span> Mejor diseño
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📚</span> Más actividades
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">💬</span> Chat más divertido
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección para Profesores -->
+            <div id="teacher-section" class="section hidden">
+                <h2>👨‍🏫 Para Profesores</h2>
+                
+                <div class="question">
+                    <h3>¿La plataforma es útil para tu trabajo?</h3>
+                    <div class="rating">
+                        <span class="star" onclick="rateStars(this, 1)">⭐</span>
+                        <span class="star" onclick="rateStars(this, 2)">⭐</span>
+                        <span class="star" onclick="rateStars(this, 3)">⭐</span>
+                        <span class="star" onclick="rateStars(this, 4)">⭐</span>
+                        <span class="star" onclick="rateStars(this, 5)">⭐</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué funcionalidad te parece más valiosa?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🤖</span> Generación de actividades con IA
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📊</span> Seguimiento de estudiantes
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📋</span> Sistema de PIAR
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🔄</span> Adaptación múltiple
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📈</span> Reportes y análisis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué mejorarías?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">⚙️</span> Más opciones de personalización
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📝</span> Mejores herramientas de evaluación
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🎯</span> Interfaz más simple
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🔗</span> Mejor integración con PIAR
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección para Directivos -->
+            <div id="director-section" class="section hidden">
+                <h2>🏫 Para Directivos</h2>
+                
+                <div class="question">
+                    <h3>¿El sistema cumple con las necesidades institucionales?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">✅</span> Completamente
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">✅</span> En su mayoría
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">⚠️</span> Parcialmente
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">❌</span> Poco
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">❌</span> No
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué aspecto te parece más importante?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📊</span> Dashboard de super administrador
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">👥</span> Gestión de usuarios
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📈</span> Reportes institucionales
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🔒</span> Seguridad del sistema
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📊</span> Análisis de datos
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Qué agregarías?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📊</span> Más métricas institucionales
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">📋</span> Mejores reportes
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">⚙️</span> Herramientas de gestión avanzadas
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🛡️</span> Mejor seguridad
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evaluación General -->
+            <div class="section">
+                <h2>🌟 Evaluación General</h2>
+                
+                <div class="question">
+                    <h3>Califica del 1 al 5</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+                        <div>
+                            <h4>Fácil de usar</h4>
+                            <div class="rating">
+                                <span class="star" onclick="rateStars(this, 1)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 2)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 3)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 4)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 5)">⭐</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Útil para educación</h4>
+                            <div class="rating">
+                                <span class="star" onclick="rateStars(this, 1)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 2)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 3)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 4)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 5)">⭐</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Diseño atractivo</h4>
+                            <div class="rating">
+                                <span class="star" onclick="rateStars(this, 1)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 2)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 3)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 4)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 5)">⭐</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Funciona bien</h4>
+                            <div class="rating">
+                                <span class="star" onclick="rateStars(this, 1)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 2)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 3)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 4)">⭐</span>
+                                <span class="star" onclick="rateStars(this, 5)">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>¿Recomendarías Kary?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🚀</span> ¡Definitivamente!
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">👍</span> Probablemente sí
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">🤔</span> No estoy seguro
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">👎</span> Probablemente no
+                        </div>
+                        <div class="option" onclick="selectOption(this)">
+                            <span class="emoji">❌</span> No
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comentarios -->
+            <div class="section">
+                <h2>💬 Comentarios Adicionales</h2>
+                <textarea class="text-input" placeholder="¿Algo más que quieras decir sobre Kary?"></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="submitFeedback()">
+                📤 Enviar Feedback
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentRole = 'student';
+        let feedbackData = {};
+
+        function showSection(role) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(role + '-section').classList.remove('hidden');
+            
+            // Actualizar botones de rol
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentRole = role;
+        }
+
+        function selectOption(element) {
+            // Remover selección previa en el mismo grupo
+            element.parentElement.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Seleccionar la opción actual
+            element.classList.add('selected');
+            
+            // Guardar la respuesta
+            const question = element.closest('.question').querySelector('h3').textContent;
+            const answer = element.textContent.trim();
+            
+            if (!feedbackData[currentRole]) {
+                feedbackData[currentRole] = {};
+            }
+            feedbackData[currentRole][question] = answer;
+        }
+
+        function rateStars(element, rating) {
+            // Remover todas las estrellas activas en este grupo
+            element.parentElement.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('active');
+            });
+            
+            // Activar estrellas hasta la seleccionada
+            for (let i = 0; i < rating; i++) {
+                element.parentElement.children[i].classList.add('active');
+            }
+            
+            // Guardar la calificación
+            const question = element.closest('.question').querySelector('h3').textContent;
+            
+            if (!feedbackData[currentRole]) {
+                feedbackData[currentRole] = {};
+            }
+            feedbackData[currentRole][question] = rating;
+        }
+
+        function submitFeedback() {
+            // Recopilar comentarios
+            const comments = document.querySelector('.text-input').value;
+            feedbackData.comments = comments;
+            
+            // Mostrar resumen
+            alert('¡Gracias por tu feedback! Los datos han sido guardados.');
+            
+            // Aquí podrías enviar los datos a un servidor
+            console.log('Feedback recopilado:', feedbackData);
+            
+            // Limpiar formulario
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('active');
+            });
+            document.querySelector('.text-input').value = '';
+            feedbackData = {};
+        }
+    </script>
+</body>
+</html>
+

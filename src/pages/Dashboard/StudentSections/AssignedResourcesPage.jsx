@@ -7,6 +7,7 @@ import { useMockAuth } from '@/contexts/MockAuthContext';
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
 import TabsRecursosEstudiante from '@/pages/Dashboard/StudentSections/components/TabsRecursosEstudiante';
 import MagicBackground from '@/pages/Dashboard/StudentDashboard/components/MagicBackground';
+import StudentLayout from '@/components/StudentLayout';
 
 export default function AssignedResourcesPage() {
   const { t } = useLanguage();
@@ -19,7 +20,7 @@ export default function AssignedResourcesPage() {
   const pageTitle = t('studentDashboard.assignedResourcesPage.pageTitle');
 
   return (
-    <MagicBackground>
+    <StudentLayout>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -64,6 +65,6 @@ export default function AssignedResourcesPage() {
         <TabsRecursosEstudiante user={userProfile} />
         
       </motion.div>
-    </MagicBackground>
+    </StudentLayout>
   );
 }

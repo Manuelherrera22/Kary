@@ -153,7 +153,7 @@ const TabsRecursosEstudiante = ({ user }) => {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   useEffect(() => {
-    const fetchAssignedResources = async () => {
+    const fetchAssignedResources = async (retryCount = 0) => {
       if (!user || !user.id) {
         setIsLoading(false);
         setAllAssigned([]);
@@ -161,10 +161,22 @@ const TabsRecursosEstudiante = ({ user }) => {
       }
       
       setIsLoading(true);
+      const maxRetries = 2;
+      
       try {
         const { data, error } = await mockStudentDataService.getAssignedResources(user.id);
 
-        if (error) throw error;
+        if (error) {
+          // Si es un error de conexión temporal y aún tenemos reintentos, intentar de nuevo
+          if (error.message.includes('Error temporal de conexión') && retryCount < maxRetries) {
+            console.log(`[TabsRecursosEstudiante] Retry attempt ${retryCount + 1}/${maxRetries} for connection error`);
+            setTimeout(() => {
+              fetchAssignedResources(retryCount + 1);
+            }, 1000 * (retryCount + 1)); // Delay incremental
+            return;
+          }
+          throw error;
+        }
         
         if (data) {
           const sortedData = data.sort((a, b) => new Date(b.assigned_at) - new Date(a.assigned_at));
@@ -176,11 +188,15 @@ const TabsRecursosEstudiante = ({ user }) => {
       } catch (error) {
         console.error("Error fetching student's assigned resources:", error);
         setAllAssigned([]);
-        toast({
-          title: t('toast.errorTitle'),
-          description: t('tabsRecursosEstudiante.fetchError') + (error.message ? `: ${error.message}` : ''),
-          variant: 'destructive',
-        });
+        
+        // Solo mostrar toast en el último intento
+        if (retryCount >= maxRetries) {
+          toast({
+            title: t('toast.errorTitle'),
+            description: t('tabsRecursosEstudiante.fetchError') + (error.message ? `: ${error.message}` : ''),
+            variant: 'destructive',
+          });
+        }
       } finally {
         setIsLoading(false);
       }

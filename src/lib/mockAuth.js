@@ -5,8 +5,8 @@ export const MOCK_USERS = [
   {
     id: 'mock-admin-1',
     email: 'admin@kary.com',
-    full_name: 'Administrador Kary',
-    role: 'admin',
+    full_name: 'Super Administrador Kary',
+    role: 'super_admin',
     status: 'active',
     grade: null,
     preferred_language: 'es',

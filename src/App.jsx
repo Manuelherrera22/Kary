@@ -18,6 +18,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useMockAuth } from "@/contexts/MockAuthContext.jsx";
 import LoadingScreen from "@/pages/Dashboard/components/LoadingScreen";
 import RealTimeSync from "@/components/RealTimeSync";
+import StudentLayout from "@/components/StudentLayout";
+import FeedbackModal from "@/components/FeedbackModal";
+import FeedbackBanner from "@/components/FeedbackBanner";
 
 import SchoolDataPanelPage from "@/pages/Dashboard/DirectiveSections/SchoolDataPanelPage";
 import AggregatedReportsPage from "@/pages/Dashboard/DirectiveSections/AggregatedReportsPage";
@@ -78,6 +81,7 @@ import ProgramBlockComparisonPage from "@/pages/Dashboard/ProgramCoordinatorSect
 
 import RoleBasedDataPanel from "@/pages/Dashboard/RoleBasedDataPanel/RoleBasedDataPanel";
 import KaryCorePanel from "@/pages/Dashboard/KaryCorePanel/KaryCorePanel";
+import SuperAdminDashboard from "@/pages/Dashboard/SuperAdminDashboard/SuperAdminDashboard";
 
 
 const MainPageLayout = () => {
@@ -96,9 +100,18 @@ const MainPageLayout = () => {
 
   return (
     <>
+      {/* Feedback Banner - Temporal para presentación */}
+      <FeedbackBanner />
+      
       <Navbar navItems={navItems} />
       <main>
         <HeroSection />
+        
+        {/* Feedback Modal - Temporal para presentación */}
+        <div className="fixed top-4 right-4 z-50">
+          <FeedbackModal />
+        </div>
+        
         <MeetKarySection />
         <WhyKarySection />
         <HowKaryWorksSection />
@@ -146,11 +159,36 @@ const AppContent = () => {
               <Routes>
                 <Route index element={<DashboardPage />} />
                 
-                {/* Rutas de Estudiante */}
-                <Route path="activities" element={<DashboardPage />} />
-                <Route path="progress" element={<DashboardPage />} />
-                <Route path="kary-chat" element={<DashboardPage />} />
-                <Route path="support-plans" element={<DashboardPage />} />
+                {/* Rutas de Estudiante con Layout Específico */}
+                <Route path="student/*" element={
+                  <StudentLayout>
+                    <Routes>
+                      <Route index element={<DashboardPage />} />
+                      <Route path="my-tasks" element={<MyTasksPage />} />
+                      <Route path="assigned-resources" element={<AssignedResourcesPage />} />
+                      <Route path="learning-resources" element={<LearningResourcesPage />} />
+                      <Route path="personal-tracking" element={<PersonalTrackingPage />} />
+                      <Route path="student-tracking-data" element={<StudentTrackingDataPage />} />
+                      <Route path="student-reports" element={<StudentReportsPage />} />
+                      <Route path="student-support-plans" element={<StudentSupportPlansPage />} />
+                      <Route path="emotional-attendance" element={<EmotionalAttendancePage />} />
+                      <Route path="kary-chat" element={<KaryChatPage />} />
+                      <Route path="settings" element={<StudentAccountSettingsPage />} />
+                    </Routes>
+                  </StudentLayout>
+                } />
+                
+                {/* Rutas de Estudiante (Compatibilidad) */}
+                <Route path="my-tasks" element={<MyTasksPage />} />
+                <Route path="assigned-resources" element={<AssignedResourcesPage />} />
+                <Route path="learning-resources" element={<LearningResourcesPage />} />
+                <Route path="personal-tracking" element={<PersonalTrackingPage />} />
+                <Route path="student-tracking-data" element={<StudentTrackingDataPage />} />
+                <Route path="student-reports" element={<StudentReportsPage />} />
+                <Route path="student-support-plans" element={<StudentSupportPlansPage />} />
+                <Route path="emotional-attendance" element={<EmotionalAttendancePage />} />
+                <Route path="kary-chat" element={<KaryChatPage />} />
+                <Route path="settings" element={<StudentAccountSettingsPage />} />
                 
                 {/* Rutas de Profesor */}
                 <Route path="students" element={<DashboardPage />} />
@@ -226,6 +264,9 @@ const AppContent = () => {
                 <Route path="program-block-comparison" element={<ProgramBlockComparisonPage />} />
                 <Route path="teacher/student-plans" element={<TeacherStudentPlansPage />} />
                 <Route path="teacher/activities" element={<StudentPlanActivities />} />
+                
+                {/* Super Admin Dashboard */}
+                <Route path="super-admin" element={<SuperAdminDashboard />} />
             </Routes>
           </ProtectedRoute>
         }/>

@@ -8,6 +8,7 @@ import AnalysisDisplay from './PersonalTrackingPage/components/AnalysisDisplay';
 import { useEmotionalTracking } from './PersonalTrackingPage/hooks/useEmotionalTracking';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import MagicBackground from '@/pages/Dashboard/StudentDashboard/components/MagicBackground';
+import StudentLayout from '@/components/StudentLayout';
 
 const PersonalTrackingPage = () => {
   const { t } = useLanguage();
@@ -32,7 +33,7 @@ const PersonalTrackingPage = () => {
   const canViewAnalysis = userProfile && userProfile.role !== 'student';
 
   return (
-    <MagicBackground>
+    <StudentLayout>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -92,7 +93,7 @@ const PersonalTrackingPage = () => {
           </div>
         </div>
       </motion.div>
-    </MagicBackground>
+    </StudentLayout>
   );
 };
 

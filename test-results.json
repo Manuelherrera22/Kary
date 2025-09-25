@@ -1,0 +1,262 @@
+{
+  "timestamp": "2025-09-24T03:40:51.998Z",
+  "server": {
+    "port": "3001",
+    "url": "http://localhost:3001/",
+    "status": "ACTIVO",
+    "vite": "v4.5.14",
+    "buildTime": "1182ms"
+  },
+  "files": {
+    "critical": {
+      "src/App.jsx": true,
+      "src/main.jsx": true,
+      "src/index.css": true,
+      "vite.config.js": true,
+      "package.json": true,
+      ".env": true,
+      "netlify.toml": true,
+      "tailwind.config.js": true,
+      "postcss.config.js": true,
+      "total": 9,
+      "percentage": 100
+    }
+  },
+  "configuration": {
+    "env": {
+      "geminiApiKey": true,
+      "aiProvider": true,
+      "total": 2
+    }
+  },
+  "credentials": {
+    "users": {
+      "admin@kary.com": {
+        "email": true,
+        "role": true,
+        "name": true,
+        "complete": true
+      },
+      "ana.garcia@estudiante.com": {
+        "email": false,
+        "role": true,
+        "name": false,
+        "complete": false
+      },
+      "maria.rodriguez@profesor.com": {
+        "email": false,
+        "role": true,
+        "name": false,
+        "complete": false
+      },
+      "luis.martinez@psicopedagogo.com": {
+        "email": false,
+        "role": true,
+        "name": true,
+        "complete": false
+      },
+      "maria.garcia@parent.com": {
+        "email": false,
+        "role": true,
+        "name": true,
+        "complete": false
+      },
+      "patricia.silva@directivo.com": {
+        "email": false,
+        "role": true,
+        "name": true,
+        "complete": false
+      }
+    },
+    "total": 1,
+    "percentage": 17
+  },
+  "ecosystem": {
+    "roles": {
+      "Estudiantes": {
+        "expected": 5,
+        "actual": 5,
+        "complete": true,
+        "names": [
+          "Ana García",
+          "Carlos López",
+          "María Fernández",
+          "Diego Martínez",
+          "Sofía Rodríguez"
+        ]
+      },
+      "Profesores": {
+        "expected": 3,
+        "actual": 3,
+        "complete": true,
+        "names": [
+          "Prof. María Rodríguez",
+          "Prof. Carlos López",
+          "Prof. Ana Martínez"
+        ]
+      },
+      "Psicopedagogos": {
+        "expected": 3,
+        "actual": 3,
+        "complete": true,
+        "names": [
+          "Dr. Luis Martínez",
+          "Dra. María García",
+          "Dra. Carmen López"
+        ]
+      },
+      "Padres": {
+        "expected": 5,
+        "actual": 5,
+        "complete": true,
+        "names": [
+          "María García",
+          "Roberto López",
+          "Carmen Fernández",
+          "Laura Martínez",
+          "Pedro Rodríguez"
+        ]
+      },
+      "Directivos": {
+        "expected": 2,
+        "actual": 2,
+        "complete": true,
+        "names": [
+          "Lic. Patricia Silva",
+          "Mg. Roberto González"
+        ]
+      }
+    },
+    "total": 5,
+    "totalUsers": 18,
+    "percentage": 100
+  },
+  "functionality": {
+    "features": {
+      "Dashboard de Estudiante": true,
+      "Smart Assignment": true,
+      "Sistema de Actividades": true,
+      "Seguimiento Emocional": true,
+      "Recursos Asignados": true,
+      "Super Admin Dashboard": true,
+      "Gemini AI": true,
+      "Unified Data Service": true,
+      "Student Sidebar": true,
+      "Real Time Sync": true
+    },
+    "total": 10,
+    "percentage": 100
+  },
+  "components": {
+    "connections": {
+      "StudentConnections.jsx": true,
+      "TeacherConnections.jsx": true,
+      "PsychopedagogueConnections.jsx": true,
+      "ParentConnections.jsx": true,
+      "DirectiveInstitutionalView.jsx": true
+    },
+    "total": 5,
+    "percentage": 100,
+    "superAdmin": {
+      "SuperAdminDashboard.jsx": true,
+      "SystemOverview.jsx": true,
+      "UserManagement.jsx": true,
+      "DataAnalytics.jsx": true,
+      "PerformanceMetrics.jsx": true,
+      "AlertCenter.jsx": true,
+      "SystemLogs.jsx": true
+    },
+    "superAdminTotal": 7,
+    "superAdminPercentage": 100
+  },
+  "services": {
+    "list": {
+      "Activity Service": true,
+      "Student Data Service": true,
+      "Task Service": true,
+      "Emotional Data Service": true,
+      "Edge Function Service": true,
+      "Mock Edge Function Service": true,
+      "Gemini Dashboard Service": true,
+      "Unified Data Service": true,
+      "Notification Service": true,
+      "Custom Auth": true
+    },
+    "total": 10,
+    "percentage": 100
+  },
+  "ui": {
+    "components": {
+      "button.jsx": true,
+      "card.jsx": true,
+      "dialog.jsx": true,
+      "input.jsx": true,
+      "select.jsx": true,
+      "tabs.jsx": true,
+      "toast.jsx": true,
+      "accordion.jsx": true,
+      "alert-dialog.jsx": true,
+      "badge.jsx": true,
+      "calendar.jsx": true,
+      "checkbox.jsx": true,
+      "command.jsx": true,
+      "drawer.jsx": true,
+      "dropdown-menu.jsx": true,
+      "label.jsx": true,
+      "popover.jsx": true,
+      "progress.jsx": true,
+      "scroll-area.jsx": true,
+      "sheet.jsx": true,
+      "skeleton.jsx": true,
+      "switch.jsx": true,
+      "table.jsx": true,
+      "textarea.jsx": true,
+      "tooltip.jsx": true
+    },
+    "total": 25,
+    "percentage": 100
+  },
+  "localization": {
+    "files": {
+      "studentDashboard.json": true,
+      "common.json": true,
+      "navbar.json": true,
+      "demoDialog.json": true,
+      "aboutIlyrAISection.json": true,
+      "benefitsSection.json": true,
+      "contactSection.json": true,
+      "footer.json": true,
+      "heroSection.json": true,
+      "howKaryWorksSection.json": true,
+      "ilyrAISection.json": true,
+      "impactSection.json": true,
+      "loginMessages.json": true,
+      "main.json": true,
+      "notifications.json": true,
+      "quickNavSection.json": true,
+      "roadmapSection.json": true,
+      "roles.json": true,
+      "toasts.json": true,
+      "useCasesSection.json": true,
+      "whyKarySection.json": true
+    },
+    "total": 21,
+    "percentage": 100
+  },
+  "deployment": {
+    "netlify": {
+      "buildCommand": true,
+      "publishDir": true,
+      "envVars": true,
+      "redirects": true,
+      "headers": true,
+      "total": 5
+    }
+  },
+  "summary": {
+    "totalTests": 12,
+    "passedTests": 10,
+    "overallPercentage": 83,
+    "status": "EXCELENTE"
+  }
+}

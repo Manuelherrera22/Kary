@@ -169,9 +169,9 @@ const simulateNetworkDelay = (ms = 300) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-// Simular error ocasional
+// Simular error ocasional (deshabilitado para desarrollo)
 const simulateError = () => {
-  return Math.random() < 0.05; // 5% de probabilidad de error
+  return Math.random() < 0.001; // 0.1% de probabilidad de error (casi nunca)
 };
 
 // Verificar autenticación

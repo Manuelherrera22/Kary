@@ -11,6 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import MagicBackground from '@/pages/Dashboard/StudentDashboard/components/MagicBackground';
+import StudentLayout from '@/components/StudentLayout';
 
 const MyTasksPage = () => {
   const { t, language } = useLanguage();
@@ -124,7 +125,7 @@ const MyTasksPage = () => {
   }
 
   return (
-    <MagicBackground>
+    <StudentLayout>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -282,7 +283,7 @@ const MyTasksPage = () => {
           )}
         </div>
       </motion.div>
-    </MagicBackground>
+    </StudentLayout>
   );
 };
 

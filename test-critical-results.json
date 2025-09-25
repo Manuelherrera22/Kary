@@ -1,0 +1,72 @@
+{
+  "timestamp": "2025-09-24T03:45:22.961Z",
+  "activityGeneration": {
+    "smartAssignmentModal": true,
+    "activityTypes": false,
+    "studentSelection": true,
+    "aiContentSuggestion": false,
+    "multipleAdaptation": false,
+    "confirmation": true,
+    "assignmentFlow": false,
+    "total": 2
+  },
+  "supportPlanGeneration": {
+    "steps": {
+      "AssignmentTypeStep.jsx": {
+        "exists": true,
+        "features": 2,
+        "complete": true
+      },
+      "StudentSelectionStep.jsx": {
+        "exists": true,
+        "features": 1,
+        "complete": true
+      },
+      "AIContentSuggestionStep.jsx": {
+        "exists": true,
+        "features": 2,
+        "complete": true
+      },
+      "AIMultipleAdaptationStep.jsx": {
+        "exists": true,
+        "features": 0,
+        "complete": false
+      },
+      "ConfirmationStep.jsx": {
+        "exists": true,
+        "features": 1,
+        "complete": true
+      }
+    },
+    "total": 4,
+    "percentage": 80
+  },
+  "aiQueries": {
+    "geminiService": true,
+    "apiKey": true,
+    "model": true,
+    "generateContent": true,
+    "chatFunction": true,
+    "suggestionFunction": true,
+    "activityGeneration": true,
+    "supportPlanGeneration": false,
+    "total": 6
+  },
+  "roleAssignment": {
+    "unifiedDataService": true,
+    "studentConnections": true,
+    "teacherConnections": true,
+    "psychopedagogueConnections": true,
+    "parentConnections": true,
+    "institutionalOverview": true,
+    "roleAssignment": true,
+    "dataSync": true,
+    "total": 7
+  },
+  "summary": {
+    "totalCriticalTests": 4,
+    "passedCriticalTests": 3,
+    "overallPercentage": 75,
+    "status": "EXCELENTE"
+  }
+}

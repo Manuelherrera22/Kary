@@ -1,35 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Sparkles, Edit } from 'lucide-react';
+import { Sparkles, Edit, RefreshCw, FileText } from 'lucide-react';
+import { getAISuggestion } from '@/services/geminiDashboardService';
+import piarService from '@/services/piarService';
 
 const AIContentSuggestionStep = ({ assignmentData, updateAssignmentData }) => {
   const { t } = useLanguage();
-  const [editingSuggestion, setEditingSuggestion] = React.useState(false);
+  const [editingSuggestion, setEditingSuggestion] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [aiSuggestion, setAiSuggestion] = useState('');
 
-  // Placeholder for IA suggestion based on selected students
-  const getAISuggestion = () => {
+  // Generar sugerencia de IA basada en PIAR y planes de apoyo
+  const generateAISuggestion = async () => {
+    if (assignmentData.selectedStudents.length === 0) return;
+    
+    setIsGenerating(true);
+    try {
+      const context = {
+        assignmentType: assignmentData.type,
+        customTitle: assignmentData.customTitle,
+        students: assignmentData.selectedStudents.map(s => ({
+          name: s.full_name,
+          grade: s.grade,
+          diagnostic: s.diagnostic_summary
+        })),
+        needs: assignmentData.selectedStudents.map(s => s.diagnostic_summary).filter(Boolean)
+      };
+
+      // Obtener datos de PIAR para el primer estudiante (o combinados si son múltiples)
+      const piarData = assignmentData.selectedStudents.map(student => {
+        const piar = piarService.getPiarByStudentId(student.id);
+        return piar ? piarService.getPiarForActivityGeneration(student.id) : null;
+      }).filter(Boolean);
+
+      // Obtener plan de apoyo basado en PIAR
+      const supportPlan = piarData.length > 0 ? {
+        objectives: piarData[0].objectives,
+        adaptations: piarData[0].adaptations,
+        resources: piarData[0].resources,
+        evaluation: piarData[0].evaluation
+      } : null;
+
+      const result = await getAISuggestion(context, piarData, supportPlan);
+      
+      if (result.success) {
+        setAiSuggestion(result.data.suggestion);
+        updateAssignmentData({ 
+          aiEditedContent: result.data.suggestion,
+          piarData: piarData,
+          supportPlan: supportPlan
+        });
+      } else {
+        console.error('Error generating AI suggestion:', result.error);
+        // Fallback a sugerencia básica
+        setAiSuggestion(getBasicSuggestion());
+      }
+    } catch (error) {
+      console.error('Error generating AI suggestion:', error);
+      setAiSuggestion(getBasicSuggestion());
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // Sugerencia básica como fallback
+  const getBasicSuggestion = () => {
     if (assignmentData.selectedStudents.length > 0) {
       const studentNames = assignmentData.selectedStudents.map(s => s.full_name).join(', ');
       const firstStudentDiag = assignmentData.selectedStudents[0]?.diagnostic_summary;
-      let suggestion = t('smartAssignment.aiSuggestionBase', { studentNames: studentNames });
+      let suggestion = `Actividad educativa para: ${studentNames}\n\n`;
       if (firstStudentDiag) {
-        suggestion += ` ${t('smartAssignment.aiSuggestionWithDiagnosis', { diagnosis: firstStudentDiag })}`;
-      } else {
-        suggestion += ` ${t('smartAssignment.aiSuggestionGenericFocus')}`;
+        suggestion += `Considerando las necesidades específicas: ${firstStudentDiag}\n\n`;
       }
+      suggestion += `Objetivos:\n- Desarrollar habilidades específicas\n- Fomentar el aprendizaje inclusivo\n- Promover la participación activa\n\nMateriales:\n- Recursos adaptados\n- Apoyos visuales\n- Herramientas tecnológicas\n\nEvaluación:\n- Criterios adaptados\n- Observación continua\n- Retroalimentación positiva`;
       return suggestion;
     }
-    return t('smartAssignment.aiSuggestionPlaceholder');
+    return 'Selecciona estudiantes para generar una sugerencia personalizada.';
   };
 
-  const aiGeneratedSuggestion = getAISuggestion();
-  const currentContent = assignmentData.aiEditedContent || aiGeneratedSuggestion;
+  const currentContent = assignmentData.aiEditedContent || aiSuggestion || getBasicSuggestion();
 
   const handleUseSuggestion = () => {
-    updateAssignmentData({ aiSuggestionUsed: true, aiEditedContent: aiGeneratedSuggestion });
+    updateAssignmentData({ aiSuggestionUsed: true, aiEditedContent: currentContent });
     setEditingSuggestion(false); 
   };
 
@@ -37,9 +92,16 @@ const AIContentSuggestionStep = ({ assignmentData, updateAssignmentData }) => {
     setEditingSuggestion(true);
     // Initialize aiEditedContent if it's not already set
     if (!assignmentData.aiEditedContent) {
-      updateAssignmentData({ aiEditedContent: aiGeneratedSuggestion });
+      updateAssignmentData({ aiEditedContent: currentContent });
     }
   };
+
+  // Generar sugerencia automáticamente cuando se seleccionan estudiantes
+  React.useEffect(() => {
+    if (assignmentData.selectedStudents.length > 0 && !aiSuggestion && !assignmentData.aiEditedContent) {
+      generateAISuggestion();
+    }
+  }, [assignmentData.selectedStudents]);
 
   return (
     <div className="space-y-6">
@@ -48,6 +110,34 @@ const AIContentSuggestionStep = ({ assignmentData, updateAssignmentData }) => {
           <Sparkles size={24} className="mr-2 text-yellow-400 animate-pulse" />
           {t('smartAssignment.aiSuggestionTitle')}
         </Label>
+        
+        {/* Información de PIAR */}
+        {assignmentData.selectedStudents.length > 0 && (
+          <div className="mb-4 p-3 bg-blue-900/30 border border-blue-700/50 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <FileText size={16} className="text-blue-400" />
+              <span className="text-sm font-semibold text-blue-300">Información de PIAR:</span>
+            </div>
+            <div className="text-xs text-blue-200 space-y-1">
+              {assignmentData.selectedStudents.map(student => {
+                const piar = piarService.getPiarByStudentId(student.id);
+                return piar ? (
+                  <div key={student.id} className="flex items-center gap-2">
+                    <span className="font-medium">{student.full_name}:</span>
+                    <span>{piar.diagnostic}</span>
+                    <span className="text-blue-300">•</span>
+                    <span>{piar.objectives.shortTerm.length} objetivos a corto plazo</span>
+                  </div>
+                ) : (
+                  <div key={student.id} className="flex items-center gap-2">
+                    <span className="font-medium">{student.full_name}:</span>
+                    <span className="text-yellow-400">Sin PIAR registrado</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
         
         {!editingSuggestion ? (
           <p className="text-slate-300 whitespace-pre-wrap min-h-[100px]">
@@ -65,6 +155,15 @@ const AIContentSuggestionStep = ({ assignmentData, updateAssignmentData }) => {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
+        <Button 
+          onClick={generateAISuggestion}
+          disabled={isGenerating || assignmentData.selectedStudents.length === 0}
+          variant="outline" 
+          className="flex-1 text-yellow-300 border-yellow-500 hover:bg-yellow-500/20 hover:text-yellow-200 py-3 text-base"
+        >
+          <RefreshCw size={18} className={`mr-2 ${isGenerating ? 'animate-spin' : ''}`} /> 
+          {isGenerating ? 'Generando...' : 'Generar nueva sugerencia'}
+        </Button>
         <Button onClick={handleUseSuggestion} variant="outline" className="flex-1 text-purple-300 border-purple-500 hover:bg-purple-500/20 hover:text-purple-200 py-3 text-base">
           <Sparkles size={18} className="mr-2" /> {t('smartAssignment.aiUseSuggestionButton')}
         </Button>

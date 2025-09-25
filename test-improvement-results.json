@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-09-24T03:50:38.599Z",
+  "activityGeneration": {
+    "smartAssignmentModal": true,
+    "activityTypes": false,
+    "studentSelection": true,
+    "aiContentSuggestion": false,
+    "multipleAdaptation": false,
+    "confirmation": true,
+    "assignmentFlow": false,
+    "total": 2
+  },
+  "supportPlanGeneration": {
+    "multipleAdaptationStep": true,
+    "generateAdaptations": false,
+    "aiIntegration": true,
+    "adaptationDisplay": true,
+    "exportFunction": true,
+    "editFunction": true,
+    "total": 4
+  },
+  "aiQueries": {
+    "geminiService": true,
+    "apiKey": true,
+    "model": true,
+    "generateContent": true,
+    "chatFunction": true,
+    "suggestionFunction": true,
+    "activityGeneration": true,
+    "supportPlanGeneration": true,
+    "adaptedActivityGeneration": true,
+    "total": 8
+  },
+  "roleAssignment": {},
+  "summary": {
+    "totalImprovementTests": 4,
+    "passedImprovementTests": 2,
+    "overallPercentage": 50,
+    "status": "BUENO"
+  }
+}
