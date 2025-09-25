@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,10 +10,13 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Progress } from '@/components/ui/progress';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MessageSquare, Star, Send, X, ChevronRight, ChevronLeft, CheckCircle, BarChart3, Users, Settings, Shield } from 'lucide-react';
+import { MessageSquare, Star, Send, X, ChevronRight, ChevronLeft, CheckCircle, BarChart3, Users, Settings, Shield, Loader2 } from 'lucide-react';
+import surveyService from '@/services/surveyService';
+import { useToast } from '@/components/ui/use-toast';
 
 const FeedbackModal = () => {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [currentRole, setCurrentRole] = useState('');
@@ -25,6 +28,8 @@ const FeedbackModal = () => {
     recommendations: {}
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [startTime, setStartTime] = useState(null);
 
   const steps = [
     { id: 'welcome', title: 'Bienvenida', icon: MessageSquare },
@@ -58,25 +63,75 @@ const FeedbackModal = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Aquí podrías enviar los datos a un servidor
-    console.log('Feedback profesional recopilado:', feedbackData);
-    setIsSubmitted(true);
+  // Inicializar tiempo de inicio cuando se abre el modal
+  useEffect(() => {
+    if (isOpen && !startTime) {
+      setStartTime(Date.now());
+    }
+  }, [isOpen, startTime]);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
     
-    // Cerrar modal después de 3 segundos
-    setTimeout(() => {
-      setIsOpen(false);
-      setIsSubmitted(false);
-      setCurrentStep(0);
-      setCurrentRole('');
-      setFeedbackData({
-        personalInfo: {},
-        roleSpecific: {},
-        generalEvaluation: {},
-        detailedFeedback: {},
-        recommendations: {}
+    try {
+      // Preparar datos para envío
+      const surveyData = {
+        ...feedbackData,
+        user_role: currentRole,
+        completionTime: startTime ? surveyService.calculateCompletionTime(startTime) : null
+      };
+
+      // Validar datos
+      const validation = surveyService.validateSurveyData(surveyData);
+      if (!validation.isValid) {
+        toast({
+          title: "Error de validación",
+          description: validation.errors.join(', '),
+          variant: "destructive"
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Enviar a Supabase
+      const result = await surveyService.submitSurvey(surveyData);
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        toast({
+          title: "¡Encuesta enviada exitosamente!",
+          description: "Gracias por tu valiosa contribución a mejorar Kary",
+          variant: "default"
+        });
+        
+        // Cerrar modal después de 3 segundos
+        setTimeout(() => {
+          setIsOpen(false);
+          setIsSubmitted(false);
+          setCurrentStep(0);
+          setCurrentRole('');
+          setStartTime(null);
+          setFeedbackData({
+            personalInfo: {},
+            roleSpecific: {},
+            generalEvaluation: {},
+            detailedFeedback: {},
+            recommendations: {}
+          });
+        }, 3000);
+      } else {
+        throw new Error(result.error || 'Error al enviar la encuesta');
+      }
+    } catch (error) {
+      console.error('Error al enviar encuesta:', error);
+      toast({
+        title: "Error al enviar encuesta",
+        description: error.message || "Por favor, inténtalo de nuevo",
+        variant: "destructive"
       });
-    }, 3000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getProgressPercentage = () => {
@@ -85,15 +140,15 @@ const FeedbackModal = () => {
 
   const renderWelcomeStep = () => (
     <div className="text-center space-y-6">
-      <div className="w-20 h-20 mx-auto bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+      <div className="w-20 h-20 mx-auto bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
         <MessageSquare className="w-10 h-10 text-white" />
       </div>
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-2">Encuesta de Evaluación Kary</h2>
         <p className="text-slate-600">Su opinión es fundamental para mejorar nuestra plataforma educativa</p>
       </div>
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <p className="text-sm text-blue-800">
+      <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg p-4">
+        <p className="text-sm text-emerald-800">
           <strong>Tiempo estimado:</strong> 8-10 minutos<br/>
           <strong>Confidencialidad:</strong> Sus respuestas son completamente anónimas<br/>
           <strong>Propósito:</strong> Mejorar la experiencia educativa de Kary
@@ -114,10 +169,10 @@ const FeedbackModal = () => {
         onValueChange={setCurrentRole}
         className="space-y-4"
       >
-        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-purple-300 hover:bg-purple-25 transition-colors">
+        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="student" id="student" />
           <Label htmlFor="student" className="flex items-center space-x-3 cursor-pointer">
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
               <Users className="w-5 h-5 text-blue-600" />
             </div>
             <div>
@@ -127,10 +182,10 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-purple-300 hover:bg-purple-25 transition-colors">
+        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="teacher" id="teacher" />
           <Label htmlFor="teacher" className="flex items-center space-x-3 cursor-pointer">
-            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-green-100 to-emerald-200 rounded-full flex items-center justify-center">
               <Settings className="w-5 h-5 text-green-600" />
             </div>
             <div>
@@ -140,10 +195,10 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-purple-300 hover:bg-purple-25 transition-colors">
+        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="psychopedagogue" id="psychopedagogue" />
           <Label htmlFor="psychopedagogue" className="flex items-center space-x-3 cursor-pointer">
-            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-100 to-violet-200 rounded-full flex items-center justify-center">
               <BarChart3 className="w-5 h-5 text-purple-600" />
             </div>
             <div>
@@ -153,10 +208,10 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-purple-300 hover:bg-purple-25 transition-colors">
+        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="parent" id="parent" />
           <Label htmlFor="parent" className="flex items-center space-x-3 cursor-pointer">
-            <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-orange-100 to-amber-200 rounded-full flex items-center justify-center">
               <Users className="w-5 h-5 text-orange-600" />
             </div>
             <div>
@@ -166,10 +221,10 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-purple-300 hover:bg-purple-25 transition-colors">
+        <div className="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="director" id="director" />
           <Label htmlFor="director" className="flex items-center space-x-3 cursor-pointer">
-            <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-red-100 to-rose-200 rounded-full flex items-center justify-center">
               <Shield className="w-5 h-5 text-red-600" />
             </div>
             <div>
@@ -256,13 +311,13 @@ const FeedbackModal = () => {
           { key: 'performance', label: 'Rendimiento', description: '¿La plataforma funciona de manera rápida y estable?', color: 'amber' },
           { key: 'support', label: 'Soporte y ayuda', description: '¿El soporte técnico es efectivo?', color: 'rose' }
         ].map((item) => (
-          <div key={item.key} className="space-y-4 p-5 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 shadow-sm">
+          <div key={item.key} className="space-y-4 p-5 bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
             <div>
-              <h4 className="font-semibold text-gray-800 text-lg">{item.label}</h4>
-              <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+              <h4 className="font-semibold text-slate-800 text-lg">{item.label}</h4>
+              <p className="text-sm text-slate-600 mt-1">{item.description}</p>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-500 font-medium">Muy malo</span>
+              <span className="text-sm text-slate-500 font-medium">Muy malo</span>
               <div className="flex space-x-3">
                 {[1, 2, 3, 4, 5].map((rating) => (
                   <button
@@ -270,15 +325,15 @@ const FeedbackModal = () => {
                     onClick={() => updateFeedbackData('generalEvaluation', item.key, rating)}
                     className={`w-10 h-10 rounded-full border-2 transition-all duration-200 font-semibold ${
                       feedbackData.generalEvaluation[item.key] >= rating
-                        ? `border-${item.color}-500 bg-${item.color}-500 text-white shadow-lg transform scale-110`
-                        : `border-gray-300 hover:border-${item.color}-300 hover:bg-${item.color}-50 text-gray-600 hover:text-${item.color}-700`
+                        ? `border-emerald-500 bg-emerald-500 text-white shadow-lg transform scale-110`
+                        : `border-slate-300 hover:border-emerald-300 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700`
                     }`}
                   >
                     {rating}
                   </button>
                 ))}
               </div>
-              <span className="text-sm text-gray-500 font-medium">Excelente</span>
+              <span className="text-sm text-slate-500 font-medium">Excelente</span>
             </div>
           </div>
         ))}
@@ -389,15 +444,15 @@ const FeedbackModal = () => {
 
   const renderCompletionStep = () => (
     <div className="text-center space-y-6">
-      <div className="w-20 h-20 mx-auto bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+      <div className="w-20 h-20 mx-auto bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
         <CheckCircle className="w-10 h-10 text-white" />
       </div>
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-2">¡Gracias por su participación!</h2>
         <p className="text-slate-600">Su feedback es fundamental para mejorar Kary</p>
       </div>
-      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-        <p className="text-sm text-green-800">
+      <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg p-4">
+        <p className="text-sm text-emerald-800">
           <strong>Próximos pasos:</strong><br/>
           • Analizaremos su feedback cuidadosamente<br/>
           • Implementaremos mejoras basadas en sus sugerencias<br/>
@@ -438,7 +493,7 @@ const FeedbackModal = () => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button 
-          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
         >
           <MessageSquare className="w-5 h-5 mr-2" />
           Hacer Encuesta
@@ -449,7 +504,7 @@ const FeedbackModal = () => {
         <DialogHeader>
           <div className="flex items-center justify-between">
             <div>
-              <DialogTitle className="text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+              <DialogTitle className="text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600">
                 🚀 Feedback Kary
               </DialogTitle>
               <p className="text-center text-slate-600">Tu opinión es importante para mejorar la plataforma</p>
@@ -472,14 +527,14 @@ const FeedbackModal = () => {
                 <div key={step.id} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all ${
                     index <= currentStep
-                      ? 'bg-purple-600 text-white'
+                      ? 'bg-emerald-600 text-white'
                       : 'bg-slate-200 text-slate-500'
                   }`}>
                     {index < currentStep ? <CheckCircle className="w-4 h-4" /> : index + 1}
                   </div>
                   {index < steps.length - 1 && (
                     <div className={`w-8 h-0.5 mx-1 ${
-                      index < currentStep ? 'bg-purple-600' : 'bg-slate-200'
+                      index < currentStep ? 'bg-emerald-600' : 'bg-slate-200'
                     }`} />
                   )}
                 </div>
@@ -508,16 +563,26 @@ const FeedbackModal = () => {
               {currentStep === steps.length - 1 ? (
                 <Button
                   onClick={handleSubmit}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  disabled={isSubmitting}
+                  className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Enviar Encuesta
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Enviar Encuesta
+                    </>
+                  )}
                 </Button>
               ) : (
                 <Button
                   onClick={nextStep}
                   disabled={currentStep === 1 && !currentRole}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Siguiente
                   <ChevronRight className="w-4 h-4 ml-2" />
