@@ -139,15 +139,15 @@ const FeedbackModal = () => {
   };
 
   const renderWelcomeStep = () => (
-    <div className="text-center space-y-4 sm:space-y-6">
-      <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
-        <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+    <div className="text-center space-y-3 sm:space-y-4">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
+        <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
       </div>
       <div>
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">Encuesta de Evaluación Kary</h2>
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-2">Encuesta de Evaluación Kary</h2>
         <p className="text-sm sm:text-base text-slate-600 px-4 sm:px-0">Su opinión es fundamental para mejorar nuestra plataforma educativa</p>
       </div>
-      <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg p-3 sm:p-4 mx-2 sm:mx-0">
+      <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg p-2 sm:p-3 mx-2 sm:mx-0">
         <p className="text-xs sm:text-sm text-emerald-800 space-y-1 sm:space-y-0">
           <div><strong>Tiempo estimado:</strong> 8-10 minutos</div>
           <div><strong>Confidencialidad:</strong> Sus respuestas son completamente anónimas</div>
@@ -158,7 +158,7 @@ const FeedbackModal = () => {
   );
 
   const renderRoleSelectionStep = () => (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-3 sm:space-y-4">
       <div className="text-center">
         <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-2">Identificación de Rol</h2>
         <p className="text-sm sm:text-base text-slate-600 px-4 sm:px-0">Por favor, seleccione su rol principal en la institución educativa</p>
@@ -167,13 +167,13 @@ const FeedbackModal = () => {
       <RadioGroup 
         value={currentRole} 
         onValueChange={setCurrentRole}
-        className="space-y-4"
+        className="space-y-3"
       >
-        <div className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
+        <div className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="student" id="student" />
           <Label htmlFor="student" className="flex items-center space-x-2 sm:space-x-3 cursor-pointer flex-1">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full flex items-center justify-center flex-shrink-0">
-              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full flex items-center justify-center flex-shrink-0">
+              <Users className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-slate-800 text-sm sm:text-base">Estudiante</div>
@@ -182,11 +182,11 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
+        <div className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="teacher" id="teacher" />
           <Label htmlFor="teacher" className="flex items-center space-x-2 sm:space-x-3 cursor-pointer flex-1">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-green-100 to-emerald-200 rounded-full flex items-center justify-center flex-shrink-0">
-              <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-green-100 to-emerald-200 rounded-full flex items-center justify-center flex-shrink-0">
+              <Settings className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-slate-800 text-sm sm:text-base">Profesor/Educador</div>
@@ -195,11 +195,11 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
+        <div className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="psychopedagogue" id="psychopedagogue" />
           <Label htmlFor="psychopedagogue" className="flex items-center space-x-2 sm:space-x-3 cursor-pointer flex-1">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-100 to-violet-200 rounded-full flex items-center justify-center flex-shrink-0">
-              <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-100 to-violet-200 rounded-full flex items-center justify-center flex-shrink-0">
+              <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-slate-800 text-sm sm:text-base">Psicopedagogo</div>
@@ -208,11 +208,11 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
+        <div className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="parent" id="parent" />
           <Label htmlFor="parent" className="flex items-center space-x-2 sm:space-x-3 cursor-pointer flex-1">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-orange-100 to-amber-200 rounded-full flex items-center justify-center flex-shrink-0">
-              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-orange-100 to-amber-200 rounded-full flex items-center justify-center flex-shrink-0">
+              <Users className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-slate-800 text-sm sm:text-base">Padre/Madre</div>
@@ -221,11 +221,11 @@ const FeedbackModal = () => {
           </Label>
         </div>
         
-        <div className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
+        <div className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-25 transition-colors">
           <RadioGroupItem value="director" id="director" />
           <Label htmlFor="director" className="flex items-center space-x-2 sm:space-x-3 cursor-pointer flex-1">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-red-100 to-rose-200 rounded-full flex items-center justify-center flex-shrink-0">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-red-100 to-rose-200 rounded-full flex items-center justify-center flex-shrink-0">
+              <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-slate-800 text-sm sm:text-base">Directivo/Administrador</div>
@@ -507,40 +507,40 @@ const FeedbackModal = () => {
         </Button>
       </DialogTrigger>
       
-      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-white to-emerald-50 border-0 shadow-2xl">
-        <DialogHeader className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 p-4 sm:p-6 rounded-t-lg -m-6 mb-6">
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[85vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-white to-emerald-50 border-0 shadow-2xl">
+        <DialogHeader className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 p-3 sm:p-4 rounded-t-lg -m-6 mb-4">
           <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
             <div className="text-center sm:text-left">
-              <DialogTitle className="text-xl sm:text-2xl font-bold text-white">
+              <DialogTitle className="text-lg sm:text-xl font-bold text-white">
                 🚀 Feedback Kary
               </DialogTitle>
-              <p className="text-sm sm:text-base text-white/90">Tu opinión es importante para mejorar la plataforma</p>
+              <p className="text-xs sm:text-sm text-white/90">Tu opinión es importante para mejorar la plataforma</p>
             </div>
             <div className="text-center sm:text-right">
               <div className="text-sm text-white/80">
                 Paso {currentStep + 1} de {steps.length}
               </div>
-              <Progress value={getProgressPercentage()} className="w-24 sm:w-32 mt-1 bg-white/20" />
+              <Progress value={getProgressPercentage()} className="w-20 sm:w-24 mt-1 bg-white/20" />
             </div>
           </div>
         </DialogHeader>
 
-        <div className="space-y-4 sm:space-y-6 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6">
+        <div className="space-y-3 sm:space-y-4 bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4">
           {/* Indicador de pasos */}
           <div className="flex items-center justify-center space-x-1 sm:space-x-2 overflow-x-auto pb-2">
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
                 <div key={step.id} className="flex items-center flex-shrink-0">
-                  <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all ${
+                  <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-xs font-semibold transition-all ${
                     index <= currentStep
                       ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg'
                       : 'bg-slate-200 text-slate-500'
                   }`}>
-                    {index < currentStep ? <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" /> : index + 1}
+                    {index < currentStep ? <CheckCircle className="w-2 h-2 sm:w-3 sm:h-3" /> : index + 1}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className={`w-4 sm:w-8 h-0.5 mx-1 ${
+                    <div className={`w-3 sm:w-6 h-0.5 mx-1 ${
                       index < currentStep ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : 'bg-slate-200'
                     }`} />
                   )}
@@ -550,12 +550,12 @@ const FeedbackModal = () => {
           </div>
 
           {/* Contenido del paso actual */}
-          <div className="min-h-[300px] sm:min-h-[400px]">
+          <div className="min-h-[250px] sm:min-h-[300px]">
             {renderCurrentStep()}
           </div>
 
           {/* Navegación */}
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0 pt-4 sm:pt-6 border-t border-slate-200">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 pt-3 sm:pt-4 border-t border-slate-200">
             <Button
               variant="outline"
               onClick={prevStep}
