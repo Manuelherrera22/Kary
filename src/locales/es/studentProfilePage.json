@@ -1,5 +1,5 @@
 {
-  "pageTitle": "Perfil de {{studentName}}",
+  "pageTitle": "Perfil del Estudiante",
   "pageSubtitle": "Información detallada y seguimiento del estudiante.",
   "errorNoStudentId": "No se proporcionó ID de estudiante.",
   "errorStudentNotFound": "Estudiante no encontrado.",

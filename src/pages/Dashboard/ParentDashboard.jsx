@@ -272,6 +272,7 @@ const ParentDashboard = () => {
     switch (card.id) {
       case 'childProfile':
         return {
+          title: `Perfil de ${student?.name || 'Estudiante'}`,
           description: `${t(card.descriptionKey)} - ${student?.name || 'N/A'}`,
           specialValue: student?.status || 'N/A',
           specialColor: 'text-green-400',
@@ -667,7 +668,7 @@ const ParentDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
           {parentDashboardCards.map((card, index) => {
             const cardData = getCardData(card, syncData);

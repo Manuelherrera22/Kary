@@ -55,7 +55,7 @@ class ParentStudentSyncService {
           age: 10,
           status: 'Activo',
           role: 'Estudiante',
-          parentEmail: 'ana.rodriguez@email.com',
+          parentEmail: 'padre@kary.com',
           emotionalState: {
             currentMood: 'Feliz',
             recentTrends: 'Estable',

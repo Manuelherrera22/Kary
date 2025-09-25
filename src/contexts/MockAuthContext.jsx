@@ -29,9 +29,10 @@ export const MockAuthProvider = ({ children }) => {
           setUserProfile(currentUser);
           
           // Simular vinculación para Ana Rodríguez
-          if (currentUser.email === 'ana.rodriguez@email.com' || currentUser.full_name === 'Ana Rodríguez Madre') {
+          if (currentUser.email === 'padre@kary.com' || currentUser.full_name === 'Ana Rodríguez Madre') {
             setPrimaryChildId('550e8400-e29b-41d4-a716-446655440002');
             setAssociatedStudentIds(['550e8400-e29b-41d4-a716-446655440002']);
+            console.log('✅ Ana Rodríguez vinculada con María García');
           }
           
           setLoading(false);
@@ -64,9 +65,10 @@ export const MockAuthProvider = ({ children }) => {
         setUserProfile(currentUser);
         
         // Simular vinculación para Ana Rodríguez
-        if (currentUser.email === 'ana.rodriguez@email.com' || currentUser.full_name === 'Ana Rodríguez Madre') {
+        if (currentUser.email === 'padre@kary.com' || currentUser.full_name === 'Ana Rodríguez Madre') {
           setPrimaryChildId('550e8400-e29b-41d4-a716-446655440002');
           setAssociatedStudentIds(['550e8400-e29b-41d4-a716-446655440002']);
+          console.log('✅ Ana Rodríguez vinculada con María García');
         }
       } else {
         setUser(null);

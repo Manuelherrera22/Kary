@@ -32,7 +32,7 @@ const DashboardCard = ({
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
-  const cardBaseClasses = `p-3 sm:p-4 md:p-5 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
+  const cardBaseClasses = `p-4 sm:p-5 md:p-6 rounded-xl shadow-lg hover:shadow-xl border border-slate-700/60 flex flex-col justify-between h-full transition-all duration-300 ease-out group ${bgColor} ${hoverBgColor} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`;
   
   const content = (
     <>
@@ -43,10 +43,10 @@ const DashboardCard = ({
           </div>
         )}
         {title && (
-          <h3 className={`text-sm sm:text-base md:text-lg font-semibold text-slate-100 mb-1 sm:mb-1.5 md:mb-2 ${IconComponent ? '' : 'mt-2'} leading-tight`}>{title}</h3>
+          <h3 className={`text-base sm:text-lg md:text-xl font-semibold text-slate-100 mb-2 sm:mb-3 ${IconComponent ? '' : 'mt-2'} leading-tight`}>{title}</h3>
         )}
         {description && (
-          <p className="text-xs sm:text-sm text-slate-400 mb-2 sm:mb-3 leading-relaxed">{description}</p>
+          <p className="text-sm sm:text-base text-slate-400 mb-3 sm:mb-4 leading-relaxed">{description}</p>
         )}
         
         {/* Mostrar métricas si están disponibles */}
@@ -81,18 +81,18 @@ const DashboardCard = ({
       {children}
       
       {/* Footer con información adicional */}
-      <div className="mt-auto pt-2 sm:pt-3 border-t border-slate-700/50">
+      <div className="mt-auto pt-3 sm:pt-4 border-t border-slate-700/50">
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             {link && !children && (
-              <span className={`inline-flex items-center text-xs sm:text-sm font-medium ${iconColor.replace('text-','text-')} group-hover:underline`}>
+              <span className={`inline-flex items-center text-sm sm:text-base font-medium ${iconColor.replace('text-','text-')} group-hover:underline`}>
                 {t(buttonTextKey || 'common.accessNowButton')}
                 <ArrowRight size={14} className="sm:hidden ml-1" />
                 <ArrowRight size={16} className="hidden sm:block ml-1.5 transform transition-transform duration-200 group-hover:translate-x-1" />
               </span>
             )}
             {specialValue && (
-              <span className={`text-xs font-medium ${specialColor} mt-1`}>
+              <span className={`text-sm font-medium ${specialColor} mt-1`}>
                 {specialValue}
               </span>
             )}
