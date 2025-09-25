@@ -389,52 +389,59 @@ const FeedbackModal = () => {
         <p className="text-slate-600">Ayúdenos a entender el impacto de Kary</p>
       </div>
       
-      <div className="space-y-4">
-        <div className="space-y-3">
-          <Label>¿Recomendaría Kary a otros?</Label>
+      <div className="space-y-6">
+        {/* Sección de recomendación - Responsive */}
+        <div className="space-y-4">
+          <Label className="text-slate-700 font-medium text-base">¿Recomendaría Kary a otros?</Label>
           <RadioGroup 
             value={feedbackData.recommendations.recommend} 
             onValueChange={(value) => updateFeedbackData('recommendations', 'recommend', value)}
+            className="space-y-3"
           >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="definitely" id="definitely" />
-              <Label htmlFor="definitely">Definitivamente sí</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="probably" id="probably" />
-              <Label htmlFor="probably">Probablemente sí</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="neutral" id="neutral" />
-              <Label htmlFor="neutral">No estoy seguro</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="probably-not" id="probably-not" />
-              <Label htmlFor="probably-not">Probablemente no</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="definitely-not" id="definitely-not" />
-              <Label htmlFor="definitely-not">Definitivamente no</Label>
+            {/* Grid responsive para opciones */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+              <div className="flex items-center space-x-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                <RadioGroupItem value="definitely" id="definitely" className="border-slate-400" />
+                <Label htmlFor="definitely" className="text-slate-800 font-medium cursor-pointer flex-1">Definitivamente sí</Label>
+              </div>
+              <div className="flex items-center space-x-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                <RadioGroupItem value="probably" id="probably" className="border-slate-400" />
+                <Label htmlFor="probably" className="text-slate-800 font-medium cursor-pointer flex-1">Probablemente sí</Label>
+              </div>
+              <div className="flex items-center space-x-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                <RadioGroupItem value="neutral" id="neutral" className="border-slate-400" />
+                <Label htmlFor="neutral" className="text-slate-800 font-medium cursor-pointer flex-1">No estoy seguro</Label>
+              </div>
+              <div className="flex items-center space-x-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                <RadioGroupItem value="probably-not" id="probably-not" className="border-slate-400" />
+                <Label htmlFor="probably-not" className="text-slate-800 font-medium cursor-pointer flex-1">Probablemente no</Label>
+              </div>
+              <div className="flex items-center space-x-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                <RadioGroupItem value="definitely-not" id="definitely-not" className="border-slate-400" />
+                <Label htmlFor="definitely-not" className="text-slate-800 font-medium cursor-pointer flex-1">Definitivamente no</Label>
+              </div>
             </div>
           </RadioGroup>
         </div>
         
+        {/* Sección de impacto - Responsive */}
         <div className="space-y-2">
-          <Label htmlFor="impact" className="text-slate-700 font-medium">¿Cómo ha impactado Kary en su experiencia educativa?</Label>
+          <Label htmlFor="impact" className="text-slate-700 font-medium text-base">¿Cómo ha impactado Kary en su experiencia educativa?</Label>
           <Textarea
             id="impact"
             placeholder="Describa el impacto que Kary ha tenido en su proceso educativo..."
-            className="min-h-[100px] bg-white border-slate-300 text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:ring-emerald-500"
+            className="min-h-[120px] bg-white border-slate-300 text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:ring-emerald-500 resize-none"
             onChange={(e) => updateFeedbackData('recommendations', 'impact', e.target.value)}
           />
         </div>
         
+        {/* Sección de comentarios adicionales - Responsive */}
         <div className="space-y-2">
-          <Label htmlFor="additional" className="text-slate-700 font-medium">Comentarios adicionales</Label>
+          <Label htmlFor="additional" className="text-slate-700 font-medium text-base">Comentarios adicionales</Label>
           <Textarea
             id="additional"
             placeholder="Cualquier comentario adicional que desee compartir..."
-            className="min-h-[80px] bg-white border-slate-300 text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:ring-emerald-500"
+            className="min-h-[100px] bg-white border-slate-300 text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:ring-emerald-500 resize-none"
             onChange={(e) => updateFeedbackData('recommendations', 'additional', e.target.value)}
           />
         </div>
