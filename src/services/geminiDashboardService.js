@@ -667,13 +667,19 @@ export const generateSupportPlan = async (studentData, piarData, context) => {
   }
 
   try {
-    const prompt = `Eres KARY AI, el asistente psicopedagógico más avanzado del mundo. Genera un plan de apoyo ESPECTACULAR y PROFESIONAL basado en el PIAR (Plan Individual de Apoyo y Refuerzo) del estudiante.
+    const prompt = `Eres KARY AI, el asistente psicopedagógico más avanzado del mundo. Genera un plan de apoyo ESPECTACULAR y PROFESIONAL basado EXCLUSIVAMENTE en el PIAR (Plan Individual de Apoyo y Refuerzo) del estudiante.
 
 🎯 DATOS DEL ESTUDIANTE: ${JSON.stringify(studentData)}
 📋 PIAR DEL ESTUDIANTE: ${JSON.stringify(piarData)}
 🔍 CONTEXTO ADICIONAL: ${JSON.stringify(context)}
 
-✨ IMPORTANTE: Este plan debe ser REVOLUCIONARIO, basado en evidencia científica y completamente personalizado.
+✨ IMPORTANTE: Este plan DEBE estar 100% basado en las condiciones específicas del niño registradas en su PIAR. Cada elemento del plan debe derivar directamente de:
+- El diagnóstico específico del PIAR: ${piarData?.diagnostic || 'No especificado'}
+- Las fortalezas identificadas en el PIAR: ${piarData?.strengths?.join(', ') || 'No especificadas'}
+- Las necesidades específicas del PIAR: ${piarData?.needs?.join(', ') || 'No especificadas'}
+- Los objetivos ya establecidos en el PIAR: ${JSON.stringify(piarData?.objectives || {})}
+- Las adaptaciones recomendadas en el PIAR: ${piarData?.adaptations?.join(', ') || 'No especificadas'}
+- Los recursos sugeridos en el PIAR: ${piarData?.resources?.join(', ') || 'No especificados'}
 
 Genera un plan de apoyo que incluya:
 

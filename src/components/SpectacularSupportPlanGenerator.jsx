@@ -22,6 +22,7 @@ import {
 import { generateSupportPlan } from '../services/geminiDashboardService';
 import { piarService } from '../services/piarService';
 import SpectacularSupportPlanDisplay from './SpectacularSupportPlanDisplay';
+import PiarBasedPlanDisplay from './PiarBasedPlanDisplay';
 
 const SpectacularSupportPlanGenerator = ({ studentId, onPlanGenerated }) => {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -101,21 +102,40 @@ const SpectacularSupportPlanGenerator = ({ studentId, onPlanGenerated }) => {
       // Obtener datos del PIAR del estudiante
       const piarData = piarService.getPiarByStudentId(studentId);
       
-      // Preparar datos del estudiante
+      if (!piarData) {
+        throw new Error('No se encontró PIAR para este estudiante. Es necesario tener un PIAR registrado para generar el plan de apoyo.');
+      }
+
+      // Preparar datos del estudiante basados en PIAR
       const studentData = {
         full_name: formData.studentName,
         grade: formData.grade,
         plan_type: formData.planType,
+        // Datos del PIAR
+        diagnostic: piarData.diagnostic,
+        piar_strengths: piarData.strengths,
+        piar_needs: piarData.needs,
+        piar_objectives: piarData.objectives,
+        piar_adaptations: piarData.adaptations,
+        piar_resources: piarData.resources,
+        piar_evaluation: piarData.evaluation,
+        piar_collaboration: piarData.collaboration,
+        // Información adicional del formulario
         specific_needs: formData.specificNeeds,
         strengths: formData.strengths,
         challenges: formData.challenges,
         goals: formData.goals
       };
 
-      // Preparar contexto
+      // Preparar contexto basado en PIAR
       const context = {
         context: formData.context,
         plan_type: formData.planType,
+        piar_based: true,
+        piar_diagnostic: piarData.diagnostic,
+        piar_strengths: piarData.strengths,
+        piar_needs: piarData.needs,
+        piar_objectives: piarData.objectives,
         additional_info: {
           specific_needs: formData.specificNeeds,
           strengths: formData.strengths,
@@ -124,7 +144,7 @@ const SpectacularSupportPlanGenerator = ({ studentId, onPlanGenerated }) => {
         }
       };
 
-      // Generar plan con IA
+      // Generar plan con IA basado en PIAR
       const result = await generateSupportPlan(studentData, piarData, context);
 
       if (result.success) {
@@ -165,12 +185,13 @@ const SpectacularSupportPlanGenerator = ({ studentId, onPlanGenerated }) => {
   };
 
   if (generatedPlan) {
+    const piarData = piarService.getPiarByStudentId(studentId);
     return (
       <div className="space-y-6">
-        <SpectacularSupportPlanDisplay 
+        <PiarBasedPlanDisplay 
           supportPlan={generatedPlan}
+          piarData={piarData}
           studentData={formData}
-          piarData={piarService.getPiarByStudentId(studentId)}
         />
         <div className="flex justify-center space-x-4">
           <Button 
@@ -212,6 +233,69 @@ const SpectacularSupportPlanGenerator = ({ studentId, onPlanGenerated }) => {
           </p>
         </CardHeader>
       </Card>
+
+      {/* Información del PIAR */}
+      {studentId && (() => {
+        const piarData = piarService.getPiarByStudentId(studentId);
+        if (piarData) {
+          return (
+            <Card className="mb-6 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
+              <CardHeader>
+                <CardTitle className="flex items-center text-green-800">
+                  <CheckCircle className="w-6 h-6 mr-2 text-green-600" />
+                  PIAR del Estudiante Encontrado
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold text-green-700 mb-2">📋 Diagnóstico:</h4>
+                    <p className="text-green-600">{piarData.diagnostic}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-green-700 mb-2">⭐ Fortalezas:</h4>
+                    <p className="text-green-600">{piarData.strengths.slice(0, 2).join(', ')}...</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-green-700 mb-2">🎯 Necesidades:</h4>
+                    <p className="text-green-600">{piarData.needs.slice(0, 2).join(', ')}...</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-green-700 mb-2">🛠️ Adaptaciones:</h4>
+                    <p className="text-green-600">{piarData.adaptations.slice(0, 2).join(', ')}...</p>
+                  </div>
+                </div>
+                <div className="mt-4 p-3 bg-green-100 rounded-lg">
+                  <p className="text-sm text-green-700">
+                    <strong>✅ El plan de apoyo se generará basado en estos datos específicos del PIAR.</strong>
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        } else {
+          return (
+            <Card className="mb-6 border-red-200 bg-gradient-to-r from-red-50 to-pink-50">
+              <CardHeader>
+                <CardTitle className="flex items-center text-red-800">
+                  <AlertCircle className="w-6 h-6 mr-2 text-red-600" />
+                  PIAR No Encontrado
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-red-600 mb-4">
+                  No se encontró un PIAR registrado para este estudiante. Es necesario tener un PIAR para generar un plan de apoyo personalizado.
+                </p>
+                <div className="bg-red-100 p-3 rounded-lg">
+                  <p className="text-sm text-red-700">
+                    <strong>⚠️ Sin PIAR, el plan generado será genérico y no estará personalizado según las necesidades específicas del estudiante.</strong>
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        }
+      })()}
 
       {/* Formulario */}
       <Card className="mb-6">
