@@ -656,7 +656,7 @@ class GeminiDashboardService {
   }
 }
 
-// Función para generar planes de apoyo personalizados basados en PIAR
+// Función para generar planes de apoyo personalizados basados en PIAR - VERSIÓN ESPECTACULAR
 export const generateSupportPlan = async (studentData, piarData, context) => {
   if (!isGeminiConfigured()) {
     return {
@@ -667,53 +667,115 @@ export const generateSupportPlan = async (studentData, piarData, context) => {
   }
 
   try {
-    const prompt = `Como psicopedagogo especializado, genera un plan de apoyo personalizado basado en el PIAR (Plan Individual de Apoyo y Refuerzo) del estudiante:
+    const prompt = `Eres KARY AI, el asistente psicopedagógico más avanzado del mundo. Genera un plan de apoyo ESPECTACULAR y PROFESIONAL basado en el PIAR (Plan Individual de Apoyo y Refuerzo) del estudiante.
 
-DATOS DEL ESTUDIANTE: ${JSON.stringify(studentData)}
-PIAR DEL ESTUDIANTE: ${JSON.stringify(piarData)}
-CONTEXTO ADICIONAL: ${JSON.stringify(context)}
+🎯 DATOS DEL ESTUDIANTE: ${JSON.stringify(studentData)}
+📋 PIAR DEL ESTUDIANTE: ${JSON.stringify(piarData)}
+🔍 CONTEXTO ADICIONAL: ${JSON.stringify(context)}
 
-IMPORTANTE: El plan de apoyo DEBE estar directamente ligado al PIAR del estudiante y considerar todas las necesidades específicas identificadas.
+✨ IMPORTANTE: Este plan debe ser REVOLUCIONARIO, basado en evidencia científica y completamente personalizado.
 
-Por favor, genera un plan de apoyo que incluya:
+Genera un plan de apoyo que incluya:
 
-1. **ANÁLISIS BASADO EN PIAR**
-   - Fortalezas identificadas en el PIAR
-   - Áreas de mejora específicas del PIAR
-   - Necesidades derivadas del PIAR
-   - Objetivos del PIAR que se abordarán
+## 🧠 **ANÁLISIS PSICOPEDAGÓGICO AVANZADO**
+- **Fortalezas cognitivas identificadas**: Análisis profundo de capacidades
+- **Áreas de desarrollo específicas**: Necesidades únicas del estudiante
+- **Perfil de aprendizaje**: Estilo y preferencias identificadas
+- **Factores de motivación**: Qué impulsa al estudiante
+- **Barreras identificadas**: Obstáculos específicos a superar
 
-2. **OBJETIVOS DEL PLAN (LIGADOS AL PIAR)**
-   - Objetivos a corto plazo (1-3 meses) basados en PIAR
-   - Objetivos a mediano plazo (3-6 meses) derivados del PIAR
-   - Objetivos a largo plazo (6-12 meses) alineados con PIAR
-   - Cómo cada objetivo responde a necesidades del PIAR
+## 🎯 **OBJETIVOS ESTRATÉGICOS MULTIDIMENSIONALES**
+### **Corto Plazo (1-3 meses)**
+- Objetivos específicos, medibles y alcanzables
+- Metas académicas, emocionales y sociales
+- Indicadores de progreso claros
 
-3. **ESTRATEGIAS DE INTERVENCIÓN (ESPECÍFICAS PARA PIAR)**
-   - Estrategias académicas adaptadas al PIAR
-   - Estrategias emocionales según necesidades del PIAR
-   - Estrategias sociales basadas en el PIAR
-   - Adaptaciones curriculares específicas del PIAR
+### **Mediano Plazo (3-6 meses)**
+- Desarrollo de competencias clave
+- Fortalecimiento de habilidades base
+- Integración social y académica
 
-4. **RECURSOS Y MATERIALES (PARA PIAR)**
-   - Recursos tecnológicos necesarios para PIAR
-   - Materiales didácticos específicos del PIAR
-   - Recursos humanos según necesidades del PIAR
-   - Apoyos específicos requeridos por el PIAR
+### **Largo Plazo (6-12 meses)**
+- Autonomía y autogestión
+- Competencias para la vida
+- Preparación para transiciones
 
-5. **SEGUIMIENTO Y EVALUACIÓN (DEL PIAR)**
-   - Indicadores de progreso del PIAR
-   - Frecuencia de evaluación según PIAR
-   - Criterios de éxito basados en PIAR
-   - Métricas específicas del PIAR
+## 🚀 **ESTRATEGIAS DE INTERVENCIÓN INNOVADORAS**
+### **Estrategias Académicas**
+- Metodologías adaptadas al perfil del estudiante
+- Tecnologías de apoyo específicas
+- Adaptaciones curriculares personalizadas
 
-6. **COLABORACIÓN (PARA IMPLEMENTAR PIAR)**
-   - Rol de la familia en el PIAR
-   - Rol de los profesores en el PIAR
-   - Rol de otros profesionales para el PIAR
-   - Coordinación necesaria para el PIAR
+### **Estrategias Emocionales**
+- Regulación emocional y autocontrol
+- Desarrollo de autoestima y confianza
+- Manejo de ansiedad y estrés
 
-Responde en español, de manera estructurada y profesional, asegurándote de que cada elemento esté directamente relacionado con el PIAR del estudiante.`;
+### **Estrategias Sociales**
+- Habilidades de comunicación
+- Resolución de conflictos
+- Integración grupal
+
+### **Estrategias Conductuales**
+- Sistemas de refuerzo positivo
+- Estructuración de rutinas
+- Gestión de comportamientos
+
+## 🛠️ **RECURSOS Y MATERIALES ESPECIALIZADOS**
+### **Recursos Tecnológicos**
+- Herramientas digitales específicas
+- Aplicaciones educativas personalizadas
+- Sistemas de comunicación aumentativa
+
+### **Materiales Didácticos**
+- Recursos multisensoriales
+- Materiales adaptados por materia
+- Herramientas de evaluación alternativas
+
+### **Recursos Humanos**
+- Especialistas requeridos
+- Formación necesaria para el equipo
+- Coordinación interdisciplinaria
+
+## 📊 **SISTEMA DE SEGUIMIENTO Y EVALUACIÓN**
+### **Indicadores de Progreso**
+- Métricas cuantitativas y cualitativas
+- Evaluaciones formativas y sumativas
+- Autoevaluación del estudiante
+
+### **Frecuencia de Evaluación**
+- Revisión semanal de objetivos
+- Evaluación mensual de progreso
+- Revisión trimestral del plan
+
+### **Criterios de Éxito**
+- Logros académicos esperados
+- Desarrollo de competencias sociales
+- Mejora en bienestar emocional
+
+## 🤝 **COLABORACIÓN Y COORDINACIÓN**
+### **Rol de la Familia**
+- Estrategias para el hogar
+- Comunicación con la escuela
+- Apoyo emocional
+
+### **Rol de los Profesores**
+- Adaptaciones en el aula
+- Estrategias de enseñanza
+- Comunicación con especialistas
+
+### **Rol de Especialistas**
+- Intervenciones específicas
+- Coordinación terapéutica
+- Seguimiento especializado
+
+## 🎨 **ELEMENTOS ÚNICOS Y CREATIVOS**
+- Actividades innovadoras específicas para este estudiante
+- Metodologías creativas adaptadas
+- Elementos motivacionales únicos
+- Estrategias de gamificación personalizadas
+
+Responde en español, con un formato PROFESIONAL y ESPECTACULAR, usando emojis para hacer el contenido más atractivo y fácil de leer. Cada sección debe ser detallada, específica y directamente relacionada con el PIAR del estudiante.`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
@@ -725,7 +787,9 @@ Responde en español, de manera estructurada y profesional, asegurándote de que
         supportPlan: text,
         timestamp: new Date().toISOString(),
         studentData: studentData,
-        context: context
+        context: context,
+        generatedBy: 'KARY AI - Asistente Psicopedagógico Avanzado',
+        version: '2.0 - Espectacular'
       }
     };
   } catch (error) {
