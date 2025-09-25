@@ -48,16 +48,35 @@ class SurveyService {
         is_anonymous: true
       };
 
-      // Insertar en Supabase
+      console.log('Enviando encuesta a Supabase:', surveyPayload);
+
+      // Insertar en Supabase con manejo mejorado de errores
       const { data, error } = await supabase
         .from(this.tableName)
         .insert([surveyPayload])
         .select();
 
       if (error) {
-        console.error('Error al enviar encuesta:', error);
-        throw new Error(`Error al guardar la encuesta: ${error.message}`);
+        console.error('Error detallado de Supabase:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        });
+
+        // Manejar errores específicos
+        if (error.code === '42501') {
+          throw new Error('Error de permisos: Las políticas de seguridad están bloqueando la inserción. Contacta al administrador.');
+        } else if (error.code === '23505') {
+          throw new Error('Error de duplicado: Ya existe una encuesta con este ID de sesión.');
+        } else if (error.code === '23514') {
+          throw new Error('Error de validación: Los datos no cumplen con las restricciones de la base de datos.');
+        } else {
+          throw new Error(`Error al guardar la encuesta: ${error.message}`);
+        }
       }
+
+      console.log('Encuesta enviada exitosamente:', data[0]);
 
       return {
         success: true,
