@@ -10,7 +10,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
-import edgeFunctionService from '@/services/edgeFunctionService'; 
+import edgeFunctionService from '@/services/edgeFunctionService';
+import ResponsiveAssistantChat from '@/components/ResponsiveAssistantChat'; 
 
 const IntelligentSummary = () => {
   const { t } = useLanguage();
@@ -57,27 +58,20 @@ const RealTimeEvaluation = () => {
 const StrategicAssistant = () => {
   const { t } = useLanguage();
   return (
-    <Card className="bg-slate-800/50 border-slate-700/60">
-      <CardHeader>
-        <CardTitle className="text-xl text-purple-300">{t('karyCore.assistant.title')}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
-          <div className="p-3 bg-slate-700/50 rounded-lg">
-            <p className="text-sm text-slate-200">{t('karyCore.assistant.exampleSuggestion1')}</p>
-            <Button size="sm" variant="outline" className="mt-2 text-purple-300 border-purple-500 hover:bg-purple-500/20">
-              {t('karyCore.assistant.actionButtonSuggestResource')}
-            </Button>
-          </div>
-          <div className="p-3 bg-slate-700/50 rounded-lg">
-            <p className="text-sm text-slate-200">{t('karyCore.assistant.exampleSuggestion2')}</p>
-             <Button size="sm" variant="outline" className="mt-2 text-purple-300 border-purple-500 hover:bg-purple-500/20">
-              {t('karyCore.assistant.actionButtonSendReport')}
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="space-y-4">
+      {/* Header */}
+      <Card className="bg-slate-800/50 border-slate-700/60">
+        <CardHeader>
+          <CardTitle className="text-xl text-purple-300 flex items-center">
+            <MessageSquare className="w-6 h-6 mr-2" />
+            {t('karyCore.assistant.title')}
+          </CardTitle>
+        </CardHeader>
+      </Card>
+
+      {/* Chat Inteligente */}
+      <ResponsiveAssistantChat />
+    </div>
   );
 };
 
