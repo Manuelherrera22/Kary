@@ -507,40 +507,40 @@ const FeedbackModal = () => {
         </Button>
       </DialogTrigger>
       
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-white to-emerald-50 border-0 shadow-2xl">
-        <DialogHeader className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 p-6 rounded-t-lg -m-6 mb-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <DialogTitle className="text-2xl font-bold text-center text-white">
+      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-white to-emerald-50 border-0 shadow-2xl">
+        <DialogHeader className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 p-4 sm:p-6 rounded-t-lg -m-6 mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+            <div className="text-center sm:text-left">
+              <DialogTitle className="text-xl sm:text-2xl font-bold text-white">
                 🚀 Feedback Kary
               </DialogTitle>
-              <p className="text-center text-white/90">Tu opinión es importante para mejorar la plataforma</p>
+              <p className="text-sm sm:text-base text-white/90">Tu opinión es importante para mejorar la plataforma</p>
             </div>
-            <div className="text-right">
+            <div className="text-center sm:text-right">
               <div className="text-sm text-white/80">
                 Paso {currentStep + 1} de {steps.length}
               </div>
-              <Progress value={getProgressPercentage()} className="w-32 mt-1 bg-white/20" />
+              <Progress value={getProgressPercentage()} className="w-24 sm:w-32 mt-1 bg-white/20" />
             </div>
           </div>
         </DialogHeader>
 
-        <div className="space-y-6 bg-white/80 backdrop-blur-sm rounded-lg p-6">
+        <div className="space-y-4 sm:space-y-6 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6">
           {/* Indicador de pasos */}
-          <div className="flex items-center justify-center space-x-2">
+          <div className="flex items-center justify-center space-x-1 sm:space-x-2 overflow-x-auto pb-2">
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div key={step.id} className="flex items-center">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all ${
+                <div key={step.id} className="flex items-center flex-shrink-0">
+                  <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all ${
                     index <= currentStep
                       ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg'
                       : 'bg-slate-200 text-slate-500'
                   }`}>
-                    {index < currentStep ? <CheckCircle className="w-4 h-4" /> : index + 1}
+                    {index < currentStep ? <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" /> : index + 1}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className={`w-8 h-0.5 mx-1 ${
+                    <div className={`w-4 sm:w-8 h-0.5 mx-1 ${
                       index < currentStep ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : 'bg-slate-200'
                     }`} />
                   )}
@@ -550,28 +550,28 @@ const FeedbackModal = () => {
           </div>
 
           {/* Contenido del paso actual */}
-          <div className="min-h-[400px]">
+          <div className="min-h-[300px] sm:min-h-[400px]">
             {renderCurrentStep()}
           </div>
 
           {/* Navegación */}
-          <div className="flex justify-between pt-6 border-t border-slate-200">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0 pt-4 sm:pt-6 border-t border-slate-200">
             <Button
               variant="outline"
               onClick={prevStep}
               disabled={currentStep === 0}
-              className="flex items-center border-slate-300 text-slate-700 hover:bg-slate-50"
+              className="w-full sm:w-auto flex items-center justify-center border-slate-300 text-slate-700 hover:bg-slate-50"
             >
               <ChevronLeft className="w-4 h-4 mr-2" />
               Anterior
             </Button>
             
-            <div className="flex space-x-2">
+            <div className="w-full sm:w-auto flex justify-center">
               {currentStep === steps.length - 1 ? (
                 <Button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -589,7 +589,7 @@ const FeedbackModal = () => {
                 <Button
                   onClick={nextStep}
                   disabled={currentStep === 1 && !currentRole}
-                  className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Siguiente
                   <ChevronRight className="w-4 h-4 ml-2" />
