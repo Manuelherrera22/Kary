@@ -229,7 +229,24 @@ export default defineConfig({
 				'@babel/traverse',
 				'@babel/generator',
 				'@babel/types'
-			]
+			],
+			output: {
+				manualChunks: {
+					vendor: ['react', 'react-dom'],
+					ui: ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-tabs'],
+					charts: ['recharts', 'chart.js', 'react-chartjs-2'],
+					utils: ['framer-motion', 'date-fns', 'clsx', 'tailwind-merge']
+				}
+			}
+		},
+		chunkSizeWarningLimit: 1000,
+		target: 'esnext',
+		minify: 'terser',
+		terserOptions: {
+			compress: {
+				drop_console: true,
+				drop_debugger: true
+			}
 		}
 	}
 });
