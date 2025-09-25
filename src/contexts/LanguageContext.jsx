@@ -79,6 +79,12 @@ export const LanguageProvider = ({ children }) => {
   }, []);
 
   const t = useCallback((key, fallback = '', replacements = {}) => {
+    // Validar que key sea una string válida
+    if (!key || typeof key !== 'string') {
+      console.warn(`Invalid translation key: ${key}`);
+      return fallback;
+    }
+    
     const keys = key.split('.');
     let translation = currentTranslations;
     

@@ -9,16 +9,16 @@ const ChartCard = ({ titleKey, descriptionKey, icon, chartData, ChartComponent, 
   return (
     <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white hover-lift h-full flex flex-col">
       <CardHeader>
-        <CardTitle className="flex items-center">{icon} {t(titleKey)}</CardTitle>
-        <CardDescription className="text-purple-300">{t(descriptionKey)}</CardDescription>
+        <CardTitle className="flex items-center">{icon} {t(titleKey || 'dashboard.defaultTitle', 'Gráfico')}</CardTitle>
+        <CardDescription className="text-purple-300">{t(descriptionKey || 'dashboard.defaultDescription', 'Descripción del gráfico')}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col justify-center">
         {loading ? (
-          <div className="h-60 flex items-center justify-center text-purple-200">{t('dashboard.loadingText')}</div>
+          <div className="h-60 flex items-center justify-center text-purple-200">{t('dashboard.loadingText', 'Cargando...')}</div>
         ) : error ? (
           <div className="h-60 flex flex-col items-center justify-center text-red-300">
             <AlertCircle size={32} className="mb-2"/>
-            <p>{t('common.errorLoadingData')}</p>
+            <p>{t('common.errorLoadingData', 'Error al cargar datos')}</p>
             <p className="text-xs mt-1">{error}</p>
           </div>
         ) : chartData ? (
