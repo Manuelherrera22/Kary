@@ -44,16 +44,16 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-slate-900 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black flex items-center justify-center z-50 p-4"
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border-4 border-slate-600 shadow-2xl"
+        className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border-4 border-gray-700 shadow-2xl"
       >
         {/* Header */}
-        <CardHeader className="bg-slate-700 border-b-4 border-slate-500">
+        <CardHeader className="bg-gray-800 border-b-4 border-gray-600">
           <div className="flex items-center justify-between">
             <CardTitle className="text-white text-xl flex items-center">
               <FileText className="w-6 h-6 mr-3 text-blue-400" />
@@ -63,30 +63,30 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
               onClick={onClose}
               variant="ghost"
               size="sm"
-              className="text-gray-200 hover:text-white hover:bg-slate-600"
+              className="text-gray-200 hover:text-white hover:bg-gray-700"
             >
               <X className="w-5 h-5" />
             </Button>
           </div>
         </CardHeader>
 
-        <CardContent className="bg-slate-800 p-6 space-y-6">
+        <CardContent className="bg-gray-900 p-6 space-y-6">
           {/* Activity Title and Basic Info */}
           <div className="space-y-4">
-            <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+            <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
               <h2 className="text-2xl font-bold text-white mb-2">{activity.title}</h2>
               <p className="text-gray-100 text-lg">{activity.description}</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="flex items-center bg-slate-700 p-3 rounded-lg border-4 border-slate-500">
+              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
                 <Clock className="w-5 h-5 mr-2 text-blue-400" />
                 <div>
                   <p className="text-sm text-gray-200">Duración</p>
                   <p className="text-white font-medium">{activity.duration} minutos</p>
                 </div>
               </div>
-              <div className="flex items-center bg-slate-700 p-3 rounded-lg border-4 border-slate-500">
+              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
                 <Target className="w-5 h-5 mr-2 text-purple-400" />
                 <div>
                   <p className="text-sm text-gray-200">Dificultad</p>
@@ -95,7 +95,7 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
                   </Badge>
                 </div>
               </div>
-              <div className="flex items-center bg-slate-700 p-3 rounded-lg border-4 border-slate-500">
+              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
                 <Award className="w-5 h-5 mr-2 text-yellow-400" />
                 <div>
                   <p className="text-sm text-gray-200">Prioridad</p>
@@ -104,7 +104,7 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
                   </Badge>
                 </div>
               </div>
-              <div className="flex items-center bg-slate-700 p-3 rounded-lg border-4 border-slate-500">
+              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
                 <BookOpen className="w-5 h-5 mr-2 text-green-400" />
                 <div>
                   <p className="text-sm text-gray-200">Materia</p>
@@ -115,23 +115,23 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           </div>
 
           {/* Objective */}
-          <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Target className="w-5 h-5 mr-2 text-purple-400" />
               Objetivo de la Actividad
             </h3>
-            <p className="text-gray-100 bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+            <p className="text-gray-100 bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
               {activity.objective}
             </p>
           </div>
 
           {/* Materials */}
-          <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Settings className="w-5 h-5 mr-2 text-blue-400" />
               Materiales Necesarios
             </h3>
-            <div className="bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
               {Array.isArray(activity.materials) ? (
                 <ul className="space-y-2">
                   {activity.materials.map((material, index) => (
@@ -148,23 +148,23 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           </div>
 
           {/* Adaptations */}
-          <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Brain className="w-5 h-5 mr-2 text-green-400" />
               Adaptaciones Específicas
             </h3>
-            <div className="bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
               <p className="text-gray-100">{activity.adaptations}</p>
             </div>
           </div>
 
           {/* Instructions */}
-          <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
               Instrucciones Paso a Paso
             </h3>
-            <div className="bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
               <div className="text-gray-100 whitespace-pre-line">
                 {activity.instructions}
               </div>
@@ -172,24 +172,24 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           </div>
 
           {/* Assessment */}
-          <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <CheckCircle className="w-5 h-5 mr-2 text-green-400" />
               Método de Evaluación
             </h3>
-            <div className="bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
               <p className="text-gray-100">{activity.assessment}</p>
             </div>
           </div>
 
           {/* Student Information */}
           {plan && (
-            <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+            <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
               <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
                 <User className="w-5 h-5 mr-2 text-blue-400" />
                 Información del Estudiante
               </h3>
-              <div className="bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+              <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-200">Nombre</p>
@@ -214,12 +214,12 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
 
           {/* AI Generation Info */}
           {activity.aiGenerated && (
-            <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
+            <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
               <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
                 <Brain className="w-5 h-5 mr-2 text-purple-400" />
                 Información de Generación con IA
               </h3>
-              <div className="bg-slate-600 p-4 rounded-lg border-4 border-slate-400">
+              <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-200">Generado por</p>
@@ -251,13 +251,13 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           )}
 
           {/* Action Buttons */}
-          <div className="bg-slate-700 p-4 rounded-lg border-4 border-slate-500">
-            <div className="flex items-center justify-between pt-4 border-t-4 border-slate-400">
+          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+            <div className="flex items-center justify-between pt-4 border-t-4 border-gray-500">
               <div className="flex items-center gap-3">
                 <Button
                   onClick={onClose}
                   variant="outline"
-                  className="border-slate-400 text-gray-200 hover:bg-slate-600 hover:text-white"
+                  className="border-gray-500 text-gray-200 hover:bg-gray-700 hover:text-white"
                 >
                   Cerrar
                 </Button>
