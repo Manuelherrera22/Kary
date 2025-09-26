@@ -336,3 +336,41 @@
   transform: scale(1);
   opacity: 1;
 }
+
+/* Estilos para modales completamente sólidos */
+.solid-modal-overlay {
+  background-color: #000000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.solid-modal-background {
+  background-color: #0f172a !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Forzar fondo sólido en todos los modales */
+[data-radix-dialog-overlay] {
+  background-color: #000000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-radix-dialog-content] {
+  background-color: #0f172a !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Forzar fondo sólido en elementos con clase fixed */
+.fixed.inset-0 {
+  background-color: #000000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}

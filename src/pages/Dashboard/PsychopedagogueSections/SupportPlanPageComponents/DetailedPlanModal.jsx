@@ -60,7 +60,7 @@ const DetailedPlanModal = ({ isOpen, onOpenChange, plan, onForceCompletePlan, cu
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl md:max-w-3xl bg-slate-800/95 backdrop-blur-md border-slate-700 text-slate-100 shadow-2xl rounded-xl">
+      <DialogContent className="max-w-2xl md:max-w-3xl bg-slate-800 border-slate-700 text-slate-100 shadow-2xl rounded-xl">
         <DialogHeader className="pb-4 border-b border-slate-700">
           <DialogTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-500">
             {t('supportPlans.detailModal.detailedPlanTitle')}

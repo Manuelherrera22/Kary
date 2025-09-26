@@ -40,19 +40,31 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <div
       className="fixed inset-0 flex items-center justify-center z-50 p-4"
-      style={{ backgroundColor: '#000000' }}
+      style={{ 
+        backgroundColor: '#000000', 
+        opacity: 1,
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999
+      }}
     >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
+      <div
         className="rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border-4 border-gray-700 shadow-2xl"
-        style={{ backgroundColor: '#111827' }}
+        style={{ 
+          backgroundColor: '#0f172a', 
+          opacity: 1,
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
+          position: 'relative',
+          zIndex: 10000
+        }}
       >
         {/* Header */}
         <CardHeader 
@@ -78,7 +90,12 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
 
         <CardContent 
           className="p-6 space-y-6"
-          style={{ backgroundColor: '#111827' }}
+          style={{ 
+            backgroundColor: '#0f172a', 
+            opacity: 1,
+            backdropFilter: 'none',
+            WebkitBackdropFilter: 'none'
+          }}
         >
           {/* Activity Title and Basic Info */}
           <div className="space-y-4">
@@ -336,8 +353,8 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
             </div>
           </div>
         </CardContent>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

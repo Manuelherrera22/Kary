@@ -24,7 +24,7 @@ const PlanPreviewModal = ({ isOpen, onOpenChange, planData, onAssign, onEdit, is
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-800/90 backdrop-blur-sm border-slate-700 text-white sm:max-w-2xl">
+      <DialogContent className="bg-slate-800 border-slate-700 text-white sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center text-green-400 text-2xl">
             <CheckCircle className="mr-3" />

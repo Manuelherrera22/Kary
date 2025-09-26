@@ -85,3 +85,39 @@ div[data-radix-dialog-overlay] {
 .activity-generator-container * {
   background-image: none !important;
 }
+
+/* Fix for ActivityDetailsModal - Custom modal */
+.fixed.inset-0 {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Force solid background for ActivityDetailsModal content */
+.max-w-4xl.w-full.max-h-\[90vh\] {
+  background-color: #0f172a !important;
+  background: #0f172a !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Force solid background for all fixed positioned elements */
+div[style*="position: fixed"] {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Force solid background for all elements with z-index 9999 or higher */
+div[style*="zIndex: 9999"], div[style*="z-index: 9999"] {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}

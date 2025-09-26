@@ -61,7 +61,7 @@ const DownloadablePlansModal = ({ isOpen, onOpenChange, plans, studentName }) =>
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-800/90 backdrop-blur-sm border-slate-700 text-white sm:max-w-2xl shadow-xl rounded-lg">
+      <DialogContent className="bg-slate-800 border-slate-700 text-white sm:max-w-2xl shadow-xl rounded-lg">
         <DialogHeader className="pb-4 border-b border-slate-700/70">
           <DialogTitle className="text-2xl font-semibold flex items-center text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-purple-400">
             <FileText size={24} className="mr-3" />

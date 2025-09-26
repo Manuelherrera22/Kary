@@ -38,7 +38,10 @@ const ActivityCard = ({ activity, onUpdate, onRemove, isEditable = true }) => {
   const Icon = currentTypeConfig.icon;
 
   return (
-    <Card className={`bg-slate-800/70 border ${isEditing ? 'border-purple-500 shadow-purple-500/30' : 'border-slate-700'} shadow-lg rounded-xl overflow-hidden transition-all`}>
+    <Card 
+      className={`bg-slate-800 border ${isEditing ? 'border-purple-500 shadow-purple-500/30' : 'border-slate-700'} shadow-lg rounded-xl overflow-hidden transition-all`}
+      style={{ backgroundColor: '#0f172a', opacity: 1 }}
+    >
       <CardHeader className="p-4 border-b border-slate-700">
         <div className="flex justify-between items-center">
           {isEditing ? (
