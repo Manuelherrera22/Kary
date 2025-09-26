@@ -4,12 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { usePIARData } from '@/hooks/usePIARData';
 import { useStudentsData } from '@/hooks/useStudentsData';
 import PIARModal from './PIARModal';
 import PersonalizedActivityGenerator from './PersonalizedActivityGenerator';
 import AIActivityGenerator from './AIActivityGenerator';
+import AdvancedPiarGenerator from './AdvancedPiarGenerator';
+import PiarAnalysisSystem from './PiarAnalysisSystem';
+import AdvancedSupportPlanGenerator from './AdvancedSupportPlanGenerator';
 import { 
   Plus, 
   Search, 
@@ -23,7 +27,11 @@ import {
   TrendingUp,
   FileText,
   Activity,
-  Sparkles
+  Sparkles,
+  Brain,
+  BarChart3,
+  Zap,
+  Settings
 } from 'lucide-react';
 
 const PIARDashboard = () => {
@@ -36,9 +44,11 @@ const PIARDashboard = () => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [viewMode, setViewMode] = useState('grid'); // grid, list, activities, ai-generator
+  const [viewMode, setViewMode] = useState('grid'); // grid, list, activities, ai-generator, advanced-piar, analysis, support-plan
   const [generatedActivities, setGeneratedActivities] = useState([]);
   const [generatedPlan, setGeneratedPlan] = useState(null);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [analysisResults, setAnalysisResults] = useState({});
 
   // Filtrar PIARs
   const filteredPIARs = piars.filter(piar => {
@@ -73,6 +83,39 @@ const PIARDashboard = () => {
     setViewMode('ai-generator');
     setGeneratedActivities([]);
     setGeneratedPlan(null);
+  };
+
+  const openAdvancedPiarGenerator = (studentId = null) => {
+    setSelectedStudentId(studentId);
+    setViewMode('advanced-piar');
+  };
+
+  const openAnalysisView = (studentId) => {
+    setSelectedStudentId(studentId);
+    setViewMode('analysis');
+  };
+
+  const openSupportPlanGenerator = (studentId) => {
+    setSelectedStudentId(studentId);
+    setViewMode('support-plan');
+  };
+
+  const handlePiarGenerated = (newPiar) => {
+    // Actualizar la lista de PIARs
+    console.log('PIAR generado:', newPiar);
+    setViewMode('grid');
+  };
+
+  const handleAnalysisComplete = (studentId, results) => {
+    setAnalysisResults(prev => ({
+      ...prev,
+      [studentId]: results
+    }));
+  };
+
+  const handleSupportPlanGenerated = (newPlan) => {
+    console.log('Plan de apoyo generado:', newPlan);
+    setViewMode('grid');
   };
 
   const getStatusColor = (status) => {
@@ -163,6 +206,94 @@ const PIARDashboard = () => {
     );
   }
 
+  if (viewMode === 'advanced-piar') {
+    const selectedStudent = selectedStudentId ? students.find(s => s.id === selectedStudentId) : null;
+    
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Button
+            onClick={() => setViewMode('grid')}
+            variant="outline"
+            className="border-slate-500 text-gray-300 hover:bg-slate-700"
+          >
+            ← Volver al Dashboard
+          </Button>
+          <h2 className="text-xl font-semibold text-white flex items-center">
+            <Brain className="w-6 h-6 mr-2 text-blue-400" />
+            Generador Avanzado de PIAR
+          </h2>
+        </div>
+        <AdvancedPiarGenerator
+          isOpen={true}
+          onOpenChange={() => setViewMode('grid')}
+          studentId={selectedStudentId}
+          studentData={selectedStudent}
+          onPiarGenerated={handlePiarGenerated}
+        />
+      </div>
+    );
+  }
+
+  if (viewMode === 'analysis' && selectedStudentId) {
+    const selectedStudent = students.find(s => s.id === selectedStudentId);
+    const selectedPIAR = getPIARByStudentId(selectedStudentId);
+    
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Button
+            onClick={() => setViewMode('grid')}
+            variant="outline"
+            className="border-slate-500 text-gray-300 hover:bg-slate-700"
+          >
+            ← Volver al Dashboard
+          </Button>
+          <h2 className="text-xl font-semibold text-white flex items-center">
+            <BarChart3 className="w-6 h-6 mr-2 text-green-400" />
+            Análisis de PIAR - {selectedStudent?.full_name}
+          </h2>
+        </div>
+        <PiarAnalysisSystem
+          studentId={selectedStudentId}
+          studentData={selectedStudent}
+          piarData={selectedPIAR}
+          onAnalysisComplete={(results) => handleAnalysisComplete(selectedStudentId, results)}
+        />
+      </div>
+    );
+  }
+
+  if (viewMode === 'support-plan' && selectedStudentId) {
+    const selectedStudent = students.find(s => s.id === selectedStudentId);
+    
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Button
+            onClick={() => setViewMode('grid')}
+            variant="outline"
+            className="border-slate-500 text-gray-300 hover:bg-slate-700"
+          >
+            ← Volver al Dashboard
+          </Button>
+          <h2 className="text-xl font-semibold text-white flex items-center">
+            <Target className="w-6 h-6 mr-2 text-purple-400" />
+            Generador de Plan de Apoyo - {selectedStudent?.full_name}
+          </h2>
+        </div>
+        <AdvancedSupportPlanGenerator
+          isOpen={true}
+          onOpenChange={() => setViewMode('grid')}
+          studentId={selectedStudentId}
+          studentData={selectedStudent}
+          piarAnalysisResults={analysisResults[selectedStudentId]}
+          onPlanGenerated={handleSupportPlanGenerated}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -179,13 +310,22 @@ const PIARDashboard = () => {
             </span>
           </div>
         </div>
-        <Button
-          onClick={openCreateModal}
-          className="bg-purple-600 hover:bg-purple-700 text-white"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Crear Nuevo PIAR
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => openAdvancedPiarGenerator()}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+          >
+            <Brain className="w-4 h-4 mr-2" />
+            Generador IA
+          </Button>
+          <Button
+            onClick={openCreateModal}
+            className="bg-purple-600 hover:bg-purple-700 text-white"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Crear Nuevo PIAR
+          </Button>
+        </div>
       </div>
 
       {/* Filtros y búsqueda */}
@@ -319,9 +459,17 @@ const PIARDashboard = () => {
                   <CardTitle className="text-lg text-white">
                     {piar.student_name || 'Estudiante'}
                   </CardTitle>
-                  <Badge className={`${getStatusColor(piar.status)} text-white`}>
-                    {getStatusLabel(piar.status)}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    {analysisResults[piar.student_id] && (
+                      <Badge className="bg-green-600 text-white text-xs">
+                        <BarChart3 className="w-3 h-3 mr-1" />
+                        Analizado
+                      </Badge>
+                    )}
+                    <Badge className={`${getStatusColor(piar.status)} text-white`}>
+                      {getStatusLabel(piar.status)}
+                    </Badge>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-400">
                   Creado: {new Date(piar.created_at).toLocaleDateString()}
@@ -382,31 +530,62 @@ const PIARDashboard = () => {
                 )}
 
                 {/* Acciones */}
-                <div className="flex gap-2 pt-2">
-                  <Button
-                    onClick={() => openAIGenerator(piar.student_id)}
-                    size="sm"
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                  >
-                    <Sparkles className="w-4 h-4 mr-1" />
-                    IA
-                  </Button>
-                  <Button
-                    onClick={() => openActivitiesView(piar.student_id)}
-                    size="sm"
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-                  >
-                    <Activity className="w-4 h-4 mr-1" />
-                    Actividades
-                  </Button>
-                  <Button
-                    onClick={() => openEditModal(piar)}
-                    size="sm"
-                    variant="outline"
-                    className="border-slate-500 text-gray-300 hover:bg-slate-700"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </Button>
+                <div className="space-y-2 pt-2">
+                  {/* Primera fila de botones */}
+                  <div className="flex gap-1">
+                    <Button
+                      onClick={() => openAdvancedPiarGenerator(piar.student_id)}
+                      size="sm"
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xs"
+                    >
+                      <Brain className="w-3 h-3 mr-1" />
+                      PIAR IA
+                    </Button>
+                    <Button
+                      onClick={() => openAnalysisView(piar.student_id)}
+                      size="sm"
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs"
+                    >
+                      <BarChart3 className="w-3 h-3 mr-1" />
+                      Análisis
+                    </Button>
+                    <Button
+                      onClick={() => openSupportPlanGenerator(piar.student_id)}
+                      size="sm"
+                      className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-xs"
+                    >
+                      <Target className="w-3 h-3 mr-1" />
+                      Plan
+                    </Button>
+                  </div>
+                  
+                  {/* Segunda fila de botones */}
+                  <div className="flex gap-1">
+                    <Button
+                      onClick={() => openAIGenerator(piar.student_id)}
+                      size="sm"
+                      className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs"
+                    >
+                      <Sparkles className="w-3 h-3 mr-1" />
+                      Actividades
+                    </Button>
+                    <Button
+                      onClick={() => openActivitiesView(piar.student_id)}
+                      size="sm"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs"
+                    >
+                      <Activity className="w-3 h-3 mr-1" />
+                      Manual
+                    </Button>
+                    <Button
+                      onClick={() => openEditModal(piar)}
+                      size="sm"
+                      variant="outline"
+                      className="border-slate-500 text-gray-300 hover:bg-slate-700"
+                    >
+                      <Edit className="w-3 h-3" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

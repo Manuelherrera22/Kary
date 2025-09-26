@@ -59,12 +59,11 @@ import emotionalAttendance from '../es/emotionalAttendance.json';
 import evaluations from '../es/evaluations.json';
 import auditLogActions from '../es/auditLogActions.json';
 import piar from '../es/piar.json';
+import psychopedagogue from '../es/psychopedagogue.json';
 import navbar from '../es/navbar.json';
 import emotionalTagSelector from '../es/emotionalTagSelector.json';
 import impactSection from '../es/impactSection.json';
 import buttons from '../es/buttons.json';
-
-import buttonsIndex from '../es/buttons';
 
 export const esTranslations = {
   main,
@@ -129,9 +128,9 @@ export const esTranslations = {
   evaluations,
   auditLogActions,
   piar,
+  psychopedagogue,
   navbar,
   emotionalTagSelector,
   impactSection,
   buttons,
-  ...buttonsIndex,
 };

@@ -109,5 +109,7 @@
   "notificationsDescription": "Gestiona tus notificaciones",
   "settingsDescription": "Configura tu cuenta y preferencias",
   "pageNotFound": "Página no encontrada",
-  "pageNotFoundDescription": "La página que buscas no existe o no está disponible"
+  "pageNotFoundDescription": "La página que buscas no existe o no está disponible",
+  "previous": "Anterior",
+  "next": "Siguiente"
 }

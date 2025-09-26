@@ -32,6 +32,7 @@ const TeacherGeminiInsights = ({
   const [insights, setInsights] = useState(null);
   const [isLoadingInsights, setIsLoadingInsights] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [isUsingMockData, setIsUsingMockData] = useState(false);
 
   // Generar insights cuando se cargan los estudiantes
   useEffect(() => {
@@ -73,8 +74,26 @@ const TeacherGeminiInsights = ({
       if (response.success) {
         setInsights(response.data);
         setLastUpdated(new Date());
+        setIsUsingMockData(false);
+        
+        // Mostrar toast de éxito
+        toast({
+          title: 'Insights generados',
+          description: 'Los insights de la clase se han generado exitosamente.',
+          variant: 'default',
+        });
       } else {
-        throw new Error(response.error);
+        // Usar datos de ejemplo cuando hay error (incluyendo 503)
+        setInsights(response.data);
+        setLastUpdated(new Date());
+        setIsUsingMockData(true);
+        
+        // Mostrar toast informativo sobre el estado
+        toast({
+          title: response.mockInfo?.message || 'Modo Demo',
+          description: response.error,
+          variant: 'default',
+        });
       }
     } catch (error) {
       console.error('Error generando insights:', error);
@@ -140,6 +159,12 @@ const TeacherGeminiInsights = ({
           <CardTitle className="text-white flex items-center">
             <Sparkles className="w-5 h-5 mr-2 text-purple-400" />
             Insights Inteligentes con IA Avanzada
+            {isUsingMockData && (
+              <Badge variant="outline" className="ml-3 bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
+                <RefreshCw className="w-3 h-3 mr-1" />
+                Modo Demo
+              </Badge>
+            )}
           </CardTitle>
           <div className="flex gap-2">
             <Button
@@ -166,6 +191,11 @@ const TeacherGeminiInsights = ({
         {lastUpdated && (
           <p className="text-sm text-gray-400">
             Última actualización: {lastUpdated.toLocaleTimeString()}
+            {isUsingMockData && (
+              <span className="text-yellow-400 ml-2">
+                • Usando datos de ejemplo debido a sobrecarga del modelo
+              </span>
+            )}
           </p>
         )}
       </CardHeader>

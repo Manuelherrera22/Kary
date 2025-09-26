@@ -27,7 +27,7 @@ import IntelligentAIAssistant from '@/pages/Dashboard/TeacherSections/components
 import TeacherGamification from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/TeacherGamification.jsx';
 import IntelligentActivityGenerator from '@/pages/Dashboard/TeacherSections/components/TeacherDashboard/IntelligentActivityGenerator.jsx';
 import EcosystemDemo from '@/components/EcosystemDemo';
-import TeacherPlanDashboard from '@/components/TeacherPlanDashboard';
+import TeacherPlanReceiver from '@/components/TeacherPlanReceiver';
 import SupportPlansNotification from '@/components/SupportPlansNotification';
 import TeacherGeminiInsights from '@/components/TeacherGeminiInsights';
 import UniversalGeminiChat from '@/components/UniversalGeminiChat';
@@ -361,7 +361,7 @@ const TeacherDashboard = () => {
 
       {activeSection === 'support-plans' && (
         <div className="mt-8">
-          <TeacherPlanDashboard teacherId={userProfile.id} />
+          <TeacherPlanReceiver />
         </div>
       )}
 

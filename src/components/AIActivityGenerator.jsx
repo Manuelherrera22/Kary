@@ -5,12 +5,9 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/components/ui/use-toast';
-import { 
-  analyzeDiagnosis, 
-  generatePersonalizedActivities, 
-  generateAutoSupportPlan 
-} from '@/services/aiActivityGeneratorService';
+import { generateCompleteAdvancedSupportPlan } from '@/services/advancedGeminiService';
 import TeacherPlanSender from './TeacherPlanSender';
+import SupportPlanViewer from './SupportPlanViewer';
 import { 
   Sparkles, 
   Brain, 
@@ -25,7 +22,9 @@ import {
   Wand2,
   Zap,
   Send,
-  Mail
+  Mail,
+  Eye,
+  Download
 } from 'lucide-react';
 
 const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onPlanGenerated }) => {
@@ -37,6 +36,7 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
   const [generatedPlan, setGeneratedPlan] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showTeacherSender, setShowTeacherSender] = useState(false);
+  const [showPlanViewer, setShowPlanViewer] = useState(false);
 
   const handleGenerateActivities = async () => {
     if (!piarData || !studentData) {
@@ -49,30 +49,19 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
     }
 
     setIsGenerating(true);
-    setGenerationStep('Analizando diagnóstico...');
+    setGenerationStep('🚀 Iniciando sistema avanzado de Gemini AI...');
 
     try {
-      // Paso 1: Análisis de diagnóstico
-      setIsAnalyzing(true);
-      setGenerationStep('🤖 IA: Analizando perfil de aprendizaje...');
+      // Usar el sistema avanzado completo
+      setGenerationStep('🧠 Gemini AI: Análisis psicopedagógico avanzado...');
       
-      const analysis = await analyzeDiagnosis(piarData.diagnostic_info);
-      
-      // Paso 2: Generación de actividades
-      setGenerationStep('🎯 IA: Generando actividades personalizadas...');
-      
-      const activities = await generatePersonalizedActivities(piarData, analysis);
-      
-      // Paso 3: Crear plan completo
-      setGenerationStep('📋 IA: Creando plan de implementación...');
-      
-      const plan = await generateAutoSupportPlan(studentData, piarData);
+      const plan = await generateCompleteAdvancedSupportPlan(studentData, piarData);
       
       setGeneratedPlan(plan);
       
       // Notificar componentes padre
       if (onActivitiesGenerated) {
-        onActivitiesGenerated(activities);
+        onActivitiesGenerated(plan.activities);
       }
       
       if (onPlanGenerated) {
@@ -80,21 +69,20 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
       }
       
       toast({
-        title: '✅ Actividades Generadas',
-        description: `IA ha generado ${activities.length} actividades personalizadas para ${studentData.full_name}`,
+        title: '🎉 Plan Avanzado Generado',
+        description: `Gemini AI ha generado un plan completo con ${plan.activities.length} actividades específicas para ${studentData.full_name}`,
         variant: 'default',
       });
       
     } catch (error) {
-      console.error('Error generando actividades:', error);
+      console.error('Error generando plan avanzado:', error);
       toast({
         title: 'Error',
-        description: 'Hubo un problema generando las actividades. Inténtalo de nuevo.',
+        description: `Error en generación avanzada: ${error.message}`,
         variant: 'destructive',
       });
     } finally {
       setIsGenerating(false);
-      setIsAnalyzing(false);
       setGenerationStep('');
     }
   };
@@ -132,7 +120,7 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
   return (
     <div className="space-y-6">
       {/* Botón Principal de Generación */}
-      <Card className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-purple-500/30">
+      <Card className="bg-slate-800 border-purple-500">
         <CardHeader>
           <CardTitle className="text-white flex items-center">
             <Sparkles className="w-6 h-6 mr-3 text-purple-400" />
@@ -144,7 +132,7 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Información del Estudiante */}
-          <div className="bg-slate-700/50 rounded-lg p-4">
+          <div className="bg-slate-700 rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center">
                 <Users className="w-5 h-5 text-blue-400 mr-2" />
@@ -189,7 +177,7 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
           <Button
             onClick={handleGenerateActivities}
             disabled={isGenerating}
-            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-6 text-lg font-semibold"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-6 text-lg font-semibold"
           >
             {isGenerating ? (
               <>
@@ -241,7 +229,7 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
           <CardContent className="space-y-6">
             {/* Análisis de IA */}
             {generatedPlan.aiAnalysis && (
-              <div className="bg-slate-700/50 rounded-lg p-4">
+              <div className="bg-slate-700 rounded-lg p-4">
                 <h4 className="font-semibold text-white mb-3 flex items-center">
                   <Brain className="w-5 h-5 mr-2 text-blue-400" />
                   Análisis de IA
@@ -249,29 +237,29 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
                 <div className="space-y-2">
                   <div>
                     <span className="text-gray-400">Perfil de Aprendizaje:</span>
-                    <p className="text-white">{generatedPlan.aiAnalysis.learningProfile.style}</p>
+                    <p className="text-white">{generatedPlan.aiAnalysis?.learningProfile?.style || 'Visual-Auditivo'}</p>
                   </div>
                   <div>
                     <span className="text-gray-400">Necesidades Prioritarias:</span>
-                    <p className="text-white">{generatedPlan.aiAnalysis.priorityNeeds.length} identificadas</p>
+                    <p className="text-white">{generatedPlan.aiAnalysis?.priorityNeeds?.length || 0} identificadas</p>
                   </div>
                   <div>
                     <span className="text-gray-400">Fortalezas Identificadas:</span>
-                    <p className="text-white">{generatedPlan.aiAnalysis.strengths.length} detectadas</p>
+                    <p className="text-white">{generatedPlan.aiAnalysis?.strengths?.length || 0} detectadas</p>
                   </div>
                 </div>
               </div>
             )}
 
             {/* Actividades Generadas */}
-            <div className="bg-slate-700/50 rounded-lg p-4">
+            <div className="bg-slate-700 rounded-lg p-4">
               <h4 className="font-semibold text-white mb-3 flex items-center">
                 <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
-                Actividades Generadas ({generatedPlan.activities.length})
+                Actividades Generadas ({generatedPlan.activities?.length || 0})
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {generatedPlan.activities.slice(0, 4).map((activity, index) => (
-                  <div key={activity.id} className="bg-slate-600/50 rounded p-3">
+                {(generatedPlan.activities || []).slice(0, 4).map((activity, index) => (
+                  <div key={activity.id} className="bg-slate-600 rounded p-3">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium text-white text-sm">
                         {activity.title}
@@ -292,10 +280,10 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
                     </div>
                   </div>
                 ))}
-                {generatedPlan.activities.length > 4 && (
-                  <div className="bg-slate-600/50 rounded p-3 flex items-center justify-center">
+                {(generatedPlan.activities?.length || 0) > 4 && (
+                  <div className="bg-slate-600 rounded p-3 flex items-center justify-center">
                     <span className="text-gray-400 text-sm">
-                      +{generatedPlan.activities.length - 4} actividades más...
+                      +{(generatedPlan.activities?.length || 0) - 4} actividades más...
                     </span>
                   </div>
                 )}
@@ -303,8 +291,8 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
             </div>
 
             {/* Plan de Implementación */}
-            {generatedPlan.implementation && (
-              <div className="bg-slate-700/50 rounded-lg p-4">
+            {generatedPlan.supportPlan && (
+              <div className="bg-slate-700 rounded-lg p-4">
                 <h4 className="font-semibold text-white mb-3 flex items-center">
                   <BookOpen className="w-5 h-5 mr-2 text-green-400" />
                   Plan de Implementación
@@ -313,25 +301,25 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
                   <div>
                     <span className="text-gray-400 text-sm">Prioridad:</span>
                     <p className="text-white font-medium">
-                      {generatedPlan.implementation.priority}
+                      {generatedPlan.implementation?.priority || 'Media'}
                     </p>
                   </div>
                   <div>
                     <span className="text-gray-400 text-sm">Timeline:</span>
                     <p className="text-white font-medium">
-                      {generatedPlan.implementation.timeline.shortTerm}
+                      {generatedPlan.implementation?.timeline?.shortTerm || '2-4 semanas'}
                     </p>
                   </div>
                   <div>
                     <span className="text-gray-400 text-sm">Monitoreo:</span>
                     <p className="text-white font-medium">
-                      {generatedPlan.implementation.monitoring.frequency}
+                      {generatedPlan.implementation?.monitoring?.frequency || 'Semanal'}
                     </p>
                   </div>
                   <div>
                     <span className="text-gray-400 text-sm">Recursos:</span>
                     <p className="text-white font-medium">
-                      {generatedPlan.implementation.resources.materials.length} materiales
+                      {generatedPlan.implementation?.resources?.materials?.length || 0} materiales
                     </p>
                   </div>
                 </div>
@@ -346,7 +334,7 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
                   Próximos Pasos
                 </h4>
                 <ul className="space-y-1">
-                  {generatedPlan.nextSteps.slice(0, 3).map((step, index) => (
+                  {(generatedPlan.nextSteps || []).slice(0, 3).map((step, index) => (
                     <li key={index} className="flex items-center text-sm text-gray-300">
                       <CheckCircle className="w-4 h-4 mr-2 text-green-400" />
                       {step}
@@ -356,18 +344,27 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
               </div>
             )}
 
-            {/* Botón para Enviar al Docente */}
+            {/* Botones de Acción */}
             {generatedPlan && !showTeacherSender && (
               <div className="mt-6 pt-4 border-t border-slate-700">
-                <Button
-                  onClick={() => setShowTeacherSender(true)}
-                  className="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white py-3 text-lg font-semibold"
-                >
-                  <Send className="w-5 h-5 mr-3" />
-                  📤 Enviar Plan al Docente
-                </Button>
-                <p className="text-center text-gray-400 text-sm mt-2">
-                  Comunica este plan al docente para que implemente las actividades
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Button
+                    onClick={() => setShowPlanViewer(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-semibold"
+                  >
+                    <Eye className="w-5 h-5 mr-3" />
+                    👁️ Ver Plan Completo
+                  </Button>
+                  <Button
+                    onClick={() => setShowTeacherSender(true)}
+                    className="bg-green-600 hover:bg-green-700 text-white py-3 text-lg font-semibold"
+                  >
+                    <Send className="w-5 h-5 mr-3" />
+                    📤 Enviar al Docente
+                  </Button>
+                </div>
+                <p className="text-center text-gray-400 text-sm mt-3">
+                  Visualiza el plan completo o envíalo directamente al docente para implementación
                 </p>
               </div>
             )}
@@ -378,19 +375,37 @@ const AIActivityGenerator = ({ studentData, piarData, onActivitiesGenerated, onP
       {/* Componente de Envío al Docente */}
       {showTeacherSender && (
         <TeacherPlanSender
-          generatedPlan={generatedPlan}
-          onPlanSent={(communication) => {
-            console.log('Plan enviado al docente:', communication);
+          isOpen={showTeacherSender}
+          onOpenChange={setShowTeacherSender}
+          plan={generatedPlan}
+          studentData={studentData}
+          onPlanSent={(result) => {
+            console.log('Plan enviado al docente:', result);
             setShowTeacherSender(false);
             toast({
               title: 'Plan Enviado',
-              description: 'El plan de apoyo ha sido enviado exitosamente al docente',
+              description: `El plan de apoyo ha sido enviado exitosamente a ${result.recipient}`,
               variant: 'default',
             });
           }}
-          onCancel={() => setShowTeacherSender(false)}
         />
       )}
+
+      {/* Componente de Visualización del Plan */}
+      <SupportPlanViewer
+        isOpen={showPlanViewer}
+        onClose={() => setShowPlanViewer(false)}
+        plan={generatedPlan}
+        studentData={studentData}
+        onPlanSent={(result) => {
+          console.log('Plan enviado desde viewer:', result);
+          toast({
+            title: 'Plan Enviado',
+            description: `El plan de apoyo ha sido enviado exitosamente a ${result.recipient}`,
+            variant: 'default',
+          });
+        }}
+      />
     </div>
   );
 };

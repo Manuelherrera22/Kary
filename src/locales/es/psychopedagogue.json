@@ -1,0 +1,115 @@
+{
+  "piar": {
+    "generator": {
+      "title": "Generador Avanzado de PIAR",
+      "description": "Genera PIARs completos y profesionales usando IA",
+      "studentName": "Nombre del Estudiante",
+      "studentNamePlaceholder": "Ingresa el nombre completo",
+      "age": "Edad",
+      "agePlaceholder": "Ingresa la edad",
+      "grade": "Grado",
+      "gradePlaceholder": "Ingresa el grado",
+      "school": "Escuela",
+      "schoolPlaceholder": "Ingresa el nombre de la escuela",
+      "previousDiagnosis": "Diagnóstico Previo",
+      "previousDiagnosisPlaceholder": "Describe cualquier diagnóstico previo",
+      "familyContext": "Contexto Familiar",
+      "familyContextPlaceholder": "Describe el contexto familiar del estudiante",
+      "academicHistory": "Historial Académico",
+      "academicHistoryPlaceholder": "Describe el historial académico",
+      "behavioralObservations": "Observaciones Conductuales",
+      "behavioralObservationsPlaceholder": "Describe las observaciones conductuales",
+      "emotionalState": "Estado Emocional",
+      "emotionalStatePlaceholder": "Describe el estado emocional actual",
+      "focusAreas": "Áreas de Enfoque",
+      "areas": {
+        "academic": "Académico",
+        "emotional": "Emocional",
+        "behavioral": "Conductual",
+        "social": "Social",
+        "communication": "Comunicación",
+        "motor": "Motor"
+      },
+      "priorityLevel": "Nivel de Prioridad",
+      "priority": {
+        "low": "Baja",
+        "medium": "Media",
+        "high": "Alta"
+      },
+      "duration": "Duración",
+      "durationOptions": {
+        "3months": "3 meses",
+        "6months": "6 meses",
+        "12months": "12 meses"
+      },
+      "generatingTitle": "Generando PIAR",
+      "generatingMessage": "Analizando datos y generando PIAR personalizado...",
+      "complete": "completado",
+      "analyzing": "Analizando con IA...",
+      "generationComplete": "Generación Completada",
+      "generatedPiar": "PIAR Generado",
+      "noContent": "No hay contenido disponible",
+      "download": "Descargar",
+      "save": "Guardar",
+      "generate": "Generar PIAR",
+      "successTitle": "PIAR Generado Exitosamente",
+      "successMessage": "El PIAR ha sido generado correctamente",
+      "errorTitle": "Error Generando PIAR",
+      "errorMessage": "Hubo un error al generar el PIAR",
+      "saveSuccessTitle": "PIAR Guardado",
+      "saveSuccessMessage": "El PIAR ha sido guardado correctamente",
+      "saveErrorTitle": "Error Guardando PIAR",
+      "saveErrorMessage": "Hubo un error al guardar el PIAR"
+    },
+    "analysis": {
+      "errorTitle": "Error en Análisis",
+      "noDataError": "No hay datos de PIAR para analizar",
+      "successTitle": "Análisis Completado",
+      "successMessage": "El análisis de PIAR se ha completado exitosamente",
+      "errorMessage": "Hubo un error durante el análisis"
+    }
+  },
+  "supportPlan": {
+    "generator": {
+      "title": "Generador Avanzado de Planes de Apoyo",
+      "description": "Genera planes de apoyo personalizados basados en análisis de PIAR",
+      "errorTitle": "Error Generando Plan",
+      "noDataError": "No hay datos suficientes para generar el plan",
+      "successTitle": "Plan Generado Exitosamente",
+      "successMessage": "El plan de apoyo ha sido generado correctamente",
+      "errorMessage": "Hubo un error al generar el plan de apoyo",
+      "saveSuccessTitle": "Plan Guardado",
+      "saveSuccessMessage": "El plan de apoyo ha sido guardado correctamente",
+      "saveErrorTitle": "Error Guardando Plan",
+      "saveErrorMessage": "Hubo un error al guardar el plan de apoyo"
+    }
+  },
+  "psychopedagogue": {
+    "dashboard": {
+      "title": "Dashboard Avanzado de Psicopedagogía",
+      "subtitle": "Sistema integrado de PIAR, análisis de datos y generación de planes de apoyo con IA",
+      "quickActions": "Acciones Rápidas",
+      "generatePiar": "Generar PIAR",
+      "generateSupportPlan": "Generar Plan de Apoyo",
+      "analyzeData": "Análisis de Datos",
+      "recentStudents": "Estudiantes Recientes",
+      "overview": "Resumen",
+      "students": "Estudiantes",
+      "analysis": "Análisis",
+      "reports": "Reportes",
+      "searchStudents": "Buscar estudiantes...",
+      "filters": "Filtros",
+      "newPiar": "Nuevo PIAR",
+      "noPiar": "Sin PIAR",
+      "noPlan": "Sin Plan",
+      "pending": "Pendiente",
+      "completed": "Completado",
+      "active": "Activo",
+      "draft": "Borrador",
+      "paused": "Pausado",
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja"
+    }
+  }
+}
