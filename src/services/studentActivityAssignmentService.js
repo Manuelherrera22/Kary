@@ -18,7 +18,7 @@ export class StudentActivityAssignmentService {
       
       // Preparar datos de la asignación
       const assignmentData = {
-        activity_id: activity.id,
+        activity_id: activity.id || crypto.randomUUID(), // Generar UUID si no existe
         student_id: plan.studentId,
         teacher_id: teacherId,
         plan_id: plan.id,
@@ -61,7 +61,7 @@ export class StudentActivityAssignmentService {
       }
 
       // Crear notificación para el estudiante
-      await this.createStudentNotification(plan.studentId, activity, 'activity_assigned');
+      await this.createStudentNotification(plan.studentId, activity, 'activity_assigned', assignmentData.activity_id);
 
       // Crear registro de seguimiento
       await this.createActivityTrackingRecord(data.id, plan.studentId, teacherId);
@@ -102,15 +102,16 @@ export class StudentActivityAssignmentService {
    * @param {string} studentId - ID del estudiante
    * @param {Object} activity - Actividad asignada
    * @param {string} type - Tipo de notificación
+   * @param {string} activityId - ID de la actividad
    */
-  static async createStudentNotification(studentId, activity, type) {
+  static async createStudentNotification(studentId, activity, type, activityId) {
     try {
       const notificationData = {
         student_id: studentId,
         type: type,
         title: 'Nueva Actividad Asignada',
         message: `Se te ha asignado una nueva actividad: "${activity.title}"`,
-        activity_id: activity.id,
+        activity_id: activityId,
         priority: activity.priority,
         created_at: new Date().toISOString(),
         read: false
