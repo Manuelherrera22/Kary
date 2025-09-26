@@ -44,16 +44,21 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 flex items-center justify-center z-50 p-4"
+      style={{ backgroundColor: '#000000' }}
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border-4 border-gray-700 shadow-2xl"
+        className="rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border-4 border-gray-700 shadow-2xl"
+        style={{ backgroundColor: '#111827' }}
       >
         {/* Header */}
-        <CardHeader className="bg-gray-800 border-b-4 border-gray-600">
+        <CardHeader 
+          className="border-b-4 border-gray-600"
+          style={{ backgroundColor: '#1f2937' }}
+        >
           <div className="flex items-center justify-between">
             <CardTitle className="text-white text-xl flex items-center">
               <FileText className="w-6 h-6 mr-3 text-blue-400" />
@@ -63,30 +68,43 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
               onClick={onClose}
               variant="ghost"
               size="sm"
-              className="text-gray-200 hover:text-white hover:bg-gray-700"
+              className="text-gray-200 hover:text-white"
+              style={{ backgroundColor: 'transparent' }}
             >
               <X className="w-5 h-5" />
             </Button>
           </div>
         </CardHeader>
 
-        <CardContent className="bg-gray-900 p-6 space-y-6">
+        <CardContent 
+          className="p-6 space-y-6"
+          style={{ backgroundColor: '#111827' }}
+        >
           {/* Activity Title and Basic Info */}
           <div className="space-y-4">
-            <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+            <div 
+              className="p-4 rounded-lg border-4 border-gray-600"
+              style={{ backgroundColor: '#1f2937' }}
+            >
               <h2 className="text-2xl font-bold text-white mb-2">{activity.title}</h2>
               <p className="text-gray-100 text-lg">{activity.description}</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
+              <div 
+                className="flex items-center p-3 rounded-lg border-4 border-gray-600"
+                style={{ backgroundColor: '#1f2937' }}
+              >
                 <Clock className="w-5 h-5 mr-2 text-blue-400" />
                 <div>
                   <p className="text-sm text-gray-200">Duración</p>
                   <p className="text-white font-medium">{activity.duration} minutos</p>
                 </div>
               </div>
-              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
+              <div 
+                className="flex items-center p-3 rounded-lg border-4 border-gray-600"
+                style={{ backgroundColor: '#1f2937' }}
+              >
                 <Target className="w-5 h-5 mr-2 text-purple-400" />
                 <div>
                   <p className="text-sm text-gray-200">Dificultad</p>
@@ -95,7 +113,10 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
                   </Badge>
                 </div>
               </div>
-              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
+              <div 
+                className="flex items-center p-3 rounded-lg border-4 border-gray-600"
+                style={{ backgroundColor: '#1f2937' }}
+              >
                 <Award className="w-5 h-5 mr-2 text-yellow-400" />
                 <div>
                   <p className="text-sm text-gray-200">Prioridad</p>
@@ -104,7 +125,10 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
                   </Badge>
                 </div>
               </div>
-              <div className="flex items-center bg-gray-800 p-3 rounded-lg border-4 border-gray-600">
+              <div 
+                className="flex items-center p-3 rounded-lg border-4 border-gray-600"
+                style={{ backgroundColor: '#1f2937' }}
+              >
                 <BookOpen className="w-5 h-5 mr-2 text-green-400" />
                 <div>
                   <p className="text-sm text-gray-200">Materia</p>
@@ -115,23 +139,35 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           </div>
 
           {/* Objective */}
-          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+          <div 
+            className="p-4 rounded-lg border-4 border-gray-600"
+            style={{ backgroundColor: '#1f2937' }}
+          >
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Target className="w-5 h-5 mr-2 text-purple-400" />
               Objetivo de la Actividad
             </h3>
-            <p className="text-gray-100 bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+            <p 
+              className="text-gray-100 p-4 rounded-lg border-4 border-gray-500"
+              style={{ backgroundColor: '#374151' }}
+            >
               {activity.objective}
             </p>
           </div>
 
           {/* Materials */}
-          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+          <div 
+            className="p-4 rounded-lg border-4 border-gray-600"
+            style={{ backgroundColor: '#1f2937' }}
+          >
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Settings className="w-5 h-5 mr-2 text-blue-400" />
               Materiales Necesarios
             </h3>
-            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+            <div 
+              className="p-4 rounded-lg border-4 border-gray-500"
+              style={{ backgroundColor: '#374151' }}
+            >
               {Array.isArray(activity.materials) ? (
                 <ul className="space-y-2">
                   {activity.materials.map((material, index) => (
@@ -148,23 +184,35 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           </div>
 
           {/* Adaptations */}
-          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+          <div 
+            className="p-4 rounded-lg border-4 border-gray-600"
+            style={{ backgroundColor: '#1f2937' }}
+          >
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Brain className="w-5 h-5 mr-2 text-green-400" />
               Adaptaciones Específicas
             </h3>
-            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+            <div 
+              className="p-4 rounded-lg border-4 border-gray-500"
+              style={{ backgroundColor: '#374151' }}
+            >
               <p className="text-gray-100">{activity.adaptations}</p>
             </div>
           </div>
 
           {/* Instructions */}
-          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+          <div 
+            className="p-4 rounded-lg border-4 border-gray-600"
+            style={{ backgroundColor: '#1f2937' }}
+          >
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
               Instrucciones Paso a Paso
             </h3>
-            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+            <div 
+              className="p-4 rounded-lg border-4 border-gray-500"
+              style={{ backgroundColor: '#374151' }}
+            >
               <div className="text-gray-100 whitespace-pre-line">
                 {activity.instructions}
               </div>
@@ -172,24 +220,32 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           </div>
 
           {/* Assessment */}
-          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+          <div 
+            className="p-4 rounded-lg border-4 border-gray-600"
+            style={{ backgroundColor: '#1f2937' }}
+          >
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
               <CheckCircle className="w-5 h-5 mr-2 text-green-400" />
               Método de Evaluación
             </h3>
-            <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+            <div 
+              className="p-4 rounded-lg border-4 border-gray-500"
+              style={{ backgroundColor: '#374151' }}
+            >
               <p className="text-gray-100">{activity.assessment}</p>
             </div>
           </div>
 
           {/* Student Information */}
           {plan && (
-            <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+            <div className="p-4 rounded-lg border-4 border-gray-600"
+              style={{ backgroundColor: '#1f2937' }}>
               <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
                 <User className="w-5 h-5 mr-2 text-blue-400" />
                 Información del Estudiante
               </h3>
-              <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+              <div className="p-4 rounded-lg border-4 border-gray-500"
+                style={{ backgroundColor: '#374151' }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-200">Nombre</p>
@@ -214,12 +270,14 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
 
           {/* AI Generation Info */}
           {activity.aiGenerated && (
-            <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+            <div className="p-4 rounded-lg border-4 border-gray-600"
+              style={{ backgroundColor: '#1f2937' }}>
               <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
                 <Brain className="w-5 h-5 mr-2 text-purple-400" />
                 Información de Generación con IA
               </h3>
-              <div className="bg-gray-700 p-4 rounded-lg border-4 border-gray-500">
+              <div className="p-4 rounded-lg border-4 border-gray-500"
+                style={{ backgroundColor: '#374151' }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-200">Generado por</p>
@@ -251,13 +309,15 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
           )}
 
           {/* Action Buttons */}
-          <div className="bg-gray-800 p-4 rounded-lg border-4 border-gray-600">
+          <div className="p-4 rounded-lg border-4 border-gray-600"
+              style={{ backgroundColor: '#1f2937' }}>
             <div className="flex items-center justify-between pt-4 border-t-4 border-gray-500">
               <div className="flex items-center gap-3">
                 <Button
                   onClick={onClose}
                   variant="outline"
-                  className="border-gray-500 text-gray-200 hover:bg-gray-700 hover:text-white"
+                  className="border-gray-500 text-gray-200 hover:text-white"
+                  style={{ backgroundColor: 'transparent' }}
                 >
                   Cerrar
                 </Button>
@@ -266,7 +326,8 @@ const ActivityDetailsModal = ({ activity, plan, onClose, onAssignToStudent }) =>
               <div className="flex items-center gap-3">
                 <Button
                   onClick={() => onAssignToStudent(activity, plan)}
-                  className="bg-green-600 hover:bg-green-700 text-white"
+                  className="text-white"
+                  style={{ backgroundColor: '#059669' }}
                 >
                   <CheckCircle className="w-4 h-4 mr-2" />
                   Asignar a {plan?.studentName || 'Estudiante'}
