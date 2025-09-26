@@ -15,13 +15,31 @@ export class StudentActivityAssignmentService {
   static async assignActivityToStudent(activity, plan, teacherId) {
     try {
       console.log('📝 Asignando actividad a estudiante...');
+      console.log('🔍 Debug - Valores recibidos:', {
+        activityId: activity.id,
+        studentId: plan.studentId,
+        teacherId: teacherId,
+        planId: plan.id
+      });
       
+      // Función para generar UUID válido si el valor no es UUID
+      const generateValidUUID = (value) => {
+        if (!value) return crypto.randomUUID();
+        // Verificar si es un UUID válido
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+        if (uuidRegex.test(value)) {
+          return value;
+        }
+        // Si no es UUID válido, generar uno nuevo
+        return crypto.randomUUID();
+      };
+
       // Preparar datos de la asignación
       const assignmentData = {
-        activity_id: activity.id || crypto.randomUUID(), // Generar UUID si no existe
-        student_id: plan.studentId,
-        teacher_id: teacherId,
-        plan_id: plan.id,
+        activity_id: generateValidUUID(activity.id),
+        student_id: generateValidUUID(plan.studentId),
+        teacher_id: generateValidUUID(teacherId),
+        plan_id: generateValidUUID(plan.id),
         title: activity.title,
         description: activity.description,
         objective: activity.objective,
@@ -47,6 +65,13 @@ export class StudentActivityAssignmentService {
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       };
+
+      console.log('🔍 Debug - UUIDs generados:', {
+        activity_id: assignmentData.activity_id,
+        student_id: assignmentData.student_id,
+        teacher_id: assignmentData.teacher_id,
+        plan_id: assignmentData.plan_id
+      });
 
       // Insertar en la base de datos
       const { data, error } = await supabase
