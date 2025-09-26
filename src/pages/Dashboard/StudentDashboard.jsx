@@ -30,6 +30,11 @@ import StudentActivityNotifications from '@/components/StudentActivityNotificati
 import UniversalGeminiChat from '@/components/UniversalGeminiChat';
 import UserHeader from '@/components/UserHeader';
 import StudentSidebar from '@/components/StudentSidebar';
+import StudentActivitiesManager from './StudentDashboard/components/StudentActivitiesManager';
+import StudentProgressAnalytics from './StudentDashboard/components/StudentProgressAnalytics';
+import StudentIntelligentAlerts from './StudentDashboard/components/StudentIntelligentAlerts';
+import StudentCommunicationPanel from './StudentDashboard/components/StudentCommunicationPanel';
+import StudentDashboardSync from './StudentDashboard/components/StudentDashboardSync';
 
 const StudentDashboard = () => {
   const { t } = useLanguage();
@@ -175,6 +180,29 @@ const StudentDashboard = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20">
               <h3 className="text-xl font-semibold text-white mb-4 text-center">Tu Progreso Esta Semana</h3>
               <WeeklyProgressWidget t={t} />
+            </div>
+            
+            {/* Nuevas funcionalidades avanzadas */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* Gestión de Actividades */}
+              <StudentActivitiesManager />
+              
+              {/* Análisis de Progreso */}
+              <StudentProgressAnalytics />
+            </div>
+            
+            {/* Alertas y Comunicación */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* Alertas Inteligentes */}
+              <StudentIntelligentAlerts />
+              
+              {/* Panel de Comunicación */}
+              <StudentCommunicationPanel />
+            </div>
+            
+            {/* Sincronización con otros dashboards */}
+            <div className="mb-8">
+              <StudentDashboardSync />
             </div>
             
             {/* Sugerencia de Kary */}
